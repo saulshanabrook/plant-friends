@@ -24,3 +24,8 @@ class ObservableObjectPublisher<T: Publisher>: ObservableObject {
         })
     }
 }
+
+
+extension Publisher {
+    var observableObject: ObservableObjectPublisher<Self> { return ObservableObjectPublisher(publisher: self)}
+}

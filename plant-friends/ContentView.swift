@@ -8,16 +8,28 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var resp = obj;
+    @StateObject var resp = res;
     var body: some View {
-        NavigationView{
-            List(resp.value ?? [PFAFPlant(latin_name: "Loading...")]) { plant in
-                NavigationLink {
-                    DetailView(plant: plant)
-                } label: {
-                    Text(plant.latin_name)
-                }
-            }.navigationTitle("Plants")
+        switch resp.value {
+        case nil:
+            ProgressView()
+        default:
+            NavigationView{
+                List(resp.value!) { plant in
+                    NavigationLink {
+                        DetailView(plant: plant)
+                    } label: {
+                        VStack(alignment: .leading){
+                            Text(plant.latin_name)
+                            Text(plant.common_names.joined(separator: ", ")).font(.subheadline)
+                                .fixedSize(horizontal: false, vertical: true)
+                                .foregroundColor(.secondary)
+                            
+                            
+                        }
+                    }
+                }.navigationTitle("Plants")
+            }
         }
     }
 }
