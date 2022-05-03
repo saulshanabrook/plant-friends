@@ -14,6 +14,9 @@
 		C74B2228281EE48C00F9B7B6 /* plant_friendsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74B2227281EE48C00F9B7B6 /* plant_friendsTests.swift */; };
 		C74B2232281EE48C00F9B7B6 /* plant_friendsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74B2231281EE48C00F9B7B6 /* plant_friendsUITests.swift */; };
 		C74B2234281EE48C00F9B7B6 /* plant_friendsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74B2233281EE48C00F9B7B6 /* plant_friendsUITestsLaunchTests.swift */; };
+		C74B22412820623000F9B7B6 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74B22402820623000F9B7B6 /* DetailView.swift */; };
+		C74B2243282067B200F9B7B6 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74B2242282067B200F9B7B6 /* ModelData.swift */; };
+		C74B22452820D31100F9B7B6 /* ObservableObjectPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74B22442820D31100F9B7B6 /* ObservableObjectPublisher.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +47,9 @@
 		C74B222D281EE48C00F9B7B6 /* plant-friendsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "plant-friendsUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C74B2231281EE48C00F9B7B6 /* plant_friendsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = plant_friendsUITests.swift; sourceTree = "<group>"; };
 		C74B2233281EE48C00F9B7B6 /* plant_friendsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = plant_friendsUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		C74B22402820623000F9B7B6 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		C74B2242282067B200F9B7B6 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
+		C74B22442820D31100F9B7B6 /* ObservableObjectPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableObjectPublisher.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +104,9 @@
 				C74B2218281EE48A00F9B7B6 /* ContentView.swift */,
 				C74B221A281EE48B00F9B7B6 /* Assets.xcassets */,
 				C74B221C281EE48B00F9B7B6 /* Preview Content */,
+				C74B22402820623000F9B7B6 /* DetailView.swift */,
+				C74B2242282067B200F9B7B6 /* ModelData.swift */,
+				C74B22442820D31100F9B7B6 /* ObservableObjectPublisher.swift */,
 			);
 			path = "plant-friends";
 			sourceTree = "<group>";
@@ -258,7 +267,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				C74B2219281EE48A00F9B7B6 /* ContentView.swift in Sources */,
+				C74B22452820D31100F9B7B6 /* ObservableObjectPublisher.swift in Sources */,
+				C74B2243282067B200F9B7B6 /* ModelData.swift in Sources */,
 				C74B2217281EE48A00F9B7B6 /* plant_friendsApp.swift in Sources */,
+				C74B22412820623000F9B7B6 /* DetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

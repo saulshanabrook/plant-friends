@@ -8,9 +8,17 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var resp = obj;
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        NavigationView{
+            List(resp.value ?? [PFAFPlant(latin_name: "Loading...")]) { plant in
+                NavigationLink {
+                    DetailView(plant: plant)
+                } label: {
+                    Text(plant.latin_name)
+                }
+            }.navigationTitle("Plants")
+        }
     }
 }
 
