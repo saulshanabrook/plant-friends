@@ -7,16 +7,71 @@
 
 import Foundation
 
+struct Image: Hashable, Decodable, Identifiable {
+    var url: String
+    var source: String
+    var id: String {
+        return self.url
+    }
+}
+
+struct Use: Hashable, Decodable, Identifiable {
+    var category: String?
+    var name: String?
+    var id: String {
+        return String(describing: (self.category, self.name))
+    }
+}
+
 
 struct PFAFPlant: Hashable, Decodable, Identifiable {
     var latin_name: String
     var habit: String
-    var common_names: [String]
+    var height: Double
+    var hardiness: String
+    var growth: String
+    var soil: String
+    var shade: String
+    var moisture: String
+    var edibility_rating: Double?
+    var medicinal_rating: Double?
+    var other_uses_rating: Double?
+    var family: String
+    var known_hazards: String
+    var habitats: String
+    var range: String
+    var weed_potential: String
+    var summary: String
+    var physical_characteristics: String
+    var synonyms: String
+    //    var habitats: String
+    var edible_uses: String
+    var medicinal_uses: String
+    var other_uses: String
+    var cultivation_details: String
+    var propagation: String
+    var other_names: String
+    var found_in: String
+    //    var weed_potential: String
+    var conservation_status: String
+    var expert_comment: String
+    var author: String
+    var botanical_references: String
+    
+    var common_names: [String?]
+    var images: [Image]
+    var uses: [Use]
+    
     var id: String {
         return self.latin_name
     }
+    
+    var common_names_joined: String {
+        return self.common_names.compactMap({$0}).joined(separator: ", ")
+    }
+    
     static let sample = try! JSONDecoder().decode(PFAFPlant.self, from: Data(SAMPLE_ROW.utf8)
-)
+    )
 }
 
 typealias Response = [PFAFPlant]
@@ -26,14 +81,14 @@ let url = URL(string: "https://pfaf-data.herokuapp.com/data.json?sql=select+*+fr
 
 
 let res = URLSession.shared
-    .dataTaskPublisher(for: url)
+    .dataTaskPublisher(for: URLRequest(url: url, cachePolicy: .useProtocolCachePolicy))
     .tryMap() { element -> Data in
         guard let httpResponse = element.response as? HTTPURLResponse,
-            httpResponse.statusCode == 200 else {
-                throw URLError(.badServerResponse)
-            }
-        return element.data
+              httpResponse.statusCode == 200 else {
+            throw URLError(.badServerResponse)
         }
+        return element.data
+    }
     .decode(type: Response.self, decoder: JSONDecoder())
     .receive(on: RunLoop.main)
     .observableObject

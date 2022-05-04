@@ -11,24 +11,26 @@ struct DetailView: View {
     var plant: PFAFPlant
     
     var body: some View {
+        ScrollView{
         VStack(alignment: .leading) {
             Text(plant.latin_name)
                 .font(.title)
 
-            HStack {
-                Text(plant.common_names.joined(separator: ", "))
-            }
-            .font(.subheadline)
+            Text(plant.common_names_joined)            .font(.subheadline)
             .foregroundColor(.secondary)
 
             Divider()
-
-            Text("Habit")
+            Text("Edible Uses")
                 .font(.title2)
-            Text(plant.habit)
+            Text(plant.edible_uses)
+                .font(.body)
+            Text("Medicinal Uses")
+                .font(.title2)
+            Text(plant.medicinal_uses)
         }
         .padding()
 
+    }
     }
 }
 
