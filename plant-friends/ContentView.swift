@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var searchQuery = ""
     @StateObject var resp = res;
     var body: some View {
         switch resp.completion {
@@ -26,22 +27,13 @@ struct ContentView: View {
             case nil:
                 ProgressView()
             default:
-                NavigationView{
-                    List(resp.value!) { plant in
-                        NavigationLink {
-                            DetailView(plant: plant)
-                        } label: {
-                            VStack(alignment: .leading){
-                                Text(plant.latin_name)
-                                Text(plant.common_names_joined).font(.subheadline)
-                                    .fixedSize(horizontal: false, vertical: true)
-                                    .foregroundColor(.secondary)
-                                
-                                
-                            }
-                        }
-                    }.navigationTitle("Plants")
+                NavigationView {
+                    ListView(plants: resp.value!)
                 }
+//                .searchable(text: $searchQuery,
+//                  prompt: "Search plants") {
+//                    PlantSuggestionView(plants: resp.value!)
+//                }
             }
         }
         
