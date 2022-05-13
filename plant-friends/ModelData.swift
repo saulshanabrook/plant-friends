@@ -77,11 +77,11 @@ struct PFAFPlant: Hashable, Decodable, Identifiable {
 typealias Response = [PFAFPlant]
 
 
-let url = URL(string: "https://pfaf-data.herokuapp.com/data.json?sql=select+*+from+plant_data&_shape=array&_json=uses&_json=images&_json=common_names")!
+let url = URL(string: "https://pfaf-data.herokuapp.com/data-6ea843c.json?sql=select+*+from+plant_data&_shape=array&_json=uses&_json=images&_json=common_names")!
 
 
 let res = URLSession.shared
-    .dataTaskPublisher(for: URLRequest(url: url, cachePolicy: .useProtocolCachePolicy))
+    .dataTaskPublisher(for: URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad))
     .tryMap() { element -> Data in
         guard let httpResponse = element.response as? HTTPURLResponse,
               httpResponse.statusCode == 200 else {
