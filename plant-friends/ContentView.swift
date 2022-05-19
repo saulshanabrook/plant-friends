@@ -31,11 +31,9 @@ struct ContentView: View {
                     ListView(plants: resp.value!, searchQuery: searchQuery)
                 }
                 .searchable(text: $searchQuery,
-                  prompt: "Search plants") {
-//                    if searchQuery.isEmpty {
-//                        PlantSuggestionView(plants: resp.value!)
-//                    }
-                }
+                  prompt: "Search plants")
+                .disableAutocorrection(true)
+
             }
         }
         

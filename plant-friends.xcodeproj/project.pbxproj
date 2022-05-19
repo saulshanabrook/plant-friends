@@ -17,6 +17,7 @@
 		C74B22412820623000F9B7B6 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74B22402820623000F9B7B6 /* DetailView.swift */; };
 		C74B2243282067B200F9B7B6 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74B2242282067B200F9B7B6 /* ModelData.swift */; };
 		C74B22452820D31100F9B7B6 /* ObservableObjectPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74B22442820D31100F9B7B6 /* ObservableObjectPublisher.swift */; };
+		C7AAF69F2836DDE000163ECB /* FieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AAF69E2836DDE000163ECB /* FieldView.swift */; };
 		C7ECBD14282ED0A600479CE6 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7ECBD13282ED0A600479CE6 /* ListView.swift */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +52,7 @@
 		C74B22402820623000F9B7B6 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		C74B2242282067B200F9B7B6 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
 		C74B22442820D31100F9B7B6 /* ObservableObjectPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableObjectPublisher.swift; sourceTree = "<group>"; };
+		C7AAF69E2836DDE000163ECB /* FieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldView.swift; sourceTree = "<group>"; };
 		C7ECBD13282ED0A600479CE6 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,6 +112,7 @@
 				C74B2242282067B200F9B7B6 /* ModelData.swift */,
 				C74B22442820D31100F9B7B6 /* ObservableObjectPublisher.swift */,
 				C7ECBD13282ED0A600479CE6 /* ListView.swift */,
+				C7AAF69E2836DDE000163ECB /* FieldView.swift */,
 			);
 			path = "plant-friends";
 			sourceTree = "<group>";
@@ -155,6 +158,8 @@
 			dependencies = (
 			);
 			name = "plant-friends";
+			packageProductDependencies = (
+			);
 			productName = "plant-friends";
 			productReference = C74B2213281EE48A00F9B7B6 /* plant-friends.app */;
 			productType = "com.apple.product-type.application";
@@ -227,6 +232,8 @@
 				Base,
 			);
 			mainGroup = C74B220A281EE48A00F9B7B6;
+			packageReferences = (
+			);
 			productRefGroup = C74B2214281EE48A00F9B7B6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -275,6 +282,7 @@
 				C74B2243282067B200F9B7B6 /* ModelData.swift in Sources */,
 				C74B2217281EE48A00F9B7B6 /* plant_friendsApp.swift in Sources */,
 				C74B22412820623000F9B7B6 /* DetailView.swift in Sources */,
+				C7AAF69F2836DDE000163ECB /* FieldView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
