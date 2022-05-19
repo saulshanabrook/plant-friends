@@ -28,12 +28,14 @@ struct ContentView: View {
                 ProgressView()
             default:
                 NavigationView {
-                    ListView(plants: resp.value!)
+                    ListView(plants: resp.value!, searchQuery: searchQuery)
                 }
-//                .searchable(text: $searchQuery,
-//                  prompt: "Search plants") {
-//                    PlantSuggestionView(plants: resp.value!)
-//                }
+                .searchable(text: $searchQuery,
+                  prompt: "Search plants") {
+//                    if searchQuery.isEmpty {
+//                        PlantSuggestionView(plants: resp.value!)
+//                    }
+                }
             }
         }
         

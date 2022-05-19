@@ -66,8 +66,12 @@ struct PFAFPlant: Hashable, Decodable, Identifiable {
         return self.latin_name
     }
     
+    var common_names_not_nil: [String] {
+        return self.common_names.compactMap({$0})
+    }
+    
     var common_names_joined: String {
-        return self.common_names.compactMap({$0}).joined(separator: ", ")
+        return self.common_names_not_nil.joined(separator: ", ")
     }
     
     static let sample = try! JSONDecoder().decode(PFAFPlant.self, from: Data(SAMPLE_ROW.utf8)

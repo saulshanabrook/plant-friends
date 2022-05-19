@@ -9,9 +9,16 @@ import SwiftUI
 
 struct ListView: View {
     var plants: [PFAFPlant]
-    
+    var searchQuery: String
     var body: some View {
-        List(plants) { plant in
+        List(plants.filter({plant in
+            if (searchQuery == "") {
+                return true;
+            }
+            return plant.latin_name.lowercased().contains(searchQuery.lowercased()) || plant.common_names_not_nil.contains {
+                common_name in common_name.lowercased().contains(searchQuery.lowercased())
+            }
+        })) { plant in
             NavigationLink {
                 DetailView(plant: plant)
             } label: {
@@ -30,6 +37,6 @@ struct ListView: View {
 
 struct ListView_Previews: PreviewProvider {
     static var previews: some View {
-        ListView(plants: [PFAFPlant.sample])
+        ListView(plants: [PFAFPlant.sample], searchQuery: "")
     }
 }
