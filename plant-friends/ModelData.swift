@@ -13,6 +13,13 @@ struct Image: Hashable, Decodable, Identifiable {
     var id: String {
         return self.url
     }
+    
+    var parsedURL: URL? {
+        guard let escapedString = self.url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        else { return nil }
+        // Escape spaces from URL before parses
+        return URL(string: escapedString)
+    }
 }
 
 struct Use: Hashable, Decodable, Identifiable {
@@ -145,7 +152,7 @@ struct PFAFPlant: Hashable, Decodable, Identifiable {
             Field("Weed Potential", self.weed_potential_section),
             Field("Conservation Status", self.conservation_status),
             Field("Botanical References", self.botanical_references),
-
+            
         ]
         return fields.filter { !($0.text.isEmpty) || !($0.uses.isEmpty)}
     }

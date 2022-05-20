@@ -11,8 +11,14 @@ struct DetailView: View {
     var plant: PFAFPlant
     
     var body: some View {
-        //        ScrollView{
         VStack(alignment: .center) {
+            ForEach(plant.images) { image in
+                AsyncImage(url: image.parsedURL)  { image in
+                    image.resizable()
+                } placeholder: {
+                    ProgressView()
+                }.frame(width: 100, height: 100)
+            }
             Text(plant.latin_name)
                 .font(.title)
             

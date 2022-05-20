@@ -21,7 +21,6 @@ struct ContentView: View {
                         .font(.system(.footnote, design: .monospaced))
                 }.padding()
             }
-            Text("Error loading data \(error)" as String)
         default:
             switch resp.value {
             case nil:

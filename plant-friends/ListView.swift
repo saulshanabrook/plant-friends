@@ -22,13 +22,22 @@ struct ListView: View {
             NavigationLink {
                 DetailView(plant: plant)
             } label: {
-                VStack(alignment: .leading){
-                    Text(plant.latin_name)
-                    Text(plant.common_names_joined).font(.subheadline)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .foregroundColor(.secondary)
-                    
-                    
+                HStack{
+                    AsyncImage(url: plant.images.isEmpty ? nil : plant.images[0].parsedURL ) { image in
+                        image.resizable()
+                    } placeholder: {
+                        ProgressView()
+                    }.frame(width: 50, height: 50)
+
+
+                    VStack(alignment: .leading){
+                        Text(plant.latin_name)
+                        Text(plant.common_names_joined).font(.subheadline)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .foregroundColor(.secondary)
+                        
+                        
+                    }
                 }
             }
         }.navigationTitle("Plants")
