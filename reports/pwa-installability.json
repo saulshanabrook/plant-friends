@@ -1,0 +1,73 @@
+{
+  "browser": {
+    "protocolVersion": "1.3",
+    "product": "Chrome/155.0.8059.80",
+    "revision": "@43a195105613ac83c21d3f14de279f4a045c7da0",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+    "jsVersion": "15.5.35.23"
+  },
+  "page": "http://127.0.0.1:4173/",
+  "serviceWorker": "http://127.0.0.1:4173/sw.js",
+  "manifestUrl": "http://127.0.0.1:4173/manifest.webmanifest",
+  "manifest": {
+    "name": "Plant Friends",
+    "short_name": "Plant Friends",
+    "description": "Identify plants on your device and explore PFAF offline.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#f7f8f2",
+    "theme_color": "#24593c",
+    "lang": "en",
+    "scope": "/",
+    "icons": [
+      {
+        "src": "icon.svg",
+        "sizes": "any",
+        "type": "image/svg+xml",
+        "purpose": "any"
+      },
+      {
+        "src": "icon-192.png",
+        "sizes": "192x192",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "icon-512.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "any maskable"
+      }
+    ]
+  },
+  "decodedIcons": [
+    {
+      "url": "http://127.0.0.1:4173/icon.svg",
+      "width": 150,
+      "height": 150,
+      "purpose": "any"
+    },
+    {
+      "url": "http://127.0.0.1:4173/icon-192.png",
+      "width": 192,
+      "height": 192,
+      "purpose": "any"
+    },
+    {
+      "url": "http://127.0.0.1:4173/icon-512.png",
+      "width": 512,
+      "height": 512,
+      "purpose": "any maskable"
+    }
+  ],
+  "manifestErrors": [],
+  "installabilityErrors": [],
+  "verification": {
+    "command": "npm run test:e2e -- tests/e2e/pwa.spec.ts",
+    "cwd": "/Users/saul/p/wt/plant-friends/offline-pwa-ui",
+    "result": "1 passed (1.8s)",
+    "profile": "temporary persistent non-incognito Chrome profile",
+    "actualInstallationPerformed": false,
+    "physicalPhoneTested": false
+  }
+}

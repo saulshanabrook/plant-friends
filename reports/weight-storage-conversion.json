@@ -1,0 +1,1128 @@
+{
+  "schemaVersion": 1,
+  "kind": "experimental-weight-storage",
+  "activated": false,
+  "source": {
+    "path": "/Users/saul/p/plant-friends/.cache/exports/fddf4901f9c0fcdff118/image.fp32.onnx",
+    "bytes": 1216297268,
+    "sha256": "95501ce8f723e348e0d5139bea3efd680a1f8572ea4b3245b67d2be2c6e3d036"
+  },
+  "candidate": {
+    "path": "/Users/saul/p/plant-friends/public/packs/bioclip2/experiments/weight-storage-fp16.onnx",
+    "bytes": 609029031,
+    "sha256": "fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb"
+  },
+  "conversion": {
+    "recipe": "fp16-matrix-storage-fp32-arithmetic-v1",
+    "minimumElements": 4096,
+    "minimumRank": 2,
+    "policy": "FP16 storage only for finite FLOAT initializers with rank>=2 and elements>=threshold; Cast back to FP32 before unchanged original nodes",
+    "criticalWeightsPolicy": "Preserve all rank-zero/rank-one scalars, biases, normalization weights, and all small tensors in FP32",
+    "originalNodesSha256": "78981632bc7546571186bdc5f9fe6d6d9761f64ace44b1755df064f4db276050",
+    "selectedInitializers": 99,
+    "preservedInitializers": 197,
+    "selectedElements": 303641600,
+    "maximumWeightError": 6.003677845001221e-05,
+    "underflowedValues": 910,
+    "weights": [
+      {
+        "name": "visual.proj",
+        "storageName": "visual.proj__fp16_storage",
+        "shape": [
+          1024,
+          768
+        ],
+        "elements": 786432,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 0
+      },
+      {
+        "name": "visual.conv1.weight",
+        "storageName": "visual.conv1.weight__fp16_storage",
+        "shape": [
+          1024,
+          3,
+          14,
+          14
+        ],
+        "elements": 602112,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 3
+      },
+      {
+        "name": "visual.transformer.resblocks.0.attn.out_proj.weight",
+        "storageName": "visual.transformer.resblocks.0.attn.out_proj.weight__fp16_storage",
+        "shape": [
+          1024,
+          1024
+        ],
+        "elements": 1048576,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 2
+      },
+      {
+        "name": "visual.transformer.resblocks.1.attn.out_proj.weight",
+        "storageName": "visual.transformer.resblocks.1.attn.out_proj.weight__fp16_storage",
+        "shape": [
+          1024,
+          1024
+        ],
+        "elements": 1048576,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 1
+      },
+      {
+        "name": "visual.transformer.resblocks.2.attn.out_proj.weight",
+        "storageName": "visual.transformer.resblocks.2.attn.out_proj.weight__fp16_storage",
+        "shape": [
+          1024,
+          1024
+        ],
+        "elements": 1048576,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 0
+      },
+      {
+        "name": "visual.transformer.resblocks.3.attn.out_proj.weight",
+        "storageName": "visual.transformer.resblocks.3.attn.out_proj.weight__fp16_storage",
+        "shape": [
+          1024,
+          1024
+        ],
+        "elements": 1048576,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 2
+      },
+      {
+        "name": "visual.transformer.resblocks.4.attn.out_proj.weight",
+        "storageName": "visual.transformer.resblocks.4.attn.out_proj.weight__fp16_storage",
+        "shape": [
+          1024,
+          1024
+        ],
+        "elements": 1048576,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 1
+      },
+      {
+        "name": "visual.transformer.resblocks.5.attn.out_proj.weight",
+        "storageName": "visual.transformer.resblocks.5.attn.out_proj.weight__fp16_storage",
+        "shape": [
+          1024,
+          1024
+        ],
+        "elements": 1048576,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 2
+      },
+      {
+        "name": "visual.transformer.resblocks.6.attn.out_proj.weight",
+        "storageName": "visual.transformer.resblocks.6.attn.out_proj.weight__fp16_storage",
+        "shape": [
+          1024,
+          1024
+        ],
+        "elements": 1048576,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 0
+      },
+      {
+        "name": "visual.transformer.resblocks.7.attn.out_proj.weight",
+        "storageName": "visual.transformer.resblocks.7.attn.out_proj.weight__fp16_storage",
+        "shape": [
+          1024,
+          1024
+        ],
+        "elements": 1048576,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 0
+      },
+      {
+        "name": "visual.transformer.resblocks.8.attn.out_proj.weight",
+        "storageName": "visual.transformer.resblocks.8.attn.out_proj.weight__fp16_storage",
+        "shape": [
+          1024,
+          1024
+        ],
+        "elements": 1048576,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 0
+      },
+      {
+        "name": "visual.transformer.resblocks.9.attn.out_proj.weight",
+        "storageName": "visual.transformer.resblocks.9.attn.out_proj.weight__fp16_storage",
+        "shape": [
+          1024,
+          1024
+        ],
+        "elements": 1048576,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 1
+      },
+      {
+        "name": "visual.transformer.resblocks.10.attn.out_proj.weight",
+        "storageName": "visual.transformer.resblocks.10.attn.out_proj.weight__fp16_storage",
+        "shape": [
+          1024,
+          1024
+        ],
+        "elements": 1048576,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 1
+      },
+      {
+        "name": "visual.transformer.resblocks.11.attn.out_proj.weight",
+        "storageName": "visual.transformer.resblocks.11.attn.out_proj.weight__fp16_storage",
+        "shape": [
+          1024,
+          1024
+        ],
+        "elements": 1048576,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 2
+      },
+      {
+        "name": "visual.transformer.resblocks.12.attn.out_proj.weight",
+        "storageName": "visual.transformer.resblocks.12.attn.out_proj.weight__fp16_storage",
+        "shape": [
+          1024,
+          1024
+        ],
+        "elements": 1048576,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 0
+      },
+      {
+        "name": "visual.transformer.resblocks.13.attn.out_proj.weight",
+        "storageName": "visual.transformer.resblocks.13.attn.out_proj.weight__fp16_storage",
+        "shape": [
+          1024,
+          1024
+        ],
+        "elements": 1048576,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 1
+      },
+      {
+        "name": "visual.transformer.resblocks.14.attn.out_proj.weight",
+        "storageName": "visual.transformer.resblocks.14.attn.out_proj.weight__fp16_storage",
+        "shape": [
+          1024,
+          1024
+        ],
+        "elements": 1048576,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 0
+      },
+      {
+        "name": "visual.transformer.resblocks.15.attn.out_proj.weight",
+        "storageName": "visual.transformer.resblocks.15.attn.out_proj.weight__fp16_storage",
+        "shape": [
+          1024,
+          1024
+        ],
+        "elements": 1048576,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 2
+      },
+      {
+        "name": "visual.transformer.resblocks.16.attn.out_proj.weight",
+        "storageName": "visual.transformer.resblocks.16.attn.out_proj.weight__fp16_storage",
+        "shape": [
+          1024,
+          1024
+        ],
+        "elements": 1048576,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 1
+      },
+      {
+        "name": "visual.transformer.resblocks.17.attn.out_proj.weight",
+        "storageName": "visual.transformer.resblocks.17.attn.out_proj.weight__fp16_storage",
+        "shape": [
+          1024,
+          1024
+        ],
+        "elements": 1048576,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 2
+      },
+      {
+        "name": "visual.transformer.resblocks.18.attn.out_proj.weight",
+        "storageName": "visual.transformer.resblocks.18.attn.out_proj.weight__fp16_storage",
+        "shape": [
+          1024,
+          1024
+        ],
+        "elements": 1048576,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 2
+      },
+      {
+        "name": "visual.transformer.resblocks.19.attn.out_proj.weight",
+        "storageName": "visual.transformer.resblocks.19.attn.out_proj.weight__fp16_storage",
+        "shape": [
+          1024,
+          1024
+        ],
+        "elements": 1048576,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 2
+      },
+      {
+        "name": "visual.transformer.resblocks.20.attn.out_proj.weight",
+        "storageName": "visual.transformer.resblocks.20.attn.out_proj.weight__fp16_storage",
+        "shape": [
+          1024,
+          1024
+        ],
+        "elements": 1048576,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 1
+      },
+      {
+        "name": "visual.transformer.resblocks.21.attn.out_proj.weight",
+        "storageName": "visual.transformer.resblocks.21.attn.out_proj.weight__fp16_storage",
+        "shape": [
+          1024,
+          1024
+        ],
+        "elements": 1048576,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 1
+      },
+      {
+        "name": "visual.transformer.resblocks.22.attn.out_proj.weight",
+        "storageName": "visual.transformer.resblocks.22.attn.out_proj.weight__fp16_storage",
+        "shape": [
+          1024,
+          1024
+        ],
+        "elements": 1048576,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 0
+      },
+      {
+        "name": "visual.transformer.resblocks.23.attn.out_proj.weight",
+        "storageName": "visual.transformer.resblocks.23.attn.out_proj.weight__fp16_storage",
+        "shape": [
+          1024,
+          1024
+        ],
+        "elements": 1048576,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 2
+      },
+      {
+        "name": "onnx::Add_4124",
+        "storageName": "onnx::Add_4124__fp16_storage",
+        "shape": [
+          257,
+          1024
+        ],
+        "elements": 263168,
+        "maximumWeightError": 6.003677845001221e-05,
+        "underflowedValues": 1
+      },
+      {
+        "name": "onnx::MatMul_4125",
+        "storageName": "onnx::MatMul_4125__fp16_storage",
+        "shape": [
+          1024,
+          3072
+        ],
+        "elements": 3145728,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 68
+      },
+      {
+        "name": "onnx::MatMul_4164",
+        "storageName": "onnx::MatMul_4164__fp16_storage",
+        "shape": [
+          1024,
+          4096
+        ],
+        "elements": 4194304,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 25
+      },
+      {
+        "name": "onnx::MatMul_4165",
+        "storageName": "onnx::MatMul_4165__fp16_storage",
+        "shape": [
+          4096,
+          1024
+        ],
+        "elements": 4194304,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 14
+      },
+      {
+        "name": "onnx::MatMul_4166",
+        "storageName": "onnx::MatMul_4166__fp16_storage",
+        "shape": [
+          1024,
+          3072
+        ],
+        "elements": 3145728,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 147
+      },
+      {
+        "name": "onnx::MatMul_4205",
+        "storageName": "onnx::MatMul_4205__fp16_storage",
+        "shape": [
+          1024,
+          4096
+        ],
+        "elements": 4194304,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 8
+      },
+      {
+        "name": "onnx::MatMul_4206",
+        "storageName": "onnx::MatMul_4206__fp16_storage",
+        "shape": [
+          4096,
+          1024
+        ],
+        "elements": 4194304,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 23
+      },
+      {
+        "name": "onnx::MatMul_4207",
+        "storageName": "onnx::MatMul_4207__fp16_storage",
+        "shape": [
+          1024,
+          3072
+        ],
+        "elements": 3145728,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 290
+      },
+      {
+        "name": "onnx::MatMul_4246",
+        "storageName": "onnx::MatMul_4246__fp16_storage",
+        "shape": [
+          1024,
+          4096
+        ],
+        "elements": 4194304,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 5
+      },
+      {
+        "name": "onnx::MatMul_4247",
+        "storageName": "onnx::MatMul_4247__fp16_storage",
+        "shape": [
+          4096,
+          1024
+        ],
+        "elements": 4194304,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 18
+      },
+      {
+        "name": "onnx::MatMul_4248",
+        "storageName": "onnx::MatMul_4248__fp16_storage",
+        "shape": [
+          1024,
+          3072
+        ],
+        "elements": 3145728,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 1
+      },
+      {
+        "name": "onnx::MatMul_4287",
+        "storageName": "onnx::MatMul_4287__fp16_storage",
+        "shape": [
+          1024,
+          4096
+        ],
+        "elements": 4194304,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 9
+      },
+      {
+        "name": "onnx::MatMul_4288",
+        "storageName": "onnx::MatMul_4288__fp16_storage",
+        "shape": [
+          4096,
+          1024
+        ],
+        "elements": 4194304,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 7
+      },
+      {
+        "name": "onnx::MatMul_4289",
+        "storageName": "onnx::MatMul_4289__fp16_storage",
+        "shape": [
+          1024,
+          3072
+        ],
+        "elements": 3145728,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 6
+      },
+      {
+        "name": "onnx::MatMul_4328",
+        "storageName": "onnx::MatMul_4328__fp16_storage",
+        "shape": [
+          1024,
+          4096
+        ],
+        "elements": 4194304,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 4
+      },
+      {
+        "name": "onnx::MatMul_4329",
+        "storageName": "onnx::MatMul_4329__fp16_storage",
+        "shape": [
+          4096,
+          1024
+        ],
+        "elements": 4194304,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 9
+      },
+      {
+        "name": "onnx::MatMul_4330",
+        "storageName": "onnx::MatMul_4330__fp16_storage",
+        "shape": [
+          1024,
+          3072
+        ],
+        "elements": 3145728,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 5
+      },
+      {
+        "name": "onnx::MatMul_4369",
+        "storageName": "onnx::MatMul_4369__fp16_storage",
+        "shape": [
+          1024,
+          4096
+        ],
+        "elements": 4194304,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 6
+      },
+      {
+        "name": "onnx::MatMul_4370",
+        "storageName": "onnx::MatMul_4370__fp16_storage",
+        "shape": [
+          4096,
+          1024
+        ],
+        "elements": 4194304,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 3
+      },
+      {
+        "name": "onnx::MatMul_4371",
+        "storageName": "onnx::MatMul_4371__fp16_storage",
+        "shape": [
+          1024,
+          3072
+        ],
+        "elements": 3145728,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 2
+      },
+      {
+        "name": "onnx::MatMul_4410",
+        "storageName": "onnx::MatMul_4410__fp16_storage",
+        "shape": [
+          1024,
+          4096
+        ],
+        "elements": 4194304,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 7
+      },
+      {
+        "name": "onnx::MatMul_4411",
+        "storageName": "onnx::MatMul_4411__fp16_storage",
+        "shape": [
+          4096,
+          1024
+        ],
+        "elements": 4194304,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 5
+      },
+      {
+        "name": "onnx::MatMul_4412",
+        "storageName": "onnx::MatMul_4412__fp16_storage",
+        "shape": [
+          1024,
+          3072
+        ],
+        "elements": 3145728,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 6
+      },
+      {
+        "name": "onnx::MatMul_4451",
+        "storageName": "onnx::MatMul_4451__fp16_storage",
+        "shape": [
+          1024,
+          4096
+        ],
+        "elements": 4194304,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 10
+      },
+      {
+        "name": "onnx::MatMul_4452",
+        "storageName": "onnx::MatMul_4452__fp16_storage",
+        "shape": [
+          4096,
+          1024
+        ],
+        "elements": 4194304,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 2
+      },
+      {
+        "name": "onnx::MatMul_4453",
+        "storageName": "onnx::MatMul_4453__fp16_storage",
+        "shape": [
+          1024,
+          3072
+        ],
+        "elements": 3145728,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 3
+      },
+      {
+        "name": "onnx::MatMul_4492",
+        "storageName": "onnx::MatMul_4492__fp16_storage",
+        "shape": [
+          1024,
+          4096
+        ],
+        "elements": 4194304,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 5
+      },
+      {
+        "name": "onnx::MatMul_4493",
+        "storageName": "onnx::MatMul_4493__fp16_storage",
+        "shape": [
+          4096,
+          1024
+        ],
+        "elements": 4194304,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 2
+      },
+      {
+        "name": "onnx::MatMul_4494",
+        "storageName": "onnx::MatMul_4494__fp16_storage",
+        "shape": [
+          1024,
+          3072
+        ],
+        "elements": 3145728,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 4
+      },
+      {
+        "name": "onnx::MatMul_4533",
+        "storageName": "onnx::MatMul_4533__fp16_storage",
+        "shape": [
+          1024,
+          4096
+        ],
+        "elements": 4194304,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 6
+      },
+      {
+        "name": "onnx::MatMul_4534",
+        "storageName": "onnx::MatMul_4534__fp16_storage",
+        "shape": [
+          4096,
+          1024
+        ],
+        "elements": 4194304,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 4
+      },
+      {
+        "name": "onnx::MatMul_4535",
+        "storageName": "onnx::MatMul_4535__fp16_storage",
+        "shape": [
+          1024,
+          3072
+        ],
+        "elements": 3145728,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 4
+      },
+      {
+        "name": "onnx::MatMul_4574",
+        "storageName": "onnx::MatMul_4574__fp16_storage",
+        "shape": [
+          1024,
+          4096
+        ],
+        "elements": 4194304,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 4
+      },
+      {
+        "name": "onnx::MatMul_4575",
+        "storageName": "onnx::MatMul_4575__fp16_storage",
+        "shape": [
+          4096,
+          1024
+        ],
+        "elements": 4194304,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 8
+      },
+      {
+        "name": "onnx::MatMul_4576",
+        "storageName": "onnx::MatMul_4576__fp16_storage",
+        "shape": [
+          1024,
+          3072
+        ],
+        "elements": 3145728,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 3
+      },
+      {
+        "name": "onnx::MatMul_4615",
+        "storageName": "onnx::MatMul_4615__fp16_storage",
+        "shape": [
+          1024,
+          4096
+        ],
+        "elements": 4194304,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 4
+      },
+      {
+        "name": "onnx::MatMul_4616",
+        "storageName": "onnx::MatMul_4616__fp16_storage",
+        "shape": [
+          4096,
+          1024
+        ],
+        "elements": 4194304,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 12
+      },
+      {
+        "name": "onnx::MatMul_4617",
+        "storageName": "onnx::MatMul_4617__fp16_storage",
+        "shape": [
+          1024,
+          3072
+        ],
+        "elements": 3145728,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 2
+      },
+      {
+        "name": "onnx::MatMul_4656",
+        "storageName": "onnx::MatMul_4656__fp16_storage",
+        "shape": [
+          1024,
+          4096
+        ],
+        "elements": 4194304,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 5
+      },
+      {
+        "name": "onnx::MatMul_4657",
+        "storageName": "onnx::MatMul_4657__fp16_storage",
+        "shape": [
+          4096,
+          1024
+        ],
+        "elements": 4194304,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 3
+      },
+      {
+        "name": "onnx::MatMul_4658",
+        "storageName": "onnx::MatMul_4658__fp16_storage",
+        "shape": [
+          1024,
+          3072
+        ],
+        "elements": 3145728,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 4
+      },
+      {
+        "name": "onnx::MatMul_4697",
+        "storageName": "onnx::MatMul_4697__fp16_storage",
+        "shape": [
+          1024,
+          4096
+        ],
+        "elements": 4194304,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 4
+      },
+      {
+        "name": "onnx::MatMul_4698",
+        "storageName": "onnx::MatMul_4698__fp16_storage",
+        "shape": [
+          4096,
+          1024
+        ],
+        "elements": 4194304,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 6
+      },
+      {
+        "name": "onnx::MatMul_4699",
+        "storageName": "onnx::MatMul_4699__fp16_storage",
+        "shape": [
+          1024,
+          3072
+        ],
+        "elements": 3145728,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 3
+      },
+      {
+        "name": "onnx::MatMul_4738",
+        "storageName": "onnx::MatMul_4738__fp16_storage",
+        "shape": [
+          1024,
+          4096
+        ],
+        "elements": 4194304,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 6
+      },
+      {
+        "name": "onnx::MatMul_4739",
+        "storageName": "onnx::MatMul_4739__fp16_storage",
+        "shape": [
+          4096,
+          1024
+        ],
+        "elements": 4194304,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 5
+      },
+      {
+        "name": "onnx::MatMul_4740",
+        "storageName": "onnx::MatMul_4740__fp16_storage",
+        "shape": [
+          1024,
+          3072
+        ],
+        "elements": 3145728,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 1
+      },
+      {
+        "name": "onnx::MatMul_4779",
+        "storageName": "onnx::MatMul_4779__fp16_storage",
+        "shape": [
+          1024,
+          4096
+        ],
+        "elements": 4194304,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 5
+      },
+      {
+        "name": "onnx::MatMul_4780",
+        "storageName": "onnx::MatMul_4780__fp16_storage",
+        "shape": [
+          4096,
+          1024
+        ],
+        "elements": 4194304,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 8
+      },
+      {
+        "name": "onnx::MatMul_4781",
+        "storageName": "onnx::MatMul_4781__fp16_storage",
+        "shape": [
+          1024,
+          3072
+        ],
+        "elements": 3145728,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 1
+      },
+      {
+        "name": "onnx::MatMul_4820",
+        "storageName": "onnx::MatMul_4820__fp16_storage",
+        "shape": [
+          1024,
+          4096
+        ],
+        "elements": 4194304,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 2
+      },
+      {
+        "name": "onnx::MatMul_4821",
+        "storageName": "onnx::MatMul_4821__fp16_storage",
+        "shape": [
+          4096,
+          1024
+        ],
+        "elements": 4194304,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 3
+      },
+      {
+        "name": "onnx::MatMul_4822",
+        "storageName": "onnx::MatMul_4822__fp16_storage",
+        "shape": [
+          1024,
+          3072
+        ],
+        "elements": 3145728,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 3
+      },
+      {
+        "name": "onnx::MatMul_4861",
+        "storageName": "onnx::MatMul_4861__fp16_storage",
+        "shape": [
+          1024,
+          4096
+        ],
+        "elements": 4194304,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 1
+      },
+      {
+        "name": "onnx::MatMul_4862",
+        "storageName": "onnx::MatMul_4862__fp16_storage",
+        "shape": [
+          4096,
+          1024
+        ],
+        "elements": 4194304,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 2
+      },
+      {
+        "name": "onnx::MatMul_4863",
+        "storageName": "onnx::MatMul_4863__fp16_storage",
+        "shape": [
+          1024,
+          3072
+        ],
+        "elements": 3145728,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 0
+      },
+      {
+        "name": "onnx::MatMul_4902",
+        "storageName": "onnx::MatMul_4902__fp16_storage",
+        "shape": [
+          1024,
+          4096
+        ],
+        "elements": 4194304,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 8
+      },
+      {
+        "name": "onnx::MatMul_4903",
+        "storageName": "onnx::MatMul_4903__fp16_storage",
+        "shape": [
+          4096,
+          1024
+        ],
+        "elements": 4194304,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 12
+      },
+      {
+        "name": "onnx::MatMul_4904",
+        "storageName": "onnx::MatMul_4904__fp16_storage",
+        "shape": [
+          1024,
+          3072
+        ],
+        "elements": 3145728,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 1
+      },
+      {
+        "name": "onnx::MatMul_4943",
+        "storageName": "onnx::MatMul_4943__fp16_storage",
+        "shape": [
+          1024,
+          4096
+        ],
+        "elements": 4194304,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 4
+      },
+      {
+        "name": "onnx::MatMul_4944",
+        "storageName": "onnx::MatMul_4944__fp16_storage",
+        "shape": [
+          4096,
+          1024
+        ],
+        "elements": 4194304,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 7
+      },
+      {
+        "name": "onnx::MatMul_4945",
+        "storageName": "onnx::MatMul_4945__fp16_storage",
+        "shape": [
+          1024,
+          3072
+        ],
+        "elements": 3145728,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 1
+      },
+      {
+        "name": "onnx::MatMul_4984",
+        "storageName": "onnx::MatMul_4984__fp16_storage",
+        "shape": [
+          1024,
+          4096
+        ],
+        "elements": 4194304,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 4
+      },
+      {
+        "name": "onnx::MatMul_4985",
+        "storageName": "onnx::MatMul_4985__fp16_storage",
+        "shape": [
+          4096,
+          1024
+        ],
+        "elements": 4194304,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 4
+      },
+      {
+        "name": "onnx::MatMul_4986",
+        "storageName": "onnx::MatMul_4986__fp16_storage",
+        "shape": [
+          1024,
+          3072
+        ],
+        "elements": 3145728,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 3
+      },
+      {
+        "name": "onnx::MatMul_5025",
+        "storageName": "onnx::MatMul_5025__fp16_storage",
+        "shape": [
+          1024,
+          4096
+        ],
+        "elements": 4194304,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 4
+      },
+      {
+        "name": "onnx::MatMul_5026",
+        "storageName": "onnx::MatMul_5026__fp16_storage",
+        "shape": [
+          4096,
+          1024
+        ],
+        "elements": 4194304,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 3
+      },
+      {
+        "name": "onnx::MatMul_5027",
+        "storageName": "onnx::MatMul_5027__fp16_storage",
+        "shape": [
+          1024,
+          3072
+        ],
+        "elements": 3145728,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 4
+      },
+      {
+        "name": "onnx::MatMul_5066",
+        "storageName": "onnx::MatMul_5066__fp16_storage",
+        "shape": [
+          1024,
+          4096
+        ],
+        "elements": 4194304,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 6
+      },
+      {
+        "name": "onnx::MatMul_5067",
+        "storageName": "onnx::MatMul_5067__fp16_storage",
+        "shape": [
+          4096,
+          1024
+        ],
+        "elements": 4194304,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 4
+      },
+      {
+        "name": "onnx::MatMul_5068",
+        "storageName": "onnx::MatMul_5068__fp16_storage",
+        "shape": [
+          1024,
+          3072
+        ],
+        "elements": 3145728,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 6
+      },
+      {
+        "name": "onnx::MatMul_5107",
+        "storageName": "onnx::MatMul_5107__fp16_storage",
+        "shape": [
+          1024,
+          4096
+        ],
+        "elements": 4194304,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 4
+      },
+      {
+        "name": "onnx::MatMul_5108",
+        "storageName": "onnx::MatMul_5108__fp16_storage",
+        "shape": [
+          4096,
+          1024
+        ],
+        "elements": 4194304,
+        "maximumWeightError": 2.9802322387695312e-08,
+        "underflowedValues": 2
+      }
+    ],
+    "arithmetic": "Original FP32 operators, I/O, and value_info; FP16 is storage only; runtime optimizations must be checked separately"
+  },
+  "versions": {
+    "onnx": "1.23.2",
+    "numpy": "2.5.4"
+  },
+  "elapsedSeconds": 2.546965999994427,
+  "status": "ONNX structure verified; actual browser numerical gates remain required; no tolerances changed"
+}

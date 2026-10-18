@@ -1,0 +1,261 @@
+{
+  "kind": "causal-prefix-cpu-probe",
+  "status": "GO for a separately authorized MPS parity/timing check; CPU invariant and strict sampled parity passed",
+  "device": "cpu",
+  "threads": 4,
+  "checkpointSha256": "b7b2bf6fbc95799e42630e394cf95803892ab447c1a8ab629dbc82fbeaf7dfef",
+  "configSha256": "1bf947e96e943fe50efd5c3e26c37f843a2fa3c358967719a68c8a6d17ce68c8",
+  "textConfig": {
+    "context_length": 77,
+    "vocab_size": 49408,
+    "width": 768,
+    "heads": 12,
+    "layers": 12
+  },
+  "promptSha256": "1ca847c6a7b08b97797e593a6361d1a69ae81f9c7130e2bd01472e0538824139",
+  "officialEncodeTextSourceSha256": "93138e5fa8c04a02f0da71c0a888c3b61decdcc36292caee107f0dd8ebdd20e1",
+  "versions": {
+    "torch": "2.14.1",
+    "open-clip-torch": "3.3.0",
+    "numpy": "2.5.4",
+    "safetensors": "0.8.0"
+  },
+  "assumptions": {
+    "causalMask": "zero on/below diagonal and -inf above",
+    "pooling": "highest-token-ID EOS",
+    "clsEmbedding": false,
+    "padMask": false,
+    "contextLength": 77,
+    "precision": "FP32",
+    "tokenizer": "SimpleTokenizer",
+    "allOperationsDevice": "cpu"
+  },
+  "diagnosticLimits": {
+    "minimumCosine": 0.999999999,
+    "maximumNormalizedCoordinateError": 1e-06
+  },
+  "limitsChanged": false,
+  "productionChanged": false,
+  "samples": [
+    {
+      "label": "Abelia triflora",
+      "prefixLength": 15,
+      "eosRange": [
+        8,
+        14
+      ],
+      "promptMetrics": {
+        "minimumCosine": 0.9999999999959243,
+        "maximumNormalizedCoordinateError": 4.5957269748098106e-07,
+        "maximumRawCoordinateError": 1.2874603271484375e-05
+      },
+      "ensembleMetrics": {
+        "minimumCosine": 0.9999999999999554,
+        "maximumNormalizedCoordinateError": 3.916857818121733e-08,
+        "maximumRawCoordinateError": 3.91155481338501e-08
+      },
+      "passed": true,
+      "fullTimesMs": [
+        2054.0933330194093,
+        2072.1447919495404
+      ],
+      "prefixTimesMs": [
+        442.8944159881212,
+        457.529415958561
+      ],
+      "medianFullMs": 2063.119062484475,
+      "medianPrefixMs": 450.2119159733411,
+      "observedCpuSpeedup": 4.582550992734365
+    },
+    {
+      "label": "Salvia officinalis",
+      "prefixLength": 16,
+      "eosRange": [
+        9,
+        15
+      ],
+      "promptMetrics": {
+        "minimumCosine": 0.9999999999999998,
+        "maximumNormalizedCoordinateError": 0.0,
+        "maximumRawCoordinateError": 0.0
+      },
+      "ensembleMetrics": {
+        "minimumCosine": 1.0,
+        "maximumNormalizedCoordinateError": 0.0,
+        "maximumRawCoordinateError": 0.0
+      },
+      "passed": true,
+      "fullTimesMs": [
+        2012.3922920320183,
+        2056.9013340282254
+      ],
+      "prefixTimesMs": [
+        462.69779198337346,
+        454.81099997414276
+      ],
+      "medianFullMs": 2034.6468130301218,
+      "medianPrefixMs": 458.7543959787581,
+      "observedCpuSpeedup": 4.435154912661225
+    },
+    {
+      "label": "Achillea millefolium",
+      "prefixLength": 18,
+      "eosRange": [
+        11,
+        17
+      ],
+      "promptMetrics": {
+        "minimumCosine": 0.999999999999577,
+        "maximumNormalizedCoordinateError": 1.5947457904924578e-07,
+        "maximumRawCoordinateError": 3.933906555175781e-06
+      },
+      "ensembleMetrics": {
+        "minimumCosine": 0.9999999999999979,
+        "maximumNormalizedCoordinateError": 2.2464506851949118e-08,
+        "maximumRawCoordinateError": 2.2351741790771484e-08
+      },
+      "passed": true,
+      "fullTimesMs": [
+        2092.4614170216955,
+        2063.8379579759203
+      ],
+      "prefixTimesMs": [
+        538.3479580050334,
+        552.4377919500694
+      ],
+      "medianFullMs": 2078.149687498808,
+      "medianPrefixMs": 545.3928749775514,
+      "observedCpuSpeedup": 3.810371904078038
+    },
+    {
+      "label": "Abutilon x hybridum",
+      "prefixLength": 17,
+      "eosRange": [
+        10,
+        16
+      ],
+      "promptMetrics": {
+        "minimumCosine": 0.9999999999990654,
+        "maximumNormalizedCoordinateError": 1.7425680821220313e-07,
+        "maximumRawCoordinateError": 3.814697265625e-06
+      },
+      "ensembleMetrics": {
+        "minimumCosine": 0.9999999999999987,
+        "maximumNormalizedCoordinateError": 1.492723597507073e-08,
+        "maximumRawCoordinateError": 1.4901161193847656e-08
+      },
+      "passed": true,
+      "fullTimesMs": [
+        2171.5653340215795,
+        2117.8173330263235
+      ],
+      "prefixTimesMs": [
+        499.4323749560863,
+        509.22879099380225
+      ],
+      "medianFullMs": 2144.6913335239515,
+      "medianPrefixMs": 504.33058297494426,
+      "observedCpuSpeedup": 4.252550620414194
+    },
+    {
+      "label": "Fragaria vesca 'Semperflorens'",
+      "prefixLength": 20,
+      "eosRange": [
+        13,
+        19
+      ],
+      "promptMetrics": {
+        "minimumCosine": 0.9999999999999998,
+        "maximumNormalizedCoordinateError": 0.0,
+        "maximumRawCoordinateError": 0.0
+      },
+      "ensembleMetrics": {
+        "minimumCosine": 1.0,
+        "maximumNormalizedCoordinateError": 0.0,
+        "maximumRawCoordinateError": 0.0
+      },
+      "passed": true,
+      "fullTimesMs": [
+        2157.0979169919156,
+        2126.4139999984764
+      ],
+      "prefixTimesMs": [
+        573.4701659530401,
+        562.5898750149645
+      ],
+      "medianFullMs": 2141.755958495196,
+      "medianPrefixMs": 568.0300204840023,
+      "observedCpuSpeedup": 3.7704978280377968
+    },
+    {
+      "label": "Brassica juncea integrifolia subintegrifolia",
+      "prefixLength": 22,
+      "eosRange": [
+        15,
+        21
+      ],
+      "promptMetrics": {
+        "minimumCosine": 0.9999999999988924,
+        "maximumNormalizedCoordinateError": 1.9688283777602456e-07,
+        "maximumRawCoordinateError": 4.26173210144043e-06
+      },
+      "ensembleMetrics": {
+        "minimumCosine": 0.999999999999997,
+        "maximumNormalizedCoordinateError": 2.2121738496583276e-08,
+        "maximumRawCoordinateError": 2.2351741790771484e-08
+      },
+      "passed": true,
+      "fullTimesMs": [
+        2071.1168340058066,
+        2115.567499946337
+      ],
+      "prefixTimesMs": [
+        626.9006250076927,
+        633.5952079971321
+      ],
+      "medianFullMs": 2093.342166976072,
+      "medianPrefixMs": 630.2479165024124,
+      "observedCpuSpeedup": 3.3214582899268645
+    },
+    {
+      "label": "Cylindropuntia imbricata subsp. spinosior",
+      "prefixLength": 24,
+      "eosRange": [
+        17,
+        23
+      ],
+      "promptMetrics": {
+        "minimumCosine": 0.9999999999999996,
+        "maximumNormalizedCoordinateError": 0.0,
+        "maximumRawCoordinateError": 0.0
+      },
+      "ensembleMetrics": {
+        "minimumCosine": 1.0,
+        "maximumNormalizedCoordinateError": 0.0,
+        "maximumRawCoordinateError": 0.0
+      },
+      "passed": true,
+      "fullTimesMs": [
+        2106.422749988269,
+        2084.448874986265
+      ],
+      "prefixTimesMs": [
+        676.4112500241026,
+        672.016458993312
+      ],
+      "medianFullMs": 2095.435812487267,
+      "medianPrefixMs": 674.2138545087073,
+      "observedCpuSpeedup": 3.107969079060515
+    }
+  ],
+  "limitations": "CPU timings do not establish MPS speed or numerical parity. Full production preparation remains untouched.",
+  "fullLengthControlBitwiseEqual": true,
+  "summary": {
+    "labels": 7,
+    "allPassed": true,
+    "minimumPromptCosine": 0.9999999999959243,
+    "maximumPromptNormalizedCoordinateError": 4.5957269748098106e-07,
+    "minimumEnsembleCosine": 0.9999999999999554,
+    "maximumEnsembleNormalizedCoordinateError": 3.916857818121733e-08
+  }
+}

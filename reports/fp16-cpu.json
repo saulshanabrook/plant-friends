@@ -1,0 +1,1356 @@
+{
+  "schemaVersion": 1,
+  "kind": "deployed-fp16-cpu-diagnostic",
+  "createdAt": "2026-10-17T23:04:53.836445+00:00",
+  "packId": "d2acbb3d9b212333d47f",
+  "model": {
+    "repository": "imageomics/bioclip-2",
+    "revision": "2957b322090f9cb17ae72c71981c7218a28d81e0",
+    "checkpointSha256": "b7b2bf6fbc95799e42630e394cf95803892ab447c1a8ab629dbc82fbeaf7dfef",
+    "configSha256": "1bf947e96e943fe50efd5c3e26c37f843a2fa3c358967719a68c8a6d17ce68c8",
+    "precision": "FP16 with FP32 input/output",
+    "opset": 17,
+    "dimension": 768,
+    "inputName": "images",
+    "inputShape": [
+      1,
+      3,
+      224,
+      224
+    ],
+    "outputName": "embedding",
+    "outputShape": [
+      1,
+      768
+    ],
+    "externalData": [],
+    "file": {
+      "url": "../weights/68a909924d8ba49096734bdc893dab61a91e51215a298a04c1493d6af6707fc7.onnx",
+      "sha256": "68a909924d8ba49096734bdc893dab61a91e51215a298a04c1493d6af6707fc7",
+      "bytes": 608381536
+    }
+  },
+  "catalogId": "39831ede5fe0b995b55c",
+  "vectorsSha256": "03c186da1d974d044fe573890c6f5486d0cf6ee3b2d7ee89f47119b5ad2c36a5",
+  "preprocessingSha256": "b09f51af341c7b946e0d926d2be163141466de083009c73dcc6bbf632feb319a",
+  "referenceManifest": "/Users/saul/p/plant-friends/public/fixtures/reference/manifest.json",
+  "referenceManifestSha256": "dfdb2ba52120553c048554903f3cae2e250d7d63745adbc0a29cfb307eb3c22f",
+  "environment": {
+    "python": "3.12.13",
+    "platform": "macOS-26.6-arm64-arm-64bit",
+    "machine": "arm64",
+    "versions": {
+      "onnxruntime": "1.31.0",
+      "numpy": "2.5.4"
+    }
+  },
+  "session": {
+    "providers": [
+      "CPUExecutionProvider"
+    ],
+    "threads": 4,
+    "executionMode": "sequential",
+    "graphOptimizationLevel": "ORT_ENABLE_ALL",
+    "initializationMs": 335.2191669982858
+  },
+  "verifiedPackFiles": {
+    "/Users/saul/p/plant-friends/public/packs/bioclip2/weights/68a909924d8ba49096734bdc893dab61a91e51215a298a04c1493d6af6707fc7.onnx": "68a909924d8ba49096734bdc893dab61a91e51215a298a04c1493d6af6707fc7",
+    "/Users/saul/p/plant-friends/public/packs/bioclip2/d2acbb3d9b212333d47f/vectors.f32": "03c186da1d974d044fe573890c6f5486d0cf6ee3b2d7ee89f47119b5ad2c36a5",
+    "/Users/saul/p/plant-friends/public/packs/bioclip2/d2acbb3d9b212333d47f/rows.json": "a7a7dfa9869774a7df888470b100692bb5a725db3cb3a928c6653b58be180aaa"
+  },
+  "samples": [
+    {
+      "id": "16418",
+      "photoUrl": "../photos/inat-16418.jpg",
+      "inputFile": {
+        "url": "16418.input.f32",
+        "sha256": "9d8f47c0bd6a23b6e76902016c8a50f56d80c0b92a3c5ca1a36ecf300c007409",
+        "bytes": 602112
+      },
+      "fp32EmbeddingFile": {
+        "url": "16418.embedding.f32",
+        "sha256": "c42f48d91736e3da75f513d47e92e9f7355d1c72972a6b0ab364fee3dae12691",
+        "bytes": 3072
+      },
+      "fp16CpuEmbeddingFile": {
+        "path": "/Users/saul/p/wt/plant-friends/offline-pwa-python/tools/plant_assets/diagnostics/fp16-cpu-embeddings/16418.embedding.f32",
+        "bytes": 3072,
+        "sha256": "2d184c761e2b9027fccaa9598afe2cc0c17cae7feb19272ba9b114a33f87b7a4"
+      },
+      "cpuInferenceMs": 822.9000830324367,
+      "cosine": 0.9999992256542258,
+      "maxNormalizedCoordinateError": 0.00014127837494015694,
+      "maxScoreError": 7.606821131855845e-05,
+      "maxScoreErrorTaxonId": "pfaf:Abelia%20triflora",
+      "expectedRawNorm": 50.024100025123516,
+      "actualRawNorm": 50.02201803031878,
+      "normalizedNormError": 2.8039339738938907e-09,
+      "entireOrderUnchanged": true,
+      "topFiveOrderUnchanged": true,
+      "fp32TopFive": [
+        "pfaf:Abelia%20triflora",
+        "pfaf:Abies%20fraseri",
+        "pfaf:Abies%20amabilis",
+        "pfaf:Abies%20delavayi",
+        "pfaf:Abelmoschus%20esculentus"
+      ],
+      "fp16CpuTopFive": [
+        "pfaf:Abelia%20triflora",
+        "pfaf:Abies%20fraseri",
+        "pfaf:Abies%20amabilis",
+        "pfaf:Abies%20delavayi",
+        "pfaf:Abelmoschus%20esculentus"
+      ],
+      "fp32MinimumAdjacentScoreGap": 0.0001233879378709224,
+      "scores": [
+        {
+          "taxonId": "pfaf:Abelia%20triflora",
+          "fp32": 0.6160749929750111,
+          "fp16Cpu": 0.6161510611863297,
+          "absoluteError": 7.606821131855845e-05
+        },
+        {
+          "taxonId": "pfaf:Abelmoschus%20esculentus",
+          "fp32": 0.5434330322761588,
+          "fp16Cpu": 0.5433872572151071,
+          "absoluteError": 4.577506105174489e-05
+        },
+        {
+          "taxonId": "pfaf:Abelmoschus%20manihot",
+          "fp32": 0.5246281667549851,
+          "fp16Cpu": 0.5245699094562989,
+          "absoluteError": 5.8257298686248404e-05
+        },
+        {
+          "taxonId": "pfaf:Abelmoschus%20moschatus",
+          "fp32": 0.5186844909722608,
+          "fp16Cpu": 0.5186457114087059,
+          "absoluteError": 3.877956355491374e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20alba",
+          "fp32": 0.5281903864010185,
+          "fp16Cpu": 0.5281867024902854,
+          "absoluteError": 3.6839107330211007e-06
+        },
+        {
+          "taxonId": "pfaf:Abies%20amabilis",
+          "fp32": 0.550788023684324,
+          "fp16Cpu": 0.5507816940932676,
+          "absoluteError": 6.329591056397632e-06
+        },
+        {
+          "taxonId": "pfaf:Abies%20balsamea",
+          "fp32": 0.5318638020361593,
+          "fp16Cpu": 0.5318676882432897,
+          "absoluteError": 3.886207130321395e-06
+        },
+        {
+          "taxonId": "pfaf:Abies%20cephalonica",
+          "fp32": 0.5302772982561346,
+          "fp16Cpu": 0.5303220486419922,
+          "absoluteError": 4.4750385857605934e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20concolor",
+          "fp32": 0.5194084308842852,
+          "fp16Cpu": 0.5194316462628211,
+          "absoluteError": 2.3215378535890174e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20delavayi",
+          "fp32": 0.5438039017675713,
+          "fp16Cpu": 0.543851112850929,
+          "absoluteError": 4.721108335770108e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20firma",
+          "fp32": 0.5224216849546666,
+          "fp16Cpu": 0.5224121004050104,
+          "absoluteError": 9.584549656160846e-06
+        },
+        {
+          "taxonId": "pfaf:Abies%20fraseri",
+          "fp32": 0.5509114116221949,
+          "fp16Cpu": 0.5509465213638035,
+          "absoluteError": 3.510974160858549e-05
+        }
+      ],
+      "fp32OnnxReferenceCosine": 0.9999999999956699,
+      "fp32OnnxReferenceMaxCoordinateError": 4.3563490831344254e-07
+    },
+    {
+      "id": "50800",
+      "photoUrl": "../photos/inat-50800.jpg",
+      "inputFile": {
+        "url": "50800.input.f32",
+        "sha256": "76bd6d5738b633fe6739c7cff2d8226040b0c621443b9d3798e338dec0098e88",
+        "bytes": 602112
+      },
+      "fp32EmbeddingFile": {
+        "url": "50800.embedding.f32",
+        "sha256": "8d568e996a1d195fcab43bd8b9310e5fd6e0b2f4511a4ce7aa9d376487321c6f",
+        "bytes": 3072
+      },
+      "fp16CpuEmbeddingFile": {
+        "path": "/Users/saul/p/wt/plant-friends/offline-pwa-python/tools/plant_assets/diagnostics/fp16-cpu-embeddings/50800.embedding.f32",
+        "bytes": 3072,
+        "sha256": "660116aadcafaa7d64a85bf2d1fa7534c028cfb3c65483ae0063b5f054a72a5e"
+      },
+      "cpuInferenceMs": 831.8135830340907,
+      "cosine": 0.9999985640312201,
+      "maxNormalizedCoordinateError": 0.00022602779790759087,
+      "maxScoreError": 0.000111125598250994,
+      "maxScoreErrorTaxonId": "pfaf:Abelmoschus%20manihot",
+      "expectedRawNorm": 57.271995580350946,
+      "actualRawNorm": 57.269054393061026,
+      "normalizedNormError": 2.1977794029126585e-09,
+      "entireOrderUnchanged": true,
+      "topFiveOrderUnchanged": true,
+      "fp32TopFive": [
+        "pfaf:Abelia%20triflora",
+        "pfaf:Abies%20fraseri",
+        "pfaf:Abies%20delavayi",
+        "pfaf:Abies%20balsamea",
+        "pfaf:Abies%20amabilis"
+      ],
+      "fp16CpuTopFive": [
+        "pfaf:Abelia%20triflora",
+        "pfaf:Abies%20fraseri",
+        "pfaf:Abies%20delavayi",
+        "pfaf:Abies%20balsamea",
+        "pfaf:Abies%20amabilis"
+      ],
+      "fp32MinimumAdjacentScoreGap": 0.0005661931622209515,
+      "scores": [
+        {
+          "taxonId": "pfaf:Abelia%20triflora",
+          "fp32": 0.5734677404515768,
+          "fp16Cpu": 0.5734159514212531,
+          "absoluteError": 5.178903032365678e-05
+        },
+        {
+          "taxonId": "pfaf:Abelmoschus%20esculentus",
+          "fp32": 0.5337299941188417,
+          "fp16Cpu": 0.5336771721656695,
+          "absoluteError": 5.282195317224403e-05
+        },
+        {
+          "taxonId": "pfaf:Abelmoschus%20manihot",
+          "fp32": 0.5035335293357147,
+          "fp16Cpu": 0.5034224037374637,
+          "absoluteError": 0.000111125598250994
+        },
+        {
+          "taxonId": "pfaf:Abelmoschus%20moschatus",
+          "fp32": 0.5254388445263654,
+          "fp16Cpu": 0.5253588711666991,
+          "absoluteError": 7.997335966625219e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20alba",
+          "fp32": 0.5367528692177265,
+          "fp16Cpu": 0.5367747524379977,
+          "absoluteError": 2.1883220271190496e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20amabilis",
+          "fp32": 0.5413527376663926,
+          "fp16Cpu": 0.5413513259615219,
+          "absoluteError": 1.4117048706685509e-06
+        },
+        {
+          "taxonId": "pfaf:Abies%20balsamea",
+          "fp32": 0.5440305666576876,
+          "fp16Cpu": 0.5440511210911099,
+          "absoluteError": 2.0554433422304008e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20cephalonica",
+          "fp32": 0.5361866760555055,
+          "fp16Cpu": 0.5361918235659564,
+          "absoluteError": 5.147510450886905e-06
+        },
+        {
+          "taxonId": "pfaf:Abies%20concolor",
+          "fp32": 0.5304301803601524,
+          "fp16Cpu": 0.5305382885232065,
+          "absoluteError": 0.0001081081630540659
+        },
+        {
+          "taxonId": "pfaf:Abies%20delavayi",
+          "fp32": 0.548782556690158,
+          "fp16Cpu": 0.5487388903943523,
+          "absoluteError": 4.366629580565551e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20firma",
+          "fp32": 0.5269331207974743,
+          "fp16Cpu": 0.526892894656304,
+          "absoluteError": 4.0226141170385254e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20fraseri",
+          "fp32": 0.5724137445228641,
+          "fp16Cpu": 0.5723351221935475,
+          "absoluteError": 7.862232931654667e-05
+        }
+      ],
+      "fp32OnnxReferenceCosine": 0.9999999999883494,
+      "fp32OnnxReferenceMaxCoordinateError": 6.195463856384364e-07
+    },
+    {
+      "id": "22158",
+      "photoUrl": "../photos/inat-22158.jpg",
+      "inputFile": {
+        "url": "22158.input.f32",
+        "sha256": "457e177f3755436c43912ceeaf926f7e28a9ee60a999471d66dc4683bd0ef7c7",
+        "bytes": 602112
+      },
+      "fp32EmbeddingFile": {
+        "url": "22158.embedding.f32",
+        "sha256": "0fb8cfeff61d56508123cd49829cd6db0c62063b718b31e5bc59143511f16831",
+        "bytes": 3072
+      },
+      "fp16CpuEmbeddingFile": {
+        "path": "/Users/saul/p/wt/plant-friends/offline-pwa-python/tools/plant_assets/diagnostics/fp16-cpu-embeddings/22158.embedding.f32",
+        "bytes": 3072,
+        "sha256": "e2b24f31797b894b089687c09b95291874ca220437f8988992a60399ec8c2a31"
+      },
+      "cpuInferenceMs": 810.6166670331731,
+      "cosine": 0.9999994933562624,
+      "maxNormalizedCoordinateError": 0.00012151151895523071,
+      "maxScoreError": 0.00011113465670831157,
+      "maxScoreErrorTaxonId": "pfaf:Abies%20cephalonica",
+      "expectedRawNorm": 59.714517870756204,
+      "actualRawNorm": 59.71878790584457,
+      "normalizedNormError": 2.973491897151348e-09,
+      "entireOrderUnchanged": true,
+      "topFiveOrderUnchanged": true,
+      "fp32TopFive": [
+        "pfaf:Abelia%20triflora",
+        "pfaf:Abies%20fraseri",
+        "pfaf:Abies%20cephalonica",
+        "pfaf:Abies%20amabilis",
+        "pfaf:Abies%20alba"
+      ],
+      "fp16CpuTopFive": [
+        "pfaf:Abelia%20triflora",
+        "pfaf:Abies%20fraseri",
+        "pfaf:Abies%20cephalonica",
+        "pfaf:Abies%20amabilis",
+        "pfaf:Abies%20alba"
+      ],
+      "fp32MinimumAdjacentScoreGap": 0.001345263232971794,
+      "scores": [
+        {
+          "taxonId": "pfaf:Abelia%20triflora",
+          "fp32": 0.5486775381220568,
+          "fp16Cpu": 0.5486037377127582,
+          "absoluteError": 7.380040929860776e-05
+        },
+        {
+          "taxonId": "pfaf:Abelmoschus%20esculentus",
+          "fp32": 0.49799837418353,
+          "fp16Cpu": 0.4979202987266374,
+          "absoluteError": 7.80754568925901e-05
+        },
+        {
+          "taxonId": "pfaf:Abelmoschus%20manihot",
+          "fp32": 0.4825235201532577,
+          "fp16Cpu": 0.4824237570132231,
+          "absoluteError": 9.97631400346255e-05
+        },
+        {
+          "taxonId": "pfaf:Abelmoschus%20moschatus",
+          "fp32": 0.48117825692028593,
+          "fp16Cpu": 0.4811021262224156,
+          "absoluteError": 7.613069787032467e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20alba",
+          "fp32": 0.5175816755140347,
+          "fp16Cpu": 0.5175080400305702,
+          "absoluteError": 7.363548346450699e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20amabilis",
+          "fp32": 0.5239865716497397,
+          "fp16Cpu": 0.5239443116402711,
+          "absoluteError": 4.226000946860875e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20balsamea",
+          "fp32": 0.5055058493838271,
+          "fp16Cpu": 0.5054622937113414,
+          "absoluteError": 4.355567248570669e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20cephalonica",
+          "fp32": 0.5265250123835712,
+          "fp16Cpu": 0.5264138777268629,
+          "absoluteError": 0.00011113465670831157
+        },
+        {
+          "taxonId": "pfaf:Abies%20concolor",
+          "fp32": 0.4951851862379219,
+          "fp16Cpu": 0.4951710163150721,
+          "absoluteError": 1.4169922849804895e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20delavayi",
+          "fp32": 0.5134822724299626,
+          "fp16Cpu": 0.51341949200427,
+          "absoluteError": 6.278042569263231e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20firma",
+          "fp32": 0.49204341443873256,
+          "fp16Cpu": 0.4919730913918081,
+          "absoluteError": 7.032304692444757e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20fraseri",
+          "fp32": 0.5320070101749689,
+          "fp16Cpu": 0.5319582563919919,
+          "absoluteError": 4.8753782976973525e-05
+        }
+      ],
+      "fp32OnnxReferenceCosine": 0.9999999999965593,
+      "fp32OnnxReferenceMaxCoordinateError": 2.9320425087159263e-07
+    },
+    {
+      "id": "portrait",
+      "photoUrl": "portrait.png",
+      "inputFile": {
+        "url": "portrait.input.f32",
+        "sha256": "62a86483a2bc20c4debd4cb603d4f44f5d5365bc36a0cbdcf36e4774b6d4f86e",
+        "bytes": 602112
+      },
+      "fp32EmbeddingFile": {
+        "url": "portrait.embedding.f32",
+        "sha256": "3492862743977ca0b2bde4f9120a216ad04296e4a2f117260e04d2d1b87c4672",
+        "bytes": 3072
+      },
+      "fp16CpuEmbeddingFile": {
+        "path": "/Users/saul/p/wt/plant-friends/offline-pwa-python/tools/plant_assets/diagnostics/fp16-cpu-embeddings/portrait.embedding.f32",
+        "bytes": 3072,
+        "sha256": "89ea37248b3e20936316a2c15f0eb6bb154fc22e7e64ab5f4af3d9eb18e633e6"
+      },
+      "cpuInferenceMs": 1243.8593750121072,
+      "cosine": 0.9999987774806214,
+      "maxNormalizedCoordinateError": 0.0001726113259792328,
+      "maxScoreError": 7.554416958055477e-05,
+      "maxScoreErrorTaxonId": "pfaf:Abies%20fraseri",
+      "expectedRawNorm": 39.191861790624245,
+      "actualRawNorm": 39.19543312925186,
+      "normalizedNormError": 1.539817384710318e-09,
+      "entireOrderUnchanged": true,
+      "topFiveOrderUnchanged": true,
+      "fp32TopFive": [
+        "pfaf:Abies%20fraseri",
+        "pfaf:Abies%20alba",
+        "pfaf:Abies%20concolor",
+        "pfaf:Abies%20firma",
+        "pfaf:Abies%20amabilis"
+      ],
+      "fp16CpuTopFive": [
+        "pfaf:Abies%20fraseri",
+        "pfaf:Abies%20alba",
+        "pfaf:Abies%20concolor",
+        "pfaf:Abies%20firma",
+        "pfaf:Abies%20amabilis"
+      ],
+      "fp32MinimumAdjacentScoreGap": 0.0002789090901019753,
+      "scores": [
+        {
+          "taxonId": "pfaf:Abelia%20triflora",
+          "fp32": 0.5541851868635619,
+          "fp16Cpu": 0.5541769018134977,
+          "absoluteError": 8.285050064227306e-06
+        },
+        {
+          "taxonId": "pfaf:Abelmoschus%20esculentus",
+          "fp32": 0.5491132148646205,
+          "fp16Cpu": 0.5491177720642371,
+          "absoluteError": 4.557199616561647e-06
+        },
+        {
+          "taxonId": "pfaf:Abelmoschus%20manihot",
+          "fp32": 0.5462192436381992,
+          "fp16Cpu": 0.5462230505720886,
+          "absoluteError": 3.8069338894608507e-06
+        },
+        {
+          "taxonId": "pfaf:Abelmoschus%20moschatus",
+          "fp32": 0.5448300850376008,
+          "fp16Cpu": 0.5448166995878213,
+          "absoluteError": 1.3385449779468317e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20alba",
+          "fp32": 0.5733668485049497,
+          "fp16Cpu": 0.5733642387981885,
+          "absoluteError": 2.6097067611363656e-06
+        },
+        {
+          "taxonId": "pfaf:Abies%20amabilis",
+          "fp32": 0.5620537130777519,
+          "fp16Cpu": 0.5620639674076229,
+          "absoluteError": 1.0254329871006718e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20balsamea",
+          "fp32": 0.5539062777734599,
+          "fp16Cpu": 0.5539566897704157,
+          "absoluteError": 5.0411996955768146e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20cephalonica",
+          "fp32": 0.5599463212789196,
+          "fp16Cpu": 0.5599185108435691,
+          "absoluteError": 2.7810435350494878e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20concolor",
+          "fp32": 0.5721169353427684,
+          "fp16Cpu": 0.5721618139930316,
+          "absoluteError": 4.487865026314708e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20delavayi",
+          "fp32": 0.5572191788533858,
+          "fp16Cpu": 0.5572321738402455,
+          "absoluteError": 1.299498685969347e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20firma",
+          "fp32": 0.5639676178910774,
+          "fp16Cpu": 0.5640220022599629,
+          "absoluteError": 5.438436888549614e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20fraseri",
+          "fp32": 0.5819068710388061,
+          "fp16Cpu": 0.5819824152083867,
+          "absoluteError": 7.554416958055477e-05
+        }
+      ],
+      "fp32OnnxReferenceCosine": 0.9999999999922875,
+      "fp32OnnxReferenceMaxCoordinateError": 4.493395443019854e-07
+    },
+    {
+      "id": "landscape",
+      "photoUrl": "landscape.png",
+      "inputFile": {
+        "url": "landscape.input.f32",
+        "sha256": "d677990aa7f95b240c797995215def8f9ac4818081b6b3f4aa70237905f6fcda",
+        "bytes": 602112
+      },
+      "fp32EmbeddingFile": {
+        "url": "landscape.embedding.f32",
+        "sha256": "d70e08e6b0d364a2327f53667b3e7c604737d435561354bc486f513d772d7fb5",
+        "bytes": 3072
+      },
+      "fp16CpuEmbeddingFile": {
+        "path": "/Users/saul/p/wt/plant-friends/offline-pwa-python/tools/plant_assets/diagnostics/fp16-cpu-embeddings/landscape.embedding.f32",
+        "bytes": 3072,
+        "sha256": "53b6a452c16a2cbfbd1268030a72711b8a16617bf700952f64964f044d2b7521"
+      },
+      "cpuInferenceMs": 1332.9870000015944,
+      "cosine": 0.9999985523159525,
+      "maxNormalizedCoordinateError": 0.00023012235760688782,
+      "maxScoreError": 0.00011800008390561167,
+      "maxScoreErrorTaxonId": "pfaf:Abelmoschus%20manihot",
+      "expectedRawNorm": 43.863967184273484,
+      "actualRawNorm": 43.874521618285414,
+      "normalizedNormError": 6.815399911097586e-09,
+      "entireOrderUnchanged": true,
+      "topFiveOrderUnchanged": true,
+      "fp32TopFive": [
+        "pfaf:Abelmoschus%20esculentus",
+        "pfaf:Abies%20fraseri",
+        "pfaf:Abelmoschus%20moschatus",
+        "pfaf:Abies%20concolor",
+        "pfaf:Abies%20alba"
+      ],
+      "fp16CpuTopFive": [
+        "pfaf:Abelmoschus%20esculentus",
+        "pfaf:Abies%20fraseri",
+        "pfaf:Abelmoschus%20moschatus",
+        "pfaf:Abies%20concolor",
+        "pfaf:Abies%20alba"
+      ],
+      "fp32MinimumAdjacentScoreGap": 0.00018436765205154249,
+      "scores": [
+        {
+          "taxonId": "pfaf:Abelia%20triflora",
+          "fp32": 0.5727326035667027,
+          "fp16Cpu": 0.5727095570036504,
+          "absoluteError": 2.304656305229802e-05
+        },
+        {
+          "taxonId": "pfaf:Abelmoschus%20esculentus",
+          "fp32": 0.5888210695322995,
+          "fp16Cpu": 0.5887332831582537,
+          "absoluteError": 8.778637404582845e-05
+        },
+        {
+          "taxonId": "pfaf:Abelmoschus%20manihot",
+          "fp32": 0.5850185403094621,
+          "fp16Cpu": 0.5849005402255565,
+          "absoluteError": 0.00011800008390561167
+        },
+        {
+          "taxonId": "pfaf:Abelmoschus%20moschatus",
+          "fp32": 0.5869776690625986,
+          "fp16Cpu": 0.5869194201011498,
+          "absoluteError": 5.8248961448792436e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20alba",
+          "fp32": 0.5865475040420626,
+          "fp16Cpu": 0.5864844022898995,
+          "absoluteError": 6.31017521630639e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20amabilis",
+          "fp32": 0.5755157766542365,
+          "fp16Cpu": 0.5754494328412596,
+          "absoluteError": 6.634381297687675e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20balsamea",
+          "fp32": 0.5609732603906392,
+          "fp16Cpu": 0.5609265017488364,
+          "absoluteError": 4.6758641802813194e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20cephalonica",
+          "fp32": 0.5707665886541201,
+          "fp16Cpu": 0.5707014855971682,
+          "absoluteError": 6.510305695195395e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20concolor",
+          "fp32": 0.5867318716941141,
+          "fp16Cpu": 0.5866440187018445,
+          "absoluteError": 8.78529922696547e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20delavayi",
+          "fp32": 0.5807765254646365,
+          "fp16Cpu": 0.5806800886790486,
+          "absoluteError": 9.643678558790558e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20firma",
+          "fp32": 0.5659084163189109,
+          "fp16Cpu": 0.5658432855689498,
+          "absoluteError": 6.513074996106205e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20fraseri",
+          "fp32": 0.5878429896486389,
+          "fp16Cpu": 0.5878528207061535,
+          "absoluteError": 9.831057514619879e-06
+        }
+      ],
+      "fp32OnnxReferenceCosine": 0.9999999999954584,
+      "fp32OnnxReferenceMaxCoordinateError": 3.503075121256624e-07
+    },
+    {
+      "id": "small",
+      "photoUrl": "small.png",
+      "inputFile": {
+        "url": "small.input.f32",
+        "sha256": "05bd6f05c1038e923af8577b63fd91cba75c5efe123d36c7e7bef78397f50d23",
+        "bytes": 602112
+      },
+      "fp32EmbeddingFile": {
+        "url": "small.embedding.f32",
+        "sha256": "91410ece0ee418881e53585982688ba51a7f6379db8c00bd8da54716cc8e0b44",
+        "bytes": 3072
+      },
+      "fp16CpuEmbeddingFile": {
+        "path": "/Users/saul/p/wt/plant-friends/offline-pwa-python/tools/plant_assets/diagnostics/fp16-cpu-embeddings/small.embedding.f32",
+        "bytes": 3072,
+        "sha256": "47eb6c3523b97aed4e41259a93f86f5aae168b2cf3c6cf851cbcaf463d2147df"
+      },
+      "cpuInferenceMs": 1444.4768750108778,
+      "cosine": 0.9999973932178313,
+      "maxNormalizedCoordinateError": 0.0002791471779346466,
+      "maxScoreError": 0.00014202746336799965,
+      "maxScoreErrorTaxonId": "pfaf:Abelmoschus%20manihot",
+      "expectedRawNorm": 40.72042668480912,
+      "actualRawNorm": 40.74170384745224,
+      "normalizedNormError": 6.26061535946576e-10,
+      "entireOrderUnchanged": true,
+      "topFiveOrderUnchanged": true,
+      "fp32TopFive": [
+        "pfaf:Abies%20cephalonica",
+        "pfaf:Abelmoschus%20moschatus",
+        "pfaf:Abies%20alba",
+        "pfaf:Abelmoschus%20esculentus",
+        "pfaf:Abelmoschus%20manihot"
+      ],
+      "fp16CpuTopFive": [
+        "pfaf:Abies%20cephalonica",
+        "pfaf:Abelmoschus%20moschatus",
+        "pfaf:Abies%20alba",
+        "pfaf:Abelmoschus%20esculentus",
+        "pfaf:Abelmoschus%20manihot"
+      ],
+      "fp32MinimumAdjacentScoreGap": 0.001957980094932865,
+      "scores": [
+        {
+          "taxonId": "pfaf:Abelia%20triflora",
+          "fp32": 0.5874551749702684,
+          "fp16Cpu": 0.5873307383102043,
+          "absoluteError": 0.00012443666006412002
+        },
+        {
+          "taxonId": "pfaf:Abelmoschus%20esculentus",
+          "fp32": 0.6086604390125723,
+          "fp16Cpu": 0.6085867088642576,
+          "absoluteError": 7.373014831468794e-05
+        },
+        {
+          "taxonId": "pfaf:Abelmoschus%20manihot",
+          "fp32": 0.6038759199107536,
+          "fp16Cpu": 0.6037338924473856,
+          "absoluteError": 0.00014202746336799965
+        },
+        {
+          "taxonId": "pfaf:Abelmoschus%20moschatus",
+          "fp32": 0.6187759109601895,
+          "fp16Cpu": 0.6186701252168749,
+          "absoluteError": 0.00010578574331454593
+        },
+        {
+          "taxonId": "pfaf:Abies%20alba",
+          "fp32": 0.6136526680961567,
+          "fp16Cpu": 0.6137730480307261,
+          "absoluteError": 0.00012037993456937013
+        },
+        {
+          "taxonId": "pfaf:Abies%20amabilis",
+          "fp32": 0.5918779224633499,
+          "fp16Cpu": 0.5919078293330085,
+          "absoluteError": 2.990686965853584e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20balsamea",
+          "fp32": 0.5765931701385761,
+          "fp16Cpu": 0.5766737037803817,
+          "absoluteError": 8.053364180560241e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20cephalonica",
+          "fp32": 0.6260286767081419,
+          "fp16Cpu": 0.6260867371673553,
+          "absoluteError": 5.806045921341596e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20concolor",
+          "fp32": 0.5987580600022097,
+          "fp16Cpu": 0.5987709261624187,
+          "absoluteError": 1.2866160209012989e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20delavayi",
+          "fp32": 0.5968000799072768,
+          "fp16Cpu": 0.5968493880621744,
+          "absoluteError": 4.9308154897564904e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20firma",
+          "fp32": 0.6012307457683119,
+          "fp16Cpu": 0.6012735042401948,
+          "absoluteError": 4.275847188284221e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20fraseri",
+          "fp32": 0.5795395550267259,
+          "fp16Cpu": 0.579616502471112,
+          "absoluteError": 7.694744438602186e-05
+        }
+      ],
+      "fp32OnnxReferenceCosine": 0.999999999988935,
+      "fp32OnnxReferenceMaxCoordinateError": 6.316053815409728e-07
+    },
+    {
+      "id": "transparent",
+      "photoUrl": "transparent.png",
+      "inputFile": {
+        "url": "transparent.input.f32",
+        "sha256": "8c0fadea6d1dfcae74bbf69c818809e1a99d1d717aca1649ca1c0e6005c02768",
+        "bytes": 602112
+      },
+      "fp32EmbeddingFile": {
+        "url": "transparent.embedding.f32",
+        "sha256": "19c57d61cf8c3d84b89cc0451393e16b7bdde33b20a4272385ad95eb114304dc",
+        "bytes": 3072
+      },
+      "fp16CpuEmbeddingFile": {
+        "path": "/Users/saul/p/wt/plant-friends/offline-pwa-python/tools/plant_assets/diagnostics/fp16-cpu-embeddings/transparent.embedding.f32",
+        "bytes": 3072,
+        "sha256": "c19872b297e20476d3ae8f7878e3161a4b1c3230ad22420b1fceffe9cd3afa8f"
+      },
+      "cpuInferenceMs": 814.2953749629669,
+      "cosine": 0.9999986908455474,
+      "maxNormalizedCoordinateError": 0.00022258982062339783,
+      "maxScoreError": 0.00016760267370052873,
+      "maxScoreErrorTaxonId": "pfaf:Abelmoschus%20moschatus",
+      "expectedRawNorm": 39.39363966240567,
+      "actualRawNorm": 39.38501831047845,
+      "normalizedNormError": 1.7502210791775497e-09,
+      "entireOrderUnchanged": true,
+      "topFiveOrderUnchanged": true,
+      "fp32TopFive": [
+        "pfaf:Abelia%20triflora",
+        "pfaf:Abies%20firma",
+        "pfaf:Abies%20alba",
+        "pfaf:Abies%20amabilis",
+        "pfaf:Abies%20balsamea"
+      ],
+      "fp16CpuTopFive": [
+        "pfaf:Abelia%20triflora",
+        "pfaf:Abies%20firma",
+        "pfaf:Abies%20alba",
+        "pfaf:Abies%20amabilis",
+        "pfaf:Abies%20balsamea"
+      ],
+      "fp32MinimumAdjacentScoreGap": 0.00017268693883232267,
+      "scores": [
+        {
+          "taxonId": "pfaf:Abelia%20triflora",
+          "fp32": 0.650882231404944,
+          "fp16Cpu": 0.6508320580978275,
+          "absoluteError": 5.017330711643009e-05
+        },
+        {
+          "taxonId": "pfaf:Abelmoschus%20esculentus",
+          "fp32": 0.5949905870061426,
+          "fp16Cpu": 0.5948530291055418,
+          "absoluteError": 0.000137557900600771
+        },
+        {
+          "taxonId": "pfaf:Abelmoschus%20manihot",
+          "fp32": 0.5890554147035952,
+          "fp16Cpu": 0.5889305340583751,
+          "absoluteError": 0.00012488064522009346
+        },
+        {
+          "taxonId": "pfaf:Abelmoschus%20moschatus",
+          "fp32": 0.5888827277647629,
+          "fp16Cpu": 0.5887151250910624,
+          "absoluteError": 0.00016760267370052873
+        },
+        {
+          "taxonId": "pfaf:Abies%20alba",
+          "fp32": 0.64449110188254,
+          "fp16Cpu": 0.6443876482023818,
+          "absoluteError": 0.00010345368015818313
+        },
+        {
+          "taxonId": "pfaf:Abies%20amabilis",
+          "fp32": 0.6422945312299354,
+          "fp16Cpu": 0.6422338614665477,
+          "absoluteError": 6.066976338769958e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20balsamea",
+          "fp32": 0.6374447130589129,
+          "fp16Cpu": 0.6373647868338576,
+          "absoluteError": 7.992622505537117e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20cephalonica",
+          "fp32": 0.6087943619485282,
+          "fp16Cpu": 0.6086339317625254,
+          "absoluteError": 0.00016043018600275794
+        },
+        {
+          "taxonId": "pfaf:Abies%20concolor",
+          "fp32": 0.6358264277306696,
+          "fp16Cpu": 0.6356986872178784,
+          "absoluteError": 0.0001277405127911857
+        },
+        {
+          "taxonId": "pfaf:Abies%20delavayi",
+          "fp32": 0.6160490083211291,
+          "fp16Cpu": 0.6159057545610319,
+          "absoluteError": 0.00014325376009716173
+        },
+        {
+          "taxonId": "pfaf:Abies%20firma",
+          "fp32": 0.6475946694638866,
+          "fp16Cpu": 0.6475111772561025,
+          "absoluteError": 8.349220778403055e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20fraseri",
+          "fp32": 0.631209517583899,
+          "fp16Cpu": 0.631114905988279,
+          "absoluteError": 9.461159561996446e-05
+        }
+      ],
+      "fp32OnnxReferenceCosine": 0.9999999999946995,
+      "fp32OnnxReferenceMaxCoordinateError": 4.464457414379841e-07
+    },
+    {
+      "id": "oriented",
+      "photoUrl": "oriented.jpg",
+      "inputFile": {
+        "url": "oriented.input.f32",
+        "sha256": "9b7d8410e9dd63ea610c4c52e8a7e256f4ad2712bb2de2e4b1f24365c0cb15b2",
+        "bytes": 602112
+      },
+      "fp32EmbeddingFile": {
+        "url": "oriented.embedding.f32",
+        "sha256": "f1934891d4a7d3a76c3303a1de092d1d6680291a53230f8b0fbf601dbf8a3e79",
+        "bytes": 3072
+      },
+      "fp16CpuEmbeddingFile": {
+        "path": "/Users/saul/p/wt/plant-friends/offline-pwa-python/tools/plant_assets/diagnostics/fp16-cpu-embeddings/oriented.embedding.f32",
+        "bytes": 3072,
+        "sha256": "b72300730360d3185316b63bbb36d77f5188672bca664bb3e8df482faff969ba"
+      },
+      "cpuInferenceMs": 616.7153339483775,
+      "cosine": 0.9999975586010542,
+      "maxNormalizedCoordinateError": 0.000260721892118454,
+      "maxScoreError": 0.00015544854680415998,
+      "maxScoreErrorTaxonId": "pfaf:Abelmoschus%20manihot",
+      "expectedRawNorm": 39.76369874234348,
+      "actualRawNorm": 39.7539966992609,
+      "normalizedNormError": 1.7303086741193852e-09,
+      "entireOrderUnchanged": true,
+      "topFiveOrderUnchanged": true,
+      "fp32TopFive": [
+        "pfaf:Abies%20fraseri",
+        "pfaf:Abies%20alba",
+        "pfaf:Abies%20concolor",
+        "pfaf:Abies%20cephalonica",
+        "pfaf:Abies%20firma"
+      ],
+      "fp16CpuTopFive": [
+        "pfaf:Abies%20fraseri",
+        "pfaf:Abies%20alba",
+        "pfaf:Abies%20concolor",
+        "pfaf:Abies%20cephalonica",
+        "pfaf:Abies%20firma"
+      ],
+      "fp32MinimumAdjacentScoreGap": 0.00030366587097852005,
+      "scores": [
+        {
+          "taxonId": "pfaf:Abelia%20triflora",
+          "fp32": 0.5445413275757753,
+          "fp16Cpu": 0.5444685846487355,
+          "absoluteError": 7.27429270398483e-05
+        },
+        {
+          "taxonId": "pfaf:Abelmoschus%20esculentus",
+          "fp32": 0.555743963280433,
+          "fp16Cpu": 0.5556388635265146,
+          "absoluteError": 0.00010509975391836957
+        },
+        {
+          "taxonId": "pfaf:Abelmoschus%20manihot",
+          "fp32": 0.5489686835676898,
+          "fp16Cpu": 0.5488132350208856,
+          "absoluteError": 0.00015544854680415998
+        },
+        {
+          "taxonId": "pfaf:Abelmoschus%20moschatus",
+          "fp32": 0.5475737157539837,
+          "fp16Cpu": 0.5474464197521604,
+          "absoluteError": 0.00012729600182337375
+        },
+        {
+          "taxonId": "pfaf:Abies%20alba",
+          "fp32": 0.5674496821876167,
+          "fp16Cpu": 0.5673842682276797,
+          "absoluteError": 6.54139599369774e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20amabilis",
+          "fp32": 0.5599900695128119,
+          "fp16Cpu": 0.5598757882090909,
+          "absoluteError": 0.00011428130372104217
+        },
+        {
+          "taxonId": "pfaf:Abies%20balsamea",
+          "fp32": 0.5428038964707058,
+          "fp16Cpu": 0.5427502520024274,
+          "absoluteError": 5.3644468278379875e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20cephalonica",
+          "fp32": 0.5643343059675754,
+          "fp16Cpu": 0.5642235505886308,
+          "absoluteError": 0.00011075537894456033
+        },
+        {
+          "taxonId": "pfaf:Abies%20concolor",
+          "fp32": 0.5671460163166382,
+          "fp16Cpu": 0.5671310354651914,
+          "absoluteError": 1.4980851446799726e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20delavayi",
+          "fp32": 0.5625062368821767,
+          "fp16Cpu": 0.562372197159545,
+          "absoluteError": 0.00013403972263170694
+        },
+        {
+          "taxonId": "pfaf:Abies%20firma",
+          "fp32": 0.5633880364354276,
+          "fp16Cpu": 0.5632842064637094,
+          "absoluteError": 0.00010382997171820563
+        },
+        {
+          "taxonId": "pfaf:Abies%20fraseri",
+          "fp32": 0.5698921402658341,
+          "fp16Cpu": 0.5698167831322479,
+          "absoluteError": 7.535713358619578e-05
+        }
+      ],
+      "fp32OnnxReferenceCosine": 0.9999999999946554,
+      "fp32OnnxReferenceMaxCoordinateError": 5.328189097188185e-07
+    },
+    {
+      "id": "webp",
+      "photoUrl": "landscape.webp",
+      "inputFile": {
+        "url": "webp.input.f32",
+        "sha256": "d677990aa7f95b240c797995215def8f9ac4818081b6b3f4aa70237905f6fcda",
+        "bytes": 602112
+      },
+      "fp32EmbeddingFile": {
+        "url": "webp.embedding.f32",
+        "sha256": "d70e08e6b0d364a2327f53667b3e7c604737d435561354bc486f513d772d7fb5",
+        "bytes": 3072
+      },
+      "fp16CpuEmbeddingFile": {
+        "path": "/Users/saul/p/wt/plant-friends/offline-pwa-python/tools/plant_assets/diagnostics/fp16-cpu-embeddings/webp.embedding.f32",
+        "bytes": 3072,
+        "sha256": "53b6a452c16a2cbfbd1268030a72711b8a16617bf700952f64964f044d2b7521"
+      },
+      "cpuInferenceMs": 630.9031250420958,
+      "cosine": 0.9999985523159525,
+      "maxNormalizedCoordinateError": 0.00023012235760688782,
+      "maxScoreError": 0.00011800008390561167,
+      "maxScoreErrorTaxonId": "pfaf:Abelmoschus%20manihot",
+      "expectedRawNorm": 43.863967184273484,
+      "actualRawNorm": 43.874521618285414,
+      "normalizedNormError": 6.815399911097586e-09,
+      "entireOrderUnchanged": true,
+      "topFiveOrderUnchanged": true,
+      "fp32TopFive": [
+        "pfaf:Abelmoschus%20esculentus",
+        "pfaf:Abies%20fraseri",
+        "pfaf:Abelmoschus%20moschatus",
+        "pfaf:Abies%20concolor",
+        "pfaf:Abies%20alba"
+      ],
+      "fp16CpuTopFive": [
+        "pfaf:Abelmoschus%20esculentus",
+        "pfaf:Abies%20fraseri",
+        "pfaf:Abelmoschus%20moschatus",
+        "pfaf:Abies%20concolor",
+        "pfaf:Abies%20alba"
+      ],
+      "fp32MinimumAdjacentScoreGap": 0.00018436765205154249,
+      "scores": [
+        {
+          "taxonId": "pfaf:Abelia%20triflora",
+          "fp32": 0.5727326035667027,
+          "fp16Cpu": 0.5727095570036504,
+          "absoluteError": 2.304656305229802e-05
+        },
+        {
+          "taxonId": "pfaf:Abelmoschus%20esculentus",
+          "fp32": 0.5888210695322995,
+          "fp16Cpu": 0.5887332831582537,
+          "absoluteError": 8.778637404582845e-05
+        },
+        {
+          "taxonId": "pfaf:Abelmoschus%20manihot",
+          "fp32": 0.5850185403094621,
+          "fp16Cpu": 0.5849005402255565,
+          "absoluteError": 0.00011800008390561167
+        },
+        {
+          "taxonId": "pfaf:Abelmoschus%20moschatus",
+          "fp32": 0.5869776690625986,
+          "fp16Cpu": 0.5869194201011498,
+          "absoluteError": 5.8248961448792436e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20alba",
+          "fp32": 0.5865475040420626,
+          "fp16Cpu": 0.5864844022898995,
+          "absoluteError": 6.31017521630639e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20amabilis",
+          "fp32": 0.5755157766542365,
+          "fp16Cpu": 0.5754494328412596,
+          "absoluteError": 6.634381297687675e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20balsamea",
+          "fp32": 0.5609732603906392,
+          "fp16Cpu": 0.5609265017488364,
+          "absoluteError": 4.6758641802813194e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20cephalonica",
+          "fp32": 0.5707665886541201,
+          "fp16Cpu": 0.5707014855971682,
+          "absoluteError": 6.510305695195395e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20concolor",
+          "fp32": 0.5867318716941141,
+          "fp16Cpu": 0.5866440187018445,
+          "absoluteError": 8.78529922696547e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20delavayi",
+          "fp32": 0.5807765254646365,
+          "fp16Cpu": 0.5806800886790486,
+          "absoluteError": 9.643678558790558e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20firma",
+          "fp32": 0.5659084163189109,
+          "fp16Cpu": 0.5658432855689498,
+          "absoluteError": 6.513074996106205e-05
+        },
+        {
+          "taxonId": "pfaf:Abies%20fraseri",
+          "fp32": 0.5878429896486389,
+          "fp16Cpu": 0.5878528207061535,
+          "absoluteError": 9.831057514619879e-06
+        }
+      ],
+      "fp32OnnxReferenceCosine": 0.9999999999954584,
+      "fp32OnnxReferenceMaxCoordinateError": 3.503075121256624e-07
+    }
+  ],
+  "acceptanceGatesChanged": false,
+  "limitations": [
+    "Identical recorded tensors isolate conversion/runtime drift from image preprocessing.",
+    "CPU execution may promote FP16 operations to FP32; profile precision is reported separately.",
+    "This diagnostic is not browser numerical acceptance or a device performance benchmark."
+  ],
+  "cpuProfile": {
+    "path": "/Users/saul/p/wt/plant-friends/offline-pwa-python/tools/plant_assets/diagnostics/fp16-cpu-profile_2026-10-17_16-04-53_521.json",
+    "bytes": 12950903,
+    "providerExecutions": {
+      "CPUExecutionProvider": 12492
+    },
+    "operations": {
+      "Cast": {
+        "executions": 2025,
+        "inputTypes": {
+          "float16": 1143,
+          "float": 882
+        },
+        "outputTypes": {
+          "float": 1143,
+          "float16": 882
+        }
+      },
+      "Transpose": {
+        "executions": 1539,
+        "inputTypes": {
+          "float": 18,
+          "float16": 1521
+        },
+        "outputTypes": {
+          "float": 18,
+          "float16": 1521
+        }
+      },
+      "NhwcFusedConv": {
+        "executions": 9,
+        "inputTypes": {
+          "float": 18
+        },
+        "outputTypes": {
+          "float": 9
+        }
+      },
+      "Reshape": {
+        "executions": 2385,
+        "inputTypes": {
+          "float16": 2385,
+          "int64": 2385
+        },
+        "outputTypes": {
+          "float16": 2385
+        }
+      },
+      "Concat": {
+        "executions": 9,
+        "inputTypes": {
+          "float": 18
+        },
+        "outputTypes": {
+          "float": 9
+        }
+      },
+      "Add": {
+        "executions": 657,
+        "inputTypes": {
+          "float": 1314
+        },
+        "outputTypes": {
+          "float": 657
+        }
+      },
+      "LayerNormalization": {
+        "executions": 450,
+        "inputTypes": {
+          "float16": 450
+        },
+        "outputTypes": {
+          "float16": 450
+        }
+      },
+      "Gemm": {
+        "executions": 864,
+        "inputTypes": {
+          "float16": 2592
+        },
+        "outputTypes": {
+          "float16": 864
+        }
+      },
+      "Squeeze": {
+        "executions": 864,
+        "inputTypes": {
+          "float16": 864,
+          "int64": 864
+        },
+        "outputTypes": {
+          "float16": 864
+        }
+      },
+      "Split": {
+        "executions": 216,
+        "inputTypes": {
+          "float16": 216,
+          "int64": 216
+        },
+        "outputTypes": {
+          "float16": 648
+        }
+      },
+      "Sqrt": {
+        "executions": 432,
+        "inputTypes": {
+          "float": 432
+        },
+        "outputTypes": {
+          "float": 432
+        }
+      },
+      "Div": {
+        "executions": 648,
+        "inputTypes": {
+          "float": 1296
+        },
+        "outputTypes": {
+          "float": 648
+        }
+      },
+      "Mul": {
+        "executions": 864,
+        "inputTypes": {
+          "float": 1728
+        },
+        "outputTypes": {
+          "float": 864
+        }
+      },
+      "MatMul": {
+        "executions": 441,
+        "inputTypes": {
+          "float": 432,
+          "float16": 441
+        },
+        "outputTypes": {
+          "float": 216,
+          "float16": 225
+        }
+      },
+      "ReduceMax": {
+        "executions": 216,
+        "inputTypes": {
+          "float": 216
+        },
+        "outputTypes": {
+          "float": 216
+        }
+      },
+      "Sub": {
+        "executions": 216,
+        "inputTypes": {
+          "float": 432
+        },
+        "outputTypes": {
+          "float": 216
+        }
+      },
+      "Exp": {
+        "executions": 216,
+        "inputTypes": {
+          "float": 216
+        },
+        "outputTypes": {
+          "float": 216
+        }
+      },
+      "ReduceSum": {
+        "executions": 216,
+        "inputTypes": {
+          "float": 216,
+          "int64": 216
+        },
+        "outputTypes": {
+          "float": 216
+        }
+      },
+      "Erf": {
+        "executions": 216,
+        "inputTypes": {
+          "float": 216
+        },
+        "outputTypes": {
+          "float": 216
+        }
+      },
+      "Gather": {
+        "executions": 9,
+        "inputTypes": {
+          "float16": 9,
+          "int64": 9
+        },
+        "outputTypes": {
+          "float16": 9
+        }
+      }
+    }
+  },
+  "summary": {
+    "samples": 9,
+    "minimumCosine": 0.9999973932178313,
+    "maximumNormalizedCoordinateError": 0.0002791471779346466,
+    "maximumScoreError": 0.00016760267370052873,
+    "allTopFiveOrdersUnchanged": true
+  }
+}

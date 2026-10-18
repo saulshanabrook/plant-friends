@@ -1,0 +1,2109 @@
+{
+  "measuredAt": "2026-10-17T23:04:02.748Z",
+  "status": "failed",
+  "iterations": 10,
+  "scope": "Full encoder feasibility with explicitly limited catalog; not final app acceptance",
+  "environment": {
+    "platform": "darwin",
+    "osRelease": "25.6.0",
+    "architecture": "arm64",
+    "cpu": "Apple M4",
+    "memoryBytes": 17179869184,
+    "node": "v26.3.1",
+    "headless": false,
+    "browserContext": "Fresh isolated regular Chrome profile; not incognito",
+    "browser": "155.0.8059.80"
+  },
+  "phoneTesting": {
+    "iPhoneSafari": "untested",
+    "iPhoneHomeScreen": "untested",
+    "AndroidChrome": "untested",
+    "AndroidHomeScreen": "untested"
+  },
+  "limitations": [
+    "Small labeled fixture sample may overlap pretraining.",
+    "Memory observations do not measure total GPU or process memory."
+  ],
+  "runtimeLogs": [
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.291100 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.0/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.292699 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.1/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.293300 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.2/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.294300 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.3/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.294800 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.4/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.295300 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.5/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.295900 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.6/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.296400 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.7/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.296799 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.8/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.297199 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.9/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.298000 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.10/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.298300 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.11/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.298600 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.12/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.299000 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.13/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.299400 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.14/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.300100 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.15/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.300499 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.16/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.300999 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.17/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.301300 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.18/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.301700 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.19/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.302100 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.20/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.302400 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.21/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.303100 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.22/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.303499 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.23/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.347600 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.0/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.348100 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.1/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.348499 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.2/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.348799 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.3/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.349099 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.4/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.349400 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.5/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.349600 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.6/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.349900 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.7/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.350100 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.8/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.350400 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.9/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.350699 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.10/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.351000 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.11/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.351300 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.12/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.351600 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.13/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.351800 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.14/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.351999 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.15/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.352299 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.16/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.352600 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.17/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.352900 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.18/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.353199 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.19/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.353500 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.20/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.353700 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.21/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.354000 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.22/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.354300 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.23/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.366000 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.0/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.366300 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.1/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.366500 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.2/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.366600 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.3/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.366699 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.4/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.366900 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.5/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.366900 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.6/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.367199 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.7/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.367300 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.8/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.367400 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.9/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.367600 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.10/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.367699 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.11/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.367800 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.12/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.367900 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.13/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.368100 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.14/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.368199 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.15/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.368299 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.16/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.368499 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.17/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.368600 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.18/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.368699 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.19/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.368799 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.20/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.368900 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.21/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.368999 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.22/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:47.369099 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.23/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.162198 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.0/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.163798 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.1/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.164298 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.2/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.164798 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.3/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.165298 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.4/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.165698 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.5/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.166398 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.6/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.166898 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.7/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.167798 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.8/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.168398 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.9/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.169298 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.10/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.169698 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.11/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.170198 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.12/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.171398 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.13/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.171998 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.14/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.172598 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.15/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.173999 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.16/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.175098 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.17/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.175898 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.18/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.176398 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.19/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.176898 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.20/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.177298 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.21/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.177799 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.22/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.178098 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.23/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.237298 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.0/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.237499 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.1/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.237898 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.2/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.238398 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.3/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.238799 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.4/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.239098 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.5/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.239398 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.6/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.239598 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.7/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.239798 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.8/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.239898 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.9/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.240098 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.10/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.240098 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.11/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.240198 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.12/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.240398 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.13/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.240398 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.14/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.240598 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.15/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.240798 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.16/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.240898 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.17/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.240998 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.18/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.241098 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.19/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.241198 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.20/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.241298 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.21/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.241398 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.22/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.241598 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.23/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.253398 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.0/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.253799 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.1/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.254098 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.2/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.254398 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.3/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.254598 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.4/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.254898 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.5/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.255098 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.6/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.255398 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.7/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.255698 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.8/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.255898 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.9/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.256098 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.10/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.256398 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.11/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.256598 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.12/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.256898 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.13/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.257098 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.14/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.257398 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.15/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.257598 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.16/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.257898 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.17/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.258098 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.18/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.258299 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.19/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.258299 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.20/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.258398 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.21/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.258598 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.22/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:57.258698 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.23/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.314198 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.0/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.315998 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.1/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.316598 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.2/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.317198 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.3/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.317599 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.4/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.318099 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.5/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.318799 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.6/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.319198 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.7/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.319599 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.8/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.320198 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.9/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.321098 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.10/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.321698 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.11/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.321999 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.12/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.322498 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.13/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.322898 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.14/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.323398 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.15/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.323798 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.16/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.325398 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.17/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.326599 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.18/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.327998 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.19/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.329198 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.20/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.330498 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.21/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.331599 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.22/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.332898 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.23/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.396898 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.0/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.397198 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.1/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.397298 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.2/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.397498 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.3/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.397698 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.4/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.397799 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.5/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.397898 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.6/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.397999 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.7/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.398099 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.8/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.398198 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.9/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.398398 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.10/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.398898 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.11/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.399398 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.12/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.399798 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.13/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.400098 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.14/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.401598 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.15/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.401999 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.16/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.402299 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.17/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.402698 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.18/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.402998 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.19/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.403298 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.20/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.403498 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.21/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.403798 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.22/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.404098 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.23/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.416898 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.0/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.417098 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.1/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.417298 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.2/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.417498 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.3/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.417598 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.4/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.417698 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.5/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.417799 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.6/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.417999 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.7/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.417999 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.8/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.418198 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.9/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.418299 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.10/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.418398 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.11/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.418498 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.12/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.418599 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.13/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.418698 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.14/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.418799 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.15/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.418898 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.16/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.418998 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.17/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.419198 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.18/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.419298 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.19/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.419298 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.20/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.419398 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.21/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.419599 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.22/attn/Sqrt'\u001b[m"
+    },
+    {
+      "type": "error",
+      "text": "\u001b[0;93m2026-10-17 16:04:59.419798 [W:onnxruntime:, constant_folding.cc:581 ApplyImpl] Could not find a CPU kernel and hence can't constant fold Sqrt node '/visual/transformer/resblocks.23/attn/Sqrt'\u001b[m"
+    }
+  ],
+  "catalogCoverage": {
+    "id": "39831ede5fe0b995b55c",
+    "sourceSha256": "4bb15be3f70a23676eea761b373a0ce8b92239ec3555b67ae2fe755ffb704ddf",
+    "url": "../../pfaf/39831ede5fe0b995b55c/manifest.json",
+    "taxonCount": 12,
+    "fullTaxonCount": 8796,
+    "rows": {
+      "url": "rows.json",
+      "sha256": "a7a7dfa9869774a7df888470b100692bb5a725db3cb3a928c6653b58be180aaa",
+      "bytes": 306
+    }
+  },
+  "modelIdentity": {
+    "repository": "imageomics/bioclip-2",
+    "revision": "2957b322090f9cb17ae72c71981c7218a28d81e0",
+    "checkpointSha256": "b7b2bf6fbc95799e42630e394cf95803892ab447c1a8ab629dbc82fbeaf7dfef",
+    "configSha256": "1bf947e96e943fe50efd5c3e26c37f843a2fa3c358967719a68c8a6d17ce68c8",
+    "precision": "FP16 with FP32 input/output",
+    "opset": 17,
+    "dimension": 768,
+    "inputName": "images",
+    "inputShape": [
+      1,
+      3,
+      224,
+      224
+    ],
+    "outputName": "embedding",
+    "outputShape": [
+      1,
+      768
+    ],
+    "externalData": [],
+    "file": {
+      "url": "../weights/68a909924d8ba49096734bdc893dab61a91e51215a298a04c1493d6af6707fc7.onnx",
+      "sha256": "68a909924d8ba49096734bdc893dab61a91e51215a298a04c1493d6af6707fc7",
+      "bytes": 608381536
+    }
+  },
+  "runtimeIdentity": {
+    "version": "1.30.0",
+    "files": [
+      {
+        "url": "../../../runtime/1.30.0/ort-wasm-simd-threaded.jsep.mjs",
+        "bytes": 46851,
+        "sha256": "709853412fd1ffc34247af1e73569227b5b79629c5ca3f59cc39cf7e500e4947"
+      },
+      {
+        "url": "../../../runtime/1.30.0/ort-wasm-simd-threaded.jsep.wasm",
+        "bytes": 28312028,
+        "sha256": "3ad23231b5bd6d9dda55a7f84606315e0bf35b6750c28ee993c987c54cacab0f"
+      }
+    ]
+  },
+  "preprocessingIdentity": {
+    "size": 224,
+    "orientation": "EXIF transpose once",
+    "color": "RGB; decoded channels interpreted as sRGB; embedded ICC ignored",
+    "alpha": "composite on white before resizing",
+    "resize": "shortest-side to 224; floor other side",
+    "interpolation": "Pillow bicubic antialias; a=-0.5; 22-bit coefficients; uint8 between passes",
+    "crop": "224 center crop; Python round-to-even offsets",
+    "scale": "uint8 / 255",
+    "layout": "NCHW",
+    "mean": [
+      0.48145466,
+      0.4578275,
+      0.40821073
+    ],
+    "std": [
+      0.26862954,
+      0.26130258,
+      0.27577711
+    ],
+    "sha256": "b09f51af341c7b946e0d926d2be163141466de083009c73dcc6bbf632feb319a",
+    "hashSerialization": "sorted-key compact UTF-8 JSON"
+  },
+  "promptHash": "1ca847c6a7b08b97797e593a6361d1a69ae81f9c7130e2bd01472e0538824139",
+  "storageBefore": {
+    "quota": 10737418240,
+    "usage": 0,
+    "usageDetails": {}
+  },
+  "catalogInstallation": {
+    "id": "39831ede5fe0b995b55c",
+    "bytes": 42820214
+  },
+  "modelInstallation": {
+    "id": "d2acbb3d9b212333d47f",
+    "bytes": 636777585
+  },
+  "storageAfterInstall": {
+    "quota": 11417798828,
+    "usage": 680380588,
+    "usageDetails": {
+      "caches": 680333824,
+      "indexedDB": 16344,
+      "serviceWorkerRegistrations": 30420
+    }
+  },
+  "installationMs": 42994.174667,
+  "runtime": {
+    "secureContext": true,
+    "adapter": {
+      "vendor": "apple",
+      "architecture": "metal-3",
+      "device": "",
+      "description": "",
+      "isFallbackAdapter": false
+    },
+    "features": [
+      "depth32float-stencil8",
+      "rg11b10ufloat-renderable",
+      "bgra8unorm-storage",
+      "texture-formats-tier1",
+      "texture-compression-bc",
+      "dual-source-blending",
+      "core-features-and-limits",
+      "float32-filterable",
+      "indirect-first-instance",
+      "texture-compression-astc-sliced-3d",
+      "float32-blendable",
+      "subgroup-size-control",
+      "texture-compression-astc",
+      "texture-compression-etc2",
+      "depth-clip-control",
+      "texture-compression-bc-sliced-3d",
+      "clip-distances",
+      "timestamp-query",
+      "texture-formats-tier2",
+      "shader-f16",
+      "primitive-index",
+      "texture-component-swizzle",
+      "subgroups"
+    ],
+    "limits": {
+      "maxBufferSize": 4294967292,
+      "maxStorageBufferBindingSize": 4294967292
+    },
+    "runtimeVersion": "1.30.0",
+    "executionProvider": "webgpu",
+    "initializationMs": 953,
+    "modelBytes": 608381536,
+    "packId": "d2acbb3d9b212333d47f",
+    "catalogId": "39831ede5fe0b995b55c"
+  },
+  "memoryObservation": {
+    "scope": "Chrome JavaScript heap only; excludes full process/GPU memory",
+    "usedJSHeapSize": 31679040,
+    "totalJSHeapSize": 36519472,
+    "jsHeapSizeLimit": 4395630592
+  },
+  "firstInference": {
+    "photo": "inat-16418.jpg",
+    "timings": {
+      "preprocessingMs": 18.700000047683716,
+      "inferenceMs": 271.89999997615814,
+      "rankingMs": 0.699999988079071,
+      "totalMs": 291.30000001192093
+    },
+    "candidates": [
+      {
+        "taxonId": "pfaf:Abelia%20triflora",
+        "similarity": 0.6148425059504246
+      },
+      {
+        "taxonId": "pfaf:Abies%20fraseri",
+        "similarity": 0.548198093069131
+      },
+      {
+        "taxonId": "pfaf:Abies%20amabilis",
+        "similarity": 0.5476161945791962
+      },
+      {
+        "taxonId": "pfaf:Abies%20delavayi",
+        "similarity": 0.5419142277273098
+      },
+      {
+        "taxonId": "pfaf:Abelmoschus%20esculentus",
+        "similarity": 0.5414459059690309
+      }
+    ]
+  },
+  "warm": {
+    "samples": [
+      {
+        "photo": "inat-16418.jpg",
+        "timings": {
+          "preprocessingMs": 13.600000023841858,
+          "inferenceMs": 240.80000001192093,
+          "rankingMs": 0.2999999523162842,
+          "totalMs": 254.69999998807907
+        }
+      },
+      {
+        "photo": "inat-96185.jpg",
+        "timings": {
+          "preprocessingMs": 11.900000035762787,
+          "inferenceMs": 242.29999995231628,
+          "rankingMs": 0.20000004768371582,
+          "totalMs": 254.4000000357628
+        }
+      },
+      {
+        "photo": "inat-50800.jpg",
+        "timings": {
+          "preprocessingMs": 8,
+          "inferenceMs": 241.5,
+          "rankingMs": 0.10000002384185791,
+          "totalMs": 249.60000002384186
+        }
+      },
+      {
+        "photo": "inat-52808.jpg",
+        "timings": {
+          "preprocessingMs": 8.5,
+          "inferenceMs": 239.29999995231628,
+          "rankingMs": 0.30000001192092896,
+          "totalMs": 248.0999999642372
+        }
+      },
+      {
+        "photo": "inat-22158.jpg",
+        "timings": {
+          "preprocessingMs": 10.699999988079071,
+          "inferenceMs": 239.60000002384186,
+          "rankingMs": 0.19999998807907104,
+          "totalMs": 250.5
+        }
+      },
+      {
+        "photo": "inat-63205.jpg",
+        "timings": {
+          "preprocessingMs": 6,
+          "inferenceMs": 239.69999998807907,
+          "rankingMs": 0.10000002384185791,
+          "totalMs": 245.80000001192093
+        }
+      },
+      {
+        "photo": "inat-28117.jpg",
+        "timings": {
+          "preprocessingMs": 8.5,
+          "inferenceMs": 241.10000002384186,
+          "rankingMs": 0.09999996423721313,
+          "totalMs": 249.69999998807907
+        }
+      },
+      {
+        "photo": "inat-46334.jpg",
+        "timings": {
+          "preprocessingMs": 8.100000023841858,
+          "inferenceMs": 239.5999999642372,
+          "rankingMs": 0.20000004768371582,
+          "totalMs": 247.9000000357628
+        }
+      },
+      {
+        "photo": "inat-13635.jpg",
+        "timings": {
+          "preprocessingMs": 6.699999988079071,
+          "inferenceMs": 239.9000000357628,
+          "rankingMs": 0.19999998807907104,
+          "totalMs": 246.80000001192093
+        }
+      },
+      {
+        "photo": "inat-16438.jpg",
+        "timings": {
+          "preprocessingMs": 8.199999988079071,
+          "inferenceMs": 239.89999997615814,
+          "rankingMs": 0.10000002384185791,
+          "totalMs": 248.19999998807907
+        }
+      }
+    ],
+    "medianMs": 248.90000000596046,
+    "p95Ms": 254.69999998807907,
+    "minimumMs": 245.80000001192093,
+    "maximumMs": 254.69999998807907
+  },
+  "numerical": [
+    {
+      "id": "16418",
+      "sameTensor": {
+        "cosine": 0.9997908787221469,
+        "maxError": 0.002608147151693496,
+        "maxScoreError": 0.003171827849296873,
+        "normError": 1.3677947663381929e-10
+      },
+      "fullPipeline": {
+        "cosine": 0.9997908787221469,
+        "maxError": 0.002608147151693496,
+        "maxScoreError": 0.003171827849296873,
+        "normError": 1.3677947663381929e-10
+      },
+      "pythonCandidates": [
+        {
+          "taxonId": "pfaf:Abelia%20triflora",
+          "similarity": 0.6160750389099121
+        },
+        {
+          "taxonId": "pfaf:Abies%20fraseri",
+          "similarity": 0.5509114265441895
+        },
+        {
+          "taxonId": "pfaf:Abies%20amabilis",
+          "similarity": 0.5507880449295044
+        },
+        {
+          "taxonId": "pfaf:Abies%20delavayi",
+          "similarity": 0.5438038110733032
+        },
+        {
+          "taxonId": "pfaf:Abelmoschus%20esculentus",
+          "similarity": 0.5434330701828003
+        }
+      ],
+      "sameTensorCandidates": [
+        {
+          "taxonId": "pfaf:Abelia%20triflora",
+          "similarity": 0.6148425059504246
+        },
+        {
+          "taxonId": "pfaf:Abies%20fraseri",
+          "similarity": 0.548198093069131
+        },
+        {
+          "taxonId": "pfaf:Abies%20amabilis",
+          "similarity": 0.5476161945791962
+        },
+        {
+          "taxonId": "pfaf:Abies%20delavayi",
+          "similarity": 0.5419142277273098
+        },
+        {
+          "taxonId": "pfaf:Abelmoschus%20esculentus",
+          "similarity": 0.5414459059690309
+        }
+      ],
+      "fullPipelineCandidates": [
+        {
+          "taxonId": "pfaf:Abelia%20triflora",
+          "similarity": 0.6148425059504246
+        },
+        {
+          "taxonId": "pfaf:Abies%20fraseri",
+          "similarity": 0.548198093069131
+        },
+        {
+          "taxonId": "pfaf:Abies%20amabilis",
+          "similarity": 0.5476161945791962
+        },
+        {
+          "taxonId": "pfaf:Abies%20delavayi",
+          "similarity": 0.5419142277273098
+        },
+        {
+          "taxonId": "pfaf:Abelmoschus%20esculentus",
+          "similarity": 0.5414459059690309
+        }
+      ],
+      "sameTensorRankingChanged": false,
+      "fullPipelineRankingChanged": false
+    },
+    {
+      "id": "50800",
+      "sameTensor": {
+        "cosine": 0.9997511321936975,
+        "maxError": 0.00285076730999141,
+        "maxScoreError": 0.0052794729541153634,
+        "normError": 5.228772970156115e-10
+      },
+      "fullPipeline": {
+        "cosine": 0.9997511321936975,
+        "maxError": 0.00285076730999141,
+        "maxScoreError": 0.0052794729541153634,
+        "normError": 5.228772970156115e-10
+      },
+      "pythonCandidates": [
+        {
+          "taxonId": "pfaf:Abelia%20triflora",
+          "similarity": 0.5734677314758301
+        },
+        {
+          "taxonId": "pfaf:Abies%20fraseri",
+          "similarity": 0.5724136829376221
+        },
+        {
+          "taxonId": "pfaf:Abies%20delavayi",
+          "similarity": 0.5487825870513916
+        },
+        {
+          "taxonId": "pfaf:Abies%20balsamea",
+          "similarity": 0.5440305471420288
+        },
+        {
+          "taxonId": "pfaf:Abies%20amabilis",
+          "similarity": 0.5413526892662048
+        }
+      ],
+      "sameTensorCandidates": [
+        {
+          "taxonId": "pfaf:Abelia%20triflora",
+          "similarity": 0.5696779988015085
+        },
+        {
+          "taxonId": "pfaf:Abies%20fraseri",
+          "similarity": 0.5671342718914824
+        },
+        {
+          "taxonId": "pfaf:Abies%20delavayi",
+          "similarity": 0.5437805632331526
+        },
+        {
+          "taxonId": "pfaf:Abies%20balsamea",
+          "similarity": 0.5396895852698795
+        },
+        {
+          "taxonId": "pfaf:Abies%20amabilis",
+          "similarity": 0.5372393249633449
+        }
+      ],
+      "fullPipelineCandidates": [
+        {
+          "taxonId": "pfaf:Abelia%20triflora",
+          "similarity": 0.5696779988015085
+        },
+        {
+          "taxonId": "pfaf:Abies%20fraseri",
+          "similarity": 0.5671342718914824
+        },
+        {
+          "taxonId": "pfaf:Abies%20delavayi",
+          "similarity": 0.5437805632331526
+        },
+        {
+          "taxonId": "pfaf:Abies%20balsamea",
+          "similarity": 0.5396895852698795
+        },
+        {
+          "taxonId": "pfaf:Abies%20amabilis",
+          "similarity": 0.5372393249633449
+        }
+      ],
+      "sameTensorRankingChanged": false,
+      "fullPipelineRankingChanged": false
+    },
+    {
+      "id": "22158",
+      "sameTensor": {
+        "cosine": 0.9998395059147325,
+        "maxError": 0.002858831161814901,
+        "maxScoreError": 0.002717028759428163,
+        "normError": 9.827418878671779e-10
+      },
+      "fullPipeline": {
+        "cosine": 0.9998395059147325,
+        "maxError": 0.002858831161814901,
+        "maxScoreError": 0.002717028759428163,
+        "normError": 9.827418878671779e-10
+      },
+      "pythonCandidates": [
+        {
+          "taxonId": "pfaf:Abelia%20triflora",
+          "similarity": 0.5486775040626526
+        },
+        {
+          "taxonId": "pfaf:Abies%20fraseri",
+          "similarity": 0.5320069789886475
+        },
+        {
+          "taxonId": "pfaf:Abies%20cephalonica",
+          "similarity": 0.5265250205993652
+        },
+        {
+          "taxonId": "pfaf:Abies%20amabilis",
+          "similarity": 0.5239865779876709
+        },
+        {
+          "taxonId": "pfaf:Abies%20alba",
+          "similarity": 0.5175817012786865
+        }
+      ],
+      "sameTensorCandidates": [
+        {
+          "taxonId": "pfaf:Abelia%20triflora",
+          "similarity": 0.5471578231502947
+        },
+        {
+          "taxonId": "pfaf:Abies%20fraseri",
+          "similarity": 0.530358894877983
+        },
+        {
+          "taxonId": "pfaf:Abies%20cephalonica",
+          "similarity": 0.5239866069623379
+        },
+        {
+          "taxonId": "pfaf:Abies%20amabilis",
+          "similarity": 0.5223177143363014
+        },
+        {
+          "taxonId": "pfaf:Abies%20alba",
+          "similarity": 0.5155056743402598
+        }
+      ],
+      "fullPipelineCandidates": [
+        {
+          "taxonId": "pfaf:Abelia%20triflora",
+          "similarity": 0.5471578231502947
+        },
+        {
+          "taxonId": "pfaf:Abies%20fraseri",
+          "similarity": 0.530358894877983
+        },
+        {
+          "taxonId": "pfaf:Abies%20cephalonica",
+          "similarity": 0.5239866069623379
+        },
+        {
+          "taxonId": "pfaf:Abies%20amabilis",
+          "similarity": 0.5223177143363014
+        },
+        {
+          "taxonId": "pfaf:Abies%20alba",
+          "similarity": 0.5155056743402598
+        }
+      ],
+      "sameTensorRankingChanged": false,
+      "fullPipelineRankingChanged": false
+    },
+    {
+      "id": "portrait",
+      "sameTensor": {
+        "cosine": 0.9994911803152751,
+        "maxError": 0.0037627193459491073,
+        "maxScoreError": 0.0021989767428405214,
+        "normError": 1.0023291086014297e-9
+      },
+      "fullPipeline": {
+        "cosine": 0.9994911803152751,
+        "maxError": 0.0037627193459491073,
+        "maxScoreError": 0.0021989767428405214,
+        "normError": 1.0023291086014297e-9
+      },
+      "pythonCandidates": [
+        {
+          "taxonId": "pfaf:Abies%20fraseri",
+          "similarity": 0.5819068551063538
+        },
+        {
+          "taxonId": "pfaf:Abies%20alba",
+          "similarity": 0.5733668208122253
+        },
+        {
+          "taxonId": "pfaf:Abies%20concolor",
+          "similarity": 0.5721169114112854
+        },
+        {
+          "taxonId": "pfaf:Abies%20firma",
+          "similarity": 0.5639675855636597
+        },
+        {
+          "taxonId": "pfaf:Abies%20amabilis",
+          "similarity": 0.5620536804199219
+        }
+      ],
+      "sameTensorCandidates": [
+        {
+          "taxonId": "pfaf:Abies%20fraseri",
+          "similarity": 0.5798315040748285
+        },
+        {
+          "taxonId": "pfaf:Abies%20alba",
+          "similarity": 0.5725489140061529
+        },
+        {
+          "taxonId": "pfaf:Abies%20concolor",
+          "similarity": 0.5705402768603818
+        },
+        {
+          "taxonId": "pfaf:Abies%20firma",
+          "similarity": 0.5625645434050749
+        },
+        {
+          "taxonId": "pfaf:Abies%20amabilis",
+          "similarity": 0.5611272355911325
+        }
+      ],
+      "fullPipelineCandidates": [
+        {
+          "taxonId": "pfaf:Abies%20fraseri",
+          "similarity": 0.5798315040748285
+        },
+        {
+          "taxonId": "pfaf:Abies%20alba",
+          "similarity": 0.5725489140061529
+        },
+        {
+          "taxonId": "pfaf:Abies%20concolor",
+          "similarity": 0.5705402768603818
+        },
+        {
+          "taxonId": "pfaf:Abies%20firma",
+          "similarity": 0.5625645434050749
+        },
+        {
+          "taxonId": "pfaf:Abies%20amabilis",
+          "similarity": 0.5611272355911325
+        }
+      ],
+      "sameTensorRankingChanged": false,
+      "fullPipelineRankingChanged": false
+    },
+    {
+      "id": "landscape",
+      "sameTensor": {
+        "cosine": 0.9996253889634075,
+        "maxError": 0.00490761409653967,
+        "maxScoreError": 0.003584543707790211,
+        "normError": 1.8430399428837063e-9
+      },
+      "fullPipeline": {
+        "cosine": 0.9996253889634075,
+        "maxError": 0.00490761409653967,
+        "maxScoreError": 0.003584543707790211,
+        "normError": 1.8430399428837063e-9
+      },
+      "pythonCandidates": [
+        {
+          "taxonId": "pfaf:Abelmoschus%20esculentus",
+          "similarity": 0.5888209939002991
+        },
+        {
+          "taxonId": "pfaf:Abies%20fraseri",
+          "similarity": 0.5878429412841797
+        },
+        {
+          "taxonId": "pfaf:Abelmoschus%20moschatus",
+          "similarity": 0.5869776606559753
+        },
+        {
+          "taxonId": "pfaf:Abies%20concolor",
+          "similarity": 0.5867319107055664
+        },
+        {
+          "taxonId": "pfaf:Abies%20alba",
+          "similarity": 0.5865474939346313
+        }
+      ],
+      "sameTensorCandidates": [
+        {
+          "taxonId": "pfaf:Abelmoschus%20esculentus",
+          "similarity": 0.5860404062453346
+        },
+        {
+          "taxonId": "pfaf:Abies%20fraseri",
+          "similarity": 0.5847566637668925
+        },
+        {
+          "taxonId": "pfaf:Abies%20concolor",
+          "similarity": 0.5845536566886774
+        },
+        {
+          "taxonId": "pfaf:Abies%20alba",
+          "similarity": 0.5841610450805829
+        },
+        {
+          "taxonId": "pfaf:Abelmoschus%20moschatus",
+          "similarity": 0.5841118742549503
+        }
+      ],
+      "fullPipelineCandidates": [
+        {
+          "taxonId": "pfaf:Abelmoschus%20esculentus",
+          "similarity": 0.5860404062453346
+        },
+        {
+          "taxonId": "pfaf:Abies%20fraseri",
+          "similarity": 0.5847566637668925
+        },
+        {
+          "taxonId": "pfaf:Abies%20concolor",
+          "similarity": 0.5845536566886774
+        },
+        {
+          "taxonId": "pfaf:Abies%20alba",
+          "similarity": 0.5841610450805829
+        },
+        {
+          "taxonId": "pfaf:Abelmoschus%20moschatus",
+          "similarity": 0.5841118742549503
+        }
+      ],
+      "sameTensorRankingChanged": true,
+      "fullPipelineRankingChanged": true
+    },
+    {
+      "id": "small",
+      "sameTensor": {
+        "cosine": 0.999438415869824,
+        "maxError": 0.004028681549050714,
+        "maxScoreError": 0.0037918477911709145,
+        "normError": 3.0137277118313932e-9
+      },
+      "fullPipeline": {
+        "cosine": 0.999438415869824,
+        "maxError": 0.004028681549050714,
+        "maxScoreError": 0.0037918477911709145,
+        "normError": 3.0137277118313932e-9
+      },
+      "pythonCandidates": [
+        {
+          "taxonId": "pfaf:Abies%20cephalonica",
+          "similarity": 0.6260286569595337
+        },
+        {
+          "taxonId": "pfaf:Abelmoschus%20moschatus",
+          "similarity": 0.6187759637832642
+        },
+        {
+          "taxonId": "pfaf:Abies%20alba",
+          "similarity": 0.6136526465415955
+        },
+        {
+          "taxonId": "pfaf:Abelmoschus%20esculentus",
+          "similarity": 0.6086603999137878
+        },
+        {
+          "taxonId": "pfaf:Abelmoschus%20manihot",
+          "similarity": 0.6038758754730225
+        }
+      ],
+      "sameTensorCandidates": [
+        {
+          "taxonId": "pfaf:Abies%20cephalonica",
+          "similarity": 0.6241581352359895
+        },
+        {
+          "taxonId": "pfaf:Abelmoschus%20moschatus",
+          "similarity": 0.6159031109276956
+        },
+        {
+          "taxonId": "pfaf:Abies%20alba",
+          "similarity": 0.6125262449880944
+        },
+        {
+          "taxonId": "pfaf:Abelmoschus%20esculentus",
+          "similarity": 0.6061052138858737
+        },
+        {
+          "taxonId": "pfaf:Abelmoschus%20manihot",
+          "similarity": 0.6000991319273241
+        }
+      ],
+      "fullPipelineCandidates": [
+        {
+          "taxonId": "pfaf:Abies%20cephalonica",
+          "similarity": 0.6241581352359895
+        },
+        {
+          "taxonId": "pfaf:Abelmoschus%20moschatus",
+          "similarity": 0.6159031109276956
+        },
+        {
+          "taxonId": "pfaf:Abies%20alba",
+          "similarity": 0.6125262449880944
+        },
+        {
+          "taxonId": "pfaf:Abelmoschus%20esculentus",
+          "similarity": 0.6061052138858737
+        },
+        {
+          "taxonId": "pfaf:Abelmoschus%20manihot",
+          "similarity": 0.6000991319273241
+        }
+      ],
+      "sameTensorRankingChanged": false,
+      "fullPipelineRankingChanged": false
+    },
+    {
+      "id": "transparent",
+      "sameTensor": {
+        "cosine": 0.9996418419236881,
+        "maxError": 0.00410800791855187,
+        "maxScoreError": 0.0014744908991293898,
+        "normError": 2.951772426484922e-8
+      },
+      "fullPipeline": {
+        "cosine": 0.9996418419236881,
+        "maxError": 0.00410800791855187,
+        "maxScoreError": 0.0014744908991293898,
+        "normError": 2.951772426484922e-8
+      },
+      "pythonCandidates": [
+        {
+          "taxonId": "pfaf:Abelia%20triflora",
+          "similarity": 0.6508823037147522
+        },
+        {
+          "taxonId": "pfaf:Abies%20firma",
+          "similarity": 0.6475947499275208
+        },
+        {
+          "taxonId": "pfaf:Abies%20alba",
+          "similarity": 0.6444910168647766
+        },
+        {
+          "taxonId": "pfaf:Abies%20amabilis",
+          "similarity": 0.6422945857048035
+        },
+        {
+          "taxonId": "pfaf:Abies%20balsamea",
+          "similarity": 0.6374446153640747
+        }
+      ],
+      "sameTensorCandidates": [
+        {
+          "taxonId": "pfaf:Abelia%20triflora",
+          "similarity": 0.6518881461478383
+        },
+        {
+          "taxonId": "pfaf:Abies%20firma",
+          "similarity": 0.6465117881128055
+        },
+        {
+          "taxonId": "pfaf:Abies%20alba",
+          "similarity": 0.6442257970878301
+        },
+        {
+          "taxonId": "pfaf:Abies%20amabilis",
+          "similarity": 0.6412771091701288
+        },
+        {
+          "taxonId": "pfaf:Abies%20balsamea",
+          "similarity": 0.6363722758797243
+        }
+      ],
+      "fullPipelineCandidates": [
+        {
+          "taxonId": "pfaf:Abelia%20triflora",
+          "similarity": 0.6518881461478383
+        },
+        {
+          "taxonId": "pfaf:Abies%20firma",
+          "similarity": 0.6465117881128055
+        },
+        {
+          "taxonId": "pfaf:Abies%20alba",
+          "similarity": 0.6442257970878301
+        },
+        {
+          "taxonId": "pfaf:Abies%20amabilis",
+          "similarity": 0.6412771091701288
+        },
+        {
+          "taxonId": "pfaf:Abies%20balsamea",
+          "similarity": 0.6363722758797243
+        }
+      ],
+      "sameTensorRankingChanged": false,
+      "fullPipelineRankingChanged": false
+    },
+    {
+      "id": "oriented",
+      "sameTensor": {
+        "cosine": 0.999485883403356,
+        "maxError": 0.004697492336858317,
+        "maxScoreError": 0.003814072237015337,
+        "normError": 4.43045600206915e-11
+      },
+      "fullPipeline": {
+        "cosine": 0.999485883403356,
+        "maxError": 0.004697492336858317,
+        "maxScoreError": 0.003814072237015337,
+        "normError": 4.43045600206915e-11
+      },
+      "pythonCandidates": [
+        {
+          "taxonId": "pfaf:Abies%20fraseri",
+          "similarity": 0.569892168045044
+        },
+        {
+          "taxonId": "pfaf:Abies%20alba",
+          "similarity": 0.567449688911438
+        },
+        {
+          "taxonId": "pfaf:Abies%20concolor",
+          "similarity": 0.5671460032463074
+        },
+        {
+          "taxonId": "pfaf:Abies%20cephalonica",
+          "similarity": 0.5643343329429626
+        },
+        {
+          "taxonId": "pfaf:Abies%20firma",
+          "similarity": 0.5633879899978638
+        }
+      ],
+      "sameTensorCandidates": [
+        {
+          "taxonId": "pfaf:Abies%20fraseri",
+          "similarity": 0.5688342878867513
+        },
+        {
+          "taxonId": "pfaf:Abies%20concolor",
+          "similarity": 0.5663987193444551
+        },
+        {
+          "taxonId": "pfaf:Abies%20alba",
+          "similarity": 0.566153301508879
+        },
+        {
+          "taxonId": "pfaf:Abies%20cephalonica",
+          "similarity": 0.5625063026341723
+        },
+        {
+          "taxonId": "pfaf:Abies%20firma",
+          "similarity": 0.5624770327470578
+        }
+      ],
+      "fullPipelineCandidates": [
+        {
+          "taxonId": "pfaf:Abies%20fraseri",
+          "similarity": 0.5688342878867513
+        },
+        {
+          "taxonId": "pfaf:Abies%20concolor",
+          "similarity": 0.5663987193444551
+        },
+        {
+          "taxonId": "pfaf:Abies%20alba",
+          "similarity": 0.566153301508879
+        },
+        {
+          "taxonId": "pfaf:Abies%20cephalonica",
+          "similarity": 0.5625063026341723
+        },
+        {
+          "taxonId": "pfaf:Abies%20firma",
+          "similarity": 0.5624770327470578
+        }
+      ],
+      "sameTensorRankingChanged": true,
+      "fullPipelineRankingChanged": true
+    },
+    {
+      "id": "webp",
+      "sameTensor": {
+        "cosine": 0.9996253889634075,
+        "maxError": 0.00490761409653967,
+        "maxScoreError": 0.003584543707790211,
+        "normError": 1.8430399428837063e-9
+      },
+      "fullPipeline": {
+        "cosine": 0.9996253889634075,
+        "maxError": 0.00490761409653967,
+        "maxScoreError": 0.003584543707790211,
+        "normError": 1.8430399428837063e-9
+      },
+      "pythonCandidates": [
+        {
+          "taxonId": "pfaf:Abelmoschus%20esculentus",
+          "similarity": 0.5888209939002991
+        },
+        {
+          "taxonId": "pfaf:Abies%20fraseri",
+          "similarity": 0.5878429412841797
+        },
+        {
+          "taxonId": "pfaf:Abelmoschus%20moschatus",
+          "similarity": 0.5869776606559753
+        },
+        {
+          "taxonId": "pfaf:Abies%20concolor",
+          "similarity": 0.5867319107055664
+        },
+        {
+          "taxonId": "pfaf:Abies%20alba",
+          "similarity": 0.5865474939346313
+        }
+      ],
+      "sameTensorCandidates": [
+        {
+          "taxonId": "pfaf:Abelmoschus%20esculentus",
+          "similarity": 0.5860404062453346
+        },
+        {
+          "taxonId": "pfaf:Abies%20fraseri",
+          "similarity": 0.5847566637668925
+        },
+        {
+          "taxonId": "pfaf:Abies%20concolor",
+          "similarity": 0.5845536566886774
+        },
+        {
+          "taxonId": "pfaf:Abies%20alba",
+          "similarity": 0.5841610450805829
+        },
+        {
+          "taxonId": "pfaf:Abelmoschus%20moschatus",
+          "similarity": 0.5841118742549503
+        }
+      ],
+      "fullPipelineCandidates": [
+        {
+          "taxonId": "pfaf:Abelmoschus%20esculentus",
+          "similarity": 0.5860404062453346
+        },
+        {
+          "taxonId": "pfaf:Abies%20fraseri",
+          "similarity": 0.5847566637668925
+        },
+        {
+          "taxonId": "pfaf:Abies%20concolor",
+          "similarity": 0.5845536566886774
+        },
+        {
+          "taxonId": "pfaf:Abies%20alba",
+          "similarity": 0.5841610450805829
+        },
+        {
+          "taxonId": "pfaf:Abelmoschus%20moschatus",
+          "similarity": 0.5841118742549503
+        }
+      ],
+      "sameTensorRankingChanged": true,
+      "fullPipelineRankingChanged": true
+    }
+  ],
+  "numericalFailures": [
+    "16418",
+    "50800",
+    "22158",
+    "portrait",
+    "landscape",
+    "small",
+    "oriented",
+    "webp"
+  ],
+  "tolerances": {
+    "status": "Provisional engineering limits; validate against actual FP32/FP16/browser measurements before accepting feasibility.",
+    "fp32CosineMin": 0.9999,
+    "fp32MaxEmbeddingError": 0.001,
+    "fp16CosineMin": 0.999,
+    "fp16MaxEmbeddingError": 0.005,
+    "fp16MaxScoreError": 0.002,
+    "pipelineCosineMin": 0.999,
+    "pipelineMaxEmbeddingError": 0.01,
+    "pipelineMaxScoreError": 0.005
+  },
+  "photoLifecycle": {
+    "oldStatus": "rejected",
+    "oldError": "AbortError",
+    "latestStatus": "fulfilled",
+    "latestCandidateCount": 5,
+    "scope": "Real worker with two immediate photo selections; superseded result must not settle current request"
+  },
+  "evaluation": {
+    "count": 0,
+    "negativeCount": 0,
+    "topOneCount": 0,
+    "topFiveCount": 0,
+    "samples": [],
+    "scope": "Descriptive fixture results within the installed PFAF catalog; not an accuracy guarantee."
+  },
+  "gpuProfiling": {
+    "kernelCount": 755,
+    "kernelTypes": {
+      "Cast": 2,
+      "Transpose": 171,
+      "Conv": 1,
+      "Concat": 1,
+      "Add": 72,
+      "LayerNormalization": 49,
+      "Gemm": 96,
+      "Gather": 73,
+      "Sqrt": 48,
+      "Div": 48,
+      "Mul": 96,
+      "MatMul": 49,
+      "Softmax": 24,
+      "Erf": 24,
+      "SkipLayerNormalization": 1
+    },
+    "totalGpuNanoseconds": 253165568,
+    "scope": "Separate diagnostic run; excluded from warm timings. GPU timestamps cover WebGPU kernels; runtime warnings are retained for CPU fallback inspection."
+  },
+  "offline": {
+    "photo": "inat-143164.jpg",
+    "firstUsedAfterOfflineReload": true,
+    "coldRuntime": {
+      "secureContext": true,
+      "adapter": {
+        "vendor": "apple",
+        "architecture": "metal-3",
+        "device": "",
+        "description": "",
+        "isFallbackAdapter": false
+      },
+      "features": [
+        "depth32float-stencil8",
+        "rg11b10ufloat-renderable",
+        "texture-formats-tier1",
+        "bgra8unorm-storage",
+        "texture-compression-bc",
+        "dual-source-blending",
+        "core-features-and-limits",
+        "float32-filterable",
+        "indirect-first-instance",
+        "texture-compression-astc-sliced-3d",
+        "float32-blendable",
+        "subgroup-size-control",
+        "texture-compression-astc",
+        "texture-compression-etc2",
+        "depth-clip-control",
+        "texture-compression-bc-sliced-3d",
+        "shader-f16",
+        "texture-formats-tier2",
+        "timestamp-query",
+        "clip-distances",
+        "primitive-index",
+        "texture-component-swizzle",
+        "subgroups"
+      ],
+      "limits": {
+        "maxBufferSize": 4294967292,
+        "maxStorageBufferBindingSize": 4294967292
+      },
+      "runtimeVersion": "1.30.0",
+      "executionProvider": "webgpu",
+      "initializationMs": 1387.800000011921,
+      "modelBytes": 608381536,
+      "packId": "d2acbb3d9b212333d47f",
+      "catalogId": "39831ede5fe0b995b55c"
+    },
+    "timings": {
+      "preprocessingMs": 15.599999964237213,
+      "inferenceMs": 269,
+      "rankingMs": 0.6000000238418579,
+      "totalMs": 285.19999998807907
+    },
+    "candidates": [
+      {
+        "taxonId": "pfaf:Abies%20alba",
+        "similarity": 0.559683033988516
+      },
+      {
+        "taxonId": "pfaf:Abies%20amabilis",
+        "similarity": 0.5475634726608842
+      },
+      {
+        "taxonId": "pfaf:Abelmoschus%20moschatus",
+        "similarity": 0.5441703158579465
+      },
+      {
+        "taxonId": "pfaf:Abelmoschus%20esculentus",
+        "similarity": 0.5392925976819889
+      },
+      {
+        "taxonId": "pfaf:Abies%20firma",
+        "similarity": 0.5356418015682715
+      }
+    ],
+    "detailId": "pfaf:Abies%20alba",
+    "requests": [
+      {
+        "url": "http://127.0.0.1:4180/?diagnostics=1",
+        "method": "GET",
+        "hasBody": false
+      },
+      {
+        "url": "http://127.0.0.1:4180/assets/index-BieFdHqn.js",
+        "method": "GET",
+        "hasBody": false
+      },
+      {
+        "url": "http://127.0.0.1:4180/assets/index-xsdfkofS.css",
+        "method": "GET",
+        "hasBody": false
+      },
+      {
+        "url": "http://127.0.0.1:4180/manifest.webmanifest",
+        "method": "GET",
+        "hasBody": false
+      },
+      {
+        "url": "http://127.0.0.1:4180/icon.svg",
+        "method": "GET",
+        "hasBody": false
+      },
+      {
+        "url": "http://127.0.0.1:4180/assets/inference.worker-Ae6GXWTg.js",
+        "method": "GET",
+        "hasBody": false
+      },
+      {
+        "url": "http://127.0.0.1:4180/runtime/1.30.0/ort-wasm-simd-threaded.jsep.mjs",
+        "method": "GET",
+        "hasBody": false
+      },
+      {
+        "url": "http://127.0.0.1:4180/runtime/1.30.0/ort-wasm-simd-threaded.jsep.wasm",
+        "method": "GET",
+        "hasBody": false
+      }
+    ],
+    "result": "Passed: fresh page, real model, offline photo and PFAF detail",
+    "productInterface": "Passed: fresh offline product page, upload, explicit identification, five candidates and PFAF hazards"
+  },
+  "privacy": {
+    "requestCount": 114,
+    "allGetRequestsWithoutBody": true,
+    "allRequestsLocal": true
+  },
+  "failure": "Error: Numerical gates failed: 16418, 50800, 22158, portrait, landscape, small, oriented, webp. Diagnostic collection does not waive tolerances.\n    at file:///Users/saul/p/plant-friends/scripts/benchmark.mjs:200:46"
+}

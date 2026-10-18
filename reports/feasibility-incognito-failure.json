@@ -1,0 +1,38 @@
+{
+  "measuredAt": "2026-10-17T22:58:12.497Z",
+  "status": "failed",
+  "iterations": 10,
+  "scope": "Full encoder feasibility with explicitly limited catalog; not final app acceptance",
+  "environment": {
+    "platform": "darwin",
+    "osRelease": "25.6.0",
+    "architecture": "arm64"
+  },
+  "phoneTesting": {
+    "iPhoneSafari": "untested",
+    "iPhoneHomeScreen": "untested",
+    "AndroidChrome": "untested",
+    "AndroidHomeScreen": "untested"
+  },
+  "limitations": [
+    "Small labeled fixture sample may overlap pretraining.",
+    "Memory observations do not measure total GPU or process memory."
+  ],
+  "catalogCoverage": {
+    "id": "39831ede5fe0b995b55c",
+    "sourceSha256": "4bb15be3f70a23676eea761b373a0ce8b92239ec3555b67ae2fe755ffb704ddf",
+    "url": "../../pfaf/39831ede5fe0b995b55c/manifest.json",
+    "taxonCount": 12,
+    "fullTaxonCount": 8796,
+    "rows": {
+      "url": "rows.json",
+      "sha256": "a7a7dfa9869774a7df888470b100692bb5a725db3cb3a928c6653b58be180aaa",
+      "bytes": 306
+    }
+  },
+  "catalogInstallation": {
+    "id": "39831ede5fe0b995b55c",
+    "bytes": 42820214
+  },
+  "failure": "page.evaluate: UnknownError: Failed to execute 'put' on 'Cache': Unexpected internal error.\n    at /Users/saul/p/plant-friends/scripts/benchmark.mjs:59:41"
+}

@@ -1,0 +1,48 @@
+{
+  "stage": "interview",
+  "title": "Offline plant identification with PFAF",
+  "goalSlug": "offline-plant-id-pwa",
+  "questions": [
+    {
+      "id": "camera-workflow",
+      "prompt": "Should the first version identify still photos or scan continuously through the camera?",
+      "description": "The confirmed goal supports camera capture and photo upload on desktop and phone layouts, with physical phone testing deferred. The research handoff uses one to three still photos of the same plant. A camera preview with a capture button fits that design; continuously identifying video frames adds a separate performance problem.",
+      "answerMode": "single-custom",
+      "recommendedAnswer": "Use a live camera preview with a capture button, or upload one to three photos of the same plant, then explicitly request identification. Defer continuous video recognition.",
+      "recommendedOptionIds": ["capture-stills"],
+      "options": [
+        { "id": "capture-stills", "label": "Camera preview and still-photo identification (recommended)" },
+        { "id": "continuous", "label": "Continuous camera recognition is required in the first version" }
+      ],
+      "required": true
+    },
+    {
+      "id": "catalog-coverage",
+      "prompt": "Which plants should the first identification catalog cover?",
+      "description": "../pfaf-data currently has 8,796 plant records, including 292 with no description yet. Ranking only these names is the shortest route to useful offline PFAF results, but it always chooses among PFAF entries even when a photographed plant is outside that catalog. Scores will be labeled possible matches, not confirmed IDs. A broader catalog needs an additional taxonomy source and explicit matching back to PFAF.",
+      "answerMode": "single-custom",
+      "recommendedAnswer": "Start with the actual PFAF catalog, preserving its names and records and reporting ambiguous or unusable model labels. Clearly state that results are possible matches within that catalog; show missing descriptions as missing. Do not claim to detect whether an unknown plant belongs to PFAF.",
+      "recommendedOptionIds": ["pfaf-first"],
+      "options": [
+        { "id": "pfaf-first", "label": "PFAF catalog first, with an explicit coverage limitation (recommended)" },
+        { "id": "broader", "label": "Broader plant catalog, with PFAF info where a verified match exists" },
+        { "id": "regional", "label": "Start with a regional subset; specify the region below" }
+      ],
+      "required": true
+    },
+    {
+      "id": "model-tradeoff",
+      "prompt": "How should we handle the handoff's model size and performance tradeoff?",
+      "description": "The handoff recommends the full BioCLIP 2 encoder first and BioCLIP 2.5 Huge only as an optional later experiment. Its planning estimate for BioCLIP 2 image weights is about 610 MB in FP16, plus catalog/runtime assets; actual export size and browser memory use remain unmeasured. The shared baseline is real local inference, explicit model download, offline identification and PFAF text, private photos, and desktop-browser validation with licensed labeled photos. Public deployment, model training, and physical phone validation are deferred.",
+      "answerMode": "single-custom",
+      "recommendedAnswer": "Try the full BioCLIP 2 path first, measuring real browser execution, download size, numerical agreement, speed, and labeled-photo results before polishing the app. If it is impractical, report the evidence and propose an alternative before changing models. Defer BioCLIP 2.5 Huge. Keep offline PFAF browsing useful even when the device cannot run identification.",
+      "recommendedOptionIds": ["bioclip-first"],
+      "options": [
+        { "id": "bioclip-first", "label": "Measure BioCLIP 2 first; discuss alternatives if needed (recommended)" },
+        { "id": "smaller-first", "label": "Prioritize a smaller download and faster inference; compare lighter models first" },
+        { "id": "compare-both", "label": "Compare BioCLIP 2 and 2.5 Huge before choosing the default" }
+      ],
+      "required": true
+    }
+  ]
+}

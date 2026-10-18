@@ -1,0 +1,50 @@
+{
+  "measuredAt": "2026-10-17T22:32:19.907Z",
+  "scope": "GPU capability probe only; full BioCLIP inference remains untested",
+  "environment": {
+    "platform": "darwin",
+    "osRelease": "25.6.0",
+    "architecture": "arm64",
+    "browser": "Chrome/155.0.8059.80",
+    "javascript": "15.5.35.23"
+  },
+  "secureContext": true,
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+  "gpuAvailable": true,
+  "adapter": {
+    "vendor": "apple",
+    "architecture": "metal-3",
+    "device": "",
+    "description": "",
+    "isFallbackAdapter": false
+  },
+  "features": [
+    "depth32float-stencil8",
+    "rg11b10ufloat-renderable",
+    "texture-formats-tier1",
+    "bgra8unorm-storage",
+    "texture-compression-bc",
+    "dual-source-blending",
+    "core-features-and-limits",
+    "float32-filterable",
+    "indirect-first-instance",
+    "texture-compression-astc-sliced-3d",
+    "float32-blendable",
+    "subgroup-size-control",
+    "texture-compression-astc",
+    "texture-compression-etc2",
+    "depth-clip-control",
+    "texture-compression-bc-sliced-3d",
+    "shader-f16",
+    "texture-formats-tier2",
+    "timestamp-query",
+    "clip-distances",
+    "primitive-index",
+    "texture-component-swizzle",
+    "subgroups"
+  ],
+  "limits": {
+    "maxBufferSize": 4294967292,
+    "maxStorageBufferBindingSize": 4294967292
+  }
+}

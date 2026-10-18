@@ -1,0 +1,592 @@
+{
+  "scope": "Automated keyboard events in desktop Chrome; no OS-native, screen-reader, or phone review",
+  "actions": [
+    {
+      "action": "Tab",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "A",
+        "type": null,
+        "name": "Skip to content",
+        "focusVisible": true,
+        "inDialog": false
+      }
+    },
+    {
+      "action": "Tab",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "A",
+        "type": null,
+        "name": "Plant Friends\nA little closer to the natural world",
+        "focusVisible": true,
+        "inDialog": false
+      }
+    },
+    {
+      "action": "Tab",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "BUTTON",
+        "type": null,
+        "name": "Identify",
+        "focusVisible": true,
+        "inDialog": false
+      }
+    },
+    {
+      "action": "Tab",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "BUTTON",
+        "type": null,
+        "name": "Explore plants",
+        "focusVisible": true,
+        "inDialog": false
+      }
+    },
+    {
+      "action": "Tab",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "BUTTON",
+        "type": null,
+        "name": "Offline setup",
+        "focusVisible": true,
+        "inDialog": false
+      }
+    },
+    {
+      "action": "Enter",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "BUTTON",
+        "type": null,
+        "name": "Offline setup",
+        "focusVisible": true,
+        "inDialog": false
+      }
+    },
+    {
+      "action": "Tab",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "BUTTON",
+        "type": null,
+        "name": "Download PFAF catalog",
+        "focusVisible": true,
+        "inDialog": false
+      }
+    },
+    {
+      "action": "Space",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "BODY",
+        "type": null,
+        "name": "Skip to content\nPlant Friends\nA little closer to the natural world\nIdentify\nExplore plants\nOffline s",
+        "focusVisible": false,
+        "inDialog": false
+      }
+    },
+    {
+      "action": "Tab",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "BUTTON",
+        "type": null,
+        "name": "Delete catalog",
+        "focusVisible": true,
+        "inDialog": false
+      }
+    },
+    {
+      "action": "Tab",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "INPUT",
+        "type": "checkbox",
+        "name": "I want to download 632.4 MiB to this device for local identification.",
+        "focusVisible": true,
+        "inDialog": false
+      }
+    },
+    {
+      "action": "Space",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "INPUT",
+        "type": "checkbox",
+        "name": "I want to download 632.4 MiB to this device for local identification.",
+        "focusVisible": true,
+        "inDialog": false
+      }
+    },
+    {
+      "action": "Tab",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "BUTTON",
+        "type": null,
+        "name": "Download identification pack",
+        "focusVisible": true,
+        "inDialog": false
+      }
+    },
+    {
+      "action": "Shift+Tab",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "INPUT",
+        "type": "checkbox",
+        "name": "I want to download 632.4 MiB to this device for local identification.",
+        "focusVisible": true,
+        "inDialog": false
+      }
+    },
+    {
+      "action": "Space",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "INPUT",
+        "type": "checkbox",
+        "name": "I want to download 632.4 MiB to this device for local identification.",
+        "focusVisible": true,
+        "inDialog": false
+      }
+    },
+    {
+      "action": "Tab",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "BUTTON",
+        "type": null,
+        "name": "Check available downloads ↻",
+        "focusVisible": true,
+        "inDialog": false
+      }
+    },
+    {
+      "action": "Tab",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "SUMMARY",
+        "type": null,
+        "name": "Developer diagnostics",
+        "focusVisible": true,
+        "inDialog": false
+      }
+    },
+    {
+      "action": "Tab",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "A",
+        "type": null,
+        "name": "Plants For A Future ↗",
+        "focusVisible": true,
+        "inDialog": false
+      }
+    },
+    {
+      "action": "Tab",
+      "focus": {
+        "documentHasFocus": false,
+        "tag": "BODY",
+        "type": null,
+        "name": "Skip to content\nPlant Friends\nA little closer to the natural world\nIdentify\nExplore plants\nOffline s",
+        "focusVisible": false,
+        "inDialog": false
+      }
+    },
+    {
+      "action": "Tab",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "A",
+        "type": null,
+        "name": "Skip to content",
+        "focusVisible": true,
+        "inDialog": false
+      }
+    },
+    {
+      "action": "Tab",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "A",
+        "type": null,
+        "name": "Plant Friends\nA little closer to the natural world",
+        "focusVisible": true,
+        "inDialog": false
+      }
+    },
+    {
+      "action": "Tab",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "BUTTON",
+        "type": null,
+        "name": "Identify",
+        "focusVisible": true,
+        "inDialog": false
+      }
+    },
+    {
+      "action": "Enter",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "BUTTON",
+        "type": null,
+        "name": "Identify",
+        "focusVisible": true,
+        "inDialog": false
+      }
+    },
+    {
+      "action": "Tab",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "BUTTON",
+        "type": null,
+        "name": "Explore plants",
+        "focusVisible": true,
+        "inDialog": false
+      }
+    },
+    {
+      "action": "Tab",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "BUTTON",
+        "type": null,
+        "name": "Offline setup",
+        "focusVisible": true,
+        "inDialog": false
+      }
+    },
+    {
+      "action": "Tab",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "BUTTON",
+        "type": null,
+        "name": "Use camera",
+        "focusVisible": true,
+        "inDialog": false
+      }
+    },
+    {
+      "action": "Tab",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "INPUT",
+        "type": "file",
+        "name": "Upload photo",
+        "focusVisible": true,
+        "inDialog": false
+      }
+    },
+    {
+      "action": "Shift+Tab",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "BUTTON",
+        "type": null,
+        "name": "Use camera",
+        "focusVisible": true,
+        "inDialog": false
+      }
+    },
+    {
+      "action": "Tab",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "INPUT",
+        "type": "file",
+        "name": "Upload photo",
+        "focusVisible": true,
+        "inDialog": false
+      }
+    },
+    {
+      "action": "Tab",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "BUTTON",
+        "type": null,
+        "name": "Open offline setup →",
+        "focusVisible": true,
+        "inDialog": false
+      }
+    },
+    {
+      "action": "Tab",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "BUTTON",
+        "type": null,
+        "name": "Explore the catalog →",
+        "focusVisible": true,
+        "inDialog": false
+      }
+    },
+    {
+      "action": "Tab",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "SUMMARY",
+        "type": null,
+        "name": "Developer diagnostics",
+        "focusVisible": true,
+        "inDialog": false
+      }
+    },
+    {
+      "action": "Tab",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "A",
+        "type": null,
+        "name": "Plants For A Future ↗",
+        "focusVisible": true,
+        "inDialog": false
+      }
+    },
+    {
+      "action": "Tab",
+      "focus": {
+        "documentHasFocus": false,
+        "tag": "BODY",
+        "type": null,
+        "name": "Skip to content\nPlant Friends\nA little closer to the natural world\nIdentify\nExplore plants\nOffline s",
+        "focusVisible": false,
+        "inDialog": false
+      }
+    },
+    {
+      "action": "Tab",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "A",
+        "type": null,
+        "name": "Skip to content",
+        "focusVisible": true,
+        "inDialog": false
+      }
+    },
+    {
+      "action": "Tab",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "A",
+        "type": null,
+        "name": "Plant Friends\nA little closer to the natural world",
+        "focusVisible": true,
+        "inDialog": false
+      }
+    },
+    {
+      "action": "Tab",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "BUTTON",
+        "type": null,
+        "name": "Identify",
+        "focusVisible": true,
+        "inDialog": false
+      }
+    },
+    {
+      "action": "Tab",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "BUTTON",
+        "type": null,
+        "name": "Explore plants",
+        "focusVisible": true,
+        "inDialog": false
+      }
+    },
+    {
+      "action": "Enter",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "BUTTON",
+        "type": null,
+        "name": "Explore plants",
+        "focusVisible": true,
+        "inDialog": false
+      }
+    },
+    {
+      "action": "Tab",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "BUTTON",
+        "type": null,
+        "name": "Offline setup",
+        "focusVisible": true,
+        "inDialog": false
+      }
+    },
+    {
+      "action": "Tab",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "INPUT",
+        "type": "search",
+        "name": "Search scientific or common names",
+        "focusVisible": true,
+        "inDialog": false
+      }
+    },
+    {
+      "action": "Type scientific-name search: Abelia triflora",
+      "focus": "labeled searchbox"
+    },
+    {
+      "action": "Tab",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "BUTTON",
+        "type": null,
+        "name": "⌁\nAbelia triflora\nIndian Abelia\n↗",
+        "focusVisible": true,
+        "inDialog": false
+      }
+    },
+    {
+      "action": "Enter",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "BUTTON",
+        "type": null,
+        "name": "Close plant details",
+        "focusVisible": true,
+        "inDialog": true
+      }
+    },
+    {
+      "action": "Shift+Tab",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "DIALOG",
+        "type": null,
+        "name": "PFAF CATALOG RECORD\n\nAbelia triflora\n\nIndian Abelia\n\n×\n\nA catalog entry is not a confirmed identific",
+        "focusVisible": true,
+        "inDialog": true
+      }
+    },
+    {
+      "action": "Tab",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "BUTTON",
+        "type": null,
+        "name": "Close plant details",
+        "focusVisible": true,
+        "inDialog": true
+      }
+    },
+    {
+      "action": "Tab",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "SUMMARY",
+        "type": null,
+        "name": "More from this record",
+        "focusVisible": true,
+        "inDialog": true
+      }
+    },
+    {
+      "action": "Tab",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "A",
+        "type": null,
+        "name": "Recorded PFAF page ↗",
+        "focusVisible": true,
+        "inDialog": true
+      }
+    },
+    {
+      "action": "Tab",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "A",
+        "type": null,
+        "name": "PFAF terms & attribution ↗",
+        "focusVisible": true,
+        "inDialog": true
+      }
+    },
+    {
+      "action": "Tab",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "BUTTON",
+        "type": null,
+        "name": "Close record",
+        "focusVisible": true,
+        "inDialog": true
+      }
+    },
+    {
+      "action": "Tab",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "DIALOG",
+        "type": null,
+        "name": "PFAF CATALOG RECORD\n\nAbelia triflora\n\nIndian Abelia\n\n×\n\nA catalog entry is not a confirmed identific",
+        "focusVisible": true,
+        "inDialog": true
+      }
+    },
+    {
+      "action": "Tab",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "BUTTON",
+        "type": null,
+        "name": "Close plant details",
+        "focusVisible": true,
+        "inDialog": true
+      }
+    },
+    {
+      "action": "Tab",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "SUMMARY",
+        "type": null,
+        "name": "More from this record",
+        "focusVisible": true,
+        "inDialog": true
+      }
+    },
+    {
+      "action": "Tab",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "A",
+        "type": null,
+        "name": "Recorded PFAF page ↗",
+        "focusVisible": true,
+        "inDialog": true
+      }
+    },
+    {
+      "action": "Escape",
+      "focus": {
+        "documentHasFocus": true,
+        "tag": "BUTTON",
+        "type": null,
+        "name": "⌁\nAbelia triflora\nIndian Abelia\n↗",
+        "focusVisible": true,
+        "inDialog": false
+      }
+    }
+  ]
+}

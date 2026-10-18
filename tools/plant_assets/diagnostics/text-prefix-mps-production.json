@@ -1,0 +1,336 @@
+{
+  "kind": "causal-prefix-probe",
+  "status": "GO: causal invariant and strict sampled mps parity passed",
+  "device": "mps",
+  "threads": 4,
+  "checkpointSha256": "b7b2bf6fbc95799e42630e394cf95803892ab447c1a8ab629dbc82fbeaf7dfef",
+  "configSha256": "1bf947e96e943fe50efd5c3e26c37f843a2fa3c358967719a68c8a6d17ce68c8",
+  "textConfig": {
+    "context_length": 77,
+    "vocab_size": 49408,
+    "width": 768,
+    "heads": 12,
+    "layers": 12
+  },
+  "promptSha256": "1ca847c6a7b08b97797e593a6361d1a69ae81f9c7130e2bd01472e0538824139",
+  "officialEncodeTextSourceSha256": "93138e5fa8c04a02f0da71c0a888c3b61decdcc36292caee107f0dd8ebdd20e1",
+  "versions": {
+    "torch": "2.14.1",
+    "open-clip-torch": "3.3.0",
+    "numpy": "2.5.4",
+    "safetensors": "0.8.0"
+  },
+  "assumptions": {
+    "causalMask": "zero on/below diagonal and -inf above",
+    "pooling": "highest-token-ID EOS",
+    "clsEmbedding": false,
+    "padMask": false,
+    "contextLength": 77,
+    "precision": "FP32",
+    "tokenizer": "SimpleTokenizer",
+    "allOperationsDevice": "mps"
+  },
+  "diagnosticLimits": {
+    "minimumCosine": 0.999999999,
+    "maximumNormalizedCoordinateError": 1e-06
+  },
+  "limitsChanged": false,
+  "productionChanged": false,
+  "samples": [
+    {
+      "label": "Abelia triflora",
+      "prefixLength": 15,
+      "eosRange": [
+        8,
+        14
+      ],
+      "promptMetrics": {
+        "minimumCosine": 0.9999999999999998,
+        "maximumNormalizedCoordinateError": 0.0,
+        "maximumRawCoordinateError": 0.0
+      },
+      "ensembleMetrics": {
+        "minimumCosine": 1.0,
+        "maximumNormalizedCoordinateError": 0.0,
+        "maximumRawCoordinateError": 0.0
+      },
+      "passed": true,
+      "fullTimesMs": [
+        416.30437498679385
+      ],
+      "prefixTimesMs": [
+        81.896833027713
+      ],
+      "medianFullMs": 416.30437498679385,
+      "medianPrefixMs": 81.896833027713,
+      "observedSpeedup": 5.083278065782116,
+      "productionLikeMs": 83.80145800765604,
+      "productionAdapterBitwiseEqual": true,
+      "productionAdapterMetrics": {
+        "minimumCosine": 0.9999999999999998,
+        "maximumNormalizedCoordinateError": 0.0,
+        "maximumRawCoordinateError": 0.0
+      },
+      "productionEnsembleMetrics": {
+        "minimumCosine": 1.0,
+        "maximumNormalizedCoordinateError": 0.0,
+        "maximumRawCoordinateError": 0.0
+      }
+    },
+    {
+      "label": "Salvia officinalis",
+      "prefixLength": 16,
+      "eosRange": [
+        9,
+        15
+      ],
+      "promptMetrics": {
+        "minimumCosine": 0.9999999999999998,
+        "maximumNormalizedCoordinateError": 0.0,
+        "maximumRawCoordinateError": 0.0
+      },
+      "ensembleMetrics": {
+        "minimumCosine": 1.0,
+        "maximumNormalizedCoordinateError": 0.0,
+        "maximumRawCoordinateError": 0.0
+      },
+      "passed": true,
+      "fullTimesMs": [
+        416.25787498196587
+      ],
+      "prefixTimesMs": [
+        85.98970796447247
+      ],
+      "medianFullMs": 416.25787498196587,
+      "medianPrefixMs": 85.98970796447247,
+      "observedSpeedup": 4.840787169017332,
+      "productionLikeMs": 88.03504204843193,
+      "productionAdapterBitwiseEqual": true,
+      "productionAdapterMetrics": {
+        "minimumCosine": 0.9999999999999998,
+        "maximumNormalizedCoordinateError": 0.0,
+        "maximumRawCoordinateError": 0.0
+      },
+      "productionEnsembleMetrics": {
+        "minimumCosine": 1.0,
+        "maximumNormalizedCoordinateError": 0.0,
+        "maximumRawCoordinateError": 0.0
+      }
+    },
+    {
+      "label": "Achillea millefolium",
+      "prefixLength": 18,
+      "eosRange": [
+        11,
+        17
+      ],
+      "promptMetrics": {
+        "minimumCosine": 0.9999999999999997,
+        "maximumNormalizedCoordinateError": 0.0,
+        "maximumRawCoordinateError": 0.0
+      },
+      "ensembleMetrics": {
+        "minimumCosine": 1.0,
+        "maximumNormalizedCoordinateError": 0.0,
+        "maximumRawCoordinateError": 0.0
+      },
+      "passed": true,
+      "fullTimesMs": [
+        416.0550420056097
+      ],
+      "prefixTimesMs": [
+        97.32062503462657
+      ],
+      "medianFullMs": 416.0550420056097,
+      "medianPrefixMs": 97.32062503462657,
+      "observedSpeedup": 4.275096279515034,
+      "productionLikeMs": 99.85404199687764,
+      "productionAdapterBitwiseEqual": true,
+      "productionAdapterMetrics": {
+        "minimumCosine": 0.9999999999999997,
+        "maximumNormalizedCoordinateError": 0.0,
+        "maximumRawCoordinateError": 0.0
+      },
+      "productionEnsembleMetrics": {
+        "minimumCosine": 1.0,
+        "maximumNormalizedCoordinateError": 0.0,
+        "maximumRawCoordinateError": 0.0
+      }
+    },
+    {
+      "label": "Abutilon x hybridum",
+      "prefixLength": 17,
+      "eosRange": [
+        10,
+        16
+      ],
+      "promptMetrics": {
+        "minimumCosine": 0.9999999999999998,
+        "maximumNormalizedCoordinateError": 0.0,
+        "maximumRawCoordinateError": 0.0
+      },
+      "ensembleMetrics": {
+        "minimumCosine": 1.0,
+        "maximumNormalizedCoordinateError": 0.0,
+        "maximumRawCoordinateError": 0.0
+      },
+      "passed": true,
+      "fullTimesMs": [
+        421.03908298304304
+      ],
+      "prefixTimesMs": [
+        94.01145804440603
+      ],
+      "medianFullMs": 421.03908298304304,
+      "medianPrefixMs": 94.01145804440603,
+      "observedSpeedup": 4.478593266622527,
+      "productionLikeMs": 97.08695899462327,
+      "productionAdapterBitwiseEqual": true,
+      "productionAdapterMetrics": {
+        "minimumCosine": 0.9999999999999998,
+        "maximumNormalizedCoordinateError": 0.0,
+        "maximumRawCoordinateError": 0.0
+      },
+      "productionEnsembleMetrics": {
+        "minimumCosine": 1.0,
+        "maximumNormalizedCoordinateError": 0.0,
+        "maximumRawCoordinateError": 0.0
+      }
+    },
+    {
+      "label": "Fragaria vesca 'Semperflorens'",
+      "prefixLength": 20,
+      "eosRange": [
+        13,
+        19
+      ],
+      "promptMetrics": {
+        "minimumCosine": 0.9999999999999997,
+        "maximumNormalizedCoordinateError": 0.0,
+        "maximumRawCoordinateError": 0.0
+      },
+      "ensembleMetrics": {
+        "minimumCosine": 0.9999999999999998,
+        "maximumNormalizedCoordinateError": 0.0,
+        "maximumRawCoordinateError": 0.0
+      },
+      "passed": true,
+      "fullTimesMs": [
+        417.9197499761358
+      ],
+      "prefixTimesMs": [
+        108.00112498691306
+      ],
+      "medianFullMs": 417.9197499761358,
+      "medianPrefixMs": 108.00112498691306,
+      "observedSpeedup": 3.8695870068647604,
+      "productionLikeMs": 113.67625003913417,
+      "productionAdapterBitwiseEqual": true,
+      "productionAdapterMetrics": {
+        "minimumCosine": 0.9999999999999997,
+        "maximumNormalizedCoordinateError": 0.0,
+        "maximumRawCoordinateError": 0.0
+      },
+      "productionEnsembleMetrics": {
+        "minimumCosine": 0.9999999999999998,
+        "maximumNormalizedCoordinateError": 0.0,
+        "maximumRawCoordinateError": 0.0
+      }
+    },
+    {
+      "label": "Brassica juncea integrifolia subintegrifolia",
+      "prefixLength": 22,
+      "eosRange": [
+        15,
+        21
+      ],
+      "promptMetrics": {
+        "minimumCosine": 0.9999999999999998,
+        "maximumNormalizedCoordinateError": 0.0,
+        "maximumRawCoordinateError": 0.0
+      },
+      "ensembleMetrics": {
+        "minimumCosine": 1.0,
+        "maximumNormalizedCoordinateError": 0.0,
+        "maximumRawCoordinateError": 0.0
+      },
+      "passed": true,
+      "fullTimesMs": [
+        418.75908395741135
+      ],
+      "prefixTimesMs": [
+        119.30733401095495
+      ],
+      "medianFullMs": 418.75908395741135,
+      "medianPrefixMs": 119.30733401095495,
+      "observedSpeedup": 3.5099190458732434,
+      "productionLikeMs": 123.00066696479917,
+      "productionAdapterBitwiseEqual": true,
+      "productionAdapterMetrics": {
+        "minimumCosine": 0.9999999999999998,
+        "maximumNormalizedCoordinateError": 0.0,
+        "maximumRawCoordinateError": 0.0
+      },
+      "productionEnsembleMetrics": {
+        "minimumCosine": 1.0,
+        "maximumNormalizedCoordinateError": 0.0,
+        "maximumRawCoordinateError": 0.0
+      }
+    },
+    {
+      "label": "Cylindropuntia imbricata subsp. spinosior",
+      "prefixLength": 24,
+      "eosRange": [
+        17,
+        23
+      ],
+      "promptMetrics": {
+        "minimumCosine": 0.9999999999999998,
+        "maximumNormalizedCoordinateError": 0.0,
+        "maximumRawCoordinateError": 0.0
+      },
+      "ensembleMetrics": {
+        "minimumCosine": 1.0,
+        "maximumNormalizedCoordinateError": 0.0,
+        "maximumRawCoordinateError": 0.0
+      },
+      "passed": true,
+      "fullTimesMs": [
+        418.5794579680078
+      ],
+      "prefixTimesMs": [
+        129.07558301230893
+      ],
+      "medianFullMs": 418.5794579680078,
+      "medianPrefixMs": 129.07558301230893,
+      "observedSpeedup": 3.2429019354349236,
+      "productionLikeMs": 132.46600003913045,
+      "productionAdapterBitwiseEqual": true,
+      "productionAdapterMetrics": {
+        "minimumCosine": 0.9999999999999998,
+        "maximumNormalizedCoordinateError": 0.0,
+        "maximumRawCoordinateError": 0.0
+      },
+      "productionEnsembleMetrics": {
+        "minimumCosine": 1.0,
+        "maximumNormalizedCoordinateError": 0.0,
+        "maximumRawCoordinateError": 0.0
+      }
+    }
+  ],
+  "timingPolicy": {
+    "warmEveryLength": true,
+    "synchronize": true,
+    "transfersAndTokenizationIncluded": false
+  },
+  "limitations": "Encoding timings exclude tokenization, transfer, ensemble reduction, and startup. Full production preparation remains untouched.",
+  "fullLengthControlBitwiseEqual": true,
+  "summary": {
+    "labels": 7,
+    "allPassed": true,
+    "minimumPromptCosine": 0.9999999999999997,
+    "maximumPromptNormalizedCoordinateError": 0.0,
+    "minimumEnsembleCosine": 0.9999999999999998,
+    "maximumEnsembleNormalizedCoordinateError": 0.0
+  }
+}

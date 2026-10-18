@@ -1,0 +1,169 @@
+{
+  "stage": "facts",
+  "title": "Offline plant-ID PWA: outcomes to verify",
+  "goalSlug": "offline-plant-id-pwa",
+  "facts": [
+    {
+      "id": "pwa-replacement",
+      "text": "The existing Swift/Xcode app is replaced by an installable TypeScript PWA with layouts usable on a computer or phone.",
+      "accepted": true,
+      "removed": false,
+      "automatedVerification": false,
+      "recommendedAutomatedVerification": false
+    },
+    {
+      "id": "photo-input",
+      "text": "A user can capture a still photo from a camera preview or upload one JPEG, PNG, or WebP photo, then replace or clear the photo and explicitly request identification; V1 uses one photo at a time.",
+      "accepted": true,
+      "removed": false,
+      "comment": "maybe just do one photo for now for ease,",
+      "automatedVerification": true,
+      "recommendedAutomatedVerification": true
+    },
+    {
+      "id": "photo-lifecycle",
+      "text": "Identification runs at most one inference at a time, reuses its loaded model, and never displays a result for an older photo selection as the current result.",
+      "accepted": true,
+      "removed": false,
+      "automatedVerification": true,
+      "recommendedAutomatedVerification": true
+    },
+    {
+      "id": "pfaf-import",
+      "text": "A reproducible read-only export from ../pfaf-data/data.sqlite builds the offline PFAF catalog, preserves source names and records, reports duplicate or unusable model labels, and displays the actual catalog size rather than a demo count.",
+      "accepted": true,
+      "removed": false,
+      "automatedVerification": true,
+      "recommendedAutomatedVerification": true
+    },
+    {
+      "id": "pfaf-details",
+      "text": "Opening a candidate shows its available PFAF scientific and common names, known hazards, edibility and use ratings, edible uses, medicinal uses, and other uses offline; missing information is shown as unavailable rather than invented.",
+      "accepted": true,
+      "removed": false,
+      "automatedVerification": true,
+      "recommendedAutomatedVerification": true
+    },
+    {
+      "id": "pfaf-browse",
+      "text": "A user can search the offline PFAF catalog by scientific or common name and open plant details even when identification is unavailable or the model has not been downloaded.",
+      "accepted": true,
+      "removed": false,
+      "automatedVerification": true,
+      "recommendedAutomatedVerification": true
+    },
+    {
+      "id": "pfaf-provenance",
+      "text": "PFAF content retains source attribution, available reference markers, and available record refresh dates; the app distinguishes an unknown refresh date from a recent catalog export.",
+      "accepted": true,
+      "removed": false,
+      "automatedVerification": true,
+      "recommendedAutomatedVerification": true
+    },
+    {
+      "id": "bioclip-feasibility",
+      "text": "Before polishing the app, the full BioCLIP 2 image encoder runs a real photo in the local browser through ONNX Runtime Web and WebGPU; its measured size, initialization, inference, and numerical agreement are recorded, and an impractical result prompts a documented alternative proposal before changing models.",
+      "accepted": true,
+      "removed": false,
+      "automatedVerification": true,
+      "recommendedAutomatedVerification": true
+    },
+    {
+      "id": "asset-preparation",
+      "text": "Pinned Python tools prepare the image encoder and scientific-name prompt vectors from the same immutable BioCLIP 2 revision, with a Python reference pipeline and explicit preprocessing, prompt, catalog, and file hashes in a versioned asset manifest.",
+      "accepted": true,
+      "removed": false,
+      "automatedVerification": true,
+      "recommendedAutomatedVerification": true
+    },
+    {
+      "id": "candidate-ranking",
+      "text": "Real identification returns the top five PFAF candidates for the selected photo by cosine similarity with deterministic ties, and scores are labeled similarity rather than probability or confirmed identification.",
+      "accepted": true,
+      "removed": false,
+      "automatedVerification": true,
+      "recommendedAutomatedVerification": true
+    },
+    {
+      "id": "coverage-limits",
+      "text": "The app states that it ranks possible matches within the installed PFAF catalog and does not claim to detect every plant, prove catalog membership, or establish that a photographed plant is safe to consume.",
+      "accepted": true,
+      "removed": false,
+      "automatedVerification": false,
+      "recommendedAutomatedVerification": false
+    },
+    {
+      "id": "explicit-install",
+      "text": "The large identification pack downloads only after an explicit user action showing its measured size, with progress, cancel, retry, installed status, and delete controls; incomplete, corrupted, or incompatible packs never become ready.",
+      "accepted": true,
+      "removed": false,
+      "automatedVerification": true,
+      "recommendedAutomatedVerification": true
+    },
+    {
+      "id": "offline-identification",
+      "text": "After setup completes, an offline reload can identify a new local photo and open PFAF details with the app shell, runtime, model, vectors, and text catalog available locally and no CDN dependency.",
+      "accepted": true,
+      "removed": false,
+      "automatedVerification": true,
+      "recommendedAutomatedVerification": true
+    },
+    {
+      "id": "recoverable-errors",
+      "text": "Unavailable cameras or WebGPU, invalid or oversized photos, model failures, and incomplete or evicted offline assets produce clear recovery actions while available PFAF browsing continues to work.",
+      "accepted": true,
+      "removed": false,
+      "automatedVerification": true,
+      "recommendedAutomatedVerification": true
+    },
+    {
+      "id": "photo-privacy",
+      "text": "Photos and their metadata stay on the device, remain limited to the current session, and are released on reset; identification makes no photo uploads, telemetry calls, or server-inference requests.",
+      "accepted": true,
+      "removed": false,
+      "automatedVerification": true,
+      "recommendedAutomatedVerification": true
+    },
+    {
+      "id": "labeled-evaluation",
+      "text": "A small reproducible set of licensed, labeled plant photos, preferably from iNaturalist, tests real browser inference and reports top-one and top-five results, failures, and catalog coverage without presenting a small or potentially training-overlapping sample as a general accuracy guarantee.",
+      "accepted": true,
+      "removed": false,
+      "automatedVerification": true,
+      "recommendedAutomatedVerification": true
+    },
+    {
+      "id": "numerical-regression",
+      "text": "Automated checks compare Python reference outputs, ONNX reference outputs, and the actual browser pipeline using recorded numerical tolerances; fast tests and mocks are clearly separated from real-model integration evidence.",
+      "accepted": true,
+      "removed": false,
+      "automatedVerification": true,
+      "recommendedAutomatedVerification": true
+    },
+    {
+      "id": "desktop-benchmarks",
+      "text": "The local desktop browser report records exact environment and model identities, download size, cold startup, at least ten warm single-photo timings, and observed failures; physical phone and home-screen performance remain explicitly untested.",
+      "accepted": true,
+      "removed": false,
+      "automatedVerification": true,
+      "recommendedAutomatedVerification": true
+    },
+    {
+      "id": "reproducible-delivery",
+      "text": "The repository uses uv with a pinned Python environment and mypy checks, TypeScript with a pinned Node environment, reproducible preparation and verification commands, local development and production-preview instructions, static HTTPS hosting guidance, and developer diagnostics, while keeping large model binaries out of git.",
+      "accepted": true,
+      "removed": false,
+      "comment": "yes, use UV and Mypy for type checking (or uv's type checker), and typescript. the PWA can use any framework whatever seems most appropriate, possibly react or another one?",
+      "automatedVerification": true,
+      "recommendedAutomatedVerification": true
+    },
+    {
+      "id": "deferred-scope",
+      "text": "This goal defers multi-photo identification, continuous video recognition, BioCLIP 2.5 Huge, training or distillation, broader-than-PFAF taxonomy, accounts, maps, saved photo history, reference-image archives, public publication, native apps, and physical phone testing.",
+      "accepted": true,
+      "removed": false,
+      "automatedVerification": false,
+      "recommendedAutomatedVerification": false
+    }
+  ]
+}

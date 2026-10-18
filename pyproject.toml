@@ -1,0 +1,35 @@
+[project]
+name = "plant-friends-assets"
+version = "0.1.0"
+description = "Reproducible PFAF catalogs and local BioCLIP image encoder packs"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "huggingface-hub",
+  "numpy",
+  "onnx",
+  "onnxruntime",
+  "onnxscript",
+  "open-clip-torch",
+  "pillow",
+  "safetensors",
+  "torch",
+  "torchvision",
+]
+
+[dependency-groups]
+dev = ["mypy", "pytest"]
+
+[tool.uv]
+package = false
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+
+[[tool.mypy.overrides]]
+module = ["open_clip.*", "onnxruntime.*", "torchvision.*", "onnxscript.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests/python"]
+pythonpath = ["."]

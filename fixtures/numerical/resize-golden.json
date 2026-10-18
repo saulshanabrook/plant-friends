@@ -1,0 +1,31 @@
+{
+  "reference": "Pillow 13.0.0 Image.Resampling.BICUBIC then center crop",
+  "formula": "(x*13+y*7+c*59+(x*y)%113)%256",
+  "cases": [
+    {
+      "width": 17,
+      "height": 31,
+      "rgbSha256": "c361512e5e210417715d2970f2a81afbccfa54086df11846516b86abdff554cc"
+    },
+    {
+      "width": 31,
+      "height": 17,
+      "rgbSha256": "74503b10d3c638b675a9bec9af854bbe3edd6286b71f7006f86a7d29e1ea9929"
+    },
+    {
+      "width": 224,
+      "height": 224,
+      "rgbSha256": "f5e8ddb128e095468c835d9681d94f3ca203013ae42647ca9b3e7f7d8b6256de"
+    },
+    {
+      "width": 317,
+      "height": 509,
+      "rgbSha256": "d1f652f5607090c8bbaf3e23a58dd6f8648c35250dc165c3938261733ac8417c"
+    },
+    {
+      "width": 640,
+      "height": 480,
+      "rgbSha256": "090e2aad63084d280ccefcb90f23c42a415f81aad7d7fbdfc99ee022ba620c78"
+    }
+  ]
+}

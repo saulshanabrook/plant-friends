@@ -1,0 +1,12 @@
+{
+  "status": "Fixed desktop regression limits; retained unchanged after the full encoder passed the native WebGPU/FP32-arithmetic feasibility milestone.",
+  "fp32CosineMin": 0.9999,
+  "fp32MaxEmbeddingError": 0.001,
+  "fp16CosineMin": 0.999,
+  "fp16MaxEmbeddingError": 0.005,
+  "fp16MaxScoreError": 0.002,
+  "pipelineCosineMin": 0.999,
+  "pipelineMaxEmbeddingError": 0.01,
+  "pipelineMaxScoreError": 0.005,
+  "basis": "reports/feasibility.json and reports/weight-storage-gpu.json; all-operations FP16 arithmetic failed these original score limits. Matrix FP16 storage with FP32 arithmetic passed ten cases including an additional plant photo. Full-catalog validation must retain these values."
+}
