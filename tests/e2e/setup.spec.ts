@@ -125,3 +125,44 @@ test('a model retry preserves family, minimum-rating filters and pagination for 
   await expect(minimum).toHaveValue('0');
   await expect(pages).toContainText('Page 2 of');
 });
+
+test('catalog install keeps one downloading label across per-file checks while its byte progress advances', async ({ page, context, request }, testInfo) => {
+  const pointer = await request.get('/catalog.json');
+  const response = await request.get((await pointer.json()).url);
+  const catalog = await response.json() as { files: { url: string; bytes: number }[] };
+  const files = catalog.files.slice(0, 3);
+  expect(files).toHaveLength(3);
+  const urls = files.map(file => new URL(file.url, response.url()).href);
+  const held = new Map<string, Route>();
+  for (const url of urls) await context.route(url, route => { held.set(url, route); });
+  await page.addInitScript(() => {
+    const samples: { text: string; value: number; max: number }[] = [];
+    Object.defineProperty(window, '__downloadStatusSamples', { value: samples });
+    new MutationObserver(() => {
+      const status = document.querySelector('#setup-status');
+      const bar = status?.querySelector('progress');
+      if (!(bar instanceof HTMLProgressElement)) return;
+      const sample = { text: status!.querySelector('p')?.textContent ?? '', value: bar.value, max: bar.max };
+      const previous = samples.at(-1);
+      if (!previous || previous.text !== sample.text || previous.value !== sample.value) samples.push(sample);
+    }).observe(document, { subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ['value'] });
+  });
+  await page.goto('/');
+  await expect.poll(() => held.has(urls[0])).toBe(true);
+  const bar = page.getByRole('progressbar', { name: 'Offline data download', exact: true });
+  await expect(bar).toHaveAttribute('value', '0');
+  await held.get(urls[0])!.continue();
+  await expect.poll(() => held.has(urls[1])).toBe(true);
+  await expect.poll(() => bar.evaluate(bar => (bar as HTMLProgressElement).value)).toBe(files[0].bytes);
+  await held.get(urls[1])!.continue();
+  await expect.poll(() => held.has(urls[2])).toBe(true);
+  await expect.poll(() => bar.evaluate(bar => (bar as HTMLProgressElement).value)).toBe(files[0].bytes + files[1].bytes);
+  const samples = await page.evaluate(() => (window as Window & { __downloadStatusSamples?: { text: string; value: number; max: number }[] }).__downloadStatusSamples!);
+  // End this bounded real install after two files; never reach model/photo downloads.
+  await held.get(urls[2])!.fulfill({ status: 500, body: 'deliberate end of catalog progress fixture' });
+  await expect(page.locator('#setup-status')).toContainText('HTTP 500');
+  await testInfo.attach('catalog-status-history', { body: JSON.stringify({ received: files[0].bytes + files[1].bytes, samples }, null, 2), contentType: 'application/json' });
+  expect(samples.length).toBeGreaterThan(2);
+  expect(samples.some(sample => sample.value > 0)).toBe(true);
+  expect(samples.every(sample => sample.text.startsWith('Downloading plant data… ')), JSON.stringify(samples)).toBe(true);
+});
