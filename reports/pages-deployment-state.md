@@ -1,5 +1,7 @@
 # GitHub Pages publication
 
+Latest update: the [minimal redesign and all-photo offline setup](minimal-redesign.md) is published from `2ea93d148b36d3852004ce6b163c6d76cbf8680b`; [Pages run 39090664463](https://github.com/saulshanabrook/plant-friends/actions/runs/39090664463) passed. The site now includes the separate pinned photo release and totals 882,660,339 bytes. [Fresh public verification](resumable-public.json) passed interrupted-model/browser-restart resume from 16 MiB, all 12,347 unique cached reference photos, real offline WebGPU identification, images in matches/records/table, table filters/sort/search and offline legal notices. The earlier publication details below are historical; no physical-phone/background-execution claim is added.
+
 Mission: push the completed app directly to main and publish a usable HTTPS GitHub Pages site with the full model and PFAF text available for browser-side offline setup. User explicitly authorized commit, main push and public publication on October 17, 2026; this supersedes the earlier local-only delivery boundary. No Python inference server, no model substitution, and no claim of physical phone verification.
 
 Implementation checkpoint: 9f38fcf. Large generated assets remain ignored by git. Main is based on live origin/main f1db1ed; no unrelated dirty changes were present. Coordinator owns GitHub/release/Pages operations, attribution integration, final verification and publication. Worker changes remain isolated until reviewed.

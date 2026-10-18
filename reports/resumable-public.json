@@ -1,0 +1,1451 @@
+{
+  "checkedAt": "2026-10-18T02:39:04.928Z",
+  "url": "https://saulshanabrook.github.io/plant-friends/",
+  "status": "passed",
+  "scope": "Real desktop Chrome public product download, simulated connection loss, browser restart, range resume and offline WebGPU; physical phone/screen lock untested",
+  "expectedModelId": "e2b03528fe84908219e7",
+  "expectedCatalogId": "39831ede5fe0b995b55c",
+  "fixture": {
+    "file": "inat-143164.jpg",
+    "sha256": "897145c878db81cd02115e38a1095ff1745e883e333f7f0e65d20092f38f0d50",
+    "sourceUrl": "https://www.inaturalist.org/observations/98736",
+    "license": "cc0"
+  },
+  "requests": [
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/assets/index-DU3EqTYf.js",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/assets/index-DaxlzK2V.css",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/manifest.webmanifest",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/catalog.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/model.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/icon.svg",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/icon.svg",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/sw.js",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/e2b03528fe84908219e7/manifest.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/manifest.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/manifest.webmanifest",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/index.html",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/index.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/icon.svg",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/icon-512.png",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/icon-192.png",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-000.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/attribution.html",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/assets/inference.worker-DlUF6Dng.js",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-001.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/assets/index-DaxlzK2V.css",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/assets/index-DU3EqTYf.js",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/third-party-notices.txt",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-002.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-003.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-004.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-005.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-006.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-007.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-008.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-009.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-010.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-011.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-012.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-013.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-014.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-015.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-016.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-017.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-018.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-019.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-020.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-021.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-022.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-023.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-024.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-025.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-026.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-027.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-028.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-029.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-030.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-031.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-032.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-033.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-034.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/photos.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=0-8388607"
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/photos/e2e188337de47653c182/manifest.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=8388608-16777215"
+    },
+    {
+      "stage": "interrupted",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=16777216-25165823"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/assets/index-DU3EqTYf.js",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/assets/index-DaxlzK2V.css",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/manifest.webmanifest",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/catalog.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/model.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/icon.svg",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/e2b03528fe84908219e7/manifest.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/manifest.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/e2b03528fe84908219e7/manifest.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/manifest.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/photos.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/photos/e2e188337de47653c182/manifest.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=16777216-25165823"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=25165824-33554431"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=33554432-41943039"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=41943040-50331647"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=50331648-58720255"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=58720256-67108863"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=67108864-75497471"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=75497472-83886079"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=83886080-92274687"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=92274688-100663295"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=100663296-109051903"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=109051904-117440511"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=117440512-125829119"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=125829120-134217727"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=134217728-142606335"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=142606336-150994943"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=150994944-159383551"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=159383552-167772159"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=167772160-176160767"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=176160768-184549375"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=184549376-192937983"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=192937984-201326591"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=201326592-209715199"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=209715200-218103807"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=218103808-226492415"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=226492416-234881023"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=234881024-243269631"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=243269632-251658239"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=251658240-260046847"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=260046848-268435455"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=268435456-276824063"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=276824064-285212671"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=285212672-293601279"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=293601280-301989887"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=301989888-310378495"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=310378496-318767103"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=318767104-327155711"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=327155712-335544319"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=335544320-343932927"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=343932928-352321535"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=352321536-360710143"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=360710144-369098751"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=369098752-377487359"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=377487360-385875967"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=385875968-394264575"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=394264576-402653183"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=402653184-411041791"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=411041792-419430399"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=419430400-427819007"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=427819008-436207615"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=436207616-444596223"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=444596224-452984831"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=452984832-461373439"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=461373440-469762047"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=469762048-478150655"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=478150656-486539263"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=486539264-494927871"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=494927872-503316479"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=503316480-511705087"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=511705088-520093695"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=520093696-528482303"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=528482304-536870911"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=536870912-545259519"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=545259520-553648127"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=553648128-562036735"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=562036736-570425343"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=570425344-578813951"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=578813952-587202559"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=587202560-595591167"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=595591168-603979775"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=603979776-609029030"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/e2b03528fe84908219e7/vectors.f32",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=0-8388607"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/e2b03528fe84908219e7/vectors.f32",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=8388608-16777215"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/e2b03528fe84908219e7/vectors.f32",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=16777216-25165823"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/e2b03528fe84908219e7/vectors.f32",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=25165824-27021311"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/e2b03528fe84908219e7/rows.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/runtime/1.30.0/ort-wasm-simd-threaded.asyncify.mjs",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/runtime/1.30.0/ort-wasm-simd-threaded.asyncify.wasm",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=0-8388607"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/runtime/1.30.0/ort-wasm-simd-threaded.asyncify.wasm",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=8388608-16777215"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/runtime/1.30.0/ort-wasm-simd-threaded.asyncify.wasm",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=16777216-25165823"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/runtime/1.30.0/ort-wasm-simd-threaded.asyncify.wasm",
+      "method": "GET",
+      "hasBody": false,
+      "range": "bytes=25165824-26781913"
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/?diagnostics=1",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/assets/index-DU3EqTYf.js",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/assets/index-DaxlzK2V.css",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/manifest.webmanifest",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/icon.svg",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/assets/inference.worker-DlUF6Dng.js",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/runtime/1.30.0/ort-wasm-simd-threaded.asyncify.mjs",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/runtime/1.30.0/ort-wasm-simd-threaded.asyncify.wasm",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/?offline-resume-check=1",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/assets/index-DU3EqTYf.js",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/assets/index-DaxlzK2V.css",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/manifest.webmanifest",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/icon.svg",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "blob:https://saulshanabrook.github.io/d7e2fda8-02ab-40e4-bfae-722a83c31423",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/assets/inference.worker-DlUF6Dng.js",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/runtime/1.30.0/ort-wasm-simd-threaded.asyncify.mjs",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/runtime/1.30.0/ort-wasm-simd-threaded.asyncify.wasm",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/?diagnostics=1",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/assets/index-DU3EqTYf.js",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/assets/index-DaxlzK2V.css",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/manifest.webmanifest",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/icon.svg",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/assets/inference.worker-DlUF6Dng.js",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/runtime/1.30.0/ort-wasm-simd-threaded.asyncify.mjs",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/runtime/1.30.0/ort-wasm-simd-threaded.asyncify.wasm",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/?offline-resume-check=1",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/assets/index-DU3EqTYf.js",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/assets/index-DaxlzK2V.css",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/manifest.webmanifest",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/icon.svg",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "blob:https://saulshanabrook.github.io/103f3660-d524-4248-9101-3c5e6d19367f",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/assets/inference.worker-DlUF6Dng.js",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/runtime/1.30.0/ort-wasm-simd-threaded.asyncify.mjs",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/runtime/1.30.0/ort-wasm-simd-threaded.asyncify.wasm",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/attribution.html",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "stage": "resumed",
+      "url": "https://saulshanabrook.github.io/plant-friends/third-party-notices.txt",
+      "method": "GET",
+      "hasBody": false
+    }
+  ],
+  "photoRequests": {
+    "interrupted": 32,
+    "resumed": 12384,
+    "violations": []
+  },
+  "ranges": {
+    "interrupted": [
+      0,
+      8388608,
+      16777216
+    ],
+    "resumed": [
+      16777216,
+      25165824,
+      33554432,
+      41943040,
+      50331648,
+      58720256,
+      67108864,
+      75497472,
+      83886080,
+      92274688,
+      100663296,
+      109051904,
+      117440512,
+      125829120,
+      134217728,
+      142606336,
+      150994944,
+      159383552,
+      167772160,
+      176160768,
+      184549376,
+      192937984,
+      201326592,
+      209715200,
+      218103808,
+      226492416,
+      234881024,
+      243269632,
+      251658240,
+      260046848,
+      268435456,
+      276824064,
+      285212672,
+      293601280,
+      301989888,
+      310378496,
+      318767104,
+      327155712,
+      335544320,
+      343932928,
+      352321536,
+      360710144,
+      369098752,
+      377487360,
+      385875968,
+      394264576,
+      402653184,
+      411041792,
+      419430400,
+      427819008,
+      436207616,
+      444596224,
+      452984832,
+      461373440,
+      469762048,
+      478150656,
+      486539264,
+      494927872,
+      503316480,
+      511705088,
+      520093696,
+      528482304,
+      536870912,
+      545259520,
+      553648128,
+      562036736,
+      570425344,
+      578813952,
+      587202560,
+      595591168,
+      603979776
+    ]
+  },
+  "pageErrors": [],
+  "appBundle": "/plant-friends/assets/index-DU3EqTYf.js",
+  "interruptedRange": "bytes=16777216-25165823",
+  "interruptedUI": [
+    "Waiting for connection; downloads resume automatically.",
+    "Showing 1–50 of 8,796 plants."
+  ],
+  "savedBeforeRestart": [
+    {
+      "cache": "plant-friends-packs-v2",
+      "keys": [
+        "https://saulshanabrook.github.io/__plant-friends-chunk__/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb/609029031/8388608/0",
+        "https://saulshanabrook.github.io/__plant-friends-chunk__/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb/609029031/8388608/8388608"
+      ]
+    }
+  ],
+  "resumeMs": 62824.74529199999,
+  "completedUI": [
+    "Reference photos: 23 / 12,347 · 0.3 MiB / 157.6 MiB. Screen awake.",
+    "Showing 1–50 of 8,796 plants."
+  ],
+  "offlinePhotos": {
+    "id": "e2e188337de47653c182",
+    "manifestSha256": "e579b258b2d6760184daf444fe76503f2094476324b6f6aee4e89710b46134a7",
+    "uniqueFiles": 12347,
+    "bytes": 165263924,
+    "allSaved": true,
+    "matchRecordAndTableVisible": true
+  },
+  "allAssetsSavedUI": [
+    "Showing 1–50 of 8,796 plants."
+  ],
+  "serviceWorker": {
+    "scope": "https://saulshanabrook.github.io/plant-friends/",
+    "script": "https://saulshanabrook.github.io/plant-friends/sw.js",
+    "secureContext": true
+  },
+  "runtime": {
+    "secureContext": true,
+    "adapter": {
+      "vendor": "apple",
+      "architecture": "metal-3",
+      "device": "",
+      "description": "",
+      "isFallbackAdapter": false
+    },
+    "features": [
+      "depth32float-stencil8",
+      "rg11b10ufloat-renderable",
+      "texture-formats-tier1",
+      "bgra8unorm-storage",
+      "texture-compression-bc",
+      "dual-source-blending",
+      "core-features-and-limits",
+      "float32-filterable",
+      "indirect-first-instance",
+      "texture-compression-astc-sliced-3d",
+      "float32-blendable",
+      "subgroup-size-control",
+      "texture-compression-astc",
+      "texture-compression-etc2",
+      "depth-clip-control",
+      "texture-compression-bc-sliced-3d",
+      "clip-distances",
+      "shader-f16",
+      "texture-formats-tier2",
+      "timestamp-query",
+      "primitive-index",
+      "texture-component-swizzle",
+      "subgroups"
+    ],
+    "limits": {
+      "maxBufferSize": 4294967292,
+      "maxStorageBufferBindingSize": 4294967292
+    },
+    "runtimeVersion": "1.30.0",
+    "executionProvider": "webgpu",
+    "initializationMs": 2073.800000011921,
+    "modelBytes": 609029031,
+    "packId": "e2b03528fe84908219e7",
+    "catalogId": "39831ede5fe0b995b55c",
+    "backend": "native-webgpu-asyncify",
+    "deviceFeatures": [
+      "core-features-and-limits",
+      "shader-f16"
+    ]
+  },
+  "offlineCandidates": [
+    " Urtica dioica 0.711 similarity",
+    " Urtica angustifolia 0.689 similarity",
+    " Urtica procera 0.689 similarity",
+    " Urtica platyphylla 0.688 similarity",
+    " Urtica holosericea 0.683 similarity"
+  ],
+  "offlinePlant": "Urtica dioica",
+  "verificationCorrection": {
+    "continuedAt": "2026-10-18T02:46:13.954Z",
+    "priorError": {
+      "name": "Error",
+      "message": "expect(locator).toBeEnabled() failed\n\nLocator: getByLabel('Family', { exact: true })\nExpected: enabled\nTimeout: 30000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"toBeEnabled\" getByLabel('Family', { exact: true }) with timeout 30000ms\n  - waiting for getByLabel('Family', { exact: true })\n"
+    },
+    "reason": "Correct native select locators to use their accessible combobox names; app source unchanged."
+  },
+  "offlineTable": {
+    "sort": true,
+    "familyAndRatingFilter": true,
+    "search": true,
+    "boundedRows": 50
+  },
+  "offlineLegalNotices": true,
+  "privacy": {
+    "allReadOnly": true,
+    "allAppOrigin": true,
+    "allAppPaths": true
+  },
+  "profileRemoved": true
+}

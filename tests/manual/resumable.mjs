@@ -24,12 +24,24 @@ const fixtures = JSON.parse(await readFile('fixtures/photos.json', 'utf8'));
 const fixture = fixtures.photos.filter(photo => photo.expectedTaxonId !== null).at(-1);
 const photoBytes = await readFile(`public/fixtures/photos/${fixture.file}`);
 if (createHash('sha256').update(photoBytes).digest('hex') !== fixture.sha256) throw new Error('Fixture hash differs.');
-const profile = await mkdtemp(join(tmpdir(), 'plant-friends-resume-'));
-const report = { checkedAt: new Date().toISOString(), url: base.href, status: 'incomplete',
+const continuingOffline = process.argv[4] === '--continue-offline';
+const prior = continuingOffline ? JSON.parse(await readFile(output, 'utf8')) : null;
+if (prior && (prior.url !== base.href || prior.expectedModelId !== metadata.modelId ||
+    prior.expectedCatalogId !== metadata.catalogId || !prior.offlinePhotos?.allSaved ||
+    !Number.isInteger(prior.ranges?.resumed?.[0]) || prior.ranges.resumed[0] < 16 * 1024 * 1024 ||
+    !prior.retainedProfile?.startsWith(join(tmpdir(), 'plant-friends-resume-'))))
+  throw new Error('Offline continuation requires this gate’s retained, fully downloaded profile and matching prior evidence.');
+const profile = prior?.retainedProfile ?? await mkdtemp(join(tmpdir(), 'plant-friends-resume-'));
+const report = prior ?? { checkedAt: new Date().toISOString(), url: base.href, status: 'incomplete',
   scope: 'Real desktop Chrome public product download, simulated connection loss, browser restart, range resume and offline WebGPU; physical phone/screen lock untested',
   expectedModelId: metadata.modelId, expectedCatalogId: metadata.catalogId,
   fixture: { file: fixture.file, sha256: fixture.sha256, sourceUrl: fixture.sourceUrl, license: fixture.license },
   requests: [], photoRequests, ranges: { interrupted: [], resumed: [] }, pageErrors: [] };
+if (prior) {
+  report.verificationCorrection = { continuedAt: new Date().toISOString(), priorError: report.error,
+    reason: 'Continue offline checks with the retained fully downloaded profile; preserve the original download evidence.' };
+  report.status = 'incomplete'; delete report.error;
+}
 let context, interrupted = false, disconnect;
 const deadline = setTimeout(() => { report.timeout = true; void context?.close(); }, 900_000);
 
@@ -40,10 +52,10 @@ function observe(browserContext, stage) {
   browserContext.on('request', request => {
     const range = request.headers().range;
     if (/\/photos\/.+\.webp$/.test(request.url())) {
-      photoRequests[stage]++;
+      report.photoRequests[stage]++;
       const url = new URL(request.url());
       if (request.method() !== 'GET' || request.postData() || url.origin !== base.origin || !url.pathname.startsWith(base.pathname))
-        photoRequests.violations.push({ url: url.href, method: request.method(), hasBody: Boolean(request.postData()) });
+        report.photoRequests.violations.push({ url: url.href, method: request.method(), hasBody: Boolean(request.postData()) });
       return;
     }
     report.requests.push({ stage, url: request.url(), method: request.method(), hasBody: Boolean(request.postData()), ...(range ? { range } : {}) });
@@ -60,55 +72,64 @@ function observe(browserContext, stage) {
 }
 
 try {
-  context = await chromium.launchPersistentContext(profile, { channel: 'chrome', headless: false });
-  observe(context, 'interrupted');
-  let page = await context.newPage();
-  await page.goto(base.href);
-  await expect(page.getByRole('heading', { name: 'Plant Friends', exact: true })).toBeVisible();
-  console.log('Waiting for automatic setup; interrupting the encoder after durable chunks.');
-  await expect.poll(() => interrupted, { timeout: 120_000 }).toBe(true);
-  await disconnect;
-  await expect(page.locator('.diagnostics')).toContainText('Offline');
-  await expect(page.locator('.diagnostics')).not.toContainText(metadata.modelId);
-  report.interruptedUI = await page.getByRole('status').allTextContents();
-  report.savedBeforeRestart = await page.evaluate(async hash => {
-    const results = [];
-    for (const name of await caches.keys()) {
-      const keys = (await (await caches.open(name)).keys()).map(request => request.url()).filter(url => url.includes(hash));
-      if (keys.length) results.push({ cache: name, keys });
-    }
-    return results;
-  }, model.model.file.sha256);
-  expect(report.savedBeforeRestart.length).toBeGreaterThan(0);
-  await context.close();
-  context = await chromium.launchPersistentContext(profile, { channel: 'chrome', headless: false });
-  observe(context, 'resumed');
-  page = await context.newPage();
-  await page.goto(base.href);
-  const resumedAt = performance.now();
-  console.log('Reopened the same profile; waiting for resumed setup to finish.');
-  await expect(page.locator('.diagnostics')).toContainText(metadata.modelId, { timeout: 300_000 });
-  await expect(page.locator('.diagnostics')).toContainText(metadata.catalogId);
-  expect(report.ranges.resumed.length).toBeGreaterThan(0);
-  expect(report.ranges.resumed[0]).toBeGreaterThanOrEqual(16 * 1024 * 1024);
-  expect(report.ranges.resumed.includes(0)).toBe(false);
-  report.resumeMs = performance.now() - resumedAt;
-  report.completedUI = await page.getByRole('status').allTextContents();
-  console.log('Model ready; waiting for every reference photo to be saved.');
-  await expect.poll(() => page.evaluate(async expected => {
-    const found = new Set(); const wanted = new Set(expected);
-    for (const name of await caches.keys())
-      for (const request of await (await caches.open(name)).keys())
-        if (wanted.has(request.url)) found.add(request.url);
-    return found.size;
-  }, photoUrls), { timeout: 420_000, intervals: [1_000, 2_000, 5_000] }).toBe(photoUrls.length);
-  report.offlinePhotos = { id: photos.id, manifestSha256: photosPointer.sha256,
-    uniqueFiles: photoUrls.length, bytes: photos.counts.photoBytes, allSaved: true };
-  report.serviceWorker = await page.evaluate(async () => {
-    const r = await navigator.serviceWorker.ready;
-    return { scope: r.scope, script: r.active?.scriptURL, secureContext: isSecureContext };
-  });
-  expect(report.serviceWorker).toEqual({ scope: base.href, script: new URL('sw.js', base).href, secureContext: true });
+  let page;
+  if (!continuingOffline) {
+    context = await chromium.launchPersistentContext(profile, { channel: 'chrome', headless: false });
+    observe(context, 'interrupted');
+    page = await context.newPage();
+    await page.goto(base.href);
+    await expect(page.getByRole('heading', { name: 'Plant Friends', exact: true })).toBeVisible();
+    report.appBundle = await page.locator('script[type=module]').getAttribute('src');
+    console.log('Waiting for automatic setup; interrupting the encoder after durable chunks.');
+    await expect.poll(() => interrupted, { timeout: 120_000 }).toBe(true);
+    await disconnect;
+    await expect(page.locator('.diagnostics')).toContainText('Offline');
+    await expect(page.locator('.diagnostics')).not.toContainText(metadata.modelId);
+    report.interruptedUI = await page.getByRole('status').allTextContents();
+    report.savedBeforeRestart = await page.evaluate(async hash => {
+      const results = [];
+      for (const name of await caches.keys()) {
+        const keys = (await (await caches.open(name)).keys()).map(request => request.url).filter(url => url.includes(hash));
+        if (keys.length) results.push({ cache: name, keys });
+      }
+      return results;
+    }, model.model.file.sha256);
+    expect(report.savedBeforeRestart.length).toBeGreaterThan(0);
+    await context.close();
+    context = await chromium.launchPersistentContext(profile, { channel: 'chrome', headless: false });
+    observe(context, 'resumed');
+    page = await context.newPage();
+    await page.goto(base.href);
+    const resumedAt = performance.now();
+    console.log('Reopened the same profile; waiting for resumed setup to finish.');
+    await expect(page.locator('.diagnostics')).toContainText(metadata.modelId, { timeout: 300_000 });
+    await expect(page.locator('.diagnostics')).toContainText(metadata.catalogId);
+    expect(report.ranges.resumed.length).toBeGreaterThan(0);
+    expect(report.ranges.resumed[0]).toBeGreaterThanOrEqual(16 * 1024 * 1024);
+    expect(report.ranges.resumed.includes(0)).toBe(false);
+    report.resumeMs = performance.now() - resumedAt;
+    report.completedUI = await page.getByRole('status').allTextContents();
+    console.log('Model ready; waiting for every reference photo to be saved.');
+    await expect.poll(() => page.evaluate(async expected => {
+      const found = new Set(); const wanted = new Set(expected);
+      for (const name of await caches.keys())
+        for (const request of await (await caches.open(name)).keys())
+          if (wanted.has(request.url)) found.add(request.url);
+      return found.size;
+    }, photoUrls), { timeout: 420_000, intervals: [1_000, 2_000, 5_000] }).toBe(photoUrls.length);
+    report.offlinePhotos = { id: photos.id, manifestSha256: photosPointer.sha256,
+      uniqueFiles: photoUrls.length, bytes: photos.counts.photoBytes, allSaved: true };
+    report.allAssetsSavedUI = await page.getByRole('status').allTextContents();
+    report.serviceWorker = await page.evaluate(async () => {
+      const r = await navigator.serviceWorker.ready;
+      return { scope: r.scope, script: r.active?.scriptURL, secureContext: isSecureContext };
+    });
+    expect(report.serviceWorker).toEqual({ scope: base.href, script: new URL('sw.js', base).href, secureContext: true });
+  } else {
+    context = await chromium.launchPersistentContext(profile, { channel: 'chrome', headless: false });
+    observe(context, 'resumed');
+    page = await context.newPage();
+  }
   await context.setOffline(true);
   await page.goto(new URL('?diagnostics=1', base).href);
   await page.waitForFunction(() => Boolean(window.plantFriends));
@@ -137,12 +158,12 @@ try {
   await expect.poll(() => recordImage.evaluate(image => image.complete && image.naturalWidth > 0)).toBe(true);
   await page.getByRole('button', { name: 'Close plant details', exact: true }).click();
   const search = page.getByRole('searchbox', { name: 'Search plants', exact: true });
-  await expect(page.getByLabel('Family', { exact: true })).toBeEnabled({ timeout: 30_000 });
+  await expect(page.getByRole('combobox', { name: 'Family', exact: true })).toBeEnabled({ timeout: 30_000 });
   await expect(page.locator('#plants tbody tr')).toHaveCount(50);
   await page.getByRole('button', { name: /^Edibility(?: ↑| ↓)?$/, exact: true }).click();
   await expect(page.getByRole('columnheader', { name: /^Edibility/ })).toHaveAttribute('aria-sort', 'ascending');
-  await page.getByLabel('Minimum edibility', { exact: true }).selectOption('3');
-  await page.getByLabel('Family', { exact: true }).selectOption('Urticaceae');
+  await page.getByRole('combobox', { name: 'Minimum edibility', exact: true }).selectOption('3');
+  await page.getByRole('combobox', { name: 'Family', exact: true }).selectOption('Urticaceae');
   await search.fill('Urtica dioica');
   await expect(page.locator('#plants tbody')).toContainText('Urtica dioica');
   const tableImage = page.locator('#plants tbody img').first();
@@ -160,7 +181,7 @@ try {
     allAppPaths: report.requests.every(r => !/^https?:/.test(r.url) || new URL(r.url).pathname.startsWith(base.pathname)),
   };
   expect(report.privacy).toEqual({ allReadOnly: true, allAppOrigin: true, allAppPaths: true });
-  expect(photoRequests.violations).toEqual([]);
+  expect(report.photoRequests.violations).toEqual([]);
   expect(report.pageErrors).toEqual([]);
   report.status = 'passed';
 } catch (error) {
@@ -168,7 +189,7 @@ try {
 } finally {
   clearTimeout(deadline);
   await context?.close();
-  if (report.status === 'passed') { await rm(profile, { recursive: true, force: true }); report.profileRemoved = true; }
+  if (report.status === 'passed') { await rm(profile, { recursive: true, force: true }); report.profileRemoved = true; delete report.retainedProfile; }
   else report.retainedProfile = profile;
   await mkdir(dirname(output), { recursive: true });
   await writeFile(output, JSON.stringify(report, null, 2) + '\n');
