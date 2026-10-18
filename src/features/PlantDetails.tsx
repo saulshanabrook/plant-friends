@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
+import type { PlantPhoto } from '../assets/photos';
 import type { CatalogEntry, PlantRecord } from '../assets/manifest';
 import { readAsset, type InstalledPack } from '../assets/storage';
 
-export function PlantDetails({ entry, catalog, onClose }: { entry: CatalogEntry; catalog: InstalledPack; onClose: () => void }) {
+export function PlantDetails({ entry, catalog, photos, onClose }: { entry: CatalogEntry; catalog: InstalledPack; photos?: PlantPhoto[]; onClose: () => void }) {
   const dialog = useRef<HTMLDialogElement>(null);
   const [record, setRecord] = useState<PlantRecord | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -51,14 +52,20 @@ export function PlantDetails({ entry, catalog, onClose }: { entry: CatalogEntry;
   return <dialog className="plant-dialog" ref={dialog} onCancel={event => { event.preventDefault(); closeRecord(); }} onClick={event => { if (event.target === event.currentTarget) closeRecord(); }} aria-labelledby="plant-title">
     <article className="plant-detail">
       <header className="detail-heading">
-        <div><p className="eyebrow">PFAF catalog record</p><h2 id="plant-title">{entry.scientificName}</h2><p className="common-name">{entry.commonName || 'Common name unavailable'}</p></div>
-        <button className="icon-button" onClick={closeRecord} aria-label="Close plant details">×</button>
+        <h2 id="plant-title">{entry.scientificName}</h2>
+        <button onClick={closeRecord}>Close plant details</button>
       </header>
       {!fields && !error && <p className="status-message" role="status">Opening saved plant details…</p>}
       {error && <p className="error-message" role="alert">{error}</p>}
       {fields && <>
-        <p className="detail-caution">A catalog entry is not a confirmed identification. These records do not establish that a photographed plant is safe to eat or use medicinally.</p>
+        <p>A catalog record does not confirm identity or safety.</p>
         <section className="hazard-panel"><h3>Known hazards</h3><p className="source-text">{fields.known_hazards === null || fields.known_hazards === undefined || fields.known_hazards === '' ? 'Information unavailable in this record.' : fields.known_hazards}</p></section>
+        <section className="reference-gallery" aria-label="Reference photos"><h3>Reference photos</h3>
+          {photos ? photos.length ? photos.map((photo, position) => <figure key={`${photo.url}:${position}`}>
+            <img src={photo.url} alt={`Reference photo ${position + 1} of ${entry.scientificName}`} width={photo.width} height={photo.height} loading="lazy" decoding="async" />
+            <figcaption><span className="source-text">{photo.credit ?? 'Credit not recorded.'}</span>{' '}<a href={photo.sourceUrl} target="_blank" rel="noreferrer">Original photo source</a></figcaption>
+          </figure>) : <p>No reference photos recorded for this plant.</p> : <p>Reference photos are not available yet.</p>}
+        </section>
         <dl className="ratings">{[
           { key: 'edibility_rating', label: 'Edibility' },
           { key: 'medicinal_rating', label: 'Medicinal' },
@@ -86,13 +93,13 @@ export function PlantDetails({ entry, catalog, onClose }: { entry: CatalogEntry;
           { key: 'botanical_references', title: 'Botanical references' },
         ].map(({ key, title }) => fields[key] !== null && fields[key] !== undefined && fields[key] !== ''
           ? <section className="detail-section" key={key}><h4>{title}</h4><p className="source-text">{fields[key]}</p></section> : null)}</details>
-        <footer className="source-note"><h3>About this record</h3>
+        <details className="source-note"><summary>Source and freshness</summary>
           <p>{manifest?.attribution ?? 'Plants For A Future (PFAF)'}</p>
           <p>Record refresh: {fields.details_scraped_at ? String(fields.details_scraped_at) : 'unknown; the source did not record a refresh date.'}</p>
           <p>Catalog exported: {manifest?.exportedAt ?? 'unavailable'}. The export date does not establish when this plant’s information was reviewed.</p>
           <p>Bracketed reference markers are retained as recorded. Full reference sources may need an internet connection.</p>
-          <div className="inline-links">{sourceUrl ? <a href={sourceUrl} target="_blank" rel="noreferrer">Recorded PFAF page ↗</a> : <span>Recorded source page unavailable</span>}{manifest && <a href={manifest.termsUrl} target="_blank" rel="noreferrer">PFAF terms & attribution ↗</a>}</div>
-        </footer>
+          <div className="inline-links">{sourceUrl ? <a href={sourceUrl} target="_blank" rel="noreferrer">Recorded PFAF page</a> : <span>Recorded source page unavailable</span>}{manifest && <a href={manifest.termsUrl} target="_blank" rel="noreferrer">PFAF terms & attribution</a>}</div>
+        </details>
       </>}
       <button className="button secondary detail-close" onClick={closeRecord}>Close record</button>
     </article>

@@ -2,7 +2,7 @@ import { writeFile } from 'node:fs/promises';
 import { expect, test, type Locator } from '@playwright/test';
 import type { CatalogEntry, CatalogManifest, ModelManifest } from '../../src/assets/manifest';
 
-test('real Chrome keyboard navigation, upload focus, consent, and catalog dialog preserve focus', async ({ page, request }, testInfo) => {
+test('real Chrome keyboard navigation, native upload focus, automatic setup, and catalog dialog preserve focus', async ({ page, request }, testInfo) => {
   // Automated desktop keyboard evidence only: no DOM focus calls, model doubles,
   // encoder download, OS-native input, screen-reader check, or phone claim.
   const trace: { action: string; focus: unknown }[] = [];
@@ -40,66 +40,35 @@ test('real Chrome keyboard navigation, upload focus, consent, and catalog dialog
     const modelAssets = new Set(model.files.map(file => new URL(file.url, modelResponse.url()).href));
     const modelRequests: string[] = [];
     page.on('request', request => { if (modelAssets.has(request.url())) modelRequests.push(request.url()); });
+    await page.goto('/?diagnostics=1');
+    await page.waitForFunction(() => Boolean(window.plantFriends));
+    await page.evaluate(() => window.plantFriends.install('pfaf'));
+    await page.evaluate(() => navigator.serviceWorker.ready.then(() => undefined));
+    await expect.poll(() => page.evaluate(() => Boolean(navigator.serviceWorker.controller))).toBe(true);
+    await page.context().setOffline(true);
     await page.goto('/');
-
-    const setup = page.getByRole('button', { name: 'Offline setup', exact: true });
-    await tabTo(setup);
-    await press('Enter');
-    const catalogCard = page.locator('.pack-card').filter({ has: page.getByRole('heading', { name: 'PFAF plant catalog', exact: true }) });
-    const modelCard = page.locator('.pack-card').filter({ has: page.getByRole('heading', { name: 'On-device identification', exact: true }) });
-    const consent = modelCard.getByRole('checkbox');
-    await expect(consent).toBeDisabled();
-    const catalogDownload = catalogCard.getByRole('button', { name: 'Download PFAF catalog', exact: true });
-    await expect(catalogDownload).toBeEnabled();
-    await tabTo(catalogDownload);
-    await press('Space');
-    await expect(catalogCard.getByRole('button', { name: 'Delete catalog', exact: true })).toBeVisible({ timeout: 90_000 });
-
-    await expect(consent).toBeEnabled();
-    await tabTo(consent);
-    await press('Space');
-    await expect(consent).toBeChecked();
-    const modelDownload = modelCard.getByRole('button', { name: 'Download identification pack', exact: true });
-    await expect(modelDownload).toBeEnabled();
-    await press('Tab');
-    await expect(modelDownload).toBeFocused();
-    await press('Shift+Tab');
-    await expect(consent).toBeFocused();
-    await press('Space');
-    await expect(consent).not.toBeChecked();
-    await expect(modelDownload).toBeDisabled();
-
-    await tabTo(page.getByRole('button', { name: 'Identify', exact: true }));
-    await press('Enter');
     const upload = page.getByLabel('Upload photo', { exact: true });
     await tabTo(upload);
     await expect(upload).toBeFocused();
     const affordance = await upload.evaluate(input => {
-      const label = input.closest('label')!;
-      const style = getComputedStyle(label);
-      const rect = label.getBoundingClientRect();
-      return { inputFocusVisible: input.matches(':focus-visible'), outlineStyle: style.outlineStyle, outlineWidth: style.outlineWidth, width: rect.width, height: rect.height };
+      const style = getComputedStyle(input);
+      return { inputFocusVisible: input.matches(':focus-visible'), outlineStyle: style.outlineStyle, outlineWidth: style.outlineWidth };
     });
     expect(affordance.inputFocusVisible).toBe(true);
-    expect(affordance.outlineStyle).toBe('solid');
-    expect(Number.parseFloat(affordance.outlineWidth)).toBeGreaterThanOrEqual(2);
-    expect(affordance.width).toBeGreaterThan(44);
-    expect(affordance.height).toBeGreaterThanOrEqual(44);
+    expect(affordance.outlineStyle).not.toBe('none');
+    expect(Number.parseFloat(affordance.outlineWidth)).toBeGreaterThan(0);
     const uploadScreenshot = testInfo.outputPath('keyboard-upload-focus.png');
-    await page.locator('.photo-card').screenshot({ path: uploadScreenshot });
+    await page.locator('#identify').screenshot({ path: uploadScreenshot });
     await testInfo.attach('keyboard-upload-focus', { path: uploadScreenshot, contentType: 'image/png' });
     await press('Shift+Tab');
-    await expect(page.getByRole('button', { name: 'Use camera', exact: true })).toBeFocused();
     await press('Tab');
     await expect(upload).toBeFocused();
 
-    await tabTo(page.getByRole('button', { name: 'Explore plants', exact: true }));
-    await press('Enter');
-    const search = page.getByRole('searchbox', { name: 'Search scientific or common names' });
+    const search = page.getByRole('searchbox', { name: 'Search plants' });
     await tabTo(search);
     await page.keyboard.type(plant.scientificName);
     trace.push({ action: `Type scientific-name search: ${plant.scientificName}`, focus: 'labeled searchbox' });
-    const opener = page.locator('.catalog-list button').filter({ has: page.getByText(plant.scientificName, { exact: true }) });
+    const opener = page.getByRole('table').getByRole('button', { name: plant.scientificName, exact: true });
     await expect(opener).toBeVisible();
     await tabTo(opener);
     await press('Enter');

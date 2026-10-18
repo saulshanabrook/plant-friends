@@ -71,9 +71,8 @@ try {
   report.offlinePlant = await page.locator('#plant-title').innerText();
   report.offlineHazards = await page.locator('.hazard-panel').innerText();
   await page.getByRole('button', { name: 'Close plant details', exact: true }).click();
-  await page.getByRole('button', { name: 'Explore plants', exact: true }).click();
-  await page.getByRole('searchbox', { name: 'Search scientific or common names' }).fill('Urtica dioica');
-  await expect(page.locator('.catalog-list')).toContainText('Urtica dioica');
+  await page.getByRole('searchbox', { name: 'Search plants' }).fill('Urtica dioica');
+  await expect(page.locator('#plants tbody')).toContainText('Urtica dioica');
   await page.getByRole('link', { name: 'Sources & licenses', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'Sources and licenses', exact: true })).toBeVisible();
   const legal = await page.evaluate(async () => { const r = await fetch('third-party-notices.txt'); return { status: r.status, text: await r.text() }; });

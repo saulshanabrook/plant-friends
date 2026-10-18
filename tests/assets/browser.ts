@@ -8,6 +8,7 @@ const harness = {
   ASSET_CACHE,
   manifestUrl,
   installedPack,
+  readAsset,
   deletePack,
   progress: [] as DownloadProgress[],
   async catalog(id: string, detail: string): Promise<{ manifest: CatalogManifest; files: Record<string, string> }> {
@@ -40,7 +41,7 @@ const harness = {
     try {
       await installPack(manifestUrl, manifest, controller.signal, progress => {
         this.progress.push(progress);
-        if (progress.file === cancelFile) controller.abort();
+        if (progress.file === cancelFile && progress.phase === 'downloading') controller.abort();
       });
       return { ok: true };
     } catch (error) {

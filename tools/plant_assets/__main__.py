@@ -23,6 +23,12 @@ def main() -> None:
     reference = commands.add_parser("reference", help="Generate real image reference tensors and check the FP32 ONNX export")
     reference.add_argument("--pack", required=True, type=Path)
     reference.add_argument("--check-export", action="store_true")
+    photos = commands.add_parser("prepare-photos", help="Derive an offline reference-photo pack from verified local files")
+    photos.add_argument("--database", required=True, type=Path)
+    photos.add_argument("--source-root", required=True, type=Path)
+    photos.add_argument("--source-commit", required=True)
+    photos.add_argument("--catalog", required=True, type=Path)
+    photos.add_argument("--output", type=Path, default=Path("public/photos"))
     args = parser.parse_args()
     if args.command == "catalog":
         print(export_catalog(args.database, args.output))
@@ -35,6 +41,10 @@ def main() -> None:
     elif args.command == "reference":
         from .reference import create_references
         print(create_references(args.pack, args.check_export))
+    elif args.command == "prepare-photos":
+        from .photos import prepare_photos
+        print(prepare_photos(args.database, args.source_root, args.catalog, args.output, args.source_commit,
+                             lambda done, total: print(f"Prepared {done}/{total} reference photos", flush=True)))
 
 
 if __name__ == "__main__":

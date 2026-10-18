@@ -20,6 +20,10 @@ test('real desktop Chrome reports an installable PWA with usable root manifest a
   try {
     context = await playwright.chromium.launchPersistentContext(profile, { channel: 'chrome', headless: false });
     const page = await context.newPage();
+    await page.goto(new URL('?diagnostics=1', baseURL!).href);
+    await page.evaluate(() => navigator.serviceWorker.ready.then(() => undefined));
+    await expect.poll(() => page.evaluate(() => Boolean(navigator.serviceWorker.controller))).toBe(true);
+    await context.setOffline(true);
     await page.goto(baseURL!);
     await page.evaluate(() => navigator.serviceWorker.ready.then(() => undefined));
     await expect.poll(() => page.evaluate(() => Boolean(navigator.serviceWorker.controller))).toBe(true);

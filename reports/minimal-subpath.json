@@ -1,0 +1,119 @@
+{
+  "checkedAt": "2026-10-18T02:33:47.933Z",
+  "base": "/plant-friends/",
+  "home": "http://127.0.0.1:57298/plant-friends/",
+  "assetSource": "/Users/saul/p/plant-friends/.cache/pages-restored-public",
+  "scope": "Production path and automatic catalog/offline verification; model payload requests denied by fixture server, no inference/camera/phone claim",
+  "status": "passed",
+  "manifest": {
+    "url": "http://127.0.0.1:57298/plant-friends/manifest.webmanifest",
+    "startUrl": "/plant-friends/",
+    "scope": "/plant-friends/",
+    "icons": [
+      {
+        "src": "icon.svg",
+        "sizes": "any",
+        "type": "image/svg+xml",
+        "purpose": "any"
+      },
+      {
+        "src": "icon-192.png",
+        "sizes": "192x192",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "icon-512.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "any maskable"
+      }
+    ]
+  },
+  "declaredAssets": {
+    "count": 41,
+    "allUnderBase": true,
+    "modelWeightsCheckedByHeadOnly": true
+  },
+  "workerUrl": "http://127.0.0.1:57298/plant-friends/assets/inference.worker-DlUF6Dng.js",
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 503 (Service Unavailable)",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: net::ERR_FAILED"
+  ],
+  "stage": "complete",
+  "workerRegistrations": [
+    {
+      "scope": "http://127.0.0.1:57298/plant-friends/",
+      "active": "activated"
+    }
+  ],
+  "serviceWorker": {
+    "scope": "http://127.0.0.1:57298/plant-friends/",
+    "script": "http://127.0.0.1:57298/plant-friends/sw.js"
+  },
+  "referencePhoto": {
+    "url": "http://127.0.0.1:57298/plant-friends/photos/e2e188337de47653c182/files/0792652ba017d496a15193b5acdcbd108c7da4af4a7b714915031c4d33298cff.webp",
+    "online": true,
+    "offline": true
+  },
+  "layout": [
+    {
+      "width": 1280,
+      "height": 900,
+      "noPageOverflow": true
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "noPageOverflow": true
+    }
+  ],
+  "modelRequests": [
+    "http://127.0.0.1:57298/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx"
+  ],
+  "blockedModelBodies": [
+    "/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx"
+  ],
+  "offline": {
+    "newQueryNavigation": true,
+    "catalogRecords": 8796,
+    "detailOpened": "Abelia triflora",
+    "diagnosticsQuery": true,
+    "missingPackAndRuntimeFetchUnavailable": true,
+    "legalNotices": [
+      "attribution.html",
+      "third-party-notices.txt"
+    ]
+  },
+  "requests": {
+    "escapedBase": [],
+    "modelPayloadBodiesServed": 0,
+    "pageErrors": []
+  }
+}

@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { CatalogEntry, PackManifest } from '../assets/manifest';
 import { availablePack, catalogIndex } from '../assets/source';
-import { deletePack, installPack, installedPack, type DownloadProgress, type InstalledPack } from '../assets/storage';
+import { installPack, installedPack, type DownloadProgress, type InstalledPack } from '../assets/storage';
 
 type PackKind = PackManifest['kind'];
 interface PackState {
@@ -12,105 +12,133 @@ interface PackState {
   progress: DownloadProgress | null;
   error: string | null;
 }
-const initialState: PackState = { available: null, installed: null, checking: true, downloading: false, progress: null, error: null };
+type Phase = 'checking' | 'downloading' | 'waiting' | 'error' | 'idle';
+const initial: PackState = { available: null, installed: null, checking: true, downloading: false, progress: null, error: null };
 
-/** Owns installation lifetimes and keeps catalog browsing tied to verified receipts. */
+/** Sequential automatic setup. Transient failures have a finite visible retry budget. */
 export function useOfflinePacks() {
-  const [packs, setPacks] = useState<Record<PackKind, PackState>>({ pfaf: { ...initialState }, bioclip2: { ...initialState } });
+  const snapshot = useRef({ pfaf: { ...initial }, bioclip2: { ...initial } });
+  const [packs, setPacks] = useState(snapshot.current);
+  const index = useRef<CatalogEntry[]>([]);
   const [entries, setEntries] = useState<CatalogEntry[]>([]);
-  const downloads = useRef<Partial<Record<PackKind, AbortController>>>({});
+  const [phase, setPhase] = useState<Phase>('checking');
+  const [setupError, setSetupError] = useState<string | null>(null);
+  const [retrying, setRetrying] = useState(false);
+  const active = useRef<AbortController | null>(null);
   const generation = useRef(0);
-  const targetModel = packs.bioclip2.available?.manifest;
-  const installedCatalog = packs.pfaf.installed?.manifest;
-  const modelCatalogPrerequisite = targetModel?.kind !== 'bioclip2' ? null
-    : packs.pfaf.checking || packs.pfaf.downloading
-      ? 'Wait for the PFAF catalog check or download to finish before downloading identification.'
-      : installedCatalog?.kind !== 'pfaf' || entries.length !== installedCatalog.taxonCount
-        ? 'First download the PFAF plant catalog. Identification needs its matching, verified offline records.'
-        : installedCatalog.id !== targetModel.catalog.id || installedCatalog.sourceSha256 !== targetModel.catalog.sourceSha256 || entries.length !== targetModel.catalog.fullTaxonCount
-          ? 'This identification pack needs a different PFAF catalog. Check available downloads and install the matching catalog update first. Your saved catalog is still available in Explore plants.'
-          : null;
+  const retryTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const retries = useRef(0);
 
-  const refresh = useCallback(async () => {
-    const check = ++generation.current;
-    setPacks(previous => ({
-      pfaf: { ...previous.pfaf, checking: true, error: null },
-      bioclip2: { ...previous.bioclip2, checking: true, error: null },
-    }));
-    const checks = await Promise.allSettled((['pfaf', 'bioclip2'] as const).map(async kind => {
-      const [receipt, prepared] = await Promise.allSettled([installedPack(kind), availablePack(kind)]);
-      if (check !== generation.current) return;
-      const installed = receipt.status === 'fulfilled' ? receipt.value : null;
-      let error = receipt.status === 'rejected' ? String(receipt.reason instanceof Error ? receipt.reason.message : receipt.reason) : null;
-      if (kind === 'pfaf') {
+  // Keep async orchestration and rendered state on the same snapshot.
+  function update(kind: PackKind, patch: Partial<PackState>) {
+    snapshot.current = { ...snapshot.current, [kind]: { ...snapshot.current[kind], ...patch } };
+    setPacks(snapshot.current);
+  }
+
+  function failed(error: unknown) {
+    const transient = !navigator.onLine || error instanceof Error && ['NetworkError', 'TimeoutError'].includes(error.name);
+    setSetupError(error instanceof Error ? error.message : 'Offline setup failed. Reopen this page to try again.');
+    setPhase(transient ? 'waiting' : 'error');
+    if (transient && navigator.onLine && document.visibilityState === 'visible' && retries.current < 3) {
+      const delay = 1_000 * 2 ** retries.current++;
+      setRetrying(true);
+      retryTimer.current = setTimeout(() => { retryTimer.current = null; setRetrying(false); void run(); }, delay);
+    }
+  }
+
+  async function run() {
+    if (active.current) return;
+    const controller = new AbortController(); active.current = controller;
+    const operation = ++generation.current;
+    const current = () => operation === generation.current && !controller.signal.aborted;
+    setPhase('checking'); setSetupError(null);
+    const failures = new Map<PackKind, unknown>();
+    try {
+      await Promise.all((['pfaf', 'bioclip2'] as const).map(async kind => {
+        update(kind, { checking: true, error: null });
+        const [saved, prepared] = await Promise.allSettled([installedPack(kind), availablePack(kind, controller.signal)]);
+        if (!current()) return;
+        let installed = saved.status === 'fulfilled' ? saved.value : null;
+        let error = saved.status === 'rejected' ? saved.reason : prepared.status === 'rejected' && !installed ? prepared.reason : null;
+        if (kind === 'pfaf') {
+          try {
+            const value = installed ? await catalogIndex(installed) : [];
+            if (!current()) return;
+            index.current = value; setEntries(value);
+          } catch (failure) {
+            if (!current()) return;
+            installed = null; index.current = []; setEntries([]); error = failure;
+          }
+        }
+        if (!current()) return;
+        update(kind, { installed, available: prepared.status === 'fulfilled' ? prepared.value : null, checking: false, error: error ? error instanceof Error ? error.message : String(error) : null });
+        if (error) failures.set(kind, error);
+      }));
+      for (const kind of ['pfaf', 'bioclip2'] as const) {
+        if (!current()) return;
+        const pack = snapshot.current[kind];
+        if (pack.installed) continue;
+        if (!pack.available) { failed(failures.get(kind) ?? new Error('Download metadata is unavailable. Reopen this page to retry.')); return; }
+        if (!navigator.onLine) { failed(new DOMException('Waiting for connection.', 'NetworkError')); return; }
+        if (kind === 'bioclip2') {
+          const catalog = snapshot.current.pfaf.installed?.manifest;
+          const model = pack.available.manifest;
+          if (catalog?.kind !== 'pfaf' || model.kind !== 'bioclip2' || catalog.id !== model.catalog.id || catalog.sourceSha256 !== model.catalog.sourceSha256 || index.current.length !== model.catalog.fullTaxonCount) {
+            failed(new Error('The model needs a matching PFAF catalog. Reopen this page after compatible downloads are available.')); return;
+          }
+        }
+        setPhase('downloading'); update(kind, { downloading: true, progress: null, error: null });
         try {
-          const index = installed ? await catalogIndex(installed) : [];
-          if (check === generation.current) setEntries(index);
-        } catch (failure) {
-          if (check === generation.current) setEntries([]);
-          error = failure instanceof Error ? failure.message : 'The catalog could not be opened. Reinstall it.';
+          const receipt = await installPack(pack.available.manifestUrl, pack.available.manifest, controller.signal, progress => {
+            if (current()) update(kind, { progress });
+          });
+          if (!current()) return;
+          if (kind === 'pfaf') {
+            const value = await catalogIndex(receipt);
+            if (!current()) return;
+            index.current = value; setEntries(value);
+          }
+          update(kind, { installed: receipt, downloading: false });
+        } catch (error) {
+          if (!current()) return;
+          update(kind, { downloading: false, error: error instanceof Error ? error.message : 'Download failed.' });
+          failed(error); return;
         }
       }
-      if (check !== generation.current) return;
-      setPacks(previous => ({ ...previous, [kind]: {
-        ...previous[kind], installed, checking: false,
-        available: prepared.status === 'fulfilled' ? prepared.value : null,
-        error: error ?? (prepared.status === 'rejected' && !installed
-          ? prepared.reason instanceof SyntaxError
-            ? 'A compatible offline pack is not available from this host yet. Check available downloads and try again.'
-            : prepared.reason instanceof Error ? prepared.reason.message : 'No prepared pack is available on this host.'
-          : null),
-      } }));
-    }));
-    for (const result of checks) {
-      if (result.status === 'rejected') console.error('Offline pack check failed', result.reason);
-    }
-  }, []);
+      if (current()) { retries.current = 0; setPhase('idle'); }
+    } catch (error) { if (current()) failed(error); }
+    finally { if (active.current === controller) active.current = null; }
+  }
 
   useEffect(() => {
-    void refresh();
-    return () => {
-      generation.current++;
-      for (const controller of Object.values(downloads.current)) controller.abort();
+    void run();
+    const interrupt = () => {
+      generation.current++; active.current?.abort(); active.current = null;
+      if (retryTimer.current) clearTimeout(retryTimer.current);
+      retryTimer.current = null; setRetrying(false);
+      for (const kind of ['pfaf', 'bioclip2'] as const) update(kind, { checking: false, downloading: false });
     };
-  }, [refresh]);
+    const offline = () => { interrupt(); setPhase('waiting'); };
+    const recover = () => {
+      if (document.visibilityState !== 'visible') {
+        if (retryTimer.current) clearTimeout(retryTimer.current);
+        retryTimer.current = null; setRetrying(false);
+        return;
+      }
+      if (!navigator.onLine) return;
+      // A suspended fetch can remain pending after the screen locks. Its durable
+      // chunks survive aborting this attempt and reopening the range installer.
+      interrupt(); retries.current = 0; void run();
+    };
+    window.addEventListener('offline', offline); window.addEventListener('online', recover);
+    document.addEventListener('visibilitychange', recover);
+    return () => {
+      generation.current++; active.current?.abort(); active.current = null;
+      if (retryTimer.current) clearTimeout(retryTimer.current);
+      window.removeEventListener('offline', offline); window.removeEventListener('online', recover);
+      document.removeEventListener('visibilitychange', recover);
+    };
+  }, []);
 
-  async function install(kind: PackKind) {
-    const prepared = packs[kind].available;
-    if (!prepared || downloads.current[kind]) return;
-    if (kind === 'bioclip2' && modelCatalogPrerequisite) {
-      setPacks(previous => ({ ...previous, bioclip2: { ...previous.bioclip2, error: modelCatalogPrerequisite } }));
-      return;
-    }
-    const controller = new AbortController();
-    downloads.current[kind] = controller;
-    setPacks(previous => ({ ...previous, [kind]: { ...previous[kind], downloading: true, error: null, progress: null } }));
-    try {
-      const receipt = await installPack(prepared.manifestUrl, prepared.manifest, controller.signal, progress => {
-        setPacks(previous => ({ ...previous, [kind]: { ...previous[kind], progress } }));
-      });
-      if (kind === 'pfaf') setEntries(await catalogIndex(receipt));
-      setPacks(previous => ({ ...previous, [kind]: { ...previous[kind], installed: receipt } }));
-    } catch (error) {
-      setPacks(previous => ({ ...previous, [kind]: { ...previous[kind], error: controller.signal.aborted
-        ? 'Download canceled. Retry when you are ready.'
-        : error instanceof Error ? error.message : 'The download failed. Check your connection and retry.' } }));
-    } finally {
-      delete downloads.current[kind];
-      setPacks(previous => ({ ...previous, [kind]: { ...previous[kind], downloading: false, progress: null } }));
-    }
-  }
-
-  async function remove(kind: PackKind) {
-    if (downloads.current[kind]) return;
-    try {
-      await deletePack(kind);
-      if (kind === 'pfaf') setEntries([]);
-      setPacks(previous => ({ ...previous, [kind]: { ...previous[kind], installed: null, error: null } }));
-    } catch (error) {
-      setPacks(previous => ({ ...previous, [kind]: { ...previous[kind], error: error instanceof Error ? error.message : 'The offline pack could not be removed. Try again.' } }));
-    }
-  }
-
-  return { packs, entries, refresh, install, remove, downloads, modelCatalogPrerequisite };
+  return { packs, entries, phase, setupError, retrying };
 }

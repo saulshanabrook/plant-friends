@@ -10,8 +10,8 @@ Catalog exported October 17, 2026; most descriptions originate in a 2022 snapsho
 three detail records were refreshed in 2026, and 292 records lack descriptions.
 Changes: selected text fields/uses, HTML-to-text formatting, JSON indexing/sharding,
 and scientific-name vectors. Original names, reference markers and disclaimers
-are retained. This app is unofficial and is not endorsed by PFAF. No PFAF images
-are distributed in this site or its deployment archive.
+are retained. This app is unofficial and is not endorsed by PFAF. The catalog/model archive contains no photos. Reference photos are distributed
+separately with their recorded credits, as described below.
 
 An earlier official PFAF body-text notice linked Creative Commons Attribution
 4.0 (https://creativecommons.org/licenses/by/4.0/) and also used conflicting
@@ -22,6 +22,20 @@ Our own text-export adaptation contributions are offered under CC BY-SA 4.0
 (https://creativecommons.org/licenses/by-sa/4.0/), without relabeling underlying
 PFAF text. The scraper software's MIT license is not the text-data license.
 See the copyright page and individual recorded source links for provenance.
+
+REFERENCE PHOTOS
+Source: https://github.com/saulshanabrook/pfaf-data/pull/3
+Pinned photo-source commit: 1dce664c55eb97844673b83b2379106e41e05908
+Photo-source SQLite SHA-256: 65c43f089fbc4a12a1844a9c88570a2db68697452f0768f38e6bb824b3d3370a
+Reference photos retain their individual owners and recorded credits. Original
+URLs, file hashes, freshness and per-plant credits are retained in the separate
+photo manifest and shown with plant records. A missing recorded credit is not
+a public-domain or unrestricted-use declaration. The text-data grant, scraper
+software license and model MIT license do not automatically license photos.
+Changes: orientation correction, size bounded to 640 pixels without upscaling,
+and WebP encoding for static on-device reference viewing. The separate photo
+archive carries its own source/credit notice. These reference photographs are
+not user uploads and are not new training or evaluation data.
 
 BIOCLIP 2
 https://huggingface.co/imageomics/bioclip-2/tree/2957b322090f9cb17ae72c71981c7218a28d81e0

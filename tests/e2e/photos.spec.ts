@@ -19,6 +19,11 @@ const test = base.extend<{ plantPhotos: { first: Buffer; second: Buffer } }>({
   },
 });
 
+test.use({ serviceWorkers: 'block' });
+test.beforeEach(async ({ page }) => {
+  await page.route('**/*.onnx*', route => route.abort('blockedbyclient'));
+});
+
 test('one photo can be uploaded, replaced, and reset; previous object URLs are released', async ({ page, plantPhotos }) => {
   await page.goto('/');
   const upload = page.locator('input[type=file]');
@@ -50,15 +55,17 @@ test('malformed and oversized files show a recoverable error before a valid phot
   await page.goto('/');
   const upload = page.locator('input[type=file]');
   await upload.setInputFiles({ name: 'broken.jpg', mimeType: 'image/jpeg', buffer: Buffer.from('not an image') });
-  await expect(page.getByRole('alert')).toContainText('valid JPEG, PNG, or WebP');
+  await expect(page.locator('#identify').getByRole('alert')).toContainText('valid JPEG, PNG, or WebP');
   await expect(page.getByRole('img', { name: 'Selected plant to identify' })).toHaveCount(0);
 
   await upload.setInputFiles({ name: 'oversized.jpg', mimeType: 'image/jpeg', buffer: Buffer.alloc(20 * 1024 * 1024 + 1) });
-  await expect(page.getByRole('alert')).toContainText('smaller than 20 MiB');
+  await expect(page.locator('#identify').getByRole('alert')).toContainText('smaller than 20 MiB');
   await expect(upload).toBeEnabled();
+  await expect(page.getByRole('table')).toBeVisible();
+  await expect(page.locator('#identify').getByRole('alert')).toContainText('smaller than 20 MiB');
   await upload.setInputFiles({ name: 'recovered.jpg', mimeType: 'image/jpeg', buffer: plantPhotos.first });
   await expect(page.getByRole('img', { name: 'Selected plant to identify' })).toBeVisible();
-  await expect(page.getByRole('alert')).toHaveCount(0);
+  await expect(page.locator('#identify').getByRole('alert')).toHaveCount(0);
 });
 
 for (const failure of [
@@ -74,15 +81,15 @@ for (const failure of [
     }, failure.code);
     await page.goto('/');
     await page.getByRole('button', { name: 'Use camera' }).click();
-    await expect(page.getByRole('alert')).toContainText(failure.message);
+    await expect(page.locator('#identify').getByRole('alert')).toContainText(failure.message);
     await expect(page.locator('video')).toHaveCount(0);
     await page.locator('input[type=file]').setInputFiles({ name: 'camera-recovery.jpg', mimeType: 'image/jpeg', buffer: plantPhotos.first });
     await expect(page.getByRole('img', { name: 'Selected plant to identify' })).toBeVisible();
-    await expect(page.getByRole('alert')).toHaveCount(0);
+    await expect(page.locator('#identify').getByRole('alert')).toHaveCount(0);
   });
 }
 
-test('FAKE CAMERA: a canvas stream captures one still and releases camera tracks on capture and navigation', async ({ page }) => {
+test('FAKE CAMERA: a canvas stream captures one still and releases camera tracks on capture and opening a record', async ({ page }) => {
   // This is an explicit getUserMedia double for lifecycle coverage, not physical-camera evidence.
   await page.addInitScript(() => {
     const streams: MediaStream[] = [];
@@ -117,17 +124,12 @@ test('FAKE CAMERA: a canvas stream captures one still and releases camera tracks
   await page.getByRole('button', { name: 'Use camera' }).click();
   await expect(page.locator('video')).toBeVisible();
   await expect(page.getByRole('img', { name: 'Selected plant to identify' })).toHaveCount(0);
-  await page.getByRole('button', { name: 'Explore plants', exact: true }).click();
+  const opener = page.getByRole('table').locator('tbody button').first();
+  await expect(opener).toBeVisible();
+  await opener.click();
+  await expect(page.locator('video')).toHaveCount(0);
   expect(await page.evaluate(() => (window as Window & { __uiCameraStreams?: MediaStream[] }).__uiCameraStreams?.every(stream => stream.getTracks().every(track => track.readyState === 'ended')))).toBe(true);
-
-  for (const inlinePath of ['Explore the catalog →', 'Open offline setup →']) {
-    await page.getByRole('button', { name: 'Identify', exact: true }).click();
-    await page.getByRole('button', { name: 'Use camera', exact: true }).click();
-    await expect(page.locator('video')).toBeVisible();
-    await page.getByRole('button', { name: inlinePath, exact: true }).click();
-    await expect(page.locator('video')).toHaveCount(0);
-    expect(await page.evaluate(() => (window as Window & { __uiCameraStreams?: MediaStream[] }).__uiCameraStreams?.every(stream => stream.getTracks().every(track => track.readyState === 'ended')))).toBe(true);
-  }
+  await page.getByRole('button', { name: 'Close plant details', exact: true }).click();
 });
 
 
@@ -145,9 +147,7 @@ test('FAKE CAMERA: resetting a stalled preview ignores its late native play reje
   await expect(page.locator('video')).toBeVisible();
   await page.getByRole('button', { name: 'Reset', exact: true }).click();
   await expect(page.locator('video')).toHaveCount(0);
-  await page.getByRole('button', { name: 'Explore plants', exact: true }).click();
-  await page.getByRole('button', { name: 'Identify', exact: true }).click();
-  await expect(page.getByRole('alert')).toHaveCount(0);
+  await expect(page.locator('#identify').getByRole('alert')).toHaveCount(0);
   await expect(page.getByRole('button', { name: 'Use camera', exact: true })).toBeEnabled();
 });
 
@@ -182,7 +182,7 @@ test('FAKE CAMERA: canceling a pending request preserves upload and stops a late
   await page.evaluate(() => (window as Window & { __resolvePendingCamera?: () => void }).__resolvePendingCamera?.());
   await expect.poll(() => page.evaluate(() => (window as Window & { __lateCameraStream?: MediaStream }).__lateCameraStream?.getTracks().every(track => track.readyState === 'ended'))).toBe(true);
   await expect(page.locator('video')).toHaveCount(0);
-  await expect(page.getByRole('alert')).toHaveCount(0);
+  await expect(page.locator('#identify').getByRole('alert')).toHaveCount(0);
   await page.locator('input[type=file]').setInputFiles({ name: 'after-camera-cancel.jpg', mimeType: 'image/jpeg', buffer: plantPhotos.first });
   await expect(page.getByRole('img', { name: 'Selected plant to identify' })).toBeVisible();
   await expect(page.locator('.photo-label')).toContainText('after-camera-cancel.jpg');

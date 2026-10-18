@@ -2,14 +2,19 @@
 import { precacheAndRoute, cleanupOutdatedCaches, createHandlerBoundToURL } from 'workbox-precaching';
 import { NavigationRoute, registerRoute } from 'workbox-routing';
 import { installedPack, readAsset } from './assets/storage';
+import { handlesPhotoRequest, photoResponse } from './assets/photos';
 declare const self: ServiceWorkerGlobalScope;
 precacheAndRoute((self as ServiceWorkerGlobalScope & { __WB_MANIFEST: { url: string; revision: string | null }[] }).__WB_MANIFEST);
 cleanupOutdatedCaches();
 registerRoute(new NavigationRoute(createHandlerBoundToURL(new URL('index.html', self.registration.scope).href), {
-  denylist: [/\/(packs|runtime)\//],
+  denylist: [/\/(packs|runtime|photos)\//, /\/photos\.json$/],
 }));
 self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
+  if (event.request.method === 'GET' && event.request.cache !== 'no-store' && handlesPhotoRequest(url.href)) {
+    event.respondWith(photoResponse(event.request).catch(() => Response.error()));
+    return;
+  }
   if (event.request.method === 'GET' && event.request.cache !== 'no-store' && url.origin === self.location.origin && /\/(packs|runtime)\//.test(url.pathname)) {
     event.respondWith((async () => {
       try {

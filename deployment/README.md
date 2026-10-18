@@ -65,3 +65,68 @@ release/tag APIs on 2026-10-17: [checkout v7.0.1](https://github.com/actions/che
 [upload-pages-artifact v5.0.0](https://github.com/actions/upload-pages-artifact/releases/tag/v5.0.0),
 and [deploy-pages v5.0.1](https://github.com/actions/deploy-pages/releases/tag/v5.0.1).
 The job/environment structure follows [GitHub's custom Pages workflow guide](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).
+
+## Offline reference photos
+
+`photos.json` pins a supplemental photo release to the existing catalog ID. It
+does not replace or duplicate the compatible catalog/model/runtime archive.
+Preparation reads the exact merged source checkout and its verified image ledger;
+it never scrapes or downloads images or changes catalog/model IDs:
+
+```sh
+uv run --locked python -m tools.plant_assets prepare-photos \
+  --database ../pfaf-data/data.sqlite --source-root ../pfaf-data \
+  --source-commit 1dce664c55eb97844673b83b2379106e41e05908 \
+  --catalog public/packs/pfaf/39831ede5fe0b995b55c/manifest.json
+node --test scripts/photos-assets.test.mjs
+node scripts/photos-assets.mjs create --source public --archive .cache/photos-assets.tar.gz
+```
+
+The source checkout must be at that clean commit and contain its local image
+files. Each original SHA-256 is checked before EXIF orientation, bounded resizing
+(640 px longest edge, no upscale), and WebP quality 75 encoding. The manifest
+retains exact original URLs/hashes, source refresh/error metadata, and every
+per-plant raw credit (including null or empty text). Photo IDs hash the exact
+original URL; identical derivative bytes share a physical file. Credits are
+source records, not a fabricated uniform photo license. `photos/NOTICE.txt`
+copies the current public notices into the release archive.
+
+Upload the archive to the exact URL recorded in `deployment/photos.json`, then
+retain the updated SHA-256/byte receipts in git. The tar.gz is release transport
+only and must not be copied into the website. CI restores core assets first,
+then the photos into the same fresh public directory:
+
+```sh
+node scripts/photos-assets.mjs restore
+# For a local archive instead of the authenticated public release:
+node scripts/photos-assets.mjs restore --archive .cache/photos-assets.tar.gz --target .cache/photo-import
+node scripts/photos-assets.mjs verify --target .cache/photo-import
+# After the production build:
+node scripts/photos-assets.mjs verify --target dist
+node scripts/photos-assets.mjs check-size --target dist
+```
+
+Restore verifies the archive before extraction, permits exactly the selected
+regular files, verifies every restored receipt, and publishes the pointer last.
+It refuses an existing photo namespace while leaving core pack files alone.
+Post-build verification rejects stale photo versions or corrupt derivatives.
+The final site-size check fails at 1,000,000,000 bytes and also reports whether
+it meets the 950 MB target. Photo files are downloaded for offline use separately
+from the small app-shell precache; changing the shell must not re-precache all
+12,347 images.
+
+The prepared `e2e188337de47653c182` pack contains all 12,370 verified source
+photo URLs as 12,347 deduplicated WebP files (165,263,924 bytes), with 12,438
+associations covering 6,535 of the 8,796 catalog plants. The remaining 2,261
+plants have no current verified photo; no replacement image or fuzzy name join
+is invented. One source image is a valid 1×1 image and is retained. The failed
+source refresh for `Cymopterus purpurescens` is recorded in the manifest rather
+than reviving its stale associations. Original source files total 313,233,218
+bytes. The deterministic transformation records Pillow 13.0.0 and libwebp 1.6.0.
+
+The manifest is 9,801,679 bytes. Including the pointer and archive notice, the
+selected photo release is 175,461,429 bytes across 12,350 files; its authenticated
+tar.gz is 169,456,371 bytes. Full original-hash checks, full output WebP decoding,
+and an actual archive restore/every-file hash verification passed. Adding these
+assets to the clean core site measured 707,182,062 bytes gives 882,643,491 bytes;
+the integrated deployment must still run the post-build size check above.

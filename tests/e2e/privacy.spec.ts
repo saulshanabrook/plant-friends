@@ -1,5 +1,7 @@
 import { expect, test } from '@playwright/test';
 
+test.use({ serviceWorkers: 'block' });
+
 test('a real photo with a synthetic metadata marker stays in the session, with no outbound payload or persistent copy', async ({ page, request }) => {
   const fixtureResponse = await request.get('/fixtures/photos.json');
   expect(fixtureResponse.ok(), 'Prepare the licensed photo fixtures for UI privacy acceptance.').toBe(true);
@@ -20,6 +22,7 @@ test('a real photo with a synthetic metadata marker stays in the session, with n
     const body = request.postDataBuffer();
     requests.push({ url: request.url(), method: request.method(), hasPrivatePayload: Boolean(body?.includes(comment) || body?.includes(privatePhoto)) });
   });
+  await page.route('**/*.onnx*', route => route.abort('blockedbyclient'));
   await page.goto('/');
   await page.locator('input[type=file]').setInputFiles({ name, mimeType: 'image/jpeg', buffer: privatePhoto });
   await expect(page.getByRole('img', { name: 'Selected plant to identify' })).toBeVisible();

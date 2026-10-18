@@ -16,13 +16,13 @@ export default defineConfig({
     injectRegister: null,
     injectManifest: {
       globPatterns: ['**/*.{js,css,html,svg,png,webmanifest}', 'third-party-notices.txt'],
-      globIgnores: ['packs/**', 'runtime/**', 'fixtures/**'],
+      globIgnores: ['packs/**', 'runtime/**', 'fixtures/**', 'photos/**'],
     },
     manifest: {
       name: 'Plant Friends', short_name: 'Plant Friends',
       start_url: base, scope: base,
       description: 'Identify plants on your device and explore PFAF offline.',
-      theme_color: '#24593c', background_color: '#f7f8f2', display: 'standalone',
+      theme_color: '#ffffff', background_color: '#ffffff', display: 'standalone',
       icons: [
         { src: 'icon.svg', sizes: 'any', type: 'image/svg+xml', purpose: 'any' },
         { src: 'icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },

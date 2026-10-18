@@ -73,6 +73,49 @@ test('actual Cache/IDB install, reuse, receipt reload and offline reads/deletion
   expect(await page.evaluate(() => (async () => (await (await caches.open(window.assetHarness.ASSET_CACHE)).keys()).length)())).toBe(0);
 });
 
+test('a network interruption keeps a durable chunk across reload and resumes the missing range', async ({ page, context }) => {
+  const catalogPack = catalog();
+  const modelPack = model();
+  modelPack.model.file = asset('image.onnx', new Uint8Array(8 * 1024 * 1024 + 257).fill(37));
+  modelPack.files[0] = modelPack.model.file;
+  const manifestUrl = await page.evaluate(() => window.assetHarness.manifestUrl);
+  for (const [url, bytes] of CONTENT) files[new URL(url, manifestUrl).pathname] = Buffer.from(bytes);
+  const ranges: string[] = [];
+  let interrupt = true;
+  await page.route('**/tests/assets/downloads/image.onnx', async route => {
+    const range = route.request().headers().range;
+    ranges.push(range ?? 'missing range');
+    const [, start, end] = /^bytes=(\d+)-(\d+)$/.exec(range ?? '')!;
+    if (interrupt && Number(start) > 0) return route.abort('internetdisconnected');
+    const bytes = files['/tests/assets/downloads/image.onnx'] as Buffer;
+    await route.fulfill({ status: 206, body: bytes.subarray(Number(start), Number(end) + 1),
+      headers: { 'Content-Range': `bytes ${start}-${end}/${bytes.length}`, 'Content-Length': String(Number(end) - Number(start) + 1) } });
+  });
+  expect(await page.evaluate(pack => window.assetHarness.install(pack), catalogPack)).toEqual({ ok: true });
+  expect(await page.evaluate(pack => window.assetHarness.install(pack), modelPack)).toMatchObject({ ok: false, name: 'NetworkError' });
+  expect(ranges).toEqual(['bytes=0-8388607', 'bytes=8388608-8388864']);
+  expect(await page.evaluate(() => window.assetHarness.installedPack('bioclip2'))).toBeNull();
+  expect(await page.evaluate(async () => (await (await caches.open(window.assetHarness.ASSET_CACHE)).keys()).filter(request => request.url.includes('__plant-friends-chunk__')).length)).toBe(1);
+  await page.reload();
+  await page.waitForFunction(() => !!window.assetHarness);
+  ranges.length = 0; interrupt = false;
+  expect(await page.evaluate(pack => window.assetHarness.install(pack), modelPack)).toEqual({ ok: true });
+  expect(ranges).toEqual(['bytes=8388608-8388864']);
+  await context.setOffline(true);
+  const recovered = await page.evaluate(async () => {
+    const pack = (await window.assetHarness.installedPack('bioclip2'))!;
+    if (pack.manifest.kind !== 'bioclip2') throw new Error('Wrong fixture receipt');
+    const bytes = await (await window.assetHarness.readAsset(pack, pack.manifest.model.file)).arrayBuffer();
+    const hash = Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', bytes)), value => value.toString(16).padStart(2, '0')).join('');
+    const cache = await caches.open(window.assetHarness.ASSET_CACHE);
+    const complete = await cache.match(new URL(`/__plant-friends-verified__/${pack.manifest.model.file.sha256}/${pack.manifest.model.file.bytes}`, pack.manifestUrl));
+    return { bytes: bytes.byteLength, hash, descriptorBytes: (await complete!.arrayBuffer()).byteLength };
+  });
+  expect(recovered).toEqual({ bytes: modelPack.model.file.bytes, hash: modelPack.model.file.sha256, descriptorBytes: 0 });
+  await page.evaluate(() => window.assetHarness.deletePack('bioclip2'));
+  expect(await page.evaluate(async () => (await (await caches.open(window.assetHarness.ASSET_CACHE)).keys()).length)).toBe(2);
+});
+
 test('cancel keeps completed files for retry and never activates an incomplete pack', async ({ page }) => {
   const fixture = await page.evaluate(() => window.assetHarness.catalog('retry', 'retry fixture detail'));
   files = fixture.files;

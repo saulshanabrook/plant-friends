@@ -12,13 +12,17 @@ const base = process.argv[3] ?? '/plant-friends/';
 const output = resolve(process.argv[4] ?? 'reports/pages-path-verification.json');
 const dist = resolve(process.argv[5] ?? 'dist');
 if (!/^\/(?:[A-Za-z0-9_-]+\/)*$/.test(base)) throw new Error('Use a root or slash-terminated project path.');
-const types = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript', '.css': 'text/css', '.svg': 'image/svg+xml', '.png': 'image/png', '.wasm': 'application/wasm', '.json': 'application/json', '.webmanifest': 'application/manifest+json', '.txt': 'text/plain' };
+const types = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript', '.css': 'text/css', '.svg': 'image/svg+xml', '.png': 'image/png', '.webp': 'image/webp', '.wasm': 'application/wasm', '.json': 'application/json', '.webmanifest': 'application/manifest+json', '.txt': 'text/plain' };
 const served = [];
+const blockedModelBodies = [];
 const server = createServer(async (request, response) => {
   try {
     const url = new URL(request.url, 'http://localhost');
     if (!url.pathname.startsWith(base)) { response.writeHead(404).end(); return; }
     const relative = decodeURIComponent(url.pathname.slice(base.length)) || 'index.html';
+    if (request.method === 'GET' && /(?:\.(onnx|f32|wasm|mjs)$|\/rows\.json$)/.test(relative) && /^(packs|runtime)\//.test(relative)) {
+      blockedModelBodies.push(url.pathname); response.writeHead(503).end(); return;
+    }
     let path = resolve(dist, relative);
     if (!path.startsWith(`${dist}${sep}`)) { response.writeHead(404).end(); return; }
     let info;
@@ -39,7 +43,7 @@ const server = createServer(async (request, response) => {
 await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
 const origin = `http://127.0.0.1:${server.address().port}`;
 const home = `${origin}${base}`;
-const report = { checkedAt: new Date().toISOString(), base, home, assetSource: assets, scope: 'Production path and catalog/offline verification; no inference, camera, phone, or encoder-download claim', status: 'running' };
+const report = { checkedAt: new Date().toISOString(), base, home, assetSource: assets, scope: 'Production path and automatic catalog/offline verification; model payload requests denied by fixture server, no inference/camera/phone claim', status: 'running' };
 let browser, context;
 try {
   const manifestResponse = await fetch(`${home}manifest.webmanifest`);
@@ -107,9 +111,7 @@ try {
   await page.goto(home);
   report.stage = 'install real catalog';
   console.log(JSON.stringify({ stage: report.stage, base }));
-  await page.getByRole('button', { name: 'Offline setup', exact: true }).click();
-  await page.getByRole('button', { name: 'Download PFAF catalog', exact: true }).click();
-  await expect(page.getByRole('button', { name: 'Delete catalog', exact: true })).toBeVisible({ timeout: 90_000 });
+  await expect(page.getByRole('searchbox', { name: 'Search plants', exact: true })).toBeVisible({ timeout: 90_000 });
   report.stage = 'activate scoped service worker';
   report.workerRegistrations = await page.evaluate(async () => (await navigator.serviceWorker.getRegistrations()).map(registration => ({ scope: registration.scope, installing: registration.installing?.state, waiting: registration.waiting?.state, active: registration.active?.state })));
   await page.evaluate(() => Promise.race([navigator.serviceWorker.ready.then(() => undefined), new Promise((_, reject) => setTimeout(() => reject(new Error('Service worker was not ready after 15 seconds.')), 15_000))]));
@@ -121,6 +123,22 @@ try {
   expect(registration.scope).toBe(home);
   expect(registration.script).toBe(`${home}sw.js`);
   report.serviceWorker = registration;
+  const reference = page.locator('#plants tbody img').first();
+  await expect(reference).toBeAttached({ timeout: 30_000 });
+  await reference.scrollIntoViewIfNeeded();
+  await expect.poll(() => reference.evaluate(image => image.complete && image.naturalWidth > 0)).toBe(true);
+  report.referencePhoto = { url: await reference.getAttribute('src'), online: true };
+  await mkdir('.cache', { recursive: true });
+  report.layout = [];
+  for (const viewport of [{ width: 1280, height: 900 }, { width: 390, height: 844 }]) {
+    await page.setViewportSize(viewport);
+    await page.evaluate(() => scrollTo(0, 0));
+    const dimensions = await page.evaluate(() => ({ viewport: innerWidth, document: document.documentElement.scrollWidth }));
+    expect(dimensions.document).toBeLessThanOrEqual(dimensions.viewport);
+    await page.screenshot({ path: `.cache/minimal-${viewport.width}.png` });
+    report.layout.push({ ...viewport, noPageOverflow: true });
+  }
+  await page.setViewportSize({ width: 1280, height: 900 });
   expect(await page.locator('link[rel=manifest]').getAttribute('href')).toBe(`${base}manifest.webmanifest`);
   const favicon = await page.locator('link[rel=icon]').getAttribute('href');
   expect(new URL(favicon, home).href).toBe(`${home}icon.svg`);
@@ -129,11 +147,14 @@ try {
   await context.setOffline(true);
   const offline = await page.goto(`${home}?pages-offline=new-navigation`);
   expect(offline.status()).toBe(200);
-  await page.getByRole('button', { name: 'Explore plants', exact: true }).click();
-  await page.getByRole('searchbox', { name: 'Search scientific or common names' }).fill(firstEntry.scientificName);
-  await page.locator('.catalog-list button').filter({ has: page.getByText(firstEntry.scientificName, { exact: true }) }).click();
+  await expect(reference).toBeAttached();
+  await reference.scrollIntoViewIfNeeded();
+  await expect.poll(() => reference.evaluate(image => image.complete && image.naturalWidth > 0)).toBe(true);
+  report.referencePhoto.offline = true;
+  await page.getByRole('searchbox', { name: 'Search plants' }).fill(firstEntry.scientificName);
+  await page.locator('#plants tbody').getByRole('button', { name: firstEntry.scientificName, exact: true }).click();
   await expect(page.getByRole('heading', { name: 'Known hazards', exact: true })).toBeVisible();
-  await page.getByRole('button', { name: 'Close record', exact: true }).click();
+  await page.getByRole('button', { name: 'Close plant details', exact: true }).click();
   await page.goto(`${home}?diagnostics=1&pages-offline=new-diagnostics`);
   await expect(page.getByRole('heading', { name: 'Plant Friends · developer checks', exact: true })).toBeVisible();
   report.stage = 'offline absent pack/runtime fetch';
@@ -154,10 +175,12 @@ try {
   });
   expect(escaped).toEqual([]);
   const modelFileUrls = new Set(packUrls.filter(file => file.kind === 'model').map(file => file.url));
-  expect(browserRequests.filter(url => modelFileUrls.has(url))).toEqual([]);
+  report.modelRequests = browserRequests.filter(url => modelFileUrls.has(url));
+  report.blockedModelBodies = blockedModelBodies;
+  expect(served.filter(request => modelFileUrls.has(`${origin}${request.path}`) && request.method !== 'HEAD')).toEqual([]);
   expect(pageErrors).toEqual([]);
   report.offline = { newQueryNavigation: true, catalogRecords: catalog.taxonCount, detailOpened: firstEntry.scientificName, diagnosticsQuery: true, missingPackAndRuntimeFetchUnavailable: true };
-  report.requests = { escapedBase: escaped, modelFilesDownloaded: 0, pageErrors };
+  report.requests = { escapedBase: escaped, modelPayloadBodiesServed: 0, pageErrors };
   for (const file of ['attribution.html', 'third-party-notices.txt']) {
     report.stage = `offline legal resource: ${file}`;
     console.log(JSON.stringify({ stage: report.stage, base }));

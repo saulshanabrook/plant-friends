@@ -5,7 +5,8 @@ import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 
-const origin = new URL(process.argv[2] ?? 'http://127.0.0.1:4173').origin;
+const base = new URL(process.argv[2] ?? 'http://127.0.0.1:4173/');
+const origin = base.origin;
 const output = resolve(process.argv[3] ?? 'reports/camera-native.json');
 const profile = await mkdtemp(join(tmpdir(), 'plant-friends-native-camera-'));
 const evidence = {
@@ -26,15 +27,15 @@ async function openCamera(action) {
   try {
     await page.waitForFunction(() => {
       const video = document.querySelector('video');
-      return Boolean(video && video.videoWidth > 0 && video.readyState >= 2) || Boolean(document.querySelector('.photo-card .error-message'));
+      return Boolean(video && video.videoWidth > 0 && video.readyState >= 2) || Boolean(document.querySelector('#identify [role=alert]'));
     }, undefined, { timeout: 12_000 });
   } catch {
     const pending = { action, result: 'blocked', durationMs: performance.now() - began, state: 'No frame or product error after 12 seconds' };
     evidence.actions.push(pending);
     throw new Error(pending.state);
   }
-  if (await page.locator('.photo-card .error-message').count()) {
-    const message = await page.locator('.photo-card .error-message').innerText();
+  if (await page.locator('#identify [role=alert]').count()) {
+    const message = await page.locator('#identify [role=alert]').innerText();
     evidence.actions.push({ action, result: 'blocked', durationMs: performance.now() - began, error: message });
     throw new Error(message);
   }
@@ -62,7 +63,8 @@ try {
   context.on('request', request => requests.push({ url: request.url(), method: request.method() }));
   page = await context.newPage();
   page.on('worker', worker => workers.push(worker.url()));
-  await page.goto(`${origin}/`);
+  await context.addInitScript(() => { Object.defineProperty(navigator, 'onLine', { value: false, configurable: true }); });
+  await page.goto(base.href);
   const cdp = await context.newCDPSession(page);
   evidence.browser = await cdp.send('Browser.getVersion');
   await cdp.detach();
@@ -92,14 +94,14 @@ try {
   expect(released).toBe(true);
   evidence.actions.push({ action: 'Reset current photo', result: 'passed', previewRemoved: true, photoObjectUrlReleased: released });
 
-  for (const path of ['Explore plants', 'Explore the catalog →', 'Open offline setup →']) {
+  for (const path of ['Plants', 'Identify']) {
     await openCamera(`Open native camera before navigation: ${path}`);
-    await page.getByRole('button', { name: path, exact: true }).click();
+    await page.getByRole('link', { name: path, exact: true }).click();
     await expect(page.locator('video')).toHaveCount(0);
     const states = await page.evaluate(() => window.__nativeCameraStreams.flatMap(stream => stream.getTracks().map(track => track.readyState)));
     expect(states.every(state => state === 'ended')).toBe(true);
     evidence.actions.push({ action: `Navigate via ${path}`, result: 'passed', allTrackStates: states });
-    await page.getByRole('button', { name: 'Identify', exact: true }).click();
+    await page.getByRole('link', { name: 'Identify', exact: true }).click();
   }
   evidence.storage = await page.evaluate(async () => {
     const databases = [];

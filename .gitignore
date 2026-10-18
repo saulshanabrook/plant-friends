@@ -19,3 +19,5 @@ reports/*.bin
 *.safetensors
 *.onnx.data
 *.tsbuildinfo
+public/photos/
+public/photos.json
