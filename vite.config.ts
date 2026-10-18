@@ -20,7 +20,11 @@ export default defineConfig({
     },
     manifest: {
       name: 'Plant Friends', short_name: 'Plant Friends',
-      start_url: base, scope: base,
+      id: base, start_url: base, scope: base,
+      ...(base === '/plant-friends/' ? { related_applications: [{
+        platform: 'webapp', url: 'manifest.webmanifest',
+        id: 'https://saulshanabrook.github.io/plant-friends/',
+      }] } : {}),
       description: 'Identify plants on your device and explore PFAF offline.',
       theme_color: '#ffffff', background_color: '#ffffff', display: 'standalone',
       icons: [

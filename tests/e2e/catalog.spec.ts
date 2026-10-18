@@ -1,40 +1,8 @@
-import { expect, test as base } from '@playwright/test';
-import type { CatalogEntry, CatalogManifest, ModelManifest, PlantRecord } from '../../src/assets/manifest';
+import { expect, sourceTest as test } from './fixtures';
+import type { ModelManifest } from '../../src/assets/manifest';
 
-type CatalogData = { manifest: CatalogManifest; index: CatalogEntry[]; zero: PlantRecord; missing: PlantRecord; provenance: PlantRecord };
+// Offline installation and automatic setup intentionally keep fresh contexts.
 const ratings = ['edibility_rating', 'medicinal_rating', 'other_uses_rating'] as const;
-const test = base.extend<{ catalogData: CatalogData }>({
-  catalogData: async ({ request }, use) => {
-    const pointer = await request.get('/catalog.json');
-    expect(pointer.ok(), 'Export the real PFAF catalog before UI acceptance.').toBe(true);
-    expect(pointer.headers()['content-type']).toContain('application/json');
-    const { url } = await pointer.json() as { url: string };
-    const manifestResponse = await request.get(url);
-    expect(manifestResponse.ok()).toBe(true);
-    const manifest = await manifestResponse.json() as CatalogManifest;
-    expect(manifest.kind).toBe('pfaf');
-    const indexResponse = await request.get(new URL(manifest.indexFile, manifestResponse.url()).href);
-    expect(indexResponse.ok()).toBe(true);
-    const index = await indexResponse.json() as CatalogEntry[];
-    expect(index).toHaveLength(manifest.taxonCount);
-    let zero: PlantRecord | undefined, missing: PlantRecord | undefined, provenance: PlantRecord | undefined;
-    for (const file of manifest.files) {
-      if (file.url === manifest.indexFile) continue;
-      const response = await request.get(new URL(file.url, manifestResponse.url()).href);
-      expect(response.ok()).toBe(true);
-      const records = Object.values(await response.json() as Record<string, PlantRecord>);
-      zero ??= records.find(record => ratings.some(key => record.fields[key] === 0));
-      missing ??= records.find(record => ratings.some(key => record.fields[key] === null));
-      provenance ??= records.find(record => !record.fields.details_scraped_at &&
-        ['edible_uses', 'medicinal_uses', 'other_uses'].some(key => /\[[^\]]+\]/.test(String(record.fields[key] ?? ''))));
-      if (zero && missing && provenance) break;
-    }
-    expect(zero, 'The real export must provide a zero-rating acceptance case.').toBeTruthy();
-    expect(missing, 'The real export must provide a missing-rating acceptance case.').toBeTruthy();
-    expect(provenance, 'The real export must provide unknown freshness and recorded reference markers.').toBeTruthy();
-    await use({ manifest, index, zero: zero!, missing: missing!, provenance: provenance! });
-  },
-});
 
 test.setTimeout(120_000);
 

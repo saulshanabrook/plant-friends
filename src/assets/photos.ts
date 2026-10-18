@@ -76,7 +76,7 @@ export function validatePhotoManifest(value: unknown, manifestUrl: string, catal
 }
 
 /** Bound allocation and each transport stall, and classify transport errors only. */
-async function fetchBytes(url: string, limit: number, signal: AbortSignal, expectedBytes?: number): Promise<Uint8Array<ArrayBuffer>> {
+async function fetchBytes(url: string, limit: number, signal: AbortSignal, expectedBytes?: number, network?: (bytes: number) => void): Promise<Uint8Array<ArrayBuffer>> {
   const controller = new AbortController();
   async function transport<T>(operation: () => Promise<T>): Promise<T> {
     return new Promise((resolve, reject) => {
@@ -113,6 +113,7 @@ async function fetchBytes(url: string, limit: number, signal: AbortSignal, expec
       if (part.done) break;
       if (received + part.value.byteLength > bytes.length) throw new Error('Reference photo download exceeded its bounded size.');
       bytes.set(part.value, received); received += part.value.byteLength;
+      network?.(part.value.byteLength);
     }
     signal.throwIfAborted();
     if (!received || expectedBytes !== undefined && received !== expectedBytes) throw new Error('Reference photo download has an incorrect size.');
@@ -148,21 +149,21 @@ async function cachedBytes(cache: Cache, url: string, limit: number, expected?: 
   } finally { await reader.cancel().catch(() => undefined); reader.releaseLock(); }
 }
 
-export async function loadPhotoAlbum(catalog: InstalledPack, signal: AbortSignal): Promise<PhotoAlbum> {
+export async function loadPhotoAlbum(catalog: InstalledPack, signal: AbortSignal, network?: (bytes: number) => void): Promise<PhotoAlbum> {
   if (catalog.manifest.kind !== 'pfaf') throw new Error('Reference photos require the installed PFAF catalog.');
   const ids = new Set((await catalogIndex(catalog)).map(entry => entry.id));
   signal.throwIfAborted();
   const pointerUrl = new URL(`${BASE}photos.json`, location.origin).href;
   const cache = await caches.open(PHOTO_CACHE);
   async function load(saved: boolean): Promise<PhotoAlbum> {
-    const pointerBytes = saved ? await cachedBytes(cache, pointerUrl, 64 * 1024) : await fetchBytes(pointerUrl, 64 * 1024, signal);
+    const pointerBytes = saved ? await cachedBytes(cache, pointerUrl, 64 * 1024) : await fetchBytes(pointerUrl, 64 * 1024, signal, undefined, network);
     const pointer: unknown = JSON.parse(new TextDecoder().decode(pointerBytes));
     if (!object(pointer) || typeof pointer.url !== 'string' || !/^photos\/[A-Za-z0-9_-]{1,128}\/manifest\.json$/.test(pointer.url) ||
         !digest(pointer.sha256) || !Number.isSafeInteger(pointer.bytes) || (pointer.bytes as number) < 1 || (pointer.bytes as number) > MAX_MANIFEST_BYTES)
       throw new Error('The reference photo pointer is invalid.');
     const manifestUrl = new URL(pointer.url, pointerUrl).href;
     const descriptor = { bytes: pointer.bytes as number, sha256: pointer.sha256 };
-    const bytes = saved ? await cachedBytes(cache, manifestUrl, MAX_MANIFEST_BYTES, descriptor) : await fetchBytes(manifestUrl, MAX_MANIFEST_BYTES, signal, descriptor.bytes);
+    const bytes = saved ? await cachedBytes(cache, manifestUrl, MAX_MANIFEST_BYTES, descriptor) : await fetchBytes(manifestUrl, MAX_MANIFEST_BYTES, signal, descriptor.bytes, network);
     if (hash(bytes) !== descriptor.sha256) throw new Error('The reference photo index failed its integrity check.');
     const album = validatePhotoManifest(JSON.parse(new TextDecoder().decode(bytes)), manifestUrl, catalog.manifest.id, ids);
     signal.throwIfAborted();
@@ -181,7 +182,7 @@ export async function loadPhotoAlbum(catalog: InstalledPack, signal: AbortSignal
   }
 }
 
-export async function cachePlantPhoto(photo: PlantPhoto | string, signal: AbortSignal = new AbortController().signal): Promise<Response> {
+export async function cachePlantPhoto(photo: PlantPhoto | string, signal: AbortSignal = new AbortController().signal, network?: (bytes: number) => void): Promise<Response> {
   const address = photoLocation(typeof photo === 'string' ? photo : photo.url);
   if (address.kind !== 'image' || typeof photo !== 'string' && (photo.sha256 !== address.sha256 || !Number.isSafeInteger(photo.bytes) || photo.bytes < 1 || photo.bytes > MAX_PHOTO_BYTES))
     throw new Error('The reference photo integrity metadata is invalid.');
@@ -199,7 +200,7 @@ export async function cachePlantPhoto(photo: PlantPhoto | string, signal: AbortS
       await cached.body?.cancel(); await cache.delete(key);
     }
     if (!navigator.onLine) throw new DOMException('Connect to save the remaining reference photos.', 'NetworkError');
-    const bytes = await fetchBytes(address.url.href, MAX_PHOTO_BYTES, signal, expected?.bytes);
+    const bytes = await fetchBytes(address.url.href, MAX_PHOTO_BYTES, signal, expected?.bytes, network);
     if (bytes.length < 12 || new TextDecoder().decode(bytes.subarray(0, 4)) !== 'RIFF' || new TextDecoder().decode(bytes.subarray(8, 12)) !== 'WEBP' ||
         new DataView(bytes.buffer).getUint32(4, true) + 8 !== bytes.length || hash(bytes) !== address.sha256)
       throw new Error('A reference photo failed its WebP or integrity check.');
@@ -234,7 +235,7 @@ export async function photoInventory(album: PhotoAlbum): Promise<{ pending: Plan
   return { pending, progress };
 }
 
-export async function cachePhotoAlbum(album: PhotoAlbum, signal: AbortSignal, progress: (value: PhotoProgress) => void): Promise<void> {
+export async function cachePhotoAlbum(album: PhotoAlbum, signal: AbortSignal, progress: (value: PhotoProgress) => void, network?: (bytes: number) => void): Promise<void> {
   const { pending, progress: value } = await photoInventory(album);
   signal.throwIfAborted(); progress({ ...value });
   const failed = new AbortController();
@@ -245,7 +246,7 @@ export async function cachePhotoAlbum(album: PhotoAlbum, signal: AbortSignal, pr
       while (next < pending.length) {
         combined.throwIfAborted();
         const photo = pending[next++];
-        const response = await cachePlantPhoto(photo, combined);
+        const response = await cachePlantPhoto(photo, combined, network);
         await response.body?.cancel();
         combined.throwIfAborted();
         value.received += photo.bytes; value.completed++;

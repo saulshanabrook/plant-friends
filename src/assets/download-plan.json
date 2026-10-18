@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "receipts": {
+    "assetsSha256": "8f627efc9f892d61b23963ea29183a77b04d8a9832d34ae48c74b16a302112ca",
+    "photosSha256": "60a54e5f787c03f7c7aa18fd0ecb4d4d1e77cd258da285b1e108cbf9b68b634f"
+  },
+  "catalog": {
+    "id": "39831ede5fe0b995b55c",
+    "bytes": 42820214
+  },
+  "model": {
+    "id": "e2b03528fe84908219e7",
+    "bytes": 663136322
+  },
+  "photos": {
+    "id": "e2e188337de47653c182",
+    "catalogId": "39831ede5fe0b995b55c",
+    "imageBytes": 165263924,
+    "metadataBytes": 9801823
+  }
+}

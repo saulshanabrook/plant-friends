@@ -1,8 +1,8 @@
 import { writeFile } from 'node:fs/promises';
-import { expect, test, type Locator } from '@playwright/test';
-import type { CatalogEntry, CatalogManifest, ModelManifest } from '../../src/assets/manifest';
+import type { Locator } from '@playwright/test';
+import { expect, test } from './fixtures';
 
-test('real Chrome keyboard navigation, native upload focus, automatic setup, and catalog dialog preserve focus', async ({ page, request }, testInfo) => {
+test('real Chrome keyboard navigation, native upload focus, cached catalog, and dialog preserve focus', async ({ page, catalogData }, testInfo) => {
   // Automated desktop keyboard evidence only: no DOM focus calls, model doubles,
   // encoder download, OS-native input, screen-reader check, or phone claim.
   const trace: { action: string; focus: unknown }[] = [];
@@ -24,28 +24,9 @@ test('real Chrome keyboard navigation, native upload focus, automatic setup, and
   }
 
   try {
-    const catalogPointer = await request.get('/catalog.json');
-    expect(catalogPointer.ok()).toBe(true);
-    const catalogResponse = await request.get((await catalogPointer.json() as { url: string }).url);
-    const catalog = await catalogResponse.json() as CatalogManifest;
-    const indexResponse = await request.get(new URL(catalog.indexFile, catalogResponse.url()).href);
-    const index = await indexResponse.json() as CatalogEntry[];
-    expect(index).toHaveLength(catalog.taxonCount);
-    const plant = index[0];
-    const modelPointer = await request.get('/model.json');
-    expect(modelPointer.headers()['content-type']).toContain('application/json');
-    const modelResponse = await request.get((await modelPointer.json() as { url: string }).url);
-    const model = await modelResponse.json() as ModelManifest;
-    expect(model.kind).toBe('bioclip2');
-    const modelAssets = new Set(model.files.map(file => new URL(file.url, modelResponse.url()).href));
-    const modelRequests: string[] = [];
-    page.on('request', request => { if (modelAssets.has(request.url())) modelRequests.push(request.url()); });
-    await page.goto('/?diagnostics=1');
-    await page.waitForFunction(() => Boolean(window.plantFriends));
-    await page.evaluate(() => window.plantFriends.install('pfaf'));
-    await page.evaluate(() => navigator.serviceWorker.ready.then(() => undefined));
-    await expect.poll(() => page.evaluate(() => Boolean(navigator.serviceWorker.controller))).toBe(true);
-    await page.context().setOffline(true);
+    const plant = catalogData.index[0];
+    const modelResponses: string[] = [];
+    page.on('response', response => { if (/\.onnx(?:$|[?#])/.test(response.url())) modelResponses.push(response.url()); });
     await page.goto('/');
     const upload = page.getByLabel('Upload photo', { exact: true });
     await tabTo(upload);
@@ -93,7 +74,7 @@ test('real Chrome keyboard navigation, native upload focus, automatic setup, and
     await press('Escape');
     await expect(dialog).toHaveCount(0);
     await expect(opener).toBeFocused();
-    expect(modelRequests).toEqual([]);
+    expect(modelResponses).toEqual([]);
   } finally {
     const tracePath = testInfo.outputPath('keyboard-trace.json');
     await writeFile(tracePath, JSON.stringify({ scope: 'Automated keyboard events in desktop Chrome; no OS-native, screen-reader, or phone review', actions: trace }, null, 2) + '\n');

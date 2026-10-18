@@ -1,4 +1,6 @@
 body { max-width: 76rem; margin: 1rem auto; padding: 0 1rem; }
+.app-heading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem; }
+.add-app { display: inline-flex; align-items: center; gap: .35rem; }
 section, details, footer { margin-block: 1.5rem; }
 .controls { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; }
 input[type="file"] { max-width: 100%; }

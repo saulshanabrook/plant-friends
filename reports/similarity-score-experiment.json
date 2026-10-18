@@ -1,0 +1,403 @@
+{
+  "scope": "Descriptive math using ten existing numerical/pipeline fixtures and saved FP32 embeddings; no calibration, new inference, OOD benchmark or probability-of-correctness claim. Some fixtures are synthetic; landscape/webp share an identical embedding.",
+  "packId": "e2b03528fe84908219e7",
+  "catalogId": "39831ede5fe0b995b55c",
+  "candidateCount": 8796,
+  "arithmetic": "float64 analytic re-scoring of stored float32 vectors/embeddings; normalized image; scale100 approximation to pinned checkpoint scalar",
+  "inputSha256": {
+    "vectors.f32": "335a9fc60b3612d43d2c7b3255513515f55de108304fd7bf5a82652bd8229d01",
+    "rows.json": "1322fcf48ff8244b09e34c15baea7c3e61df66f3e4f3debf2294c0a1066141c2"
+  },
+  "samples": [
+    {
+      "id": "16418",
+      "embeddingSha256": "c42f48d91736e3da75f513d47e92e9f7355d1c72972a6b0ab364fee3dae12691",
+      "topFive": [
+        {
+          "taxonId": "pfaf:Trifolium%20obtusiflorum",
+          "cosine": 0.7106300135935113,
+          "fullCatalogSoftmaxScale100": 0.3299414714852211,
+          "topFiveOnlySoftmaxScale100": 0.425273021829077
+        },
+        {
+          "taxonId": "pfaf:Trifolium%20repens",
+          "cosine": 0.7058321890907384,
+          "fullCatalogSoftmaxScale100": 0.2042067231071366,
+          "topFiveOnlySoftmaxScale100": 0.2632091377378594
+        },
+        {
+          "taxonId": "pfaf:Trifolium%20hybridum",
+          "cosine": 0.6969837618980852,
+          "fullCatalogSoftmaxScale100": 0.08429226541209348,
+          "topFiveOnlySoftmaxScale100": 0.10864722845313875
+        },
+        {
+          "taxonId": "pfaf:Trifolium%20tridentatum",
+          "cosine": 0.6969049947582374,
+          "fullCatalogSoftmaxScale100": 0.08363092735094968,
+          "topFiveOnlySoftmaxScale100": 0.1077948068571291
+        },
+        {
+          "taxonId": "pfaf:Trifolium%20cyathiferum",
+          "cosine": 0.6956494451444609,
+          "fullCatalogSoftmaxScale100": 0.07376308732197259,
+          "topFiveOnlySoftmaxScale100": 0.09507580512279577
+        }
+      ],
+      "cosineMargin": 0.004797824502772885,
+      "topFiveMassFullCatalogScale100": 0.7758344746773734,
+      "mcmStyleMaximumCosineSoftmaxTau1": 0.00013305442233577601
+    },
+    {
+      "id": "50800",
+      "embeddingSha256": "8d568e996a1d195fcab43bd8b9310e5fd6e0b2f4511a4ce7aa9d376487321c6f",
+      "topFive": [
+        {
+          "taxonId": "pfaf:Plantago%20rugelii",
+          "cosine": 0.7538595756129545,
+          "fullCatalogSoftmaxScale100": 0.9370386430740119,
+          "topFiveOnlySoftmaxScale100": 0.9514221873898027
+        },
+        {
+          "taxonId": "pfaf:Plantago%20major",
+          "cosine": 0.7141684765550085,
+          "fullCatalogSoftmaxScale100": 0.017700884620101706,
+          "topFiveOnlySoftmaxScale100": 0.017972593220642125
+        },
+        {
+          "taxonId": "pfaf:Plantago%20asiatica",
+          "cosine": 0.711796543708623,
+          "fullCatalogSoftmaxScale100": 0.013963144633260685,
+          "topFiveOnlySoftmaxScale100": 0.014177478920437398
+        },
+        {
+          "taxonId": "pfaf:Plantago%20psyllium",
+          "cosine": 0.7096621169826474,
+          "fullCatalogSoftmaxScale100": 0.011279406840572104,
+          "topFiveOnlySoftmaxScale100": 0.011452545749352826
+        },
+        {
+          "taxonId": "pfaf:Plantago%20debilis",
+          "cosine": 0.7013246416628537,
+          "fullCatalogSoftmaxScale100": 0.004899980020465452,
+          "topFiveOnlySoftmaxScale100": 0.004975194719764985
+        }
+      ],
+      "cosineMargin": 0.03969109905794599,
+      "topFiveMassFullCatalogScale100": 0.9848820591884118,
+      "mcmStyleMaximumCosineSoftmaxTau1": 0.0001379497321670497
+    },
+    {
+      "id": "22158",
+      "embeddingSha256": "0fb8cfeff61d56508123cd49829cd6db0c62063b718b31e5bc59143511f16831",
+      "topFive": [
+        {
+          "taxonId": "pfaf:Bellis%20perennis",
+          "cosine": 0.7165226612632594,
+          "fullCatalogSoftmaxScale100": 0.9921809351965732,
+          "topFiveOnlySoftmaxScale100": 0.9965988536913596
+        },
+        {
+          "taxonId": "pfaf:Leucanthemum%20vulgare",
+          "cosine": 0.6505719807218794,
+          "fullCatalogSoftmaxScale100": 0.0013564044755808697,
+          "topFiveOnlySoftmaxScale100": 0.00136244418487834
+        },
+        {
+          "taxonId": "pfaf:Erigeron%20glaucus",
+          "cosine": 0.6457468243227353,
+          "fullCatalogSoftmaxScale100": 0.0008372117873251126,
+          "topFiveOnlySoftmaxScale100": 0.0008409396693152497
+        },
+        {
+          "taxonId": "pfaf:Leucanthemum%20maximum",
+          "cosine": 0.6431040419354614,
+          "fullCatalogSoftmaxScale100": 0.000642777629241632,
+          "topFiveOnlySoftmaxScale100": 0.0006456397475060782
+        },
+        {
+          "taxonId": "pfaf:Erigeron%20pulchellus",
+          "cosine": 0.6415393282847188,
+          "fullCatalogSoftmaxScale100": 0.0005496751493206023,
+          "topFiveOnlySoftmaxScale100": 0.0005521227069405507
+        }
+      ],
+      "cosineMargin": 0.06595068054137998,
+      "topFiveMassFullCatalogScale100": 0.9955670042380413,
+      "mcmStyleMaximumCosineSoftmaxTau1": 0.00013721745995443134
+    },
+    {
+      "id": "portrait",
+      "embeddingSha256": "3492862743977ca0b2bde4f9120a216ad04296e4a2f117260e04d2d1b87c4672",
+      "topFive": [
+        {
+          "taxonId": "pfaf:Microcachrys%20tetragona",
+          "cosine": 0.6520474994509401,
+          "fullCatalogSoftmaxScale100": 0.027013276736628684,
+          "topFiveOnlySoftmaxScale100": 0.25393933586696416
+        },
+        {
+          "taxonId": "pfaf:Fargesia%20nitida",
+          "cosine": 0.6516057691074089,
+          "fullCatalogSoftmaxScale100": 0.025845989446418468,
+          "topFiveOnlySoftmaxScale100": 0.24296620727793963
+        },
+        {
+          "taxonId": "pfaf:Ptiloria%20exigua",
+          "cosine": 0.6489171527847156,
+          "fullCatalogSoftmaxScale100": 0.019752771478118294,
+          "topFiveOnlySoftmaxScale100": 0.18568667990891355
+        },
+        {
+          "taxonId": "pfaf:Trilisa%20odoratissima",
+          "cosine": 0.6474354125998144,
+          "fullCatalogSoftmaxScale100": 0.017032440511581242,
+          "topFiveOnlySoftmaxScale100": 0.16011410514444352
+        },
+        {
+          "taxonId": "pfaf:Morus%20australis",
+          "cosine": 0.647257691209031,
+          "fullCatalogSoftmaxScale100": 0.016732411584815813,
+          "topFiveOnlySoftmaxScale100": 0.15729367180173906
+        }
+      ],
+      "cosineMargin": 0.00044173034353123253,
+      "topFiveMassFullCatalogScale100": 0.1063768897575625,
+      "mcmStyleMaximumCosineSoftmaxTau1": 0.0001242673587658644
+    },
+    {
+      "id": "landscape",
+      "embeddingSha256": "d70e08e6b0d364a2327f53667b3e7c604737d435561354bc486f513d772d7fb5",
+      "topFive": [
+        {
+          "taxonId": "pfaf:Homalocephala%20polycephala",
+          "cosine": 0.6860359214605514,
+          "fullCatalogSoftmaxScale100": 0.0357491955049446,
+          "topFiveOnlySoftmaxScale100": 0.23616424368625394
+        },
+        {
+          "taxonId": "pfaf:Ptiloria%20exigua",
+          "cosine": 0.6856598360283325,
+          "fullCatalogSoftmaxScale100": 0.03442968823625683,
+          "topFiveOnlySoftmaxScale100": 0.22744739197122554
+        },
+        {
+          "taxonId": "pfaf:Sorbopyrus%20species",
+          "cosine": 0.6846606561519426,
+          "fullCatalogSoftmaxScale100": 0.031155825265492418,
+          "topFiveOnlySoftmaxScale100": 0.20581978996501904
+        },
+        {
+          "taxonId": "pfaf:Microcachrys%20tetragona",
+          "cosine": 0.683480334915531,
+          "fullCatalogSoftmaxScale100": 0.02768716950241016,
+          "topFiveOnlySoftmaxScale100": 0.18290535921138193
+        },
+        {
+          "taxonId": "pfaf:Morus%20serrata",
+          "cosine": 0.6813399874277679,
+          "fullCatalogSoftmaxScale100": 0.022352414851061396,
+          "topFiveOnlySoftmaxScale100": 0.14766321516611947
+        }
+      ],
+      "cosineMargin": 0.0003760854322188978,
+      "topFiveMassFullCatalogScale100": 0.15137429336016542,
+      "mcmStyleMaximumCosineSoftmaxTau1": 0.00012463791747481515
+    },
+    {
+      "id": "small",
+      "embeddingSha256": "91410ece0ee418881e53585982688ba51a7f6379db8c00bd8da54716cc8e0b44",
+      "topFive": [
+        {
+          "taxonId": "pfaf:Bulnesia%20arborea",
+          "cosine": 0.6814787038836766,
+          "fullCatalogSoftmaxScale100": 0.019918114021500358,
+          "topFiveOnlySoftmaxScale100": 0.30354668947157043
+        },
+        {
+          "taxonId": "pfaf:Prumnopitys%20andina",
+          "cosine": 0.6788679613442941,
+          "fullCatalogSoftmaxScale100": 0.015341403983520588,
+          "topFiveOnlySoftmaxScale100": 0.23379886198145455
+        },
+        {
+          "taxonId": "pfaf:Melicoccus%20bijugatus",
+          "cosine": 0.6767245441700558,
+          "fullCatalogSoftmaxScale100": 0.012381625989751347,
+          "topFiveOnlySoftmaxScale100": 0.1886926430588367
+        },
+        {
+          "taxonId": "pfaf:Stylophorum%20lasiocarpum",
+          "cosine": 0.6747414892555719,
+          "fullCatalogSoftmaxScale100": 0.010154410135481469,
+          "topFiveOnlySoftmaxScale100": 0.15475047370623393
+        },
+        {
+          "taxonId": "pfaf:Platanus%20orientalis",
+          "cosine": 0.6721323276828791,
+          "fullCatalogSoftmaxScale100": 0.007822404201543004,
+          "topFiveOnlySoftmaxScale100": 0.11921133178190442
+        }
+      ],
+      "cosineMargin": 0.002610742539382538,
+      "topFiveMassFullCatalogScale100": 0.06561795833179676,
+      "mcmStyleMaximumCosineSoftmaxTau1": 0.00012218364240975285
+    },
+    {
+      "id": "transparent",
+      "embeddingSha256": "19c57d61cf8c3d84b89cc0451393e16b7bdde33b20a4272385ad95eb114304dc",
+      "topFive": [
+        {
+          "taxonId": "pfaf:Kalimeris%20incisa",
+          "cosine": 0.6933805480020168,
+          "fullCatalogSoftmaxScale100": 0.03207395769454303,
+          "topFiveOnlySoftmaxScale100": 0.3388632900685726
+        },
+        {
+          "taxonId": "pfaf:Perovskia%20atriplicifolia",
+          "cosine": 0.6887618740412733,
+          "fullCatalogSoftmaxScale100": 0.02020998962419916,
+          "topFiveOnlySoftmaxScale100": 0.21351975460992184
+        },
+        {
+          "taxonId": "pfaf:Prosopis%20pallida",
+          "cosine": 0.68720150788759,
+          "fullCatalogSoftmaxScale100": 0.01729020926131546,
+          "topFiveOnlySoftmaxScale100": 0.18267209965361703
+        },
+        {
+          "taxonId": "pfaf:Argania%20spinosa",
+          "cosine": 0.6857682229298059,
+          "fullCatalogSoftmaxScale100": 0.01498143708205554,
+          "topFiveOnlySoftmaxScale100": 0.15827978286709485
+        },
+        {
+          "taxonId": "pfaf:Xanthoceras%20sorbifolium",
+          "cosine": 0.6818215181281357,
+          "fullCatalogSoftmaxScale100": 0.010096021412663777,
+          "topFiveOnlySoftmaxScale100": 0.10666507280079358
+        }
+      ],
+      "cosineMargin": 0.004618673960743447,
+      "topFiveMassFullCatalogScale100": 0.09465161507477696,
+      "mcmStyleMaximumCosineSoftmaxTau1": 0.00012298233954257347
+    },
+    {
+      "id": "oriented",
+      "embeddingSha256": "f1934891d4a7d3a76c3303a1de092d1d6680291a53230f8b0fbf601dbf8a3e79",
+      "topFive": [
+        {
+          "taxonId": "pfaf:Pugionium%20cornutum",
+          "cosine": 0.6667575448046061,
+          "fullCatalogSoftmaxScale100": 0.043704459047622816,
+          "topFiveOnlySoftmaxScale100": 0.2970063994318565
+        },
+        {
+          "taxonId": "pfaf:Trilisa%20odoratissima",
+          "cosine": 0.6632438637411097,
+          "fullCatalogSoftmaxScale100": 0.030755905612426224,
+          "topFiveOnlySoftmaxScale100": 0.2090107276527336
+        },
+        {
+          "taxonId": "pfaf:Grusonia%20clavata",
+          "cosine": 0.66244441402032,
+          "fullCatalogSoftmaxScale100": 0.028392841574812082,
+          "topFiveOnlySoftmaxScale100": 0.1929518367127059
+        },
+        {
+          "taxonId": "pfaf:Morus%20serrata",
+          "cosine": 0.6602239778106425,
+          "fullCatalogSoftmaxScale100": 0.02273927112374022,
+          "topFiveOnlySoftmaxScale100": 0.154531349645757
+        },
+        {
+          "taxonId": "pfaf:Morus%20australis",
+          "cosine": 0.6596902408389325,
+          "fullCatalogSoftmaxScale100": 0.021557412782570902,
+          "topFiveOnlySoftmaxScale100": 0.14649968655694687
+        }
+      ],
+      "cosineMargin": 0.0035136810634964766,
+      "topFiveMassFullCatalogScale100": 0.14714989014117225,
+      "mcmStyleMaximumCosineSoftmaxTau1": 0.00012561020613938392
+    },
+    {
+      "id": "webp",
+      "embeddingSha256": "d70e08e6b0d364a2327f53667b3e7c604737d435561354bc486f513d772d7fb5",
+      "topFive": [
+        {
+          "taxonId": "pfaf:Homalocephala%20polycephala",
+          "cosine": 0.6860359214605514,
+          "fullCatalogSoftmaxScale100": 0.0357491955049446,
+          "topFiveOnlySoftmaxScale100": 0.23616424368625394
+        },
+        {
+          "taxonId": "pfaf:Ptiloria%20exigua",
+          "cosine": 0.6856598360283325,
+          "fullCatalogSoftmaxScale100": 0.03442968823625683,
+          "topFiveOnlySoftmaxScale100": 0.22744739197122554
+        },
+        {
+          "taxonId": "pfaf:Sorbopyrus%20species",
+          "cosine": 0.6846606561519426,
+          "fullCatalogSoftmaxScale100": 0.031155825265492418,
+          "topFiveOnlySoftmaxScale100": 0.20581978996501904
+        },
+        {
+          "taxonId": "pfaf:Microcachrys%20tetragona",
+          "cosine": 0.683480334915531,
+          "fullCatalogSoftmaxScale100": 0.02768716950241016,
+          "topFiveOnlySoftmaxScale100": 0.18290535921138193
+        },
+        {
+          "taxonId": "pfaf:Morus%20serrata",
+          "cosine": 0.6813399874277679,
+          "fullCatalogSoftmaxScale100": 0.022352414851061396,
+          "topFiveOnlySoftmaxScale100": 0.14766321516611947
+        }
+      ],
+      "cosineMargin": 0.0003760854322188978,
+      "topFiveMassFullCatalogScale100": 0.15137429336016542,
+      "mcmStyleMaximumCosineSoftmaxTau1": 0.00012463791747481515
+    },
+    {
+      "id": "28117",
+      "embeddingSha256": "308d646b8697f99cd84002bd3bdb0642a2fa4ff3dcdff9f0c4cdecfb50a83047",
+      "topFive": [
+        {
+          "taxonId": "pfaf:Alliaria%20petiolata",
+          "cosine": 0.7288162728870256,
+          "fullCatalogSoftmaxScale100": 0.9832783472081671,
+          "topFiveOnlySoftmaxScale100": 0.9955796545952171
+        },
+        {
+          "taxonId": "pfaf:Cardamine%20rotundifolia",
+          "cosine": 0.6625273068550575,
+          "fullCatalogSoftmaxScale100": 0.001299520873662763,
+          "topFiveOnlySoftmaxScale100": 0.0013157785343426733
+        },
+        {
+          "taxonId": "pfaf:Cardamine%20scutata",
+          "cosine": 0.6615341445667348,
+          "fullCatalogSoftmaxScale100": 0.0011766594027759507,
+          "topFiveOnlySoftmaxScale100": 0.0011913800045714718
+        },
+        {
+          "taxonId": "pfaf:Cardamine%20oligosperma",
+          "cosine": 0.6613661068305698,
+          "fullCatalogSoftmaxScale100": 0.0011570522827158557,
+          "topFiveOnlySoftmaxScale100": 0.0011715275895635945
+        },
+        {
+          "taxonId": "pfaf:Cardamine%20pennsylvanica",
+          "cosine": 0.6567943681610596,
+          "fullCatalogSoftmaxScale100": 0.0007324953900281103,
+          "topFiveOnlySoftmaxScale100": 0.000741659276304989
+        }
+      ],
+      "cosineMargin": 0.0662889660319681,
+      "topFiveMassFullCatalogScale100": 0.9876440751573499,
+      "mcmStyleMaximumCosineSoftmaxTau1": 0.00013592505915960862
+    }
+  ]
+}

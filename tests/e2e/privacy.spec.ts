@@ -1,14 +1,10 @@
 import { expect, test } from '@playwright/test';
+import { readPhotoFixtures } from './fixtures';
 
 test.use({ serviceWorkers: 'block' });
 
-test('a real photo with a synthetic metadata marker stays in the session, with no outbound payload or persistent copy', async ({ page, request }) => {
-  const fixtureResponse = await request.get('/fixtures/photos.json');
-  expect(fixtureResponse.ok(), 'Prepare the licensed photo fixtures for UI privacy acceptance.').toBe(true);
-  const fixtures = await fixtureResponse.json() as { photos: { file: string }[] };
-  const imageResponse = await request.get(`/fixtures/photos/${encodeURIComponent(fixtures.photos[0].file)}`);
-  expect(imageResponse.ok()).toBe(true);
-  const source = await imageResponse.body();
+test('a real photo with a synthetic metadata marker stays in the session, with no outbound payload or persistent copy', async ({ page }) => {
+  const { first: source } = await readPhotoFixtures();
   expect([...source.subarray(0, 2)]).toEqual([0xff, 0xd8]);
   // Inject a valid JPEG COM segment so metadata movement is observable without any personal information.
   const marker = 'PLANT-FRIENDS-PRIVATE-UI-METADATA GPSLatitude=47.6100 GPSLongitude=-122.3300';

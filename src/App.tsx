@@ -7,9 +7,11 @@ import { PlantDetails } from './features/PlantDetails';
 import { PlantTable } from './features/PlantTable';
 import { useOfflinePacks } from './features/useOfflinePacks';
 import { usePlantPhotos } from './features/usePlantPhotos';
+import { useDownloadEstimate } from './features/useDownloadEstimate';
 
 interface Photo { blob: Blob; name: string; url: string; width: number; height: number }
 interface InstallPrompt extends Event { prompt(): Promise<void>; userChoice: Promise<{ outcome: 'accepted' | 'dismissed' }> }
+interface InstalledRelatedApp { platform: string; url?: string; id?: string }
 function formatBytes(bytes: number): string { return `${(bytes / 1024 / 1024).toFixed(1)} MiB`; }
 
 export default function App() {
@@ -27,6 +29,9 @@ export default function App() {
   const [shellReady, setShellReady] = useState(false);
   const [updateWorker, setUpdateWorker] = useState<ServiceWorker | null>(null);
   const [installPrompt, setInstallPrompt] = useState<InstallPrompt | null>(null);
+  const [appInstalled, setAppInstalled] = useState(() => Boolean((navigator as Navigator & { standalone?: boolean }).standalone));
+  const [browserDisplay, setBrowserDisplay] = useState(() => window.matchMedia('(display-mode: browser)').matches);
+  const [installHelp, setInstallHelp] = useState<string | null>(null);
   const video = useRef<HTMLVideoElement>(null);
   const camera = useRef<MediaStream | null>(null);
   const cameraGeneration = useRef(0);
@@ -38,16 +43,45 @@ export default function App() {
   const livePhotoUrl = useRef<string | null>(null);
 
   useEffect(() => {
+    let current = true;
     const change = () => setOnline(navigator.onLine);
-    const prompt = (event: Event) => { event.preventDefault(); setInstallPrompt(event as InstallPrompt); };
-    const installed = () => setInstallPrompt(null);
+    const prompt = (event: Event) => { event.preventDefault(); setInstallPrompt(event as InstallPrompt); setInstallHelp(null); };
+    const installed = () => { setAppInstalled(true); setInstallPrompt(null); setInstallHelp(null); };
+    const displayMode = window.matchMedia('(display-mode: browser)');
+    const displayChanged = () => setBrowserDisplay(displayMode.matches);
+    const relatedApps = (navigator as Navigator & { getInstalledRelatedApps?: () => Promise<InstalledRelatedApp[]> }).getInstalledRelatedApps;
+    if (relatedApps) void Promise.resolve().then(() => relatedApps.call(navigator)).then(apps => {
+      const manifestUrl = new URL(`${import.meta.env.BASE_URL}manifest.webmanifest`, location.href).href;
+      const appId = new URL(import.meta.env.BASE_URL, location.href).href;
+      if (current && apps.some(app => {
+        if (app.platform !== 'webapp') return false;
+        try {
+          const manifest = app.url ? new URL(app.url, location.href) : null;
+          return manifest?.href === manifestUrl || typeof app.id === 'string' && new URL(app.id, manifest ?? location.href).href === appId;
+        } catch { return false; }
+      })) installed();
+    }).catch(() => undefined);
     window.addEventListener('online', change); window.addEventListener('offline', change);
     window.addEventListener('beforeinstallprompt', prompt); window.addEventListener('appinstalled', installed);
+    displayMode.addEventListener('change', displayChanged);
     return () => {
+      current = false;
       window.removeEventListener('online', change); window.removeEventListener('offline', change);
       window.removeEventListener('beforeinstallprompt', prompt); window.removeEventListener('appinstalled', installed);
+      displayMode.removeEventListener('change', displayChanged);
     };
   }, []);
+
+  async function addApp() {
+    if (installPrompt) {
+      setInstallPrompt(null);
+      try { await installPrompt.prompt(); await installPrompt.userChoice; return; }
+      catch { /* The browser's own menu remains available when prompting fails. */ }
+    }
+    const ios = /iPad|iPhone|iPod/.test(navigator.userAgent) || navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1;
+    const safari = /Safari/.test(navigator.userAgent) && !/Chrome|Chromium|CriOS|Edg|OPR/.test(navigator.userAgent);
+    setInstallHelp(ios ? 'Open the Share menu, then choose Add to Home Screen.' : safari ? 'In Safari, choose File → Add to Dock.' : 'Use your browser’s Install app or Add to Home Screen option.');
+  }
 
   useEffect(() => {
     if (!import.meta.env.PROD || !('serviceWorker' in navigator)) return;
@@ -174,6 +208,7 @@ export default function App() {
     modelManifest.catalog.id === catalog.manifest.id && modelManifest.catalog.sourceSha256 === catalog.manifest.sourceSha256 &&
     modelManifest.catalog.fullTaxonCount === entries.length);
   const referencePhotos = usePlantPhotos(catalog, compatible && Boolean(model));
+  const downloadEstimate = useDownloadEstimate({ packs, phase, photos: referencePhotos });
   const webgpu = Boolean(window.isSecureContext && navigator.gpu);
   const indexById = useMemo(() => new Map(entries.map(entry => [entry.id, entry])), [entries]);
 
@@ -214,8 +249,9 @@ export default function App() {
   const downloadingPack = packs.pfaf.downloading ? packs.pfaf : packs.bioclip2.downloading ? packs.bioclip2 : null;
   const downloadProgress = downloadingPack?.progress;
   const downloadBytes = downloadingPack?.available?.manifest.files.reduce((sum, file) => sum + file.bytes, 0) ?? null;
-  const saving = phase === 'downloading' || referencePhotos.phase === 'downloading';
-  const photoSetup = referencePhotos.phase === 'downloading' || phase === 'idle' && referencePhotos.phase !== 'ready';
+  const preparingPhotos = referencePhotos.phase === 'checking' && referencePhotos.transfer !== null;
+  const saving = phase === 'downloading' || referencePhotos.phase === 'downloading' || preparingPhotos;
+  const photoSetup = preparingPhotos || referencePhotos.phase === 'downloading' || phase === 'idle' && referencePhotos.phase !== 'ready';
   const [screenAwake, setScreenAwake] = useState(false);
   useEffect(() => {
     if (!saving || !navigator.wakeLock) return;
@@ -242,7 +278,10 @@ export default function App() {
   }, [saving]);
 
   return <>
-    <header><h1>Plant Friends</h1><nav aria-label="Sections"><a href="#identify" onClick={stopCamera}>Identify</a>{' · '}<a href="#plants" onClick={stopCamera}>Plants</a></nav></header>
+    <header><div className="app-heading"><h1>Plant Friends</h1>{!appInstalled && browserDisplay && <button className="add-app" onClick={() => void addApp()} aria-describedby={installHelp ? 'install-help' : undefined}><img src={`${import.meta.env.BASE_URL}icon.svg`} width="20" height="20" alt="" />Add app</button>}</div>
+      <p>Fully offline after download. Model: <a href="https://imageomics.github.io/bioclip-2/" target="_blank" rel="noreferrer">BioCLIP 2</a> · Data: <a href="https://pfaf.org/" target="_blank" rel="noreferrer">PFAF</a>.</p>
+      {installHelp && <p id="install-help" role="status">{installHelp}</p>}
+    </header>
     <main id="main-content">
       <section id="identify" aria-labelledby="photo-heading">
         <h2 id="photo-heading">Identify</h2>
@@ -250,26 +289,25 @@ export default function App() {
           {cameraActive ? <><button onClick={() => void capturePhoto()}>Capture still photo</button><button onClick={stopCamera}>Close camera</button></> : cameraStarting ? <button onClick={stopCamera}>Cancel camera</button> : <button onClick={() => void startCamera()} disabled={readingPhoto}>Use camera</button>}
           {(photo || cameraActive || cameraStarting) && <button onClick={resetPhoto}>Reset</button>}
         </div>
-        <p>One JPEG, PNG, or WebP; up to 20 MiB and 24 megapixels. Photos stay in this session.</p>
+        <p>Your photos stay in this session.</p>
         {cameraActive ? <video ref={video} autoPlay muted playsInline aria-label="Live camera preview" /> : photo ? <img className="photo-preview" src={photo.url} alt="Selected plant to identify" /> : (readingPhoto || cameraStarting) && <p role="status">{readingPhoto ? 'Opening photo…' : 'Opening camera…'}</p>}
         {photo && <p className="photo-label">{photo.name} · {photo.width.toLocaleString()} × {photo.height.toLocaleString()}</p>}
         {photoError && <div role="alert"><p>{photoError}</p>{model && <button onClick={() => { resetIdentification(); setPhotoError(null); }}>Reload identification model</button>}</div>}
         <div className="controls"><button disabled={!photo || !compatible || !webgpu || Boolean(busy) || readingPhoto} onClick={() => void identify()}>{busy ?? 'Identify this photo'}</button>{busy && <button onClick={() => { inferenceOperation.current++; client.current?.cancel(); setBusy(null); }}>Cancel identification</button>}</div>
-        {!compatible && <p>Identification needs the matching catalog and model downloads.</p>}
-        {!webgpu && <p>Identification needs a secure browser with WebGPU. Saved plant records remain available.</p>}
-        <p>Possible matches are not confirmed identifications or evidence that a plant is safe to eat or use medicinally.</p>
+        {!webgpu && <p>Photo identification is unavailable in this browser.</p>}
+        <p>Possible matches do not confirm identity or safety for food or medicine.</p>
         {result && <section aria-labelledby="results-heading"><h3 id="results-heading">Possible catalog matches</h3><ol className="candidate-list">{result.candidates.map(candidate => {
           const entry = indexById.get(candidate.taxonId);
           const reference = referencePhotos.photosByPlant[candidate.taxonId]?.[0];
           return <li key={candidate.taxonId}>{reference && <img className="match-photo" src={reference.url} alt={`Reference for ${entry?.scientificName ?? 'catalog plant'}`} width={reference.width} height={reference.height} loading="lazy" decoding="async" />} <button disabled={!entry} onClick={() => { if (entry) { stopCamera(); setSelected(entry); } }}>{entry?.scientificName ?? 'Record unavailable'}</button> {candidate.similarity.toFixed(3)} similarity</li>;
         })}</ol></section>}
         {(phase !== 'idle' || photoSetup) && <div id="setup-status">
-          <p role={phase === 'error' || photoSetup && referencePhotos.phase === 'error' ? 'alert' : 'status'}>{photoSetup ? referencePhotos.phase === 'checking' ? 'Checking reference photos…' : referencePhotos.phase === 'downloading' ? `Reference photos: ${referencePhotos.progress.completed.toLocaleString()} / ${referencePhotos.progress.totalFiles.toLocaleString()} · ${formatBytes(referencePhotos.progress.received)} / ${formatBytes(referencePhotos.progress.total)}.` : referencePhotos.phase === 'error' ? referencePhotos.error : online ? 'Reference photo download interrupted. Reload or return to this page to continue.' : 'Waiting for connection to finish saving reference photos.' : phase === 'checking' ? 'Checking saved data…' : phase === 'downloading' ? <>Downloading {packs.pfaf.downloading ? 'plant data' : 'model'}… {formatBytes(downloadProgress?.received ?? 0)} / {downloadBytes === null ? '…' : formatBytes(downloadBytes)}.</> : phase === 'waiting' ? !online ? 'Waiting for connection; downloads resume automatically.' : retrying ? 'Download interrupted; retrying shortly.' : 'Download interrupted. Reload or return to this page to continue.' : setupError?.replace(/Could not download .+? \(HTTP (\d+)\).*$/, 'Download failed (HTTP $1). Reload this page to retry.')}{screenAwake && ' Screen awake.'}</p>
-          {saving && <progress aria-label="Offline data download" max={photoSetup ? referencePhotos.progress.total || 1 : downloadProgress?.total ?? 1} value={photoSetup ? referencePhotos.progress.received : downloadProgress?.received ?? 0} />}
+          <p role={phase === 'error' || photoSetup && referencePhotos.phase === 'error' ? 'alert' : 'status'}>{photoSetup ? referencePhotos.phase === 'checking' ? 'Preparing reference photos…' : referencePhotos.phase === 'downloading' ? `Reference photos: ${referencePhotos.progress.completed.toLocaleString()} / ${referencePhotos.progress.totalFiles.toLocaleString()} · ${formatBytes(referencePhotos.progress.received)} / ${formatBytes(referencePhotos.progress.total)}.` : referencePhotos.phase === 'error' ? referencePhotos.error : online ? 'Reference photo download interrupted. Reload or return to this page to continue.' : 'Waiting for connection to finish saving reference photos.' : phase === 'checking' ? 'Checking saved data…' : phase === 'downloading' ? <>Downloading {packs.pfaf.downloading ? 'plant data' : 'model'}… {formatBytes(downloadProgress?.received ?? 0)} / {downloadBytes === null ? '…' : formatBytes(downloadBytes)}.</> : phase === 'waiting' ? !online ? 'Waiting for connection; downloads resume automatically.' : retrying ? 'Download interrupted; retrying shortly.' : 'Download interrupted. Reload or return to this page to continue.' : setupError?.replace(/Could not download .+? \(HTTP (\d+)\).*$/, 'Download failed (HTTP $1). Reload this page to retry.')}{saving && downloadEstimate.label && <> {downloadEstimate.label}</>}{screenAwake && ' Screen awake.'}</p>
+          {saving && <progress aria-label="Offline data download" max={preparingPhotos ? undefined : photoSetup ? referencePhotos.progress.total || 1 : downloadProgress?.total ?? 1} value={preparingPhotos ? undefined : photoSetup ? referencePhotos.progress.received : downloadProgress?.received ?? 0} />}
         </div>}
       </section>
       <section id="plants" aria-labelledby="plants-heading"><h2 id="plants-heading">Plants</h2>{catalog && entries.length ? <PlantTable entries={entries} catalog={catalog} photos={referencePhotos.photosByPlant} onSelect={entry => { stopCamera(); setSelected(entry); }} /> : <p>{packs.pfaf.checking ? 'Checking saved catalog…' : 'The plant table is available after the catalog download.'}</p>}</section>
-      <details className="diagnostics"><summary>Diagnostics</summary>{installPrompt && <button onClick={() => { void installPrompt.prompt().then(() => installPrompt.userChoice).catch(error => console.error('App installation prompt failed', error)).finally(() => setInstallPrompt(null)); }}>Install app</button>}<dl><dt>Offline setup</dt><dd>{setupError ?? phase}</dd><dt>Reference photos</dt><dd>{referencePhotos.error ?? referencePhotos.phase}; {referencePhotos.progress.completed.toLocaleString()} / {referencePhotos.progress.totalFiles.toLocaleString()} saved</dd><dt>Connection</dt><dd>{online ? 'Online' : 'Offline'}</dd><dt>App saved offline</dt><dd>{shellReady ? 'Yes' : 'Not yet'}</dd><dt>WebGPU API</dt><dd>{webgpu ? 'Present' : 'Unavailable'}</dd><dt>Catalog</dt><dd>{catalog?.manifest.id ?? 'Not installed'} ({entries.length.toLocaleString()} records)</dd><dt>Model</dt><dd>{model?.manifest.id ?? 'Not installed'}</dd><dt>Execution provider</dt><dd>{runtime?.executionProvider ?? 'Model not loaded'}</dd>{runtime && <><dt>Initialization</dt><dd>{runtime.initializationMs.toFixed(0)} ms</dd></>}{result && <><dt>Last identification</dt><dd>{result.timings.totalMs.toFixed(0)} ms</dd></>}</dl><a href="?diagnostics=1">Inference checks</a></details>
+      <details className="diagnostics"><summary>Diagnostics</summary><dl><dt>Offline setup</dt><dd>{setupError ?? phase}</dd><dt>Reference photos</dt><dd>{referencePhotos.error ?? referencePhotos.phase}; {referencePhotos.progress.completed.toLocaleString()} / {referencePhotos.progress.totalFiles.toLocaleString()} saved</dd><dt>Connection</dt><dd>{online ? 'Online' : 'Offline'}</dd><dt>App saved offline</dt><dd>{shellReady ? 'Yes' : 'Not yet'}</dd><dt>WebGPU API</dt><dd>{webgpu ? 'Present' : 'Unavailable'}</dd><dt>Catalog</dt><dd>{catalog?.manifest.id ?? 'Not installed'} ({entries.length.toLocaleString()} records)</dd><dt>Model</dt><dd>{model?.manifest.id ?? 'Not installed'}</dd><dt>Execution provider</dt><dd>{runtime?.executionProvider ?? 'Model not loaded'}</dd>{runtime && <><dt>Initialization</dt><dd>{runtime.initializationMs.toFixed(0)} ms</dd></>}{result && <><dt>Last identification</dt><dd>{result.timings.totalMs.toFixed(0)} ms</dd></>}</dl><a href="?diagnostics=1">Inference checks</a></details>
     </main>
     <footer><p><a href={`${import.meta.env.BASE_URL}attribution.html`}>Sources &amp; licenses</a></p></footer>
     {updateWorker && <p role="status">App update available. <button onClick={() => { window.dispatchEvent(new Event('plant-friends-update')); updateWorker.postMessage({ type: 'SKIP_WAITING' }); }}>Reload to update</button></p>}

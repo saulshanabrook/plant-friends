@@ -1,0 +1,158 @@
+{
+  "checkedAt": "2026-10-18T04:56:30.912780+00:00",
+  "scope": "Real catalog installed through diagnostics once per interaction worker, browser CacheStorage/IndexedDB retained, fresh pages; remaining 13 setup/privacy/PWA/navigation cases intentionally use fresh contexts. Full run passed 30 tests; the separate offline-navigation error-page cleanup fix is checked separately. No model inference or physical camera claim.",
+  "catalogId": "39831ede5fe0b995b55c",
+  "catalogPayloadBytes": 42820214,
+  "cachedInteractionTests": 18,
+  "workers": {
+    "3": {
+      "http://127.0.0.1:4173/packs/pfaf/39831ede5fe0b995b55c/index.json": 1,
+      "http://127.0.0.1:4173/packs/pfaf/39831ede5fe0b995b55c/details-000.json": 1,
+      "http://127.0.0.1:4173/packs/pfaf/39831ede5fe0b995b55c/details-001.json": 1,
+      "http://127.0.0.1:4173/packs/pfaf/39831ede5fe0b995b55c/details-002.json": 1,
+      "http://127.0.0.1:4173/packs/pfaf/39831ede5fe0b995b55c/details-003.json": 1,
+      "http://127.0.0.1:4173/packs/pfaf/39831ede5fe0b995b55c/details-004.json": 1,
+      "http://127.0.0.1:4173/packs/pfaf/39831ede5fe0b995b55c/details-005.json": 1,
+      "http://127.0.0.1:4173/packs/pfaf/39831ede5fe0b995b55c/details-006.json": 1,
+      "http://127.0.0.1:4173/packs/pfaf/39831ede5fe0b995b55c/details-007.json": 1,
+      "http://127.0.0.1:4173/packs/pfaf/39831ede5fe0b995b55c/details-008.json": 1,
+      "http://127.0.0.1:4173/packs/pfaf/39831ede5fe0b995b55c/details-009.json": 1,
+      "http://127.0.0.1:4173/packs/pfaf/39831ede5fe0b995b55c/details-010.json": 1,
+      "http://127.0.0.1:4173/packs/pfaf/39831ede5fe0b995b55c/details-011.json": 1,
+      "http://127.0.0.1:4173/packs/pfaf/39831ede5fe0b995b55c/details-012.json": 1,
+      "http://127.0.0.1:4173/packs/pfaf/39831ede5fe0b995b55c/details-013.json": 1,
+      "http://127.0.0.1:4173/packs/pfaf/39831ede5fe0b995b55c/details-014.json": 1,
+      "http://127.0.0.1:4173/packs/pfaf/39831ede5fe0b995b55c/details-015.json": 1,
+      "http://127.0.0.1:4173/packs/pfaf/39831ede5fe0b995b55c/details-016.json": 1,
+      "http://127.0.0.1:4173/packs/pfaf/39831ede5fe0b995b55c/details-017.json": 1,
+      "http://127.0.0.1:4173/packs/pfaf/39831ede5fe0b995b55c/details-018.json": 1,
+      "http://127.0.0.1:4173/packs/pfaf/39831ede5fe0b995b55c/details-019.json": 1,
+      "http://127.0.0.1:4173/packs/pfaf/39831ede5fe0b995b55c/details-020.json": 1,
+      "http://127.0.0.1:4173/packs/pfaf/39831ede5fe0b995b55c/details-021.json": 1,
+      "http://127.0.0.1:4173/packs/pfaf/39831ede5fe0b995b55c/details-022.json": 1,
+      "http://127.0.0.1:4173/packs/pfaf/39831ede5fe0b995b55c/details-023.json": 1,
+      "http://127.0.0.1:4173/packs/pfaf/39831ede5fe0b995b55c/details-024.json": 1,
+      "http://127.0.0.1:4173/packs/pfaf/39831ede5fe0b995b55c/details-025.json": 1,
+      "http://127.0.0.1:4173/packs/pfaf/39831ede5fe0b995b55c/details-026.json": 1,
+      "http://127.0.0.1:4173/packs/pfaf/39831ede5fe0b995b55c/details-027.json": 1,
+      "http://127.0.0.1:4173/packs/pfaf/39831ede5fe0b995b55c/details-028.json": 1,
+      "http://127.0.0.1:4173/packs/pfaf/39831ede5fe0b995b55c/details-029.json": 1,
+      "http://127.0.0.1:4173/packs/pfaf/39831ede5fe0b995b55c/details-030.json": 1,
+      "http://127.0.0.1:4173/packs/pfaf/39831ede5fe0b995b55c/details-031.json": 1,
+      "http://127.0.0.1:4173/packs/pfaf/39831ede5fe0b995b55c/details-032.json": 1,
+      "http://127.0.0.1:4173/packs/pfaf/39831ede5fe0b995b55c/details-033.json": 1,
+      "http://127.0.0.1:4173/packs/pfaf/39831ede5fe0b995b55c/details-034.json": 1
+    }
+  },
+  "totalCatalogPayloadGetsDuringInteractions": 0,
+  "tests": [
+    {
+      "test": "e2e-header-SIMULATED-DISPL-6e80e-less-installation-completed-ui",
+      "worker": 3,
+      "catalogPayloadGetsDuringTest": 0,
+      "openPagesAfterTest": 0
+    },
+    {
+      "test": "e2e-header-SIMULATED-INSTA-07726-n-origin-with-a-relative-ID-ui",
+      "worker": 3,
+      "catalogPayloadGetsDuringTest": 0,
+      "openPagesAfterTest": 0
+    },
+    {
+      "test": "e2e-header-SIMULATED-INSTA-1719b-alone-does-not-hide-Add-app-ui",
+      "worker": 3,
+      "catalogPayloadGetsDuringTest": 0,
+      "openPagesAfterTest": 0
+    },
+    {
+      "test": "e2e-header-SIMULATED-INSTA-6f6f5-tion-recognizes-this-app-ID-ui",
+      "worker": 3,
+      "catalogPayloadGetsDuringTest": 0,
+      "openPagesAfterTest": 0
+    },
+    {
+      "test": "e2e-header-SIMULATED-INSTA-71c9b-tection-ignores-another-app-ui",
+      "worker": 3,
+      "catalogPayloadGetsDuringTest": 0,
+      "openPagesAfterTest": 0
+    },
+    {
+      "test": "e2e-header-SIMULATED-INSTA-ddf7a-on-recognizes-this-manifest-ui",
+      "worker": 3,
+      "catalogPayloadGetsDuringTest": 0,
+      "openPagesAfterTest": 0
+    },
+    {
+      "test": "e2e-header-SIMULATED-INSTALL-standalone-launch-hides-Add-app-ui",
+      "worker": 3,
+      "catalogPayloadGetsDuringTest": 0,
+      "openPagesAfterTest": 0
+    },
+    {
+      "test": "e2e-header-compact-linked--eadfc--and-responsive-plant-table-ui",
+      "worker": 3,
+      "catalogPayloadGetsDuringTest": 0,
+      "openPagesAfterTest": 0
+    },
+    {
+      "test": "e2e-keyboard-real-Chrome-k-ab85d-g-and-dialog-preserve-focus-ui",
+      "worker": 3,
+      "catalogPayloadGetsDuringTest": 0,
+      "openPagesAfterTest": 0
+    },
+    {
+      "test": "e2e-photos-FAKE-CAMERA-a-c-a29d6-apture-and-opening-a-record-ui",
+      "worker": 3,
+      "catalogPayloadGetsDuringTest": 0,
+      "openPagesAfterTest": 0
+    },
+    {
+      "test": "e2e-photos-FAKE-CAMERA-can-e5128-oad-and-stops-a-late-stream-ui",
+      "worker": 3,
+      "catalogPayloadGetsDuringTest": 0,
+      "openPagesAfterTest": 0
+    },
+    {
+      "test": "e2e-photos-FAKE-CAMERA-den-5552c-sion-offers-upload-recovery-ui",
+      "worker": 3,
+      "catalogPayloadGetsDuringTest": 0,
+      "openPagesAfterTest": 0
+    },
+    {
+      "test": "e2e-photos-FAKE-CAMERA-no--6ba29-vice-offers-upload-recovery-ui",
+      "worker": 3,
+      "catalogPayloadGetsDuringTest": 0,
+      "openPagesAfterTest": 0
+    },
+    {
+      "test": "e2e-photos-FAKE-CAMERA-res-5cb80--late-native-play-rejection-ui",
+      "worker": 3,
+      "catalogPayloadGetsDuringTest": 0,
+      "openPagesAfterTest": 0
+    },
+    {
+      "test": "e2e-photos-a-cached-catalo-a62fa-and-filters-in-its-own-page-ui",
+      "worker": 3,
+      "catalogPayloadGetsDuringTest": 0,
+      "openPagesAfterTest": 0
+    },
+    {
+      "test": "e2e-photos-a-new-interacti-240cc-to-camera-dialog-or-filters-ui",
+      "worker": 3,
+      "catalogPayloadGetsDuringTest": 0,
+      "openPagesAfterTest": 0
+    },
+    {
+      "test": "e2e-photos-one-photo-can-b-a6169-us-object-URLs-are-released-ui",
+      "worker": 3,
+      "catalogPayloadGetsDuringTest": 0,
+      "openPagesAfterTest": 0
+    },
+    {
+      "test": "e2e-reference-photos-photo-8eab0-it-until-the-model-is-ready-ui",
+      "worker": 3,
+      "catalogPayloadGetsDuringTest": 0,
+      "openPagesAfterTest": 0
+    }
+  ]
+}

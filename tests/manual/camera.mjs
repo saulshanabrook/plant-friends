@@ -94,14 +94,13 @@ try {
   expect(released).toBe(true);
   evidence.actions.push({ action: 'Reset current photo', result: 'passed', previewRemoved: true, photoObjectUrlReleased: released });
 
-  for (const path of ['Plants', 'Identify']) {
-    await openCamera(`Open native camera before navigation: ${path}`);
-    await page.getByRole('link', { name: path, exact: true }).click();
+  for (const action of ['Close camera', 'Reset']) {
+    await openCamera(`Open native camera before ${action}`);
+    await page.getByRole('button', { name: action, exact: true }).click();
     await expect(page.locator('video')).toHaveCount(0);
     const states = await page.evaluate(() => window.__nativeCameraStreams.flatMap(stream => stream.getTracks().map(track => track.readyState)));
     expect(states.every(state => state === 'ended')).toBe(true);
-    evidence.actions.push({ action: `Navigate via ${path}`, result: 'passed', allTrackStates: states });
-    await page.getByRole('link', { name: 'Identify', exact: true }).click();
+    evidence.actions.push({ action, result: 'passed', allTrackStates: states });
   }
   evidence.storage = await page.evaluate(async () => {
     const databases = [];

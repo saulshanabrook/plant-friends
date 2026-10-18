@@ -17,5 +17,5 @@ test('production worker serves a fresh query navigation offline without swallowi
   const assetPage = await context.newPage();
   await expect(assetPage.goto('/packs/not-installed/missing.bin')).rejects.toThrow();
   await expect(assetPage.goto('/runtime/not-installed/missing.mjs')).rejects.toThrow();
-  await assetPage.close();
+  // The fresh context fixture disposes Chrome's offline error document too.
 });

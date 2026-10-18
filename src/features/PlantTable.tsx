@@ -78,7 +78,7 @@ export function PlantTable({ entries, catalog, onSelect, photos }: PlantTablePro
     <p role="status">Showing {result.start.toLocaleString()}–{result.end.toLocaleString()} of {result.total.toLocaleString()} plants{result.total !== entries.length && ` (${entries.length.toLocaleString()} in catalog)`}.</p>
     <div className="table-scroll">
       <table>
-        <caption>PFAF plants. Use ratings are 0–5; — means unavailable.</caption>
+        <caption>PFAF use ratings: 0–5; — unavailable.</caption>
         <thead><tr><th scope="col">Photo</th>{columns.map(column => <th key={column.key} scope="col" aria-sort={sort === column.key ? descending ? 'descending' : 'ascending' : undefined}>
           <button type="button" disabled={!ready && column.key !== 'scientificName' && column.key !== 'commonName'} onClick={() => {
             setDescending(sort === column.key ? !descending : false); setSort(column.key); setPage(0);

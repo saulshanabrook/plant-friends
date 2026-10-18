@@ -19,12 +19,15 @@ beforeEach(() => {
 });
 afterEach(() => { sync?.dispose(); sync = undefined; vi.unstubAllGlobals(); vi.useRealTimers(); vi.resetAllMocks(); });
 
-test('metadata loads before model readiness, and the same index starts bulk work only after readiness', async () => {
+test('model readiness gates metadata, inventory, publication and bulk across lifecycle events', async () => {
   const states: PlantPhotosState[] = [];
   sync = startPhotoSync(pack, false, state => states.push(state));
   await vi.advanceTimersByTimeAsync(0);
-  expect(states.at(-1)).toMatchObject({ photosByPlant: album.photosByPlant, phase: 'waiting' });
-  expect(loadPhotoAlbum).toHaveBeenCalledTimes(1);
+  win.dispatchEvent(new Event('online')); doc.dispatchEvent(new Event('visibilitychange'));
+  await vi.advanceTimersByTimeAsync(60_000);
+  expect(states.every(state => Object.keys(state.photosByPlant).length === 0)).toBe(true);
+  expect(loadPhotoAlbum).not.toHaveBeenCalled();
+  expect(photoInventory).not.toHaveBeenCalled();
   expect(cachePhotoAlbum).not.toHaveBeenCalled();
   sync.setModelReady(true);
   await vi.advanceTimersByTimeAsync(0);
@@ -113,16 +116,43 @@ test('offline startup can restore the saved index and a completely cached album'
   expect(states.at(-1)?.phase).toBe('ready');
 });
 
-test('an initially hidden offline page restores its saved album when it becomes visible', async () => {
+test('an initially hidden offline page restores saved metadata and inventory with an installed model', async () => {
   vi.stubGlobal('navigator', { onLine: false }); doc.visibilityState = 'hidden';
   const states: PlantPhotosState[] = [];
   sync = startPhotoSync(pack, true, state => states.push(state));
-  expect(loadPhotoAlbum).not.toHaveBeenCalled();
+  await vi.advanceTimersByTimeAsync(0);
+  expect(states.at(-1)).toMatchObject({ phase: 'ready', photosByPlant: album.photosByPlant });
   doc.visibilityState = 'visible'; doc.dispatchEvent(new Event('visibilitychange'));
   await vi.advanceTimersByTimeAsync(0);
   expect(loadPhotoAlbum).toHaveBeenCalledTimes(1);
   expect(cachePhotoAlbum).toHaveBeenCalledTimes(1);
   expect(states.at(-1)).toMatchObject({ phase: 'ready', photosByPlant: album.photosByPlant });
+});
+
+test('hidden offline cache restoration still waits for the model gate', async () => {
+  vi.stubGlobal('navigator', { onLine: false }); doc.visibilityState = 'hidden';
+  const states: PlantPhotosState[] = [];
+  sync = startPhotoSync(pack, false, state => states.push(state));
+  await vi.advanceTimersByTimeAsync(0);
+  expect(loadPhotoAlbum).not.toHaveBeenCalled(); expect(cachePhotoAlbum).not.toHaveBeenCalled();
+  expect(states.every(state => Object.keys(state.photosByPlant).length === 0)).toBe(true);
+  sync.setModelReady(true);
+  await vi.advanceTimersByTimeAsync(0);
+  expect(states.at(-1)).toMatchObject({ phase: 'ready', photosByPlant: album.photosByPlant });
+});
+
+test('network transfer counters include the index but never include an image inventory jump', async () => {
+  vi.mocked(loadPhotoAlbum).mockImplementationOnce(async (_catalog, _signal, network) => { network?.(100); return album; });
+  vi.mocked(cachePhotoAlbum).mockImplementationOnce(async (_album, _signal, progress, network) => {
+    progress({ received: 9_000_000, total: 10_000_000, completed: 900, totalFiles: 1_000 });
+    network?.(200);
+  });
+  const states: PlantPhotosState[] = [];
+  sync = startPhotoSync(pack, true, state => states.push(state));
+  await vi.advanceTimersByTimeAsync(0);
+  expect(states.filter(state => state.transfer?.received).map(state => state.transfer!.received)).toContain(100);
+  expect(Math.max(...states.map(state => state.transfer?.received ?? 0))).toBe(300);
+  expect(states.at(-1)).toMatchObject({ phase: 'ready', metadataReady: true, transfer: null, progress: { received: 9_000_000 } });
 });
 
 test('going offline during initial metadata read promptly reopens saved metadata while still visible', async () => {
@@ -171,13 +201,34 @@ test('disposed index loads cannot publish after a new catalog lifecycle starts',
   let rejectOld: (error: Error) => void;
   vi.mocked(loadPhotoAlbum).mockImplementationOnce(() => new Promise((_resolve, reject) => { rejectOld = reject; }));
   const oldStates: PlantPhotosState[] = [], states: PlantPhotosState[] = [];
-  const previous = startPhotoSync(pack, false, state => oldStates.push(state));
+  const previous = startPhotoSync(pack, true, state => oldStates.push(state));
   previous.dispose();
   const count = oldStates.length;
-  sync = startPhotoSync(pack, false, state => states.push(state));
+  sync = startPhotoSync(pack, true, state => states.push(state));
   await vi.advanceTimersByTimeAsync(0);
   rejectOld!(new Error('old index failed'));
   await vi.advanceTimersByTimeAsync(0);
   expect(oldStates).toHaveLength(count);
-  expect(states.at(-1)).toMatchObject({ phase: 'waiting', photosByPlant: album.photosByPlant, error: null });
+  expect(states.at(-1)).toMatchObject({ phase: 'ready', photosByPlant: album.photosByPlant, error: null });
+});
+
+test('losing model readiness aborts index work and blocks late publication and network counters', async () => {
+  let signal: AbortSignal, resolveOld: (value: PhotoAlbum) => void, network: (bytes: number) => void;
+  vi.mocked(loadPhotoAlbum).mockImplementationOnce((_catalog, currentSignal, received) => {
+    signal = currentSignal; network = received!;
+    return new Promise(resolve => { resolveOld = resolve; });
+  });
+  const states: PlantPhotosState[] = [];
+  sync = startPhotoSync(pack, true, state => states.push(state));
+  sync.setModelReady(false);
+  expect(signal!.aborted).toBe(true);
+  const count = states.length;
+  network!(9_800_000); resolveOld!(album);
+  await vi.advanceTimersByTimeAsync(60_000);
+  expect(states).toHaveLength(count);
+  expect(states.at(-1)).toMatchObject({ photosByPlant: {}, transfer: null, phase: 'waiting' });
+  expect(cachePhotoAlbum).not.toHaveBeenCalled();
+  sync.setModelReady(true);
+  await vi.advanceTimersByTimeAsync(0);
+  expect(states.at(-1)).toMatchObject({ photosByPlant: album.photosByPlant, phase: 'ready' });
 });

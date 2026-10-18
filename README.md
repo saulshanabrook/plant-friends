@@ -4,9 +4,11 @@ A local, offline plant guide: choose one camera still or uploaded JPEG, PNG, or 
 
 Matches are cosine similarities within the installed catalog. They are not probabilities, confirmed identifications, or evidence that a plant is safe to eat or use medicinally. Out-of-catalog plants and non-plants can still return plausible matches. PFAF search and records work without the large identification pack or a GPU.
 
+[Similarity research](reports/similarity-research.md) compares the official Python library and demos, calibration, unknown-species detection, a saved-embedding experiment and an independent Claude Fable critique. It proposes an evaluation before adding confidence labels or cutoffs; current scoring remains unchanged. The plain PF icons are rendered by `uv run python scripts/icons.py` (use `--font` to select a local bold serif font on other platforms).
+
 ## Use the published app
 
-Open **https://saulshanabrook.github.io/plant-friends/** on your computer or phone. Setup downloads the catalog, model and all reference photos automatically, with compact progress below the photo controls. Choose a camera still or upload a photo, then press **Identify this photo**. Use your browser's install or add-to-home-screen option if offered. The HTTPS address permits browser camera access after you allow it.
+Open **https://saulshanabrook.github.io/plant-friends/** on your computer or phone. Setup downloads the catalog, then the model, then all reference photos automatically, with compact progress below the photo controls. A rough time estimate covers all remaining downloads when a recent transfer rate is available; it resets after interruptions and between stages. Choose a camera still or upload a photo, then press **Identify this photo**. **Add app** at the top opens the browser's install prompt when supported, or shows brief installation instructions. The HTTPS address permits browser camera access after you allow it.
 
 Photo identification requires hardware WebGPU with `shader-f16` and enough device/browser storage and memory for the full model. Catalog browsing remains available independently. Physical phone performance is still untested; desktop Chrome is verified. Photos are processed locally, including offline after setup.
 
@@ -51,6 +53,8 @@ npm run test:integration -- --project=real-webgpu
 ```
 
 Fast Python/Vitest and asset/UI tests use explicitly labeled small fixtures or camera/worker doubles where needed. They do not prove model inference. The real-WebGPU integration runs the complete encoder and catalog in installed desktop Chrome, checks Python/FP32 ONNX/browser numerical agreement, records ten warm runs, evaluates the licensed fixture set, and identifies a held-out local photo after a fresh offline reload. Missing assets, unavailable hardware, or numerical failures fail that gate. The benchmark writes `reports/desktop-benchmark.json`; run it separately with `npm run benchmark -- --iterations 10` only when fresh measurements are needed.
+
+Interaction UI tests install the real catalog once per worker and reuse its CacheStorage/IndexedDB with a fresh page for each case. They assert that catalog payloads are not downloaded again. Installation, interruption, privacy and PWA tests retain fresh contexts where needed. Licensed photo inputs are read and SHA-checked locally, so a production preview need not publish test photos. Isolated worktrees can set `PLANT_FRIENDS_TEST_PUBLIC` to a prepared `public` directory. A bounded published-interface check is available with `node tests/manual/interface.mjs`; it holds encoder requests and does not run inference.
 
 For an initial feasibility run, prepare with `--limit 12`, generate its checked references, build, and run `npm run benchmark -- --feasibility`. This limits only the label vectors; the full image encoder is still used. A feasibility subset does not satisfy full-catalog acceptance. Open `/?diagnostics=1` for manual installation and real inference diagnostics.
 

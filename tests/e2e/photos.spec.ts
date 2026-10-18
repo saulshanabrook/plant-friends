@@ -1,29 +1,8 @@
-import { createHash } from 'node:crypto';
-import { expect, test as base } from '@playwright/test';
+import type { Route } from '@playwright/test';
+import { expect, test, sourceTest as freshTest } from './fixtures';
 
-// Product UI acceptance only. Licensed photos are real inputs; no model inference is mocked or claimed.
-const test = base.extend<{ plantPhotos: { first: Buffer; second: Buffer } }>({
-  plantPhotos: async ({ request }, use) => {
-    const response = await request.get('/fixtures/photos.json');
-    expect(response.ok(), 'Prepare the licensed photo fixtures before running UI acceptance.').toBe(true);
-    const fixture = await response.json() as { photos: { file: string; sha256: string }[] };
-    expect(fixture.photos.length).toBeGreaterThanOrEqual(2);
-    const photos = await Promise.all(fixture.photos.slice(0, 2).map(async photo => {
-      const image = await request.get(`/fixtures/photos/${encodeURIComponent(photo.file)}`);
-      expect(image.ok(), `Licensed fixture ${photo.file} must be available from production preview.`).toBe(true);
-      const bytes = await image.body();
-      expect(createHash('sha256').update(bytes).digest('hex')).toBe(photo.sha256);
-      return bytes;
-    }));
-    await use({ first: photos[0], second: photos[1] });
-  },
-});
-
-test.use({ serviceWorkers: 'block' });
-test.beforeEach(async ({ page }) => {
-  await page.route('**/*.onnx*', route => route.abort('blockedbyclient'));
-});
-
+// Interaction acceptance reuses the real catalog; every test receives a fresh page.
+// Licensed photo bytes come from local, SHA-checked inputs, never the Pages bundle.
 test('one photo can be uploaded, replaced, and reset; previous object URLs are released', async ({ page, plantPhotos }) => {
   await page.goto('/');
   const upload = page.locator('input[type=file]');
@@ -51,21 +30,31 @@ test('one photo can be uploaded, replaced, and reset; previous object URLs are r
   }, secondUrl)).toBe(false);
 });
 
-test('malformed and oversized files show a recoverable error before a valid photo is accepted', async ({ page, plantPhotos }) => {
-  await page.goto('/');
-  const upload = page.locator('input[type=file]');
-  await upload.setInputFiles({ name: 'broken.jpg', mimeType: 'image/jpeg', buffer: Buffer.from('not an image') });
-  await expect(page.locator('#identify').getByRole('alert')).toContainText('valid JPEG, PNG, or WebP');
-  await expect(page.getByRole('img', { name: 'Selected plant to identify' })).toHaveCount(0);
+freshTest.describe('photo recovery across fresh catalog activation', () => {
+  freshTest.use({ serviceWorkers: 'block' });
+  freshTest('malformed and oversized files show a recoverable error before a valid photo is accepted', async ({ page, plantPhotos, request, catalogData }) => {
+    await page.route('**/*.onnx*', route => route.abort('blockedbyclient'));
+    const pointer = await request.get('/catalog.json');
+    const firstFile = new URL(catalogData.manifest.files[0].url, new URL((await pointer.json()).url, pointer.url())).href;
+    let catalogRequest: Route | undefined;
+    await page.route(firstFile, route => { catalogRequest = route; });
+    await page.goto('/');
+    await expect.poll(() => Boolean(catalogRequest)).toBe(true);
+    const upload = page.locator('input[type=file]');
+    await upload.setInputFiles({ name: 'broken.jpg', mimeType: 'image/jpeg', buffer: Buffer.from('not an image') });
+    await expect(page.locator('#identify').getByRole('alert')).toContainText('valid JPEG, PNG, or WebP');
+    await expect(page.getByRole('img', { name: 'Selected plant to identify' })).toHaveCount(0);
 
-  await upload.setInputFiles({ name: 'oversized.jpg', mimeType: 'image/jpeg', buffer: Buffer.alloc(20 * 1024 * 1024 + 1) });
-  await expect(page.locator('#identify').getByRole('alert')).toContainText('smaller than 20 MiB');
-  await expect(upload).toBeEnabled();
-  await expect(page.getByRole('table')).toBeVisible();
-  await expect(page.locator('#identify').getByRole('alert')).toContainText('smaller than 20 MiB');
-  await upload.setInputFiles({ name: 'recovered.jpg', mimeType: 'image/jpeg', buffer: plantPhotos.first });
-  await expect(page.getByRole('img', { name: 'Selected plant to identify' })).toBeVisible();
-  await expect(page.locator('#identify').getByRole('alert')).toHaveCount(0);
+    await upload.setInputFiles({ name: 'oversized.jpg', mimeType: 'image/jpeg', buffer: Buffer.alloc(20 * 1024 * 1024 + 1) });
+    await expect(page.locator('#identify').getByRole('alert')).toContainText('smaller than 20 MiB');
+    await expect(upload).toBeEnabled();
+    await catalogRequest!.continue();
+    await expect(page.getByRole('table')).toBeVisible();
+    await expect(page.locator('#identify').getByRole('alert')).toContainText('smaller than 20 MiB');
+    await upload.setInputFiles({ name: 'recovered.jpg', mimeType: 'image/jpeg', buffer: plantPhotos.first });
+    await expect(page.getByRole('img', { name: 'Selected plant to identify' })).toBeVisible();
+    await expect(page.locator('#identify').getByRole('alert')).toHaveCount(0);
+  });
 });
 
 for (const failure of [
@@ -186,4 +175,37 @@ test('FAKE CAMERA: canceling a pending request preserves upload and stops a late
   await page.locator('input[type=file]').setInputFiles({ name: 'after-camera-cancel.jpg', mimeType: 'image/jpeg', buffer: plantPhotos.first });
   await expect(page.getByRole('img', { name: 'Selected plant to identify' })).toBeVisible();
   await expect(page.locator('.photo-label')).toContainText('after-camera-cancel.jpg');
+});
+
+test('a cached-catalog interaction can leave an unsaved photo and filters in its own page', async ({ page, plantPhotos }) => {
+  await page.goto('/');
+  const family = page.getByRole('combobox', { name: 'Family', exact: true });
+  await expect(family).toBeEnabled();
+  await family.selectOption('Pinaceae');
+  await page.getByRole('searchbox', { name: 'Search plants', exact: true }).fill('Abies');
+  await page.locator('input[type=file]').setInputFiles({ name: 'page-isolation.jpg', mimeType: 'image/jpeg', buffer: plantPhotos.first });
+  await expect(page.getByRole('img', { name: 'Selected plant to identify' })).toBeVisible();
+  await expect(family).toHaveValue('Pinaceae');
+  // Deliberately leave session state behind. The fixture closes this page.
+});
+
+test('a new interaction page retains the installed catalog without a previous photo, camera, dialog or filters', async ({ page }) => {
+  await page.goto('/');
+  const family = page.getByRole('combobox', { name: 'Family', exact: true });
+  await expect(family).toBeEnabled();
+  await expect(family).toHaveValue('');
+  await expect(page.getByRole('searchbox', { name: 'Search plants', exact: true })).toHaveValue('');
+  await expect(page.locator('input[type=file]')).toHaveValue('');
+  await expect(page.getByRole('img', { name: 'Selected plant to identify' })).toHaveCount(0);
+  await expect(page.locator('video')).toHaveCount(0);
+  await expect(page.getByRole('dialog')).toHaveCount(0);
+  // The restored baseline guard must also reject an encoder absent from local
+  // metadata, including a different revision, uppercase extension and query.
+  const unknown = new URL('/packs/bioclip2/unexpected/ENCODER.ONNX?guard-probe=1', page.url()).href;
+  const failures: string[] = [], responses: number[] = [];
+  page.on('requestfailed', request => { if (request.url() === unknown) failures.push(request.failure()?.errorText ?? ''); });
+  page.on('response', response => { if (response.url() === unknown) responses.push(response.status()); });
+  expect(await page.evaluate(async url => { try { await fetch(url); return false; } catch { return true; } }, unknown)).toBe(true);
+  await expect.poll(() => failures).toEqual([expect.stringMatching(/^net::ERR_BLOCKED_BY_CLIENT(?:\.Inspector)?$/)]);
+  expect(responses).toEqual([]);
 });

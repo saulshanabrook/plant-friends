@@ -100,6 +100,33 @@ test('verifies pointer/manifest bytes, retains offline metadata and serves it th
   expect(fetcher).not.toHaveBeenCalled();
 });
 
+test('transfer counters include metadata and fetched images but exclude cached metadata, images and inventory', async () => {
+  const { raw, bodies } = fixture();
+  const manifest = new TextEncoder().encode(JSON.stringify(raw));
+  const pointer = new TextEncoder().encode(JSON.stringify({ url: 'photos/0123456789abcdefabcd/manifest.json', bytes: manifest.length, sha256: sha(manifest) }));
+  fetcher.mockResolvedValueOnce(new Response(pointer)).mockResolvedValueOnce(new Response(manifest));
+  const network = vi.fn();
+  const album = await loadPhotoAlbum(catalogPack(), new AbortController().signal, network);
+  expect(network.mock.calls.reduce((sum, [bytes]) => sum + bytes, 0)).toBe(pointer.length + manifest.length);
+  fetcher.mockImplementation(async (url: string) => new Response(bodies.get(url)!.slice()));
+  network.mockClear();
+  await cachePlantPhoto(album.files[0], new AbortController().signal, network);
+  expect(network.mock.calls.reduce((sum, [bytes]) => sum + bytes, 0)).toBe(album.files[0].bytes);
+  network.mockClear(); fetcher.mockClear();
+  const progress = vi.fn();
+  await cachePhotoAlbum(album, new AbortController().signal, progress, network);
+  expect(progress.mock.calls[0][0].received).toBe(album.files[0].bytes);
+  expect(network.mock.calls.reduce((sum, [bytes]) => sum + bytes, 0)).toBe(album.files[1].bytes);
+  expect(fetcher).toHaveBeenCalledTimes(1);
+  vi.stubGlobal('navigator', { onLine: false });
+  network.mockClear(); fetcher.mockClear();
+  await loadPhotoAlbum(catalogPack(), new AbortController().signal, network);
+  await cachePhotoAlbum(album, new AbortController().signal, () => undefined, network);
+  await cachePlantPhoto(album.files[0], new AbortController().signal, network);
+  expect(network).not.toHaveBeenCalled();
+  expect(fetcher).not.toHaveBeenCalled();
+});
+
 test.each(['hash', 'bytes', 'unsafe pointer', 'null pointer'])('rejects bad %s before caching metadata', async variant => {
   const { raw } = fixture();
   const bytes = new TextEncoder().encode(JSON.stringify(raw));

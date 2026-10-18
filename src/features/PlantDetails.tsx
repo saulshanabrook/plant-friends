@@ -71,7 +71,7 @@ export function PlantDetails({ entry, catalog, photos, onClose }: { entry: Catal
           { key: 'medicinal_rating', label: 'Medicinal' },
           { key: 'other_uses_rating', label: 'Other uses' },
         ].map(({ key, label }) => <div key={key}><dt>{label} rating</dt><dd>{fields[key] === null || fields[key] === undefined || fields[key] === '' ? <span className="rating-missing">Unavailable</span> : <>{fields[key]}<span> / 5</span></>}</dd></div>)}</dl>
-        <p className="small muted">Ratings are PFAF’s recorded use ratings, not identification confidence or a safety assessment.</p>
+        <p>PFAF use ratings, not identification confidence or safety.</p>
         <section className="detail-section"><h3>Names</h3><dl className="facts-grid">
           <div><dt>Scientific name</dt><dd>{fields.latin_name || record?.sourceKey}</dd></div>
           <div><dt>Common name</dt><dd>{fields.common_name || 'Unavailable'}</dd></div>

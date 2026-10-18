@@ -53,7 +53,8 @@ try {
   expect(manifest.display).toBe('standalone');
   expect(new URL(manifest.start_url, manifestResponse.url).href).toBe(home);
   expect(new URL(manifest.scope, manifestResponse.url).href).toBe(home);
-  report.manifest = { url: manifestResponse.url, startUrl: manifest.start_url, scope: manifest.scope, icons: manifest.icons };
+  expect(new URL(manifest.id, manifestResponse.url).href).toBe(home);
+  report.manifest = { url: manifestResponse.url, id: manifest.id, startUrl: manifest.start_url, scope: manifest.scope, icons: manifest.icons };
   for (const icon of manifest.icons) {
     const url = new URL(icon.src, manifestResponse.url);
     expect(url.pathname.startsWith(base)).toBe(true);
@@ -123,11 +124,11 @@ try {
   expect(registration.scope).toBe(home);
   expect(registration.script).toBe(`${home}sw.js`);
   report.serviceWorker = registration;
-  const reference = page.locator('#plants tbody img').first();
-  await expect(reference).toBeAttached({ timeout: 30_000 });
-  await reference.scrollIntoViewIfNeeded();
-  await expect.poll(() => reference.evaluate(image => image.complete && image.naturalWidth > 0)).toBe(true);
-  report.referencePhoto = { url: await reference.getAttribute('src'), online: true };
+  await expect.poll(() => blockedModelBodies.length).toBeGreaterThan(0);
+  await expect(page.locator('#plants tbody img')).toHaveCount(0);
+  const photoRequests = () => browserRequests.filter(value => /\/(?:photos(?:\.json|\/)|__plant-friends-photo__\/)/.test(new URL(value).pathname));
+  expect(photoRequests()).toEqual([]);
+  report.photoPriority = { modelPayloadBlocked: true, photoRequestsBeforeModel: [], scope: 'Strict priority only; prior full-model verification covers offline galleries.' };
   await mkdir('.cache', { recursive: true });
   report.layout = [];
   for (const viewport of [{ width: 1280, height: 900 }, { width: 390, height: 844 }]) {
@@ -142,15 +143,13 @@ try {
   expect(await page.locator('link[rel=manifest]').getAttribute('href')).toBe(`${base}manifest.webmanifest`);
   const favicon = await page.locator('link[rel=icon]').getAttribute('href');
   expect(new URL(favicon, home).href).toBe(`${home}icon.svg`);
-  for (const image of await page.locator('.brand img').all()) expect(await image.evaluate(image => image.complete && image.naturalWidth > 0)).toBe(true);
+  for (const image of await page.locator('header img').all()) expect(await image.evaluate(image => image.complete && image.naturalWidth > 0)).toBe(true);
   report.stage = 'offline query navigation and details';
   await context.setOffline(true);
   const offline = await page.goto(`${home}?pages-offline=new-navigation`);
   expect(offline.status()).toBe(200);
-  await expect(reference).toBeAttached();
-  await reference.scrollIntoViewIfNeeded();
-  await expect.poll(() => reference.evaluate(image => image.complete && image.naturalWidth > 0)).toBe(true);
-  report.referencePhoto.offline = true;
+  await expect(page.locator('#plants tbody img')).toHaveCount(0);
+  expect(photoRequests()).toEqual([]);
   await page.getByRole('searchbox', { name: 'Search plants' }).fill(firstEntry.scientificName);
   await page.locator('#plants tbody').getByRole('button', { name: firstEntry.scientificName, exact: true }).click();
   await expect(page.getByRole('heading', { name: 'Known hazards', exact: true })).toBeVisible();
