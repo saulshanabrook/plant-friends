@@ -59,10 +59,18 @@ export function useOfflinePacks() {
         const [saved, prepared] = await Promise.allSettled([installedPack(kind), availablePack(kind, controller.signal)]);
         if (!current()) return;
         let installed = saved.status === 'fulfilled' ? saved.value : null;
+        const previous = snapshot.current[kind].installed;
+        // An immutable catalog ID + address identifies the already validated
+        // receipt/index. Keep their references so model retries do not reset table filters.
+        if (kind === 'pfaf' && installed && previous && installed.manifest.id === previous.manifest.id && installed.manifestUrl === previous.manifestUrl)
+          installed = previous;
         let error = saved.status === 'rejected' ? saved.reason : prepared.status === 'rejected' && !installed ? prepared.reason : null;
         if (kind === 'pfaf') {
           try {
-            const value = installed ? await catalogIndex(installed) : [];
+            const value = installed
+              ? installed === previous && installed.manifest.kind === 'pfaf' && index.current.length === installed.manifest.taxonCount
+                ? index.current : await catalogIndex(installed)
+              : [];
             if (!current()) return;
             index.current = value; setEntries(value);
           } catch (failure) {

@@ -99,3 +99,29 @@ test('a stale catalog-index rejection cannot clear entries loaded by a newer set
   await expect(page.getByRole('table')).toBeVisible();
   await expect(page.getByRole('region', { name: 'Plant catalog' })).toContainText('8,796');
 });
+
+test('a model retry preserves family, minimum-rating filters and pagination for the unchanged catalog', async ({ page, context }) => {
+  let attempts = 0, stalled: Route | undefined;
+  await context.route(encoder, async route => {
+    attempts++;
+    if (attempts === 1) stalled = route;
+    else await route.fulfill({ status: 500, body: 'deliberate server failure' });
+  });
+  await page.goto('/');
+  await expect.poll(() => Boolean(stalled)).toBe(true);
+  const family = page.getByRole('combobox', { name: 'Family', exact: true });
+  const minimum = page.getByRole('combobox', { name: 'Minimum edibility', exact: true });
+  await expect(family).toBeEnabled();
+  await family.selectOption('Pinaceae');
+  await minimum.selectOption('0');
+  await page.getByRole('combobox', { name: 'Rows per page', exact: true }).selectOption('25');
+  const pages = page.getByRole('navigation', { name: 'Plant table pages', exact: true });
+  await pages.getByRole('button', { name: 'Next', exact: true }).click();
+  await expect(pages).toContainText('Page 2 of');
+  await stalled!.abort('failed');
+  await expect.poll(() => attempts).toBe(2);
+  await expect(family).toBeEnabled();
+  await expect(family).toHaveValue('Pinaceae');
+  await expect(minimum).toHaveValue('0');
+  await expect(pages).toContainText('Page 2 of');
+});
