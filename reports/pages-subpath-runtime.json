@@ -1,0 +1,70 @@
+{
+  "checkedAt": "2026-10-18T00:25:11.626Z",
+  "base": "/plant-friends/",
+  "home": "http://127.0.0.1:51475/plant-friends/",
+  "assetSource": "/Users/saul/p/plant-friends/.cache/pages-restored-public",
+  "scope": "Production path and catalog/offline verification; no inference, camera, phone, or encoder-download claim",
+  "status": "passed",
+  "manifest": {
+    "url": "http://127.0.0.1:51475/plant-friends/manifest.webmanifest",
+    "startUrl": "/plant-friends/",
+    "scope": "/plant-friends/",
+    "icons": [
+      {
+        "src": "icon.svg",
+        "sizes": "any",
+        "type": "image/svg+xml",
+        "purpose": "any"
+      },
+      {
+        "src": "icon-192.png",
+        "sizes": "192x192",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "icon-512.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "any maskable"
+      }
+    ]
+  },
+  "declaredAssets": {
+    "count": 41,
+    "allUnderBase": true,
+    "modelWeightsCheckedByHeadOnly": true
+  },
+  "workerUrl": "http://127.0.0.1:51475/plant-friends/assets/inference.worker-DytQv8nv.js",
+  "consoleErrors": [
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: net::ERR_FAILED"
+  ],
+  "stage": "complete",
+  "workerRegistrations": [
+    {
+      "scope": "http://127.0.0.1:51475/plant-friends/",
+      "active": "activated"
+    }
+  ],
+  "serviceWorker": {
+    "scope": "http://127.0.0.1:51475/plant-friends/",
+    "script": "http://127.0.0.1:51475/plant-friends/sw.js"
+  },
+  "offline": {
+    "newQueryNavigation": true,
+    "catalogRecords": 8796,
+    "detailOpened": "Abelia triflora",
+    "diagnosticsQuery": true,
+    "missingPackAndRuntimeFetchUnavailable": true,
+    "legalNotices": [
+      "attribution.html",
+      "third-party-notices.txt"
+    ]
+  },
+  "requests": {
+    "escapedBase": [],
+    "modelFilesDownloaded": 0,
+    "pageErrors": []
+  }
+}

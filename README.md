@@ -4,6 +4,12 @@ A local, offline plant guide: choose one camera still or uploaded JPEG, PNG, or 
 
 Matches are cosine similarities within the installed catalog. They are not probabilities, confirmed identifications, or evidence that a plant is safe to eat or use medicinally. Out-of-catalog plants and non-plants can still return plausible matches. PFAF search and records work without the large identification pack or a GPU.
 
+## Use the published app
+
+Open **https://saulshanabrook.github.io/plant-friends/** on your computer or phone. In **Offline setup**, save the PFAF catalog and identification pack, then choose a camera still or upload a photo and press **Identify this photo**. Use your browser's install or add-to-home-screen option if offered. The HTTPS address permits browser camera access after you allow it.
+
+Photo identification requires hardware WebGPU with `shader-f16` and enough device/browser storage and memory for the full model. Catalog browsing remains available independently. Physical phone performance is still untested; desktop Chrome is verified. Photos are processed locally, including offline after setup.
+
 ## Run locally
 
 Use the pinned Node version in `.node-version` and Python 3.12 with [uv](https://docs.astral.sh/uv/). Keep the source database at `../pfaf-data/data.sqlite`. Preparation opens it read-only and does not run its scraper.
@@ -51,15 +57,21 @@ For an initial feasibility run, prepare with `--limit 12`, generate its checked 
 ## Assets, sources, and offline behavior
 
 - The current PFAF snapshot has 8,796 catalog records, including synonyms, hybrids, and cultivars; it is not a verified list of distinct accepted species. Only three records include a recorded detail refresh date. Export dates are displayed separately from source freshness. Missing fields remain unavailable, and zero ratings remain zero.
-- Source attribution and bracketed reference markers are retained. See [the source repository](https://github.com/saulshanabrook/pfaf-data) and [PFAF's terms](https://pfaf.org/user/cmspage.aspx?pageid=136). Public redistribution of source content requires its own terms review; this local project does not publish it.
+- Source attribution and bracketed reference markers are retained. See [the source repository](https://github.com/saulshanabrook/pfaf-data) and [PFAF's terms](https://pfaf.org/user/cmspage.aspx?pageid=136). The public app distributes text with source attribution and [licensing/provenance notices](public/third-party-notices.txt), including the historical body-text license discrepancy. No PFAF images are deployed.
 - BioCLIP 2 uses [the pinned checkpoint](https://huggingface.co/imageomics/bioclip-2/tree/2957b322090f9cb17ae72c71981c7218a28d81e0), its matching tokenizer/configuration, and the pinned official 80-template scientific-name ensemble. The deployment encoder stores large matrices in FP16 and casts them back to the original FP32 arithmetic; biases, normalization vectors, small constants, and input/output stay FP32. The measured encoder is 609,029,031 bytes. This precision policy passed the original numerical gates without relaxing them. See [asset preparation](tools/plant_assets/README.md) for recipes and hash rules.
 - [Photo fixtures](fixtures/README.md) retain source, author, license, and hashes. The small sample may overlap pretraining. Its top-one/top-five results are descriptive checks, not a general accuracy estimate or unknown-species detector.
 - The service worker saves the small app shell. Catalog/model/runtime files are installed separately with incremental size/SHA-256 checks and semantic validation before activation. Interrupted or failed upgrades preserve the previous working pack. Persistent storage is requested but may be denied; browser data clearing or eviction requires reinstalling packs.
 
 ONNX Runtime Web 1.30's `/webgpu` entry is paired with the same package's self-hosted `ort-wasm-simd-threaded.asyncify.mjs` and `.wasm`. The inference worker explicitly supplies a hardware WebGPU device. JSEP runtime pairs and incompatible precision recipes are rejected. No CDN runtime is used. The separate diagnostic run counts actual GPU dispatch calls; it does not claim GPU timestamp durations. See [the precision experiment](reports/weight-storage-gpu.md) for the measured choice.
 
-## Static hosting
+## GitHub Pages deployment
 
-Serve `dist/` over HTTPS with JavaScript and WASM MIME types (`text/javascript`, `application/wasm`), including `sw.js`, the web manifest, and all generated packs/runtime files. Serve `sw.js`, `catalog.json`, and `model.json` with revalidation; retain immutable versioned assets during updates. Upload assets before their root pointers. The default build targets an origin root. Custom subpaths need a matching Vite base and a rebuilt deployment. This project provides hosting guidance only; it does not publish a site.
+Pushes to `main` run [the Pages workflow](.github/workflows/pages.yml). The workflow downloads a SHA-256-pinned prepared asset release, verifies every selected file, builds with `VITE_BASE_PATH=/plant-friends/`, verifies the output again, and deploys through GitHub Pages. No Python process, model conversion, hosting credential, or inference server is needed in the deployment.
+
+The generated catalog/model/runtime files stay outside git. [Deployment metadata](deployment/assets.json) selects the exact full pack and archive; [asset deployment instructions](deployment/README.md) describe preparing a new release. Only the current catalog/model/runtime are published, keeping the static site below GitHub Pages' size limit. Old feasibility packs, test photographs, numerical tensors and caches are excluded. The release and website carry [data and third-party notices](public/third-party-notices.txt); attribution is available offline from the app footer.
+
+To reproduce a project-path build locally, use `VITE_BASE_PATH=/plant-friends/ npm run build` after restoring the selected assets into a clean preparation tree. Plain `npm run build` retains the root-path local preview. The Pages manifest, start URL and service-worker scope use the project path. Public verification uses `node tests/manual/published.mjs https://saulshanabrook.github.io/plant-friends/` with the pinned local photo fixtures.
+
+Other static hosts must serve JavaScript/WASM MIME types and retain immutable pack files during updates. Serve `sw.js`, `catalog.json` and `model.json` with revalidation and publish assets before their pointers. A custom subpath requires a matching `VITE_BASE_PATH` and rebuilt site. GitHub Pages and release publication were explicitly authorized after the original local-only implementation goal.
 
 The [full desktop verification report](reports/desktop-verification.md) records the completed 8,796-record run: median 159.25 ms warm identification, expected label first in 14/24 positive photos and in the top five in 21/24. Fresh offline identification through the app passed. These small-sample results are not a general accuracy guarantee. Real desktop camera capture and cleanup also passed after camera access was allowed; see [camera evidence](reports/camera-verification.md). Phone and home-screen environments remain untested. [Implementation state](goals/offline-plant-id-pwa/progress.md) records the completed scope.

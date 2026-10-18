@@ -2,7 +2,12 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 
+const base = process.env.VITE_BASE_PATH ?? '/';
+if (!/^\/(?:[A-Za-z0-9_-]+\/)*$/.test(base))
+  throw new Error('VITE_BASE_PATH must be / or a slash-terminated app path such as /plant-friends/.');
+
 export default defineConfig({
+  base,
   resolve: { conditions: ['onnxruntime-web-use-extern-wasm', 'module', 'browser', 'development|production'] },
   plugins: [react(), VitePWA({
     strategies: 'injectManifest',
@@ -10,11 +15,12 @@ export default defineConfig({
     registerType: 'prompt',
     injectRegister: null,
     injectManifest: {
-      globPatterns: ['**/*.{js,css,html,svg,png,webmanifest}'],
+      globPatterns: ['**/*.{js,css,html,svg,png,webmanifest}', 'third-party-notices.txt'],
       globIgnores: ['packs/**', 'runtime/**', 'fixtures/**'],
     },
     manifest: {
       name: 'Plant Friends', short_name: 'Plant Friends',
+      start_url: base, scope: base,
       description: 'Identify plants on your device and explore PFAF offline.',
       theme_color: '#24593c', background_color: '#f7f8f2', display: 'standalone',
       icons: [
