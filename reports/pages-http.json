@@ -1,0 +1,336 @@
+{
+  "checkedAt": "2026-10-18T00:45:03.620Z",
+  "base": "https://saulshanabrook.github.io/plant-friends/",
+  "status": "passed",
+  "checks": [
+    {
+      "path": "catalog.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "encoding": null,
+      "contentLength": "56"
+    },
+    {
+      "path": "model.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "encoding": null,
+      "contentLength": "60"
+    },
+    {
+      "path": "packs/bioclip2/e2b03528fe84908219e7/manifest.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "encoding": "gzip",
+      "contentLength": "2837"
+    },
+    {
+      "path": "packs/bioclip2/e2b03528fe84908219e7/rows.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "encoding": "gzip",
+      "contentLength": "58356"
+    },
+    {
+      "path": "packs/bioclip2/e2b03528fe84908219e7/vectors.f32",
+      "status": 200,
+      "type": "application/octet-stream",
+      "encoding": "gzip",
+      "contentLength": "25078301"
+    },
+    {
+      "path": "packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "status": 200,
+      "type": "application/octet-stream",
+      "encoding": "gzip",
+      "contentLength": "459614902"
+    },
+    {
+      "path": "packs/NOTICE.txt",
+      "status": 200,
+      "type": "text/plain; charset=utf-8",
+      "encoding": "gzip",
+      "contentLength": "38192"
+    },
+    {
+      "path": "packs/pfaf/39831ede5fe0b995b55c/details-000.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "encoding": "gzip",
+      "contentLength": "231397"
+    },
+    {
+      "path": "packs/pfaf/39831ede5fe0b995b55c/details-001.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "encoding": "gzip",
+      "contentLength": "238593"
+    },
+    {
+      "path": "packs/pfaf/39831ede5fe0b995b55c/details-002.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "encoding": "gzip",
+      "contentLength": "241534"
+    },
+    {
+      "path": "packs/pfaf/39831ede5fe0b995b55c/details-003.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "encoding": "gzip",
+      "contentLength": "189040"
+    },
+    {
+      "path": "packs/pfaf/39831ede5fe0b995b55c/details-004.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "encoding": "gzip",
+      "contentLength": "241631"
+    },
+    {
+      "path": "packs/pfaf/39831ede5fe0b995b55c/details-005.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "encoding": "gzip",
+      "contentLength": "246499"
+    },
+    {
+      "path": "packs/pfaf/39831ede5fe0b995b55c/details-006.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "encoding": "gzip",
+      "contentLength": "229224"
+    },
+    {
+      "path": "packs/pfaf/39831ede5fe0b995b55c/details-007.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "encoding": "gzip",
+      "contentLength": "240585"
+    },
+    {
+      "path": "packs/pfaf/39831ede5fe0b995b55c/details-008.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "encoding": "gzip",
+      "contentLength": "214857"
+    },
+    {
+      "path": "packs/pfaf/39831ede5fe0b995b55c/details-009.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "encoding": "gzip",
+      "contentLength": "182526"
+    },
+    {
+      "path": "packs/pfaf/39831ede5fe0b995b55c/details-010.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "encoding": "gzip",
+      "contentLength": "229176"
+    },
+    {
+      "path": "packs/pfaf/39831ede5fe0b995b55c/details-011.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "encoding": "gzip",
+      "contentLength": "243925"
+    },
+    {
+      "path": "packs/pfaf/39831ede5fe0b995b55c/details-012.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "encoding": "gzip",
+      "contentLength": "191596"
+    },
+    {
+      "path": "packs/pfaf/39831ede5fe0b995b55c/details-013.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "encoding": "gzip",
+      "contentLength": "225332"
+    },
+    {
+      "path": "packs/pfaf/39831ede5fe0b995b55c/details-014.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "encoding": "gzip",
+      "contentLength": "233939"
+    },
+    {
+      "path": "packs/pfaf/39831ede5fe0b995b55c/details-015.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "encoding": "gzip",
+      "contentLength": "187837"
+    },
+    {
+      "path": "packs/pfaf/39831ede5fe0b995b55c/details-016.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "encoding": "gzip",
+      "contentLength": "228378"
+    },
+    {
+      "path": "packs/pfaf/39831ede5fe0b995b55c/details-017.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "encoding": "gzip",
+      "contentLength": "198308"
+    },
+    {
+      "path": "packs/pfaf/39831ede5fe0b995b55c/details-018.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "encoding": "gzip",
+      "contentLength": "171860"
+    },
+    {
+      "path": "packs/pfaf/39831ede5fe0b995b55c/details-019.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "encoding": "gzip",
+      "contentLength": "231400"
+    },
+    {
+      "path": "packs/pfaf/39831ede5fe0b995b55c/details-020.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "encoding": "gzip",
+      "contentLength": "270781"
+    },
+    {
+      "path": "packs/pfaf/39831ede5fe0b995b55c/details-021.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "encoding": "gzip",
+      "contentLength": "219456"
+    },
+    {
+      "path": "packs/pfaf/39831ede5fe0b995b55c/details-022.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "encoding": "gzip",
+      "contentLength": "199109"
+    },
+    {
+      "path": "packs/pfaf/39831ede5fe0b995b55c/details-023.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "encoding": "gzip",
+      "contentLength": "237470"
+    },
+    {
+      "path": "packs/pfaf/39831ede5fe0b995b55c/details-024.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "encoding": "gzip",
+      "contentLength": "206478"
+    },
+    {
+      "path": "packs/pfaf/39831ede5fe0b995b55c/details-025.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "encoding": "gzip",
+      "contentLength": "206664"
+    },
+    {
+      "path": "packs/pfaf/39831ede5fe0b995b55c/details-026.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "encoding": "gzip",
+      "contentLength": "175006"
+    },
+    {
+      "path": "packs/pfaf/39831ede5fe0b995b55c/details-027.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "encoding": "gzip",
+      "contentLength": "119187"
+    },
+    {
+      "path": "packs/pfaf/39831ede5fe0b995b55c/details-028.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "encoding": "gzip",
+      "contentLength": "203330"
+    },
+    {
+      "path": "packs/pfaf/39831ede5fe0b995b55c/details-029.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "encoding": "gzip",
+      "contentLength": "222967"
+    },
+    {
+      "path": "packs/pfaf/39831ede5fe0b995b55c/details-030.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "encoding": "gzip",
+      "contentLength": "186920"
+    },
+    {
+      "path": "packs/pfaf/39831ede5fe0b995b55c/details-031.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "encoding": "gzip",
+      "contentLength": "286670"
+    },
+    {
+      "path": "packs/pfaf/39831ede5fe0b995b55c/details-032.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "encoding": "gzip",
+      "contentLength": "197322"
+    },
+    {
+      "path": "packs/pfaf/39831ede5fe0b995b55c/details-033.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "encoding": "gzip",
+      "contentLength": "196609"
+    },
+    {
+      "path": "packs/pfaf/39831ede5fe0b995b55c/details-034.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "encoding": "gzip",
+      "contentLength": "91598"
+    },
+    {
+      "path": "packs/pfaf/39831ede5fe0b995b55c/index.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "encoding": "gzip",
+      "contentLength": "191316"
+    },
+    {
+      "path": "packs/pfaf/39831ede5fe0b995b55c/manifest.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "encoding": "gzip",
+      "contentLength": "2430"
+    },
+    {
+      "path": "runtime/1.30.0/ort-wasm-simd-threaded.asyncify.mjs",
+      "status": 200,
+      "type": "text/javascript; charset=utf-8",
+      "encoding": "gzip",
+      "contentLength": "19394"
+    },
+    {
+      "path": "runtime/1.30.0/ort-wasm-simd-threaded.asyncify.wasm",
+      "status": 200,
+      "type": "application/wasm",
+      "encoding": "gzip",
+      "contentLength": "6791325"
+    },
+    {
+      "path": "runtime/manifest.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "encoding": "gzip",
+      "contentLength": "215"
+    }
+  ]
+}

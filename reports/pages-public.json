@@ -1,0 +1,529 @@
+{
+  "checkedAt": "2026-10-18T00:43:55.862Z",
+  "url": "https://saulshanabrook.github.io/plant-friends/",
+  "status": "passed",
+  "scope": "Published HTTPS PWA, real desktop Chrome WebGPU, fresh offline product identification; phones untested",
+  "expectedModelId": "e2b03528fe84908219e7",
+  "expectedCatalogId": "39831ede5fe0b995b55c",
+  "fixture": {
+    "file": "inat-143164.jpg",
+    "sha256": "897145c878db81cd02115e38a1095ff1745e883e333f7f0e65d20092f38f0d50",
+    "sourceUrl": "https://www.inaturalist.org/observations/98736",
+    "license": "cc0"
+  },
+  "requests": [
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/?diagnostics=1",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/assets/index-Cqozbz7j.js",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/assets/index-xsdfkofS.css",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/manifest.webmanifest",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/icon.svg",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/icon.svg",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/sw.js",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/manifest.webmanifest",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/index.html",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/icon.svg",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/icon-512.png",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/icon-192.png",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/attribution.html",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/assets/inference.worker-DytQv8nv.js",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/assets/index-xsdfkofS.css",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/assets/index-Cqozbz7j.js",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/third-party-notices.txt",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/manifest.webmanifest",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/catalog.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/manifest.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/manifest.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/index.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-000.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-001.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-002.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-003.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-004.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-005.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-006.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-007.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-008.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-009.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-010.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-011.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-012.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-013.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-014.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-015.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-016.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-017.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-018.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-019.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-020.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-021.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-022.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-023.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-024.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-025.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-026.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-027.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-028.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-029.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-030.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-031.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-032.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-033.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/pfaf/39831ede5fe0b995b55c/details-034.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/model.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/e2b03528fe84908219e7/manifest.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/e2b03528fe84908219e7/manifest.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/e2b03528fe84908219e7/vectors.f32",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/packs/bioclip2/e2b03528fe84908219e7/rows.json",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/runtime/1.30.0/ort-wasm-simd-threaded.asyncify.mjs",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/runtime/1.30.0/ort-wasm-simd-threaded.asyncify.wasm",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/assets/inference.worker-DytQv8nv.js",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/runtime/1.30.0/ort-wasm-simd-threaded.asyncify.mjs",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/runtime/1.30.0/ort-wasm-simd-threaded.asyncify.wasm",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/?offline-deployment-check=1",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/assets/index-Cqozbz7j.js",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/assets/index-xsdfkofS.css",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/manifest.webmanifest",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/icon.svg",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/icon.svg",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "blob:https://saulshanabrook.github.io/93bb52ee-cb91-400d-8d57-f2c14b22becd",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/assets/inference.worker-DytQv8nv.js",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/runtime/1.30.0/ort-wasm-simd-threaded.asyncify.mjs",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/runtime/1.30.0/ort-wasm-simd-threaded.asyncify.wasm",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/attribution.html",
+      "method": "GET",
+      "hasBody": false
+    },
+    {
+      "url": "https://saulshanabrook.github.io/plant-friends/third-party-notices.txt",
+      "method": "GET",
+      "hasBody": false
+    }
+  ],
+  "pageErrors": [],
+  "browser": "155.0.8059.80",
+  "serviceWorker": {
+    "scope": "https://saulshanabrook.github.io/plant-friends/",
+    "script": "https://saulshanabrook.github.io/plant-friends/sw.js",
+    "secureContext": true
+  },
+  "manifest": {
+    "name": "Plant Friends",
+    "short_name": "Plant Friends",
+    "description": "Identify plants on your device and explore PFAF offline.",
+    "start_url": "/plant-friends/",
+    "display": "standalone",
+    "background_color": "#f7f8f2",
+    "theme_color": "#24593c",
+    "lang": "en",
+    "scope": "/plant-friends/",
+    "icons": [
+      {
+        "src": "icon.svg",
+        "sizes": "any",
+        "type": "image/svg+xml",
+        "purpose": "any"
+      },
+      {
+        "src": "icon-192.png",
+        "sizes": "192x192",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "icon-512.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "any maskable"
+      }
+    ]
+  },
+  "catalog": {
+    "id": "39831ede5fe0b995b55c",
+    "bytes": 42820214
+  },
+  "model": {
+    "id": "e2b03528fe84908219e7",
+    "bytes": 663136322
+  },
+  "installationMs": 92731.644333,
+  "runtime": {
+    "secureContext": true,
+    "adapter": {
+      "vendor": "apple",
+      "architecture": "metal-3",
+      "device": "",
+      "description": "",
+      "isFallbackAdapter": false
+    },
+    "features": [
+      "depth32float-stencil8",
+      "rg11b10ufloat-renderable",
+      "bgra8unorm-storage",
+      "texture-formats-tier1",
+      "texture-compression-bc",
+      "dual-source-blending",
+      "core-features-and-limits",
+      "float32-filterable",
+      "indirect-first-instance",
+      "texture-compression-astc-sliced-3d",
+      "float32-blendable",
+      "subgroup-size-control",
+      "texture-compression-astc",
+      "texture-compression-etc2",
+      "depth-clip-control",
+      "texture-compression-bc-sliced-3d",
+      "clip-distances",
+      "timestamp-query",
+      "texture-formats-tier2",
+      "shader-f16",
+      "primitive-index",
+      "texture-component-swizzle",
+      "subgroups"
+    ],
+    "limits": {
+      "maxBufferSize": 4294967292,
+      "maxStorageBufferBindingSize": 4294967292
+    },
+    "runtimeVersion": "1.30.0",
+    "executionProvider": "webgpu",
+    "initializationMs": 1956.4000000357628,
+    "modelBytes": 609029031,
+    "packId": "e2b03528fe84908219e7",
+    "catalogId": "39831ede5fe0b995b55c",
+    "backend": "native-webgpu-asyncify",
+    "deviceFeatures": [
+      "core-features-and-limits",
+      "shader-f16"
+    ]
+  },
+  "offlineCandidates": [
+    "1Urtica dioicaStinging Nettle, California nettle0.711similarity↗",
+    "2Urtica angustifoliaCommon name unavailable0.689similarity↗",
+    "3Urtica proceraStinging Nettle, California nettle0.689similarity↗",
+    "4Urtica platyphyllaCommon name unavailable0.688similarity↗",
+    "5Urtica holosericeaStinging Nettle0.683similarity↗"
+  ],
+  "offlinePlant": "Urtica dioica",
+  "offlineHazards": "Known hazards\n\nThe leaves of the plants have stinging hairs, causing irritation to the skin[21, 200]. This action is neutralized by heat or by thorough drying, so the cooked leaves are perfectly safe and nutritious[200]. However, only young leaves should be used because older leaves develop gritty particles called cystoliths which act as an irritant to the kidneys[172]. Possible interference with allopathic drugs for diabetes mellitus, hypertension. Central nervous system depression drugs (e.g. morphine, alcohol) may also interact with nettle. Avoid during pregnancy [301].",
+  "offlineLegalNotices": "passed",
+  "privacy": {
+    "allReadOnly": true,
+    "allAppOrigin": true,
+    "allAppPaths": true
+  },
+  "profileRemoved": true
+}
