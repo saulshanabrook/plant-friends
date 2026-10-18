@@ -21,7 +21,7 @@ test('compact linked header, on-demand install help and responsive plant table',
   await expect(add.locator('img')).toHaveAttribute('src', '/icon.svg');
   await expect(page.locator('#install-help')).toHaveCount(0);
   await expect(page.getByRole('combobox', { name: 'Family', exact: true })).toBeEnabled();
-  await expect(page.getByRole('button', { name: 'Identify this photo', exact: true })).toBeDisabled();
+  await expect(page.getByRole('button', { name: 'Identify this photo', exact: true })).toHaveCount(0);
   await expect(page.locator('#setup-status')).toContainText('Downloading model…');
   await expect(page.locator('#setup-status')).toContainText('Estimating…');
   for (const viewport of [{ width: 1280, height: 900 }, { width: 390, height: 844 }]) {

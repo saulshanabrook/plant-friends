@@ -8,7 +8,7 @@ Matches are cosine similarities within the installed catalog. They are not proba
 
 ## Use the published app
 
-Open **https://saulshanabrook.github.io/plant-friends/** on your computer or phone. Setup downloads the catalog, then the model, then all reference photos automatically, with compact progress below the photo controls. A rough time estimate covers all remaining downloads when a recent transfer rate is available; it resets after interruptions and between stages. Choose a camera still or upload a photo, then press **Identify this photo**. **Add app** at the top opens the browser's install prompt when supported, or shows brief installation instructions. The HTTPS address permits browser camera access after you allow it.
+Open **https://saulshanabrook.github.io/plant-friends/** on your computer or phone. Setup downloads the catalog, then the model, then all reference photos automatically, with compact progress below the photo controls. A rough time estimate covers all remaining downloads when a recent transfer rate is available; it resets after interruptions and between stages. Upload a photo or capture a camera still; identification starts automatically once the catalog and model are ready. Replacing the photo starts a new identification, and **Reset** clears the photo and results. **Add app** at the top opens the browser's install prompt when supported, or shows brief installation instructions. The HTTPS address permits browser camera access after you allow it.
 
 Photo identification requires hardware WebGPU with `shader-f16` and enough device/browser storage and memory for the full model. Catalog browsing remains available independently. Physical phone performance is still untested; desktop Chrome is verified. Photos are processed locally, including offline after setup.
 
@@ -35,7 +35,7 @@ npm run build
 npm run preview
 ```
 
-Open **http://127.0.0.1:4173** in a regular window of a recent Chrome with hardware WebGPU and `shader-f16`. Catalog setup starts automatically, followed by the model. Interrupted downloads retain completed 8 MiB chunks and resume after reconnection, reopening or returning to the app. Upload a photo or use the camera, then select **Identify this photo**. Reload offline to check your setup. Private browser storage can be restricted; a regular window is recommended.
+Open **http://127.0.0.1:4173** in a regular window of a recent Chrome with hardware WebGPU and `shader-f16`. Catalog setup starts automatically, followed by the model. Interrupted downloads retain completed 8 MiB chunks and resume after reconnection, reopening or returning to the app. Upload a photo or capture a camera still and wait for automatic identification. Reload offline to check your setup. Private browser storage can be restricted; a regular window is recommended.
 
 `npm run dev` starts the development server; use the production build and preview to verify service-worker/offline behavior. A browser on another device cannot access this computer's `127.0.0.1`; a phone needs a trusted HTTPS origin. The real built-in desktop camera has passed preview, capture, reset, and track-cleanup checks. Phone cameras and home-screen operation remain untested.
 

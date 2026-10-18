@@ -26,6 +26,8 @@ try {
   await expect(header.getByRole('button', { name: 'Add app', exact: true })).toBeVisible();
   await expect(header.getByRole('link', { name: 'BioCLIP 2', exact: true })).toHaveAttribute('href', 'https://imageomics.github.io/bioclip-2/');
   await expect(header.getByRole('link', { name: 'PFAF', exact: true })).toHaveAttribute('href', 'https://pfaf.org/');
+  await expect(page.getByRole('button', { name: 'Identify this photo', exact: true })).toHaveCount(0);
+  report.noInitialIdentifyButton = true;
   await expect(page.getByRole('searchbox', { name: 'Search plants', exact: true })).toBeVisible({ timeout: 90000 });
   await expect.poll(() => heldModels.length, { timeout: 30000 }).toBeGreaterThan(0);
   await expect(page.locator('#setup-status')).toContainText('Downloading model…');

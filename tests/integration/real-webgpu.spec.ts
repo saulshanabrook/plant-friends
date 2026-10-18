@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { promisify } from 'node:util';
 import { expect, test } from '@playwright/test';
 
-test('full catalog, real BioCLIP WebGPU parity, ten warm timings and fresh offline inference', async () => {
+test('full catalog, real BioCLIP WebGPU parity, ten warm timings and fresh offline automatic identification', async () => {
   // Missing generated assets, unavailable hardware, and numerical failures fail
   // this integration gate. Unit/UI doubles cannot satisfy it.
   const result = await promisify(execFile)(process.execPath, ['scripts/benchmark.mjs'], {
@@ -20,5 +20,6 @@ test('full catalog, real BioCLIP WebGPU parity, ten warm timings and fresh offli
   expect(report.evaluation.count).toBe(24);
   expect(report.evaluation.negativeCount).toBe(4);
   expect(report.offline.candidates).toHaveLength(5);
+  expect(report.offline.automaticIdentification).toBe(true);
   expect(report.privacy).toMatchObject({ allGetRequestsWithoutBody: true, allRequestsLocal: true });
 });

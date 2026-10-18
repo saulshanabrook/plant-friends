@@ -18,7 +18,7 @@ if (createHash('sha256').update(photoBytes).digest('hex') !== fixture.sha256)
   throw new Error('Local verification photograph differs from its pinned licensed fixture.');
 const profile = await mkdtemp(join(tmpdir(), 'plant-friends-pages-'));
 const report = { checkedAt: new Date().toISOString(), url: base.href, status: 'incomplete',
-  scope: 'Published HTTPS PWA, real desktop Chrome WebGPU, fresh offline product identification; phones untested',
+  scope: 'Published HTTPS PWA, real desktop Chrome WebGPU, fresh offline automatic photo identification; phones untested',
   expectedModelId: metadata.modelId, expectedCatalogId: metadata.catalogId,
   fixture: { file: fixture.file, sha256: fixture.sha256, sourceUrl: fixture.sourceUrl, license: fixture.license },
   requests: [], pageErrors: [] };
@@ -61,10 +61,8 @@ try {
   const selected = page.getByRole('img', { name: 'Selected plant to identify' });
   await page.locator('input[type=file]').setInputFiles({ name: 'local-offline-plant.jpg', mimeType: 'image/jpeg', buffer: photoBytes });
   await expect(selected).toBeVisible();
-  const identify = page.getByRole('button', { name: 'Identify this photo', exact: true });
-  await expect(identify).toBeEnabled({ timeout: 30_000 });
-  await identify.click();
   await expect(page.locator('.candidate-list > li')).toHaveCount(5, { timeout: 60_000 });
+  report.automaticIdentification = true;
   report.offlineCandidates = await page.locator('.candidate-list > li').allTextContents();
   await page.locator('.candidate-list > li button').first().click();
   await expect(page.getByRole('heading', { name: 'Known hazards', exact: true })).toBeVisible();

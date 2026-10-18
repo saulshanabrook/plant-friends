@@ -10,6 +10,7 @@ test('one photo can be uploaded, replaced, and reset; previous object URLs are r
   await upload.setInputFiles({ name: 'first-plant.jpg', mimeType: 'image/jpeg', buffer: plantPhotos.first });
   const preview = page.getByRole('img', { name: 'Selected plant to identify' });
   await expect(preview).toBeVisible();
+  await expect(page.getByText('Waiting for identification downloads…', { exact: true })).toBeVisible();
   await expect(page.locator('.photo-label')).toContainText('first-plant.jpg');
   const firstUrl = await preview.getAttribute('src');
 
@@ -24,7 +25,7 @@ test('one photo can be uploaded, replaced, and reset; previous object URLs are r
 
   await page.getByRole('button', { name: 'Reset', exact: true }).click();
   await expect(preview).toHaveCount(0);
-  await expect(page.getByRole('button', { name: 'Identify this photo' })).toBeDisabled();
+  await expect(page.getByRole('button', { name: 'Identify this photo', exact: true })).toHaveCount(0);
   expect(await page.evaluate(async url => {
     try { await fetch(url!); return true; } catch { return false; }
   }, secondUrl)).toBe(false);

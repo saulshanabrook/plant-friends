@@ -2,14 +2,14 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import type { CatalogEntry } from './assets/manifest';
 import { InferenceClient } from './inference/client';
 import { imageDimensions } from './inference/preprocess';
-import type { InferenceResult, RuntimeInfo } from './inference/protocol';
+import { AutomaticIdentification, type IdentificationState } from './features/automaticIdentification';
 import { PlantDetails } from './features/PlantDetails';
 import { PlantTable } from './features/PlantTable';
 import { useOfflinePacks } from './features/useOfflinePacks';
 import { usePlantPhotos } from './features/usePlantPhotos';
 import { useDownloadEstimate } from './features/useDownloadEstimate';
 
-interface Photo { blob: Blob; name: string; url: string; width: number; height: number }
+interface Photo { id: number; blob: Blob; name: string; url: string; width: number; height: number }
 interface InstallPrompt extends Event { prompt(): Promise<void>; userChoice: Promise<{ outcome: 'accepted' | 'dismissed' }> }
 interface InstalledRelatedApp { platform: string; url?: string; id?: string }
 function formatBytes(bytes: number): string { return `${(bytes / 1024 / 1024).toFixed(1)} MiB`; }
@@ -21,9 +21,8 @@ export default function App() {
   const [readingPhoto, setReadingPhoto] = useState(false);
   const [cameraActive, setCameraActive] = useState(false);
   const [cameraStarting, setCameraStarting] = useState(false);
-  const [busy, setBusy] = useState<string | null>(null);
-  const [result, setResult] = useState<InferenceResult | null>(null);
-  const [runtime, setRuntime] = useState<RuntimeInfo | null>(null);
+  const [identification, setIdentification] = useState<IdentificationState>({ phase: 'idle', result: null, runtime: null, error: null });
+  const { result, runtime } = identification;
   const [selected, setSelected] = useState<CatalogEntry | null>(null);
   const [online, setOnline] = useState(navigator.onLine);
   const [shellReady, setShellReady] = useState(false);
@@ -36,11 +35,14 @@ export default function App() {
   const camera = useRef<MediaStream | null>(null);
   const cameraGeneration = useRef(0);
   const photoGeneration = useRef(0);
-  const inferenceOperation = useRef(0);
-  const client = useRef<InferenceClient | null>(null);
-  const loading = useRef<Promise<RuntimeInfo> | null>(null);
-  const loadedKey = useRef<string | null>(null);
+  const identifier = useRef<AutomaticIdentification | null>(null);
   const livePhotoUrl = useRef<string | null>(null);
+
+  useEffect(() => {
+    const session = new AutomaticIdentification(() => new InferenceClient(), setIdentification);
+    identifier.current = session;
+    return () => { session.dispose(); if (identifier.current === session) identifier.current = null; };
+  }, []);
 
   useEffect(() => {
     let current = true;
@@ -102,21 +104,14 @@ export default function App() {
   }, [photo]);
 
   useEffect(() => {
-    resetIdentification(); setSelected(null);
+    setSelected(null);
   }, [packs.pfaf.installed?.manifest.id, packs.bioclip2.installed?.manifest.id]);
 
   useEffect(() => () => {
     photoGeneration.current++; cameraGeneration.current++;
     camera.current?.getTracks().forEach(track => track.stop());
-    client.current?.dispose();
     if (livePhotoUrl.current) URL.revokeObjectURL(livePhotoUrl.current);
   }, []);
-
-  function resetIdentification() {
-    inferenceOperation.current++;
-    client.current?.dispose(); client.current = null; loading.current = null; loadedKey.current = null;
-    setRuntime(null); setResult(null); setBusy(null);
-  }
 
   function stopCamera() {
     cameraGeneration.current++;
@@ -126,22 +121,21 @@ export default function App() {
   }
 
   function resetPhoto() {
-    photoGeneration.current++; inferenceOperation.current++;
-    client.current?.cancel();
-    setPhoto(null); setResult(null); setPhotoError(null); setBusy(null); setReadingPhoto(false);
+    photoGeneration.current++; identifier.current?.setPhoto(null);
+    setPhoto(null); setPhotoError(null); setReadingPhoto(false);
     stopCamera();
   }
 
   async function choosePhoto(blob: Blob, name: string) {
     const generation = ++photoGeneration.current;
-    inferenceOperation.current++; client.current?.cancel();
-    setPhoto(null); setResult(null); setBusy(null); setPhotoError(null); setReadingPhoto(true);
+    identifier.current?.setPhoto(null);
+    setPhoto(null); setPhotoError(null); setReadingPhoto(true);
     try {
       await imageDimensions(blob);
       const bitmap = await createImageBitmap(blob, { imageOrientation: 'from-image' });
       const width = bitmap.width, height = bitmap.height; bitmap.close();
       if (generation !== photoGeneration.current) return;
-      setPhoto({ blob, name, width, height, url: URL.createObjectURL(blob) });
+      setPhoto({ id: generation, blob, name, width, height, url: URL.createObjectURL(blob) });
       stopCamera();
     } catch (error) {
       if (generation === photoGeneration.current) setPhotoError(error instanceof Error ? error.message : 'This photo could not be opened. Choose another JPEG, PNG, or WebP.');
@@ -212,39 +206,17 @@ export default function App() {
   const webgpu = Boolean(window.isSecureContext && navigator.gpu);
   const indexById = useMemo(() => new Map(entries.map(entry => [entry.id, entry])), [entries]);
 
-  async function identify() {
-    if (!photo || !catalog || !model || !compatible || busy) return;
-    const generation = photoGeneration.current;
-    const operation = ++inferenceOperation.current;
-    setPhotoError(null); setResult(null); setBusy('Loading the identification model…');
-    let currentClient = client.current;
-    if (!currentClient) {
-      currentClient = new InferenceClient(); client.current = currentClient;
-      currentClient.onDeviceLost = message => {
-        if (client.current !== currentClient) return;
-        photoGeneration.current++; inferenceOperation.current++;
-        currentClient?.dispose(); client.current = null; loading.current = null; loadedKey.current = null;
-        setRuntime(null); setBusy(null); setResult(null); setPhotoError(`${message} Retry identification to reload the model. Catalog browsing is still available.`);
-      };
-    }
-    try {
-      const key = `${model.manifest.id}:${catalog.manifest.id}`;
-      if (loadedKey.current !== key) {
-        if (!loading.current) loading.current = currentClient.load(model, catalog, entries);
-        const info = await loading.current;
-        if (client.current !== currentClient) return;
-        loadedKey.current = key; loading.current = null; setRuntime(info);
-      }
-      if (generation !== photoGeneration.current || operation !== inferenceOperation.current) return;
-      setBusy('Finding possible catalog matches…');
-      const identified = await currentClient.identify(photo.blob);
-      if (generation === photoGeneration.current && operation === inferenceOperation.current) setResult(identified);
-    } catch (error) {
-      if (client.current === currentClient) loading.current = null;
-      if (generation === photoGeneration.current && operation === inferenceOperation.current && !(error instanceof Error && error.name === 'AbortError'))
-        setPhotoError(error instanceof Error ? error.message : 'Identification failed. Retry, or browse the catalog.');
-    } finally { if (operation === inferenceOperation.current) setBusy(null); }
-  }
+  useEffect(() => {
+    identifier.current?.setAssets(catalog && model && compatible && webgpu ? {
+      key: JSON.stringify([model.manifest.id, model.manifestUrl, catalog.manifest.id, catalog.manifestUrl]),
+      model, catalog, index: entries,
+    } : null);
+  }, [catalog, model, compatible, webgpu, entries]);
+  useEffect(() => { identifier.current?.setPhoto(photo); }, [photo]);
+
+  const identifying = identification.phase === 'loading' || identification.phase === 'identifying';
+  const identificationStatus = identification.phase === 'loading' ? 'Loading model…' : identification.phase === 'identifying' ? 'Identifying…' :
+    identification.phase === 'cancelled' ? 'Identification cancelled.' : identification.phase === 'idle' || identification.phase === 'waiting' ? 'Waiting for identification downloads…' : null;
 
   const downloadingPack = packs.pfaf.downloading ? packs.pfaf : packs.bioclip2.downloading ? packs.bioclip2 : null;
   const downloadProgress = downloadingPack?.progress;
@@ -292,8 +264,8 @@ export default function App() {
         <p>Your photos stay in this session.</p>
         {cameraActive ? <video ref={video} autoPlay muted playsInline aria-label="Live camera preview" /> : photo ? <img className="photo-preview" src={photo.url} alt="Selected plant to identify" /> : (readingPhoto || cameraStarting) && <p role="status">{readingPhoto ? 'Opening photo…' : 'Opening camera…'}</p>}
         {photo && <p className="photo-label">{photo.name} · {photo.width.toLocaleString()} × {photo.height.toLocaleString()}</p>}
-        {photoError && <div role="alert"><p>{photoError}</p>{model && <button onClick={() => { resetIdentification(); setPhotoError(null); }}>Reload identification model</button>}</div>}
-        <div className="controls"><button disabled={!photo || !compatible || !webgpu || Boolean(busy) || readingPhoto} onClick={() => void identify()}>{busy ?? 'Identify this photo'}</button>{busy && <button onClick={() => { inferenceOperation.current++; client.current?.cancel(); setBusy(null); }}>Cancel identification</button>}</div>
+        {(photoError || identification.error) && <div role="alert"><p>{photoError ?? identification.error}</p>{identification.error && photo && <><button onClick={() => identifier.current?.retry()}>Retry identification</button>{model && <button onClick={() => identifier.current?.retry(true)}>Reload identification model</button>}</>}</div>}
+        {photo && webgpu && identificationStatus && <div className="controls"><p role="status">{identificationStatus}</p>{identifying && <button onClick={() => identifier.current?.cancel()}>Cancel identification</button>}{identification.phase === 'cancelled' && <button onClick={() => identifier.current?.retry()}>Retry identification</button>}</div>}
         {!webgpu && <p>Photo identification is unavailable in this browser.</p>}
         <p>Possible matches do not confirm identity or safety for food or medicine.</p>
         {result && <section aria-labelledby="results-heading"><h3 id="results-heading">Possible catalog matches</h3><ol className="candidate-list">{result.candidates.map(candidate => {

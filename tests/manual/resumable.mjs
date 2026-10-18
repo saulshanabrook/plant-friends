@@ -141,10 +141,8 @@ try {
   page = await context.newPage();
   await page.goto(new URL('?offline-resume-check=1', base).href);
   await page.getByLabel('Upload photo', { exact: true }).setInputFiles({ name: 'offline-plant.jpg', mimeType: 'image/jpeg', buffer: photoBytes });
-  const identify = page.getByRole('button', { name: 'Identify this photo', exact: true });
-  await expect(identify).toBeEnabled({ timeout: 30_000 });
-  await identify.click();
   await expect(page.locator('.candidate-list > li')).toHaveCount(5, { timeout: 60_000 });
+  report.automaticIdentification = true;
   report.offlineCandidates = await page.locator('.candidate-list > li').allTextContents();
   const picturedMatch = page.locator('.candidate-list > li').filter({ has: page.locator('img') }).first();
   const matchImage = picturedMatch.locator('img');

@@ -13,7 +13,7 @@ export default defineConfig({
     { command: 'npm run dev -- --port 4174 --strictPort', url: 'http://127.0.0.1:4174', reuseExistingServer: !process.env.CI },
   ],
   projects: [
-    { name: 'ui', testMatch: /(e2e\/(photos|catalog|privacy|pwa|keyboard|setup|reference-photos|header)|assets\/navigation)\.spec\.ts/, use: { baseURL: 'http://127.0.0.1:4173' } },
+    { name: 'ui', testMatch: /(e2e\/(photos|catalog|privacy|pwa|keyboard|setup|reference-photos|header|automatic-identification)|assets\/navigation)\.spec\.ts/, use: { baseURL: 'http://127.0.0.1:4173' } },
     { name: 'assets', testMatch: /e2e\/install\.spec\.ts/, use: { baseURL: 'http://127.0.0.1:4174' } },
     { name: 'real-webgpu', testMatch: /integration\/.*\.spec\.ts/, timeout: 900_000, use: { baseURL: 'http://127.0.0.1:4173' } },
   ],

@@ -190,14 +190,14 @@ try {
   page = await context.newPage();
   await page.goto(origin);
   await page.locator('input[type=file]').setInputFiles({ name: 'offline-local-plant.jpg', mimeType: 'image/jpeg', buffer: bytes });
-  await page.getByRole('button', { name: 'Identify this photo' }).click();
   await page.getByRole('heading', { name: 'Possible catalog matches' }).waitFor({ timeout: 120_000 });
   if (await page.locator('.candidate-list > li').count() !== 5) throw new Error('Product UI did not render five real offline candidates.');
   await page.locator('.candidate-list button').first().click();
   await page.getByRole('heading', { name: 'Known hazards' }).waitFor();
   await mkdir('reports/screenshots', { recursive: true });
   await page.screenshot({ path: 'reports/screenshots/offline-identification.png', fullPage: true });
-  report.offline.productInterface = 'Passed: fresh offline product page, upload, explicit identification, five candidates and PFAF hazards';
+  report.offline.automaticIdentification = true;
+  report.offline.productInterface = 'Passed: fresh offline product page, upload, automatic identification, five candidates and PFAF hazards';
   report.privacy = { requestCount: requests.length, allGetRequestsWithoutBody: requests.every(request => request.method === 'GET' && !request.hasBody),
     allRequestsLocal: requests.every(request => new URL(request.url).origin === origin) };
   if (!report.privacy.allGetRequestsWithoutBody || !report.privacy.allRequestsLocal) throw new Error('Unexpected outbound request in local inference test.');
