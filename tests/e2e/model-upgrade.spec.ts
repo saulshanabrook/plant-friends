@@ -1,5 +1,5 @@
 import { expect, test as base, type Page, type Route } from '@playwright/test';
-import { asset, catalog, CONTENT, model } from '../assets/fixtures';
+import { asset, catalog, CONTENT, externalModel, model } from '../assets/fixtures';
 import type {} from '../../src/dev/api';
 
 // Fabricated, non-runnable model bytes; the actual App, automatic setup,
@@ -10,6 +10,7 @@ type Upgrade = {
   runtimeBody: Buffer;
   weightRanges: string[];
   photos: number;
+  advertiseExternalData: () => void;
 };
 const test = base.extend<{ upgrade: Upgrade }>({
   upgrade: [async ({ page, context, baseURL }, use) => {
@@ -30,15 +31,28 @@ const test = base.extend<{ upgrade: Upgrade }>({
     const previousUrl = new URL('/packs/bioclip2/previous/manifest.json', origin);
     const nextUrl = new URL('/packs/bioclip2/updated/manifest.json', origin);
     const runtimeUrl = new URL(oldRuntime.url, previousUrl).href;
+    const updateRuntimeUrls = new Set([runtimeUrl]);
     const weightsUrl = new URL(previous.model.file.url, previousUrl).href;
     const payloads = new Map<string, Buffer>();
     for (const [manifest, url] of [[pfaf, catalogUrl], [previous, previousUrl], [next, nextUrl]] as const)
       for (const file of manifest.files) payloads.set(new URL(file.url, url).href, Buffer.from(CONTENT.get(file.url)!));
     let advertiseUpdate = false;
-    const state: Upgrade = { runtime: [], runtimeBody, weightRanges: [], photos: 0 };
     const json = new Map([
       [catalogUrl.href, JSON.stringify(pfaf)], [previousUrl.href, JSON.stringify(previous)], [nextUrl.href, JSON.stringify(next)],
     ]);
+    const state: Upgrade = { runtime: [], runtimeBody, weightRanges: [], photos: 0,
+      advertiseExternalData() {
+        const external = externalModel();
+        next.model.file = external.model.file;
+        next.model.externalData = [{ path: 'weights.onnx', file: previous.model.file }];
+        next.runtime.files = external.runtime.files;
+        next.files = [next.model.file, previous.model.file, next.vectors.file, next.catalog.rows, ...next.runtime.files];
+        for (const file of next.files) payloads.set(new URL(file.url, nextUrl).href, Buffer.from(CONTENT.get(file.url)!));
+        updateRuntimeUrls.clear();
+        for (const file of next.runtime.files) updateRuntimeUrls.add(new URL(file.url, nextUrl).href);
+        json.set(nextUrl.href, JSON.stringify(next));
+      },
+    };
     // Fail closed: no unrecognized encoder can escape this bounded fixture.
     await context.route('**/*.onnx*', route => route.abort('blockedbyclient'));
     await context.route(url => json.has(url.href) || payloads.has(url.href) ||
@@ -47,10 +61,8 @@ const test = base.extend<{ upgrade: Upgrade }>({
       if (path === '/catalog.json') return route.fulfill({ json: { url: catalogUrl.pathname } });
       if (path === '/model.json') return route.fulfill({ json: { url: advertiseUpdate ? nextUrl.pathname : previousUrl.pathname } });
       if (path === '/photos.json') { state.photos++; return route.fulfill({ status: 500, body: 'No reference photos in this upgrade fixture' }); }
-      if (url === runtimeUrl) {
-        if (advertiseUpdate) { state.runtime.push(route); return; }
-        return route.fulfill({ body: previousRuntimeBody });
-      }
+      if (advertiseUpdate && updateRuntimeUrls.has(url)) { state.runtime.push(route); return; }
+      if (url === runtimeUrl) return route.fulfill({ body: previousRuntimeBody });
       if (url === weightsUrl) {
         const range = route.request().headers().range ?? '';
         state.weightRanges.push(range);
@@ -138,4 +150,22 @@ test('transient upgrade retries stay bounded with the old model intact, then rec
   await expect.poll(async () => (await savedState(page)).receipt?.manifest.id).toBe('updated-model');
   expect((await savedState(page)).chunks).toEqual(saved.chunks);
   expect(upgrade.weightRanges).toEqual(['bytes=0-8388607', 'bytes=8388608-8388864']);
+});
+
+test('a browser without JSPI keeps its saved legacy model and catalog without downloading an unusable update', async ({ page, upgrade }) => {
+  const saved = await savedState(page);
+  const initialWeightRequests = [...upgrade.weightRanges];
+  upgrade.advertiseExternalData();
+  await page.addInitScript(() => { Reflect.deleteProperty(WebAssembly, 'Suspending'); });
+  await page.goto('/');
+  expect(await page.evaluate(() => 'Suspending' in WebAssembly)).toBe(false);
+  await expect(page.locator('#setup-status [role=alert]')).toContainText('needs WebAssembly JSPI');
+  await expect(page.locator('#setup-status')).toContainText('Update your browser');
+  await expect(page.locator('#setup-status')).toContainText('Your saved model and catalog are kept');
+  await expect(page.getByRole('table')).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Fixture 0', exact: true })).toBeVisible();
+  await expect(page.locator('.diagnostics dt').filter({ hasText: /^Model$/ }).locator('+ dd')).toHaveText('previous-model');
+  expect(await savedState(page)).toEqual(saved);
+  expect(upgrade.runtime).toHaveLength(0);
+  expect(upgrade.weightRanges).toEqual(initialWeightRequests);
 });

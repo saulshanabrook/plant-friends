@@ -97,6 +97,11 @@ export function useOfflinePacks() {
           if (catalog?.kind !== 'pfaf' || model.kind !== 'bioclip2' || catalog.id !== model.catalog.id || catalog.sourceSha256 !== model.catalog.sourceSha256 || index.current.length !== model.catalog.fullTaxonCount) {
             failed(new Error('The model needs a matching PFAF catalog. Reopen this page after compatible downloads are available.')); return;
           }
+          if (model.model.externalData?.length && !('Suspending' in WebAssembly)) {
+            const message = 'This model update needs WebAssembly JSPI. Update your browser to install it.' +
+              (pack.installed ? ' Your saved model and catalog are kept.' : ' PFAF browsing remains available.');
+            update(kind, { error: message }); failed(new Error(message)); return;
+          }
         }
         setPhase('downloading'); update(kind, { downloading: true, progress: null, error: null });
         try {
