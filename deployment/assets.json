@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
   "catalogId": "39831ede5fe0b995b55c",
-  "modelId": "e2b03528fe84908219e7",
+  "modelId": "8ea9a1391621f4cb429f",
   "runtimeVersion": "1.30.0",
   "archive": {
-    "url": "https://github.com/saulshanabrook/plant-friends/releases/download/offline-assets-e2b03528fe84908219e7/plant-friends-assets-e2b03528fe84908219e7.tar.gz",
-    "bytes": 498785904,
-    "sha256": "804ff1e6d5b57514123db928b391beecc9ec76981da4cd4d5d2f11f5759eec7b"
+    "url": "https://github.com/saulshanabrook/plant-friends/releases/download/offline-assets-8ea9a1391621f4cb429f/plant-friends-assets-8ea9a1391621f4cb429f.tar.gz",
+    "bytes": 496304460,
+    "sha256": "6eefd225439b66121d2c1cc8376d36f90e410e84b0b4058dda7d2cb0e1690b35"
   },
   "files": [
     {
@@ -16,21 +16,31 @@
     },
     {
       "path": "model.json",
-      "bytes": 60,
-      "sha256": "060086b3dc9ac2c3ea7e0bb5d5db71adcc5446607e78919cfb314109e262c9d5"
+      "bytes": 59,
+      "sha256": "6c914f32f73b67a9675689cdc5374e8cb604cf60cf69d12b58d6185b5d1fd3cb"
     },
     {
-      "path": "packs/bioclip2/e2b03528fe84908219e7/manifest.json",
-      "bytes": 8136,
-      "sha256": "5df0ca3ad7419c4f3902a1dd9e7629824e27a009f41e5ff9963000229f11c568"
+      "path": "packs/bioclip2/8ea9a1391621f4cb429f/external-data-proof.json",
+      "bytes": 58242,
+      "sha256": "68a18d05bc7525409ef48d8cbc2c9de2109b02fddb551497588528c7caa42aef"
     },
     {
-      "path": "packs/bioclip2/e2b03528fe84908219e7/rows.json",
+      "path": "packs/bioclip2/8ea9a1391621f4cb429f/image.external.onnx",
+      "bytes": 465117,
+      "sha256": "3c6c481544839e020010a88e7ca04a0656218a8e4c5c03cb155a133a7bb5ee5a"
+    },
+    {
+      "path": "packs/bioclip2/8ea9a1391621f4cb429f/manifest.json",
+      "bytes": 9530,
+      "sha256": "0a2720acb7ba360df2242486ee4c2a9a657435569498135b7beae2c825843101"
+    },
+    {
+      "path": "packs/bioclip2/8ea9a1391621f4cb429f/rows.json",
       "bytes": 251008,
       "sha256": "1322fcf48ff8244b09e34c15baea7c3e61df66f3e4f3debf2294c0a1066141c2"
     },
     {
-      "path": "packs/bioclip2/e2b03528fe84908219e7/vectors.f32",
+      "path": "packs/bioclip2/8ea9a1391621f4cb429f/vectors.f32",
       "bytes": 27021312,
       "sha256": "335a9fc60b3612d43d2c7b3255513515f55de108304fd7bf5a82652bd8229d01"
     },
@@ -41,8 +51,8 @@
     },
     {
       "path": "packs/NOTICE.txt",
-      "bytes": 394921,
-      "sha256": "c062b6ff41b7e279dca7ce7bd208f6ca5437fa4f0eb20376a661d6f9a7e1085f"
+      "bytes": 395916,
+      "sha256": "c0dad2eae872e2cb91aaf68802ab47a6ee7d8c4dca7e9a8107f869b713c32c46"
     },
     {
       "path": "packs/pfaf/39831ede5fe0b995b55c/details-000.json",
@@ -230,20 +240,20 @@
       "sha256": "108d345af883def230d3bffd0e634b4574ad8a1cd0d037cc2636a91985a29222"
     },
     {
-      "path": "runtime/1.30.0/ort-wasm-simd-threaded.asyncify.mjs",
-      "bytes": 53057,
-      "sha256": "3d1c85995364bb643302fc6fd877a0c3ba5ae72401815e0f24828a53d9191e28"
+      "path": "runtime/1.30.0/ort-wasm-simd-threaded.jspi.mjs",
+      "bytes": 50918,
+      "sha256": "270e2c6da9f297239d301d329782b6446641cb1e16a77967690adcfca35f3268"
     },
     {
-      "path": "runtime/1.30.0/ort-wasm-simd-threaded.asyncify.wasm",
-      "bytes": 26781914,
-      "sha256": "39f9f0894d478800487ed9f7dbe92618498db320cf55c8e3d89adff8dce658da"
+      "path": "runtime/1.30.0/ort-wasm-simd-threaded.jspi.wasm",
+      "bytes": 16758545,
+      "sha256": "a54c76f86b0f0d9572380cf1c6292a7b3903716ffcbcd6b0e5c7050bf430eb93"
     },
     {
       "path": "runtime/manifest.json",
-      "bytes": 320,
-      "sha256": "aa9be29de6f6a52351069fa037ceb1dc8f5cd4b5c845f86c426dce38872c856a"
+      "bytes": 312,
+      "sha256": "f415a2e03d677d6b91944df40aa7dbfc13fb776d3e3212e2ba316794d4860202"
     }
   ],
-  "totalBytes": 706366029
+  "totalBytes": 696866260
 }

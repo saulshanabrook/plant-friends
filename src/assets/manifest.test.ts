@@ -1,11 +1,63 @@
 import { describe, expect, test } from 'vitest';
 import { validateManifest, validateVectors, validateCatalogIndex, validateCatalogDetails } from './manifest';
-import { asset, catalog, model, MANIFEST_URL, MODEL_URL, INDEX, CONTENT } from '../../tests/assets/fixtures';
+import { asset, catalog, model, externalModel, MANIFEST_URL, MODEL_URL, INDEX, CONTENT } from '../../tests/assets/fixtures';
 
 describe('untrusted manifest compatibility', () => {
   test('accepts a complete catalog and the pinned supported encoder contract', () => {
     expect(validateManifest(catalog(), MANIFEST_URL).kind).toBe('pfaf');
     expect(validateManifest(model(), MODEL_URL).kind).toBe('bioclip2');
+    const legacy = model(); legacy.model.externalData = [];
+    expect(validateManifest(legacy, MODEL_URL)).toBe(legacy);
+    const external = externalModel();
+    expect(validateManifest(external, MODEL_URL)).toBe(external);
+  });
+
+  test.each([null, {}, 'weights.onnx', [null], [{}], [{ path: 'weights.onnx', file: null }]])('rejects malformed external data: %j', externalData => {
+    const pack = { ...externalModel(), model: { ...externalModel().model, externalData } };
+    expect(() => validateManifest(pack, MODEL_URL)).toThrow('external data');
+    try { validateManifest(pack, MODEL_URL); } catch (error) { expect(error).not.toBeInstanceOf(TypeError); }
+  });
+
+  test.each(['', '.', '..', './weights.onnx', '../weights.onnx', 'a/../weights.onnx', '/weights.onnx',
+    'https://elsewhere.test/weights.onnx', 'a\\weights.onnx', 'weights.onnx?x=1', 'weights.onnx#x', '%77eights.onnx'])('rejects a noncanonical external data path: %s', path => {
+    const pack = externalModel(); pack.model.externalData![0].path = path;
+    expect(() => validateManifest(pack, MODEL_URL)).toThrow('relative path');
+  });
+
+  test('requires external descriptors to be included exactly and use unique paths and file URLs', () => {
+    const missing = externalModel(); missing.files = missing.files.filter(file => file !== missing.model.externalData![0].file);
+    expect(() => validateManifest(missing, MODEL_URL)).toThrow('missing a required');
+    const changed = externalModel();
+    changed.model.externalData![0].file = { ...changed.model.externalData![0].file, sha256: '0'.repeat(64) };
+    expect(() => validateManifest(changed, MODEL_URL)).toThrow('missing a required');
+    const duplicate = externalModel(); duplicate.model.externalData!.push({ ...duplicate.model.externalData![0] });
+    expect(() => validateManifest(duplicate, MODEL_URL)).toThrow('unique paths');
+    const sameFile = externalModel(); sameFile.model.externalData!.push({ ...sameFile.model.externalData![0], path: 'alias.onnx' });
+    expect(() => validateManifest(sameFile, MODEL_URL)).toThrow('unique paths');
+    const samePath = externalModel();
+    const otherFile = asset('other-weights.onnx', 'other weights');
+    samePath.files.push(otherFile); samePath.model.externalData!.push({ path: 'weights.onnx', file: otherFile });
+    expect(() => validateManifest(samePath, MODEL_URL)).toThrow('unique paths');
+    const graph = externalModel(); graph.model.externalData![0].file = graph.model.file;
+    expect(() => validateManifest(graph, MODEL_URL)).toThrow('unique paths');
+    const query = externalModel(); query.model.externalData![0].file.url += '?alias';
+    expect(() => validateManifest(query, MODEL_URL)).toThrow('without query');
+    const foreign = externalModel(); foreign.model.externalData![0].file.url = 'https://elsewhere.test/weights.onnx';
+    expect(() => validateManifest(foreign, MODEL_URL)).toThrow('on this site');
+  });
+
+  test('external data requires the exact JSPI pair and a bounded graph without changing precision', () => {
+    const asyncify = externalModel();
+    for (const runtime of asyncify.runtime.files) runtime.url = runtime.url.replace('.jspi.', '.asyncify.');
+    expect(() => validateManifest(asyncify, MODEL_URL)).toThrow('native WebGPU JSPI');
+    const legacy = externalModel(); legacy.model.externalData = [];
+    expect(() => validateManifest(legacy, MODEL_URL)).toThrow('native WebGPU Asyncify');
+    const mixed = externalModel(); mixed.runtime.files[0].url = mixed.runtime.files[0].url.replace('.jspi.', '.asyncify.');
+    expect(() => validateManifest(mixed, MODEL_URL)).toThrow('native WebGPU JSPI');
+    const large = externalModel(); large.model.file.bytes = 16 * 1024 * 1024 + 1;
+    expect(() => validateManifest(large, MODEL_URL)).toThrow('small graph');
+    const precision = externalModel(); precision.model.precision = 'FP16 with FP32 input/output';
+    expect(() => validateManifest(precision, MODEL_URL)).toThrow('incompatible');
   });
 
   test.each([null, [], {}, { schemaVersion: 2 }, { ...catalog(), files: [null] },

@@ -1,7 +1,7 @@
 # Prepared assets for GitHub Pages
 
 `assets.json` selects one complete PFAF catalog, one complete BioCLIP 2 pack,
-their shared encoder, the exact native Asyncify runtime pair, both root
+their shared encoder and small external-data graph/proof, the exact native JSPI runtime pair, both root
 pointers/manifests, and `packs/NOTICE.txt`. It records every selected file's byte
 count and SHA-256. Old packs, fixture photos, reference tensors, and caches are
 excluded. Website notices remain ordinary tracked public files; the archive also
@@ -14,7 +14,7 @@ packs, pointers, runtime, fixtures, or caches:
 
 ```sh
 node --test scripts/pages-assets.test.mjs
-node scripts/pages-assets.mjs create --source /Users/saul/p/plant-friends/public --archive .cache/plant-friends-assets-e2b03528fe84908219e7.tar.gz
+node scripts/pages-assets.mjs create --source /Users/saul/p/plant-friends/public --archive .cache/plant-friends-assets-8ea9a1391621f4cb429f.tar.gz
 ```
 
 The command updates `deployment/assets.json` with the archive's actual size and
@@ -27,7 +27,7 @@ selection and release receipt.
 For a local import check, use a target with no generated asset namespaces:
 
 ```sh
-node scripts/pages-assets.mjs restore --archive .cache/plant-friends-assets-e2b03528fe84908219e7.tar.gz --target .cache/pages-restored-public
+node scripts/pages-assets.mjs restore --archive .cache/plant-friends-assets-8ea9a1391621f4cb429f.tar.gz --target .cache/pages-restored-public
 node scripts/pages-assets.mjs verify --target .cache/pages-restored-public
 ```
 
@@ -50,6 +50,8 @@ node scripts/pages-assets.mjs verify --target dist
 This detects runtime changes introduced by `copy-runtime.mjs`, missing/corrupt
 selected files, or accidental inclusion of old packs/fixtures. Ordinary tracked
 public files such as icons and notices are copied by Vite as usual.
+
+The JSPI pack `8ea9a1391621f4cb429f` contains the same original 609,029,031-byte weight asset as its Asyncify predecessor. Its 465,117-byte graph references verified initializer offsets inside that file. Existing browser caches reuse the unchanged SHA/size chunk keys; only the graph, proof and matching JSPI runtime need new content. `copy-runtime.mjs` selects the runtime pair from the active model's external-data descriptors. The manifest/proof binds the source pack and unchanged numerical graph; see [preparation](../tools/plant_assets/README.md). The selected core archive contains 49 files / 696,866,260 bytes, with the supplemental photo archive unchanged.
 
 The GitHub Actions workflow runs only for main pushes or manual dispatch from
 main. Build permissions are `contents: read` and `pages: read`; deployment has `pages: write`,

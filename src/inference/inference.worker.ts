@@ -1,5 +1,5 @@
 /// <reference lib="webworker" />
-import * as ort from 'onnxruntime-web/webgpu';
+import type * as Ort from 'onnxruntime-web/webgpu';
 import type { CatalogManifest, ModelManifest } from '../assets/manifest';
 import { validateManifest, validateVectors } from '../assets/manifest';
 import { readAsset } from '../assets/storage';
@@ -8,7 +8,8 @@ import { normalize, rank } from './scoring';
 import type { InferenceResult, RuntimeInfo, WorkerCommand, WorkerReply } from './protocol';
 
 declare const self: DedicatedWorkerGlobalScope;
-let session: ort.InferenceSession | null = null;
+let ort: typeof Ort | null = null;
+let session: Ort.InferenceSession | null = null;
 let manifest: ModelManifest | null = null;
 let vectors = new Float32Array();
 let rows: string[] = [];
@@ -26,9 +27,13 @@ async function load(command: Extract<WorkerCommand, { type: 'load' }>): Promise<
   const catalog = validateManifest(command.catalog.manifest, command.catalog.manifestUrl);
   if (model.kind !== 'bioclip2' || catalog.kind !== 'pfaf') throw new Error('Wrong pack types.');
   const key = JSON.stringify([model.id, catalog.id, catalog.sourceSha256, model.model.file.sha256,
-    model.vectors.file.sha256, model.catalog.rows.sha256, model.preprocessing.sha256, model.prompts.sha256, model.runtime.version]);
+    model.vectors.file.sha256, model.catalog.rows.sha256, model.preprocessing.sha256, model.prompts.sha256,
+    model.runtime.version, model.runtime.files, model.model.externalData ?? []]);
   if (session && !lost && sessionKey === key && info) return info;
   if (running) throw new Error('Wait for identification to finish before switching models.');
+  const jspi = !!model.model.externalData?.length;
+  if (jspi && !('Suspending' in WebAssembly))
+    throw new Error('This identification pack needs WebAssembly JSPI. Update your browser and retry. PFAF browsing still works.');
   const vectorResponse = await readAsset(command.model, model.vectors.file);
   const loadedVectors = new Float32Array(await vectorResponse.arrayBuffer());
   const loadedRows = await (await readAsset(command.model, model.catalog.rows)).json();
@@ -40,16 +45,25 @@ async function load(command: Extract<WorkerCommand, { type: 'load' }>): Promise<
   const adapterInfo = adapter.info;
   if (adapterInfo.isFallbackAdapter || /swiftshader|software/i.test(`${adapterInfo.description} ${adapterInfo.architecture}`))
     throw new Error('A hardware GPU is required for this model; software emulation is not supported.');
-  ort.env.wasm.numThreads = 1;
-  ort.env.wasm.proxy = false;
-  ort.env.wasm.wasmPaths = {
+  const runtime = jspi ? await import('onnxruntime-web/jspi') : await import('onnxruntime-web/webgpu');
+  runtime.env.wasm.numThreads = 1;
+  runtime.env.wasm.proxy = false;
+  runtime.env.wasm.wasmPaths = {
     mjs: new URL(model.runtime.files.find(file => file.url.endsWith('.mjs'))!.url, command.model.manifestUrl).href,
     wasm: new URL(model.runtime.files.find(file => file.url.endsWith('.wasm'))!.url, command.model.manifestUrl).href,
   };
-  if (!ort.env.webgpu.adapter) ort.env.webgpu.adapter = adapter;
-  ort.env.logLevel = command.diagnostics ? 'verbose' : 'warning';
-  if (ort.env.versions.web !== model.runtime.version) throw new Error('The app and downloaded runtime versions differ. Refresh and reinstall a compatible pack.');
+  if (!runtime.env.webgpu.adapter) runtime.env.webgpu.adapter = adapter;
+  runtime.env.logLevel = command.diagnostics ? 'verbose' : 'warning';
+  if (runtime.env.versions.web !== model.runtime.version) throw new Error('The app and downloaded runtime versions differ. Refresh and reinstall a compatible pack.');
   const bytes = await (await readAsset(command.model, model.model.file)).arrayBuffer();
+  // JSPI reads initializer ranges from Blob backing. Never materialize the
+  // external weights as a model-sized JavaScript ArrayBuffer.
+  const externalData: { path: string; data: Blob }[] = [];
+  for (const entry of model.model.externalData ?? []) {
+    const data = await (await readAsset(command.model, entry.file)).blob();
+    if (data.size !== entry.file.bytes) throw new Error('The saved encoder weights have an incorrect size. Reinstall the identification pack.');
+    externalData.push({ path: entry.path, data });
+  }
   if (session) await session.release();
   session = null; manifest = null; info = null; sessionKey = null;
   const previousDevice = device;
@@ -62,9 +76,10 @@ async function load(command: Extract<WorkerCommand, { type: 'load' }>): Promise<
     maxComputeInvocationsPerWorkgroup: adapter.limits.maxComputeInvocationsPerWorkgroup,
   } });
   try {
-    session = await ort.InferenceSession.create(bytes, {
+    session = await runtime.InferenceSession.create(bytes, {
       executionProviders: [{ name: 'webgpu', device: nextDevice }], enableProfiling: false,
       logSeverityLevel: command.diagnostics ? 0 : 2, logVerbosityLevel: command.diagnostics ? 1 : 0,
+      ...(jspi ? { externalData } : {}),
     });
   } catch (error) { nextDevice.destroy(); throw error; }
   device = nextDevice;
@@ -73,6 +88,7 @@ async function load(command: Extract<WorkerCommand, { type: 'load' }>): Promise<
     throw new Error('The exported model has unexpected input or output names.');
   }
   rows = validatedRows;
+  ort = runtime;
   vectors = loadedVectors;
   manifest = model;
   sessionKey = key;
@@ -88,8 +104,9 @@ async function load(command: Extract<WorkerCommand, { type: 'load' }>): Promise<
     features: [...adapter.features],
     limits: { maxBufferSize: adapter.limits.maxBufferSize, maxStorageBufferBindingSize: adapter.limits.maxStorageBufferBindingSize },
     runtimeVersion: model.runtime.version, executionProvider: 'webgpu', initializationMs: performance.now() - started,
-    modelBytes: model.model.file.bytes, packId: model.id, catalogId: model.catalog.id,
-    backend: 'native-webgpu-asyncify', deviceFeatures: [...nextDevice.features],
+    modelBytes: model.model.file.bytes + (model.model.externalData ?? []).reduce((total, entry) => total + entry.file.bytes, 0),
+    packId: model.id, catalogId: model.catalog.id,
+    backend: jspi ? 'native-webgpu-jspi' : 'native-webgpu-asyncify', deviceFeatures: [...nextDevice.features],
   };
   return info;
 }
@@ -101,7 +118,7 @@ async function drain(): Promise<void> {
     const command = pending;
     pending = null;
     try {
-      if (!session || !manifest) throw new Error('Load the downloaded identification pack first.');
+      if (!session || !manifest || !ort) throw new Error('Load the downloaded identification pack first.');
       if (lost) throw new Error('The GPU connection was lost. Reload identification to try again.');
       const started = performance.now();
       const data = command.type === 'tensor' ? command.tensor : await preparePhoto(command.photo);
@@ -125,7 +142,7 @@ async function drain(): Promise<void> {
           return Reflect.apply(indirect, this, args);
         };
       }
-      let outputs: ort.InferenceSession.ReturnType | null = null;
+      let outputs: Ort.InferenceSession.ReturnType | null = null;
       try {
         outputs = await session.run({ [manifest.model.inputName]: input });
         const inferred = performance.now();

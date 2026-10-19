@@ -1,6 +1,6 @@
 # Asset preparation tools
 
-Run commands from the repository root with the locked Python environment. The source SQLite database is read-only. Model preparation always uses the full projected BioCLIP 2 image encoder at immutable revision `2957b322090f9cb17ae72c71981c7218a28d81e0`; `--limit` changes only the scientific-name vector rows for an explicitly labeled feasibility pack. Production precision is `FP16 matrix storage with FP32 arithmetic and input/output`: finite FP32 initializers of rank at least two with at least 4,096 elements are stored in FP16, then cast to their original FP32 names before the unchanged encoder operations. Scalars, vectors, biases, normalization parameters, and smaller tensors stay FP32. The deployment recipe binds this policy separately from the FP32 export and text-vector identities, so deployment changes reuse those caches. Use the matching self-hosted native asyncify runtime from the locked Node package; actual browser numerical gates still apply.
+Run commands from the repository root with the locked Python environment. The source SQLite database is read-only. Model preparation always uses the full projected BioCLIP 2 image encoder at immutable revision `2957b322090f9cb17ae72c71981c7218a28d81e0`; `--limit` changes only the scientific-name vector rows for an explicitly labeled feasibility pack. Production precision is `FP16 matrix storage with FP32 arithmetic and input/output`: finite FP32 initializers of rank at least two with at least 4,096 elements are stored in FP16, then cast to their original FP32 names before the unchanged encoder operations. Scalars, vectors, biases, normalization parameters, and smaller tensors stay FP32. The deployment recipe binds this policy separately from the FP32 export and text-vector identities, so deployment changes reuse those caches. Use the matching self-hosted native runtime from the locked Node package: Asyncify for the self-contained baseline, JSPI for the external-data pack below. Actual browser numerical gates still apply.
 
 ```sh
 uv sync --locked
@@ -19,6 +19,18 @@ The `catalog` and `prepare-model` commands print the prepared manifest path. Aft
 ```sh
 uv run python -m tools.plant_assets prepare-model --catalog public/packs/pfaf/<catalog-id>/manifest.json --revision 2957b322090f9cb17ae72c71981c7218a28d81e0 --output public/packs/bioclip2
 ```
+
+To derive the same numerical encoder with a small graph and Blob-based external weights:
+
+```sh
+uv run python -m tools.plant_assets.external_data --source-manifest public/packs/bioclip2/<self-contained-pack-id>/manifest.json
+```
+
+This stages a new immutable pack and prints its manifest path, leaving `public/model.json`, the source pack, and `public/runtime/manifest.json` unchanged. It copies the installed matching JSPI runtime pair into the versioned runtime directory and reuses the source vectors, row mapping, image-export recipe, matrix-storage recipe, preprocessing and prompt metadata. It never loads a checkpoint, exports a model, recomputes vectors or changes tensor values. Select the staged pack only after the runtime/device gates pass.
+
+The small graph replaces every initializer's embedded `raw_data` with the virtual external location `weights.onnx` and verified byte offsets into the original content-addressed ONNX file. That existing 609 MB asset keeps its exact URL, SHA and size in `files[]`, allowing installed whole-file/chunk caches to be reused. Only the graph, JSPI runtime and derivation receipt need new content. `external-data-proof.json` is included in `files[]`; it binds the source pack/manifest hash, every initializer name/type/shape/payload hash/offset/length and the unchanged graph metadata. The original operator graph passes ONNX checker, and restoring the original initializer metadata reproduces the same weight-stripped ModelProto. A small actual ONNX Runtime CPU regression also verifies bitwise-equal outputs through offsets into the original ONNX file. The native ONNX external-file checker rejects hardlinked files, so preparation does not create a second full-size weight file merely for that filesystem policy.
+
+The derived manifest records `externalDataPreparation.sourcePackId` and its source-manifest SHA. Existing numerical reference arrays remain references to that verified source pack; a browser compatibility check must explicitly verify this provenance and unchanged vectors/preprocessing rather than relabeling or regenerating expected arrays. JSPI avoids the old full-model ArrayBuffer loading path, but does not establish a device's remaining session/GPU memory requirement.
 
 Checkpoint downloads, ONNX exports, vectors, and public packs are cached locally and remain outside git. Keep the repository working directory when running `reference`: `pack.reference.fp32Export` identifies its local recipe-specific export cache.
 

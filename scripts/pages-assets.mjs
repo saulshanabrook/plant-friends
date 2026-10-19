@@ -66,11 +66,15 @@ export async function selectAssets(source, metadata, packageFile = 'node_modules
     if (manifest.id !== id || manifest.schemaVersion !== 1 || manifest.kind !== folder || !Array.isArray(manifest.files))
       throw new Error(`Invalid ${kind} deployment manifest.`);
     manifests[kind] = { path, manifest };
+    const externalData = kind === 'model' ? manifest.model.externalData ?? [] : [];
+    if (!Array.isArray(externalData) || externalData.some(entry => !entry?.file)) throw new Error('Invalid model external-data descriptors.');
+    const variant = externalData.length ? 'jspi' : 'asyncify';
     for (const file of manifest.files) {
       const target = assetPath(file.url, path);
       const allowed = target.startsWith(`packs/${folder}/${id}/`) ||
-        (kind === 'model' && (target === `packs/bioclip2/weights/${manifest.model.file.sha256}.onnx` ||
-          /^runtime\/[^/]+\/ort-wasm-simd-threaded\.asyncify\.(mjs|wasm)$/.test(target)));
+        (kind === 'model' && ([manifest.model.file, ...externalData.map(entry => entry.file)]
+          .some(weight => target === `packs/bioclip2/weights/${weight.sha256}.onnx`) ||
+          ['mjs', 'wasm'].some(ext => target === `runtime/${version}/ort-wasm-simd-threaded.${variant}.${ext}`)));
       if (!allowed) throw new Error(`Unexpected asset outside the selected pack: ${target}`);
       await add(target, file);
     }
@@ -81,18 +85,20 @@ export async function selectAssets(source, metadata, packageFile = 'node_modules
       model.catalog.taxonCount !== catalog.taxonCount || model.catalog.fullTaxonCount !== catalog.taxonCount ||
       assetPath(model.catalog.url, manifests.model.path) !== manifests.catalog.path || model.runtime.version !== version)
     throw new Error('Deployment requires the matching complete catalog and runtime.');
-  for (const file of [model.model.file, model.vectors.file, model.catalog.rows, ...model.runtime.files]) {
+  const externalData = model.model.externalData ?? [];
+  for (const file of [model.model.file, ...externalData.map(entry => entry.file), model.vectors.file, model.catalog.rows, ...model.runtime.files]) {
     const selected = files.get(assetPath(file.url, manifests.model.path));
     if (!selected || selected.bytes !== file.bytes || selected.sha256 !== file.sha256)
       throw new Error('A required model/runtime descriptor is absent or inconsistent.');
   }
   const runtime = await add('runtime/manifest.json');
-  const expectedRuntimePaths = ['mjs', 'wasm'].map(ext => `runtime/${version}/ort-wasm-simd-threaded.asyncify.${ext}`);
+  const variant = externalData.length ? 'jspi' : 'asyncify';
+  const expectedRuntimePaths = ['mjs', 'wasm'].map(ext => `runtime/${version}/ort-wasm-simd-threaded.${variant}.${ext}`);
   if (runtime.version !== version || runtime.files.length !== 2 || model.runtime.files.length !== 2)
-    throw new Error('Expected exactly the pinned native Asyncify runtime pair.');
+    throw new Error(`Expected exactly the pinned native ${variant} runtime pair.`);
   if (new Set(runtime.files.map(file => assetPath(file.url, 'runtime/manifest.json'))).size !== 2 ||
       expectedRuntimePaths.some(path => !model.runtime.files.some(file => assetPath(file.url, manifests.model.path) === path)))
-    throw new Error('The model and runtime must identify the same complete Asyncify pair.');
+    throw new Error(`The model and runtime must identify the same complete ${variant} pair.`);
   for (const file of runtime.files) {
     const path = assetPath(file.url, 'runtime/manifest.json');
     if (!expectedRuntimePaths.includes(path)) throw new Error('Unexpected runtime file.');

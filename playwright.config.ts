@@ -14,7 +14,7 @@ export default defineConfig({
   ],
   projects: [
     { name: 'ui', testMatch: /(e2e\/(photos|catalog|privacy|pwa|keyboard|setup|reference-photos|header|automatic-identification)|assets\/navigation)\.spec\.ts/, use: { baseURL: 'http://127.0.0.1:4173' } },
-    { name: 'assets', testMatch: /e2e\/install\.spec\.ts/, use: { baseURL: 'http://127.0.0.1:4174' } },
+    { name: 'assets', testMatch: /e2e\/(install|model-upgrade)\.spec\.ts/, use: { baseURL: 'http://127.0.0.1:4174' } },
     { name: 'real-webgpu', testMatch: /integration\/.*\.spec\.ts/, timeout: 900_000, use: { baseURL: 'http://127.0.0.1:4173' } },
   ],
 });

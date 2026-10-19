@@ -12,7 +12,7 @@ import { createArchive, restoreAssets, selectAssets, validateArchive, verifyAsse
 const scratch = [];
 afterEach(async () => { await Promise.all(scratch.splice(0).map(path => rm(path, { recursive: true, force: true }))); });
 
-async function fixture() {
+async function fixture(external = false) {
   const root = await mkdtemp(join(tmpdir(), 'plant-pages-test-'));
   scratch.push(root);
   const source = join(root, 'source');
@@ -31,19 +31,20 @@ async function fixture() {
   const weightContent = 'fabricated encoder';
   const weightHash = createHash('sha256').update(weightContent).digest('hex');
   const weights = { url: `../weights/${weightHash}.onnx`, ...await asset(`packs/bioclip2/weights/${weightHash}.onnx`, weightContent) };
+  const graph = external ? { url: 'graph.onnx', ...await asset(`packs/bioclip2/${metadata.modelId}/graph.onnx`, 'fabricated external graph') } : weights;
   const vectors = { url: 'vectors.f32', ...await asset(`packs/bioclip2/${metadata.modelId}/vectors.f32`, 'fabricated vectors') };
   const rows = { url: 'rows.json', ...await asset(`packs/bioclip2/${metadata.modelId}/rows.json`, '["fixture"]') };
   const runtime = [];
   for (const ext of ['mjs', 'wasm']) {
-    const path = `runtime/1.30.0/ort-wasm-simd-threaded.asyncify.${ext}`;
+    const path = `runtime/1.30.0/ort-wasm-simd-threaded.${external ? 'jspi' : 'asyncify'}.${ext}`;
     runtime.push({ url: `../../../${path}`, ...await asset(path, `fabricated runtime ${ext}`) });
   }
   const catalog = { schemaVersion: 1, kind: 'pfaf', id: metadata.catalogId, sourceSha256: 'c'.repeat(64), taxonCount: 1, files: [index] };
   const model = { schemaVersion: 1, kind: 'bioclip2', id: metadata.modelId,
-    model: { file: weights }, vectors: { file: vectors },
+    model: { file: graph, externalData: external ? [{ path: 'original.onnx', file: weights }] : [] }, vectors: { file: vectors },
     catalog: { id: metadata.catalogId, sourceSha256: catalog.sourceSha256, taxonCount: 1, fullTaxonCount: 1,
       url: `../../pfaf/${metadata.catalogId}/manifest.json`, rows },
-    runtime: { version: metadata.runtimeVersion, files: runtime }, files: [weights, vectors, rows, ...runtime] };
+    runtime: { version: metadata.runtimeVersion, files: runtime }, files: [...(external ? [graph] : []), weights, vectors, rows, ...runtime] };
   await asset(catalogPath, JSON.stringify(catalog));
   await asset(modelPath, JSON.stringify(model));
   await asset('catalog.json', JSON.stringify({ url: catalogPath }));
@@ -124,4 +125,25 @@ test('runtime version drift and partial catalog pointers fail selection', async 
   f.model.catalog.taxonCount = 0;
   await writeFile(join(f.source, f.modelPath), JSON.stringify(f.model));
   await assert.rejects(selectAssets(f.source, f.metadata, f.packageFile), /matching complete catalog/);
+});
+
+test('external-data selection preserves the original weight receipt and authenticates the complete JSPI pair', async () => {
+  const f = await fixture(true);
+  const selected = await selectAssets(f.source, f.metadata, f.packageFile);
+  const weight = f.model.model.externalData[0].file;
+  assert.ok(selected.files.some(file => file.path.endsWith(`/weights/${weight.sha256}.onnx`) && file.sha256 === weight.sha256));
+  assert.equal(selected.files.filter(file => /\.jspi\.(mjs|wasm)$/.test(file.path)).length, 2);
+  const archive = join(f.root, 'external.tar.gz');
+  const pinned = await createArchive(f.source, archive, f.metadata, f.packageFile);
+  await restoreAssets(archive, join(f.root, 'restored'), pinned, f.packageFile);
+  f.model.files = f.model.files.filter(file => file !== weight);
+  await writeFile(join(f.source, f.modelPath), JSON.stringify(f.model));
+  await assert.rejects(selectAssets(f.source, f.metadata, f.packageFile), /required model\/runtime descriptor/);
+});
+
+test('external-data graph cannot select a legacy runtime pair', async () => {
+  const f = await fixture();
+  f.model.model.externalData = [{ path: 'original.onnx', file: f.model.model.file }];
+  await writeFile(join(f.source, f.modelPath), JSON.stringify(f.model));
+  await assert.rejects(selectAssets(f.source, f.metadata, f.packageFile), /Unexpected asset|same complete/);
 });

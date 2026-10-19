@@ -13,7 +13,8 @@ const output = process.argv[3] ?? 'reports/resumable-public.json';
 const metadata = JSON.parse(await readFile('deployment/assets.json', 'utf8'));
 const manifestPath = `packs/bioclip2/${metadata.modelId}/manifest.json`;
 const model = JSON.parse(await readFile(`public/${manifestPath}`, 'utf8'));
-const encoderUrl = new URL(model.model.file.url, new URL(manifestPath, base)).href;
+const encoder = model.model.externalData?.[0]?.file ?? model.model.file;
+const encoderUrl = new URL(encoder.url, new URL(manifestPath, base)).href;
 const photosPointer = JSON.parse(await readFile('public/photos.json', 'utf8'));
 const photosBytes = await readFile(`public/${photosPointer.url}`);
 if (createHash('sha256').update(photosBytes).digest('hex') !== photosPointer.sha256) throw new Error('Photo index hash differs.');
@@ -93,7 +94,7 @@ try {
         if (keys.length) results.push({ cache: name, keys });
       }
       return results;
-    }, model.model.file.sha256);
+    }, encoder.sha256);
     expect(report.savedBeforeRestart.length).toBeGreaterThan(0);
     await context.close();
     context = await chromium.launchPersistentContext(profile, { channel: 'chrome', headless: false });

@@ -1,6 +1,7 @@
 import { chromium } from '@playwright/test';
 import { spawn, execFile } from 'node:child_process';
 import { promisify } from 'node:util';
+import { createHash } from 'node:crypto';
 import { readFile, writeFile, mkdir, mkdtemp, rm } from 'node:fs/promises';
 import { platform, release, arch, tmpdir, cpus, totalmem } from 'node:os';
 import { join } from 'node:path';
@@ -43,7 +44,27 @@ try {
   const model = JSON.parse(await readFile(`public/${pointer.url}`, 'utf8'));
   if (!feasibilityOnly && model.catalog.taxonCount !== model.catalog.fullTaxonCount)
     throw new Error('Final verification requires the full catalog. Use --feasibility for an explicitly partial catalog.');
-  if (reference.packId !== model.id || !reference.exportChecked) throw new Error('Regenerate checked Python references for the active model pack.');
+  if (!reference.exportChecked || reference.modelRevision !== model.model.revision ||
+      reference.checkpointSha256 !== model.model.checkpointSha256 || reference.preprocessingSha256 !== model.preprocessing.sha256 ||
+      reference.promptSha256 !== model.prompts.sha256 || reference.catalogId !== model.catalog.id)
+    throw new Error('Regenerate checked Python references for the active numerical recipe.');
+  if (reference.packId !== model.id) {
+    const prepared = model.externalDataPreparation;
+    const proofBytes = prepared && await readFile(new URL(prepared.proof.url, new URL(pointer.url, `file://${process.cwd()}/public/`)));
+    if (!proofBytes || proofBytes.length !== prepared.proof.bytes ||
+        createHash('sha256').update(proofBytes).digest('hex') !== prepared.proof.sha256)
+      throw new Error('The external-data model needs its verified structural proof before reusing numerical references.');
+    const proof = JSON.parse(proofBytes);
+    const weights = model.model.externalData?.[0]?.file;
+    if (prepared.recipe.sourcePackId !== reference.packId || proof.sourceSha256 !== weights?.sha256 ||
+        proof.sourceBytes !== weights?.bytes || proof.graphSha256 !== model.model.file.sha256 ||
+        !/^[a-f0-9]{64}$/.test(proof.originalGraphAndTensorMetadataSha256 ?? '') ||
+        !/^[a-f0-9]{64}$/.test(proof.restoredGraphAndTensorMetadataSha256 ?? '') ||
+        proof.originalGraphAndTensorMetadataSha256 !== proof.restoredGraphAndTensorMetadataSha256)
+      throw new Error('The external-data graph does not preserve the checked reference model.');
+    report.numericalReference = { packId: reference.packId, activePackId: model.id, structuralProof: prepared.proof,
+      scope: 'Existing checked FP32 expected arrays reused after verified byte-identical weights and graph metadata reconstruction; not regenerated results.' };
+  }
   report.catalogCoverage = model.catalog;
   report.modelIdentity = model.model;
   report.runtimeIdentity = model.runtime;

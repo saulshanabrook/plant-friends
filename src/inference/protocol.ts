@@ -7,7 +7,7 @@ export interface RuntimeInfo {
   secureContext: boolean; adapter: Record<string, unknown>; features: string[];
   limits: Record<string, number>; runtimeVersion: string; executionProvider: 'webgpu';
   initializationMs: number; modelBytes: number; packId: string; catalogId: string;
-  backend: 'native-webgpu-asyncify'; deviceFeatures: string[];
+  backend: 'native-webgpu-asyncify' | 'native-webgpu-jspi'; deviceFeatures: string[];
 }
 export interface InferenceResult {
   requestId: number; packId: string; catalogId: string; inputCount: 1;

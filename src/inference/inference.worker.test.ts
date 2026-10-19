@@ -1,14 +1,24 @@
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 import type { InstalledPack } from '../assets/storage';
 import type { WorkerCommand, WorkerReply } from './protocol';
-import { asset, catalog, CONTENT, INDEX, MANIFEST_URL, model, MODEL_URL } from '../../tests/assets/fixtures';
+import { asset, catalog, CONTENT, externalModel, INDEX, MANIFEST_URL, model, MODEL_URL } from '../../tests/assets/fixtures';
 
 // These doubles exercise the real module's IPC and activation state. The tiny
 // fixture encoder is fabricated; these tests provide no GPU/numerical evidence.
 const doubles = vi.hoisted(() => ({
   readAsset: vi.fn(), preparePhoto: vi.fn(), createSession: vi.fn(),
+  createJspiSession: vi.fn(),
   run: vi.fn(), release: vi.fn(), inputDispose: vi.fn(), outputDispose: vi.fn(),
   env: { wasm: {}, webgpu: { adapter: undefined as unknown }, versions: { web: '1.30.0' }, logLevel: 'warning' },
+  jspiEnv: { wasm: {}, webgpu: { adapter: undefined as unknown }, versions: { web: '1.30.0' }, logLevel: 'warning' },
+}));
+vi.mock('onnxruntime-web/jspi', () => ({
+  env: doubles.jspiEnv,
+  InferenceSession: { create: doubles.createJspiSession },
+  Tensor: class {
+    dispose = doubles.inputDispose;
+    constructor(readonly type: string, readonly data: Float32Array, readonly dims: number[]) {}
+  },
 }));
 
 vi.mock('../assets/storage', () => ({ readAsset: doubles.readAsset }));
@@ -34,8 +44,8 @@ let requestAdapter: ReturnType<typeof vi.fn>;
 
 // Snapshot each coherent descriptor/content pair because the shared fixture
 // factory reuses URLs. Replacement B has valid but different rows AND vectors.
-function installedModel(id: string, replacement = false): InstalledPack {
-  const manifest = model();
+function installedModel(id: string, replacement = false, external = false): InstalledPack {
+  const manifest = external ? externalModel() : model();
   manifest.id = id;
   if (replacement) {
     const vectors = new Float32Array(5 * 768);
@@ -56,7 +66,11 @@ beforeEach(async () => {
   vi.clearAllMocks();
   doubles.readAsset.mockReset();
   doubles.createSession.mockReset();
+  doubles.createJspiSession.mockReset();
+  doubles.env.wasm = {};
   doubles.env.webgpu.adapter = undefined;
+  doubles.jspiEnv.wasm = {};
+  doubles.jspiEnv.webgpu.adapter = undefined;
   assetsByPack.clear();
   catalogPack = { manifestUrl: MANIFEST_URL, manifest: catalog(), installedAt: '2026-10-17T00:00:00Z', persistent: false };
   doubles.readAsset.mockImplementation(async (pack: InstalledPack, file: { url: string }) => {
@@ -68,6 +82,7 @@ beforeEach(async () => {
   embedding[0] = 1;
   doubles.run.mockResolvedValue({ embedding: { data: embedding, dispose: doubles.outputDispose } });
   doubles.createSession.mockResolvedValue(session);
+  doubles.createJspiSession.mockResolvedValue(session);
   doubles.preparePhoto.mockResolvedValue(new Float32Array(3 * 224 * 224));
   const device = {
     features: new Set(['shader-f16']), lost: new Promise(() => {}), destroy: vi.fn(),
@@ -82,6 +97,7 @@ beforeEach(async () => {
   worker = { isSecureContext: true, onmessage: null, postMessage: vi.fn<(reply: WorkerReply) => void>() };
   vi.stubGlobal('self', worker);
   vi.stubGlobal('navigator', { gpu: { requestAdapter } });
+  vi.stubGlobal('WebAssembly', Object.assign(Object.create(WebAssembly), { Suspending: class {} }));
   vi.stubGlobal('GPUComputePassEncoder', class {
     dispatchWorkgroups() {}
     dispatchWorkgroupsIndirect() {}
@@ -92,6 +108,96 @@ beforeEach(async () => {
 afterEach(() => vi.unstubAllGlobals());
 
 describe('worker IPC activation with explicit ORT/GPU doubles', () => {
+  test('JSPI receives a small graph and the exact cached weights Blob without reading a weights ArrayBuffer', async () => {
+    const pack = installedModel('external-model', false, true);
+    if (pack.manifest.kind !== 'bioclip2') throw new Error('Unexpected fixture kind');
+    const weights = pack.manifest.model.externalData![0];
+    const response = new Response(CONTENT.get(weights.file.url)!.slice().buffer);
+    const blob = vi.spyOn(response, 'blob');
+    const arrayBuffer = vi.spyOn(response, 'arrayBuffer').mockRejectedValue(new Error('Full weights ArrayBuffer forbidden.'));
+    const read = doubles.readAsset.getMockImplementation()!;
+    doubles.readAsset.mockImplementation((installed: InstalledPack, file: { url: string }) =>
+      file.url === weights.file.url ? Promise.resolve(response) : read(installed, file));
+
+    worker.onmessage!({ data: { type: 'load', id: 20, model: pack, catalog: catalogPack, index: INDEX } });
+    await vi.waitFor(() => expect(worker.postMessage).toHaveBeenCalledWith(expect.objectContaining({ type: 'loaded', id: 20 })));
+    expect(doubles.createSession).not.toHaveBeenCalled();
+    expect(doubles.createJspiSession).toHaveBeenCalledTimes(1);
+    const [graph, options] = doubles.createJspiSession.mock.calls[0];
+    expect(new Uint8Array(graph)).toEqual(CONTENT.get(pack.manifest.model.file.url));
+    expect(options.externalData).toHaveLength(1);
+    expect(options.externalData[0]).toMatchObject({ path: weights.path, data: expect.any(Blob) });
+    expect(await options.externalData[0].data.text()).toBe('not a model');
+    expect(blob).toHaveBeenCalledTimes(1);
+    expect(arrayBuffer).not.toHaveBeenCalled();
+    expect(doubles.jspiEnv.wasm).toMatchObject({ numThreads: 1, proxy: false, wasmPaths: {
+      mjs: 'https://plants.test/runtime/1.30.0/ort-wasm-simd-threaded.jspi.mjs',
+      wasm: 'https://plants.test/runtime/1.30.0/ort-wasm-simd-threaded.jspi.wasm',
+    } });
+    expect(worker.postMessage).toHaveBeenCalledWith(expect.objectContaining({ result: expect.objectContaining({
+      backend: 'native-webgpu-jspi', modelBytes: pack.manifest.model.file.bytes + weights.file.bytes,
+    }) }));
+    worker.onmessage!({ data: { type: 'tensor', id: 21, tensor: new Float32Array(3 * 224 * 224) } });
+    await vi.waitFor(() => expect(worker.postMessage).toHaveBeenCalledWith(expect.objectContaining({ type: 'result', id: 21 })));
+  });
+
+  test('missing JSPI fails before asset reads and leaves an active legacy session usable', async () => {
+    const legacy = installedModel('legacy');
+    worker.onmessage!({ data: { type: 'load', id: 30, model: legacy, catalog: catalogPack, index: INDEX } });
+    await vi.waitFor(() => expect(worker.postMessage).toHaveBeenCalledWith(expect.objectContaining({ type: 'loaded', id: 30 })));
+    const reads = doubles.readAsset.mock.calls.length;
+    vi.stubGlobal('WebAssembly', {});
+    const pack = installedModel('unsupported-jspi', false, true);
+    worker.onmessage!({ data: { type: 'load', id: 31, model: pack, catalog: catalogPack, index: INDEX } });
+    await vi.waitFor(() => expect(worker.postMessage).toHaveBeenCalledWith(expect.objectContaining({
+      type: 'error', id: 31, code: 'model-initialization', message: expect.stringContaining('needs WebAssembly JSPI'),
+    })));
+    expect(doubles.readAsset).toHaveBeenCalledTimes(reads);
+    expect(doubles.createJspiSession).not.toHaveBeenCalled();
+    expect(doubles.release).not.toHaveBeenCalled();
+    worker.onmessage!({ data: { type: 'tensor', id: 32, tensor: new Float32Array(3 * 224 * 224) } });
+    await vi.waitFor(() => expect(worker.postMessage).toHaveBeenCalledWith(expect.objectContaining({
+      type: 'result', id: 32, result: expect.objectContaining({ packId: 'legacy' }),
+    })));
+  });
+
+  test('JSPI failure reports the actual error and destroys its requested device without falling back', async () => {
+    const pack = installedModel('broken-jspi', false, true);
+    doubles.createJspiSession.mockRejectedValueOnce(new Error('Explicit JSPI initialization failure.'));
+    worker.onmessage!({ data: { type: 'load', id: 40, model: pack, catalog: catalogPack, index: INDEX } });
+    await vi.waitFor(() => expect(worker.postMessage).toHaveBeenCalledWith({
+      type: 'error', id: 40, code: 'model-initialization', message: 'Explicit JSPI initialization failure.',
+    }));
+    const adapter = await requestAdapter.mock.results[0].value;
+    expect((await adapter.requestDevice.mock.results[0].value).destroy).toHaveBeenCalledTimes(1);
+    expect(doubles.createSession).not.toHaveBeenCalled();
+  });
+
+  test.each(['missing', 'truncated'])('%s external weights fail before replacing an active legacy session', async failure => {
+    const legacy = installedModel('saved-legacy');
+    worker.onmessage!({ data: { type: 'load', id: 50, model: legacy, catalog: catalogPack, index: INDEX } });
+    await vi.waitFor(() => expect(worker.postMessage).toHaveBeenCalledWith(expect.objectContaining({ type: 'loaded', id: 50 })));
+    const pack = installedModel('unusable-weights', false, true);
+    if (pack.manifest.kind !== 'bioclip2') throw new Error('Unexpected fixture kind');
+    const weights = pack.manifest.model.externalData![0].file;
+    const read = doubles.readAsset.getMockImplementation()!;
+    doubles.readAsset.mockImplementation((installed: InstalledPack, file: { url: string }) => {
+      if (file.url !== weights.url) return read(installed, file);
+      if (failure === 'missing') throw new Error('An offline file is missing or was evicted. Reinstall the downloaded pack.');
+      return Promise.resolve(new Response('short'));
+    });
+    worker.onmessage!({ data: { type: 'load', id: 51, model: pack, catalog: catalogPack, index: INDEX } });
+    await vi.waitFor(() => expect(worker.postMessage).toHaveBeenCalledWith(expect.objectContaining({
+      type: 'error', id: 51, message: expect.stringContaining(failure === 'missing' ? 'missing or was evicted' : 'incorrect size'),
+    })));
+    expect(doubles.createJspiSession).not.toHaveBeenCalled();
+    expect(doubles.release).not.toHaveBeenCalled();
+    worker.onmessage!({ data: { type: 'tensor', id: 52, tensor: new Float32Array(3 * 224 * 224) } });
+    await vi.waitFor(() => expect(worker.postMessage).toHaveBeenCalledWith(expect.objectContaining({
+      type: 'result', id: 52, result: expect.objectContaining({ packId: 'saved-legacy' }),
+    })));
+  });
+
   test('an adapter failure for validated replacement B preserves active A rows and vectors', async () => {
     const first = installedModel('model-A');
     const replacement = installedModel('model-B', true);

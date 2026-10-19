@@ -17,6 +17,7 @@ export interface ModelManifest {
   model: {
     repository: string; revision: string; checkpointSha256: string; precision: string;
     dimension: number; inputName: string; outputName: string; inputShape: number[]; outputShape: number[]; file: AssetFile;
+    externalData?: { path: string; file: AssetFile }[];
   };
   catalog: { id: string; sourceSha256: string; url: string; taxonCount: number; fullTaxonCount: number; rows: AssetFile };
   vectors: { file: AssetFile; shape: number[]; dtype: string; byteOrder: string };
@@ -109,17 +110,38 @@ export function validateManifest(value: unknown, manifestUrl: string): PackManif
     catch { throw new Error('The identification pack has an invalid catalog address.'); }
     if (catalogUrl.origin !== base.origin || catalogUrl.username || catalogUrl.password || catalogUrl.href.includes('#'))
       throw new Error('The identification pack must reference a catalog on this site.');
-    for (const required of [pack.model.file, pack.vectors.file, pack.catalog.rows, ...pack.runtime.files]) {
+    const externalData = pack.model.externalData;
+    if (externalData !== undefined && (!Array.isArray(externalData) || externalData.some(entry => !object(entry) ||
+        !text(entry.path) || !/^[A-Za-z0-9._-]+(?:\/[A-Za-z0-9._-]+)*$/.test(entry.path) ||
+        entry.path.split('/').some(segment => segment === '.' || segment === '..') || !file(entry.file))))
+      throw new Error('The encoder external data has an invalid file or relative path. Rebuild and reinstall a matching pack.');
+    for (const required of [pack.model.file, pack.vectors.file, pack.catalog.rows, ...pack.runtime.files,
+      ...(externalData ?? []).map(entry => entry.file)]) {
       if (!file(required) || !pack.files.some(f => f.url === required.url && f.bytes === required.bytes && f.sha256 === required.sha256))
         throw new Error('An offline pack is missing a required model or runtime file.');
     }
+    const jspi = !!externalData?.length;
+    if (jspi) {
+      const paths = new Set<string>();
+      const urls = new Set<string>([new URL(pack.model.file.url, base).href]);
+      for (const entry of externalData!) {
+        const url = new URL(entry.file.url, base);
+        if (paths.has(entry.path) || urls.has(url.href) || url.search)
+          throw new Error('Encoder external data needs unique paths and file URLs without query parameters. Rebuild and reinstall it.');
+        paths.add(entry.path); urls.add(url.href);
+      }
+      if (pack.model.file.bytes > 16 * 1024 * 1024)
+        throw new Error('The external-data encoder needs a small graph of at most 16 MiB. Rebuild and reinstall it.');
+    }
+    const runtimeVariant = jspi ? 'jspi' : 'asyncify';
+    const runtimeLabel = jspi ? 'JSPI' : 'Asyncify';
     const runtimeUrls = pack.runtime.files.map(asset => new URL(asset.url, base));
     const runtimeNames = new Set(runtimeUrls.map(url => url.pathname.slice(url.pathname.lastIndexOf('/') + 1)));
     if (runtimeUrls.length !== 2 || new Set(runtimeUrls.map(url => new URL('.', url).href)).size !== 1 ||
         runtimeUrls.some(url => !new URL('.', url).pathname.endsWith(`/runtime/${encodeURIComponent(pack.runtime.version)}/`)) ||
-        runtimeUrls.some(url => url.search) || !runtimeNames.has('ort-wasm-simd-threaded.asyncify.mjs') ||
-        !runtimeNames.has('ort-wasm-simd-threaded.asyncify.wasm'))
-      throw new Error('The offline runtime needs exactly the native WebGPU Asyncify JavaScript/WASM pair in one versioned directory. Rebuild and reinstall it.');
+        runtimeUrls.some(url => url.search) || !runtimeNames.has(`ort-wasm-simd-threaded.${runtimeVariant}.mjs`) ||
+        !runtimeNames.has(`ort-wasm-simd-threaded.${runtimeVariant}.wasm`))
+      throw new Error(`The offline runtime needs exactly the native WebGPU ${runtimeLabel} JavaScript/WASM pair in one versioned directory. Rebuild and reinstall it.`);
   }
   return pack;
 }

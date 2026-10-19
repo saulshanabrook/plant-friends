@@ -64,3 +64,15 @@ export function model(): ModelManifest {
     runtime: { version: '1.30.0', files: runtime },
   };
 }
+
+export function externalModel(): ModelManifest {
+  const manifest = model();
+  const weights = manifest.model.file;
+  const graph = asset('image.external.onnx', 'not a graph');
+  manifest.model.file = graph;
+  manifest.model.externalData = [{ path: 'weights.onnx', file: weights }];
+  manifest.runtime.files = manifest.runtime.files.map(file =>
+    asset(file.url.replace('.asyncify.', '.jspi.'), CONTENT.get(file.url)!));
+  manifest.files = [graph, weights, manifest.vectors.file, manifest.catalog.rows, ...manifest.runtime.files];
+  return manifest;
+}

@@ -1,0 +1,557 @@
+{
+  "measuredAt": "2026-10-19T05:28:10.033Z",
+  "status": "passed",
+  "scope": "Same-weight JSPI external-data pack: real desktop WebGPU, unchanged numerical tolerances and fresh offline automatic product identification",
+  "environment": {
+    "platform": "darwin",
+    "osRelease": "25.6.0",
+    "architecture": "arm64",
+    "cpu": "Apple M4",
+    "memoryBytes": 17179869184,
+    "node": "v26.3.1",
+    "headless": false,
+    "browserContext": "Fresh isolated regular Chrome profile; not incognito",
+    "browser": "155.0.8059.85"
+  },
+  "modelIdentity": {
+    "repository": "imageomics/bioclip-2",
+    "revision": "2957b322090f9cb17ae72c71981c7218a28d81e0",
+    "checkpointSha256": "b7b2bf6fbc95799e42630e394cf95803892ab447c1a8ab629dbc82fbeaf7dfef",
+    "configSha256": "1bf947e96e943fe50efd5c3e26c37f843a2fa3c358967719a68c8a6d17ce68c8",
+    "precision": "FP16 matrix storage with FP32 arithmetic and input/output",
+    "opset": 17,
+    "dimension": 768,
+    "inputName": "images",
+    "inputShape": [
+      1,
+      3,
+      224,
+      224
+    ],
+    "outputName": "embedding",
+    "outputShape": [
+      1,
+      768
+    ],
+    "externalData": [
+      {
+        "path": "weights.onnx",
+        "file": {
+          "url": "../weights/fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb.onnx",
+          "sha256": "fd3f7ee590ea91e04bf8ef0e104fc536e28d7ff1518b7638c947da7eede733cb",
+          "bytes": 609029031
+        }
+      }
+    ],
+    "file": {
+      "url": "image.external.onnx",
+      "bytes": 465117,
+      "sha256": "3c6c481544839e020010a88e7ca04a0656218a8e4c5c03cb155a133a7bb5ee5a"
+    }
+  },
+  "runtimeIdentity": {
+    "version": "1.30.0",
+    "files": [
+      {
+        "url": "../../../runtime/1.30.0/ort-wasm-simd-threaded.jspi.mjs",
+        "bytes": 50918,
+        "sha256": "270e2c6da9f297239d301d329782b6446641cb1e16a77967690adcfca35f3268"
+      },
+      {
+        "url": "../../../runtime/1.30.0/ort-wasm-simd-threaded.jspi.wasm",
+        "bytes": 16758545,
+        "sha256": "a54c76f86b0f0d9572380cf1c6292a7b3903716ffcbcd6b0e5c7050bf430eb93"
+      }
+    ]
+  },
+  "runtime": {
+    "secureContext": true,
+    "adapter": {
+      "vendor": "apple",
+      "architecture": "metal-3",
+      "device": "",
+      "description": "",
+      "isFallbackAdapter": false
+    },
+    "features": [
+      "depth32float-stencil8",
+      "rg11b10ufloat-renderable",
+      "texture-formats-tier1",
+      "bgra8unorm-storage",
+      "texture-compression-bc",
+      "dual-source-blending",
+      "core-features-and-limits",
+      "float32-filterable",
+      "indirect-first-instance",
+      "texture-compression-astc-sliced-3d",
+      "float32-blendable",
+      "subgroup-size-control",
+      "texture-compression-astc",
+      "texture-compression-etc2",
+      "depth-clip-control",
+      "texture-compression-bc-sliced-3d",
+      "shader-f16",
+      "texture-formats-tier2",
+      "timestamp-query",
+      "clip-distances",
+      "primitive-index",
+      "texture-component-swizzle",
+      "subgroups"
+    ],
+    "limits": {
+      "maxBufferSize": 4294967292,
+      "maxStorageBufferBindingSize": 4294967292
+    },
+    "runtimeVersion": "1.30.0",
+    "executionProvider": "webgpu",
+    "initializationMs": 1911.1000000238419,
+    "modelBytes": 609494148,
+    "packId": "8ea9a1391621f4cb429f",
+    "catalogId": "39831ede5fe0b995b55c",
+    "backend": "native-webgpu-jspi",
+    "deviceFeatures": [
+      "core-features-and-limits",
+      "shader-f16"
+    ]
+  },
+  "numericalReference": {
+    "packId": "e2b03528fe84908219e7",
+    "activePackId": "8ea9a1391621f4cb429f",
+    "structuralProof": {
+      "url": "external-data-proof.json",
+      "sha256": "68a18d05bc7525409ef48d8cbc2c9de2109b02fddb551497588528c7caa42aef",
+      "bytes": 58242
+    },
+    "scope": "Existing checked FP32 expected arrays reused after verified byte-identical weights and graph metadata reconstruction; not regenerated results."
+  },
+  "tolerances": {
+    "status": "Fixed desktop regression limits; retained unchanged after the full encoder passed the native WebGPU/FP32-arithmetic feasibility milestone.",
+    "fp32CosineMin": 0.9999,
+    "fp32MaxEmbeddingError": 0.001,
+    "fp16CosineMin": 0.999,
+    "fp16MaxEmbeddingError": 0.005,
+    "fp16MaxScoreError": 0.002,
+    "pipelineCosineMin": 0.999,
+    "pipelineMaxEmbeddingError": 0.01,
+    "pipelineMaxScoreError": 0.005,
+    "basis": "reports/feasibility.json and reports/weight-storage-gpu.json; all-operations FP16 arithmetic failed these original score limits. Matrix FP16 storage with FP32 arithmetic passed ten cases including an additional plant photo. Full-catalog validation must retain these values."
+  },
+  "numerical": [
+    {
+      "id": "16418",
+      "sameTensor": {
+        "cosine": 0.9999999985927713,
+        "maxError": 0.000005202463685426151,
+        "maxScoreError": 0.00000933997654076758,
+        "normError": 5.931168889361516e-10
+      },
+      "fullPipeline": {
+        "cosine": 0.9999999985927713,
+        "maxError": 0.000005202463685426151,
+        "maxScoreError": 0.00000933997654076758,
+        "normError": 5.931168889361516e-10
+      },
+      "sameTensorRankingChanged": false,
+      "fullPipelineRankingChanged": false
+    },
+    {
+      "id": "50800",
+      "sameTensor": {
+        "cosine": 0.9999999999228633,
+        "maxError": 0.00000818437948191253,
+        "maxScoreError": 0.000012545178257623874,
+        "normError": 1.851798714369579e-9
+      },
+      "fullPipeline": {
+        "cosine": 0.9999999999228633,
+        "maxError": 0.00000818437948191253,
+        "maxScoreError": 0.000012545178257623874,
+        "normError": 1.851798714369579e-9
+      },
+      "sameTensorRankingChanged": false,
+      "fullPipelineRankingChanged": false
+    },
+    {
+      "id": "22158",
+      "sameTensor": {
+        "cosine": 1.0000000009785759,
+        "maxError": 0.0000036372000396522886,
+        "maxScoreError": 0.000003950347409387983,
+        "normError": 1.1874357053187623e-9
+      },
+      "fullPipeline": {
+        "cosine": 1.0000000009785759,
+        "maxError": 0.0000036372000396522886,
+        "maxScoreError": 0.000003950347409387983,
+        "normError": 1.1874357053187623e-9
+      },
+      "sameTensorRankingChanged": false,
+      "fullPipelineRankingChanged": false
+    },
+    {
+      "id": "portrait",
+      "sameTensor": {
+        "cosine": 0.9999999959935982,
+        "maxError": 0.000011464103274277026,
+        "maxScoreError": 0.00002059707702349747,
+        "normError": 2.4564545952898698e-9
+      },
+      "fullPipeline": {
+        "cosine": 0.9999999959935982,
+        "maxError": 0.000011464103274277026,
+        "maxScoreError": 0.00002059707702349747,
+        "normError": 2.4564545952898698e-9
+      },
+      "sameTensorRankingChanged": false,
+      "fullPipelineRankingChanged": false
+    },
+    {
+      "id": "landscape",
+      "sameTensor": {
+        "cosine": 1.0000000003730196,
+        "maxError": 0.00000410388364141534,
+        "maxScoreError": 0.0000047545442819322936,
+        "normError": 7.4495964952348e-10
+      },
+      "fullPipeline": {
+        "cosine": 1.0000000003730196,
+        "maxError": 0.00000410388364141534,
+        "maxScoreError": 0.0000047545442819322936,
+        "normError": 7.4495964952348e-10
+      },
+      "sameTensorRankingChanged": false,
+      "fullPipelineRankingChanged": false
+    },
+    {
+      "id": "small",
+      "sameTensor": {
+        "cosine": 0.9999999982529151,
+        "maxError": 0.00000592084372885715,
+        "maxScoreError": 0.000007660125127865983,
+        "normError": 9.343887885648883e-10
+      },
+      "fullPipeline": {
+        "cosine": 0.9999999982529151,
+        "maxError": 0.00000592084372885715,
+        "maxScoreError": 0.000007660125127865983,
+        "normError": 9.343887885648883e-10
+      },
+      "sameTensorRankingChanged": false,
+      "fullPipelineRankingChanged": false
+    },
+    {
+      "id": "transparent",
+      "sameTensor": {
+        "cosine": 0.9999999991145172,
+        "maxError": 0.000003173213546897591,
+        "maxScoreError": 0.000005275139093776982,
+        "normError": 4.6435189027249635e-10
+      },
+      "fullPipeline": {
+        "cosine": 0.9999999991145172,
+        "maxError": 0.000003173213546897591,
+        "maxScoreError": 0.000005275139093776982,
+        "normError": 4.6435189027249635e-10
+      },
+      "sameTensorRankingChanged": false,
+      "fullPipelineRankingChanged": false
+    },
+    {
+      "id": "oriented",
+      "sameTensor": {
+        "cosine": 0.9999999978512102,
+        "maxError": 0.000005394173665129731,
+        "maxScoreError": 0.000007580153971892263,
+        "normError": 1.1283045608934117e-9
+      },
+      "fullPipeline": {
+        "cosine": 0.9999999978512102,
+        "maxError": 0.000005394173665129731,
+        "maxScoreError": 0.000007580153971892263,
+        "normError": 1.1283045608934117e-9
+      },
+      "sameTensorRankingChanged": false,
+      "fullPipelineRankingChanged": false
+    },
+    {
+      "id": "webp",
+      "sameTensor": {
+        "cosine": 1.0000000003730196,
+        "maxError": 0.00000410388364141534,
+        "maxScoreError": 0.0000047545442819322936,
+        "normError": 7.4495964952348e-10
+      },
+      "fullPipeline": {
+        "cosine": 1.0000000003730196,
+        "maxError": 0.00000410388364141534,
+        "maxScoreError": 0.0000047545442819322936,
+        "normError": 7.4495964952348e-10
+      },
+      "sameTensorRankingChanged": false,
+      "fullPipelineRankingChanged": false
+    },
+    {
+      "id": "28117",
+      "sameTensor": {
+        "cosine": 0.9999999940850356,
+        "maxError": 0.000014774027298387893,
+        "maxScoreError": 0.000017472937818060617,
+        "normError": 2.1974200237195873e-10
+      },
+      "fullPipeline": {
+        "cosine": 0.9999999940850356,
+        "maxError": 0.000014774027298387893,
+        "maxScoreError": 0.000017472937818060617,
+        "normError": 2.1974200237195873e-10
+      },
+      "sameTensorRankingChanged": false,
+      "fullPipelineRankingChanged": false
+    }
+  ],
+  "numericalFailures": [],
+  "firstInference": {
+    "photo": "inat-16418.jpg",
+    "timings": {
+      "preprocessingMs": 18.800000071525574,
+      "inferenceMs": 176.39999997615814,
+      "rankingMs": 15.100000023841858,
+      "totalMs": 210.30000007152557
+    },
+    "candidates": [
+      {
+        "taxonId": "pfaf:Trifolium%20obtusiflorum",
+        "similarity": 0.7106317395895115
+      },
+      {
+        "taxonId": "pfaf:Trifolium%20repens",
+        "similarity": 0.705832396053772
+      },
+      {
+        "taxonId": "pfaf:Trifolium%20hybridum",
+        "similarity": 0.696985964862386
+      },
+      {
+        "taxonId": "pfaf:Trifolium%20tridentatum",
+        "similarity": 0.696907496303217
+      },
+      {
+        "taxonId": "pfaf:Trifolium%20cyathiferum",
+        "similarity": 0.6956504422476288
+      }
+    ]
+  },
+  "warm": {
+    "samples": [
+      {
+        "photo": "inat-16418.jpg",
+        "timings": {
+          "preprocessingMs": 7.299999952316284,
+          "inferenceMs": 143.89999997615814,
+          "rankingMs": 12.899999976158142,
+          "totalMs": 164.09999990463257
+        }
+      },
+      {
+        "photo": "inat-96185.jpg",
+        "timings": {
+          "preprocessingMs": 11.399999976158142,
+          "inferenceMs": 144.70000004768372,
+          "rankingMs": 9.5,
+          "totalMs": 165.60000002384186
+        }
+      },
+      {
+        "photo": "inat-50800.jpg",
+        "timings": {
+          "preprocessingMs": 7.699999928474426,
+          "inferenceMs": 145,
+          "rankingMs": 9.5,
+          "totalMs": 162.19999992847443
+        }
+      },
+      {
+        "photo": "inat-52808.jpg",
+        "timings": {
+          "preprocessingMs": 8.200000047683716,
+          "inferenceMs": 143.39999997615814,
+          "rankingMs": 9.899999976158142,
+          "totalMs": 161.5
+        }
+      },
+      {
+        "photo": "inat-22158.jpg",
+        "timings": {
+          "preprocessingMs": 10,
+          "inferenceMs": 144.69999992847443,
+          "rankingMs": 9.600000023841858,
+          "totalMs": 164.29999995231628
+        }
+      },
+      {
+        "photo": "inat-63205.jpg",
+        "timings": {
+          "preprocessingMs": 6,
+          "inferenceMs": 143.79999995231628,
+          "rankingMs": 9.5,
+          "totalMs": 159.29999995231628
+        }
+      },
+      {
+        "photo": "inat-28117.jpg",
+        "timings": {
+          "preprocessingMs": 8.199999928474426,
+          "inferenceMs": 144.20000004768372,
+          "rankingMs": 9.699999928474426,
+          "totalMs": 162.09999990463257
+        }
+      },
+      {
+        "photo": "inat-46334.jpg",
+        "timings": {
+          "preprocessingMs": 7.800000071525574,
+          "inferenceMs": 143.59999990463257,
+          "rankingMs": 9.900000095367432,
+          "totalMs": 161.30000007152557
+        }
+      },
+      {
+        "photo": "inat-13635.jpg",
+        "timings": {
+          "preprocessingMs": 6.200000047683716,
+          "inferenceMs": 144.70000004768372,
+          "rankingMs": 9.699999928474426,
+          "totalMs": 160.60000002384186
+        }
+      },
+      {
+        "photo": "inat-16438.jpg",
+        "timings": {
+          "preprocessingMs": 8,
+          "inferenceMs": 143.29999995231628,
+          "rankingMs": 9.700000047683716,
+          "totalMs": 161
+        }
+      }
+    ],
+    "medianMs": 161.79999995231628,
+    "p95Ms": 165.60000002384186,
+    "minimumMs": 159.29999995231628,
+    "maximumMs": 165.60000002384186
+  },
+  "evaluation": {
+    "count": 24,
+    "negativeCount": 4,
+    "topOneCount": 14,
+    "topFiveCount": 21,
+    "scope": "Descriptive fixture results within the installed PFAF catalog; not an accuracy guarantee."
+  },
+  "photoLifecycle": {
+    "oldStatus": "rejected",
+    "oldError": "AbortError",
+    "latestStatus": "fulfilled",
+    "latestCandidateCount": 5,
+    "scope": "Real worker with two immediate photo selections; superseded result must not settle current request"
+  },
+  "gpuProfiling": {
+    "method": "WebGPU dispatch calls",
+    "dispatchCount": 586,
+    "dispatchMethods": {
+      "dispatchWorkgroups": 586
+    },
+    "scope": "Separate diagnostic run, excluded from warm timings. Counts actual WebGPU dispatch calls, not GPU timestamp durations or named ONNX operators."
+  },
+  "offline": {
+    "photo": "inat-143164.jpg",
+    "firstUsedAfterOfflineReload": true,
+    "coldRuntime": {
+      "secureContext": true,
+      "adapter": {
+        "vendor": "apple",
+        "architecture": "metal-3",
+        "device": "",
+        "description": "",
+        "isFallbackAdapter": false
+      },
+      "features": [
+        "depth32float-stencil8",
+        "rg11b10ufloat-renderable",
+        "texture-formats-tier1",
+        "bgra8unorm-storage",
+        "texture-compression-bc",
+        "dual-source-blending",
+        "core-features-and-limits",
+        "float32-filterable",
+        "indirect-first-instance",
+        "texture-compression-astc-sliced-3d",
+        "float32-blendable",
+        "subgroup-size-control",
+        "texture-compression-astc",
+        "texture-compression-etc2",
+        "depth-clip-control",
+        "texture-compression-bc-sliced-3d",
+        "texture-formats-tier2",
+        "timestamp-query",
+        "clip-distances",
+        "shader-f16",
+        "primitive-index",
+        "texture-component-swizzle",
+        "subgroups"
+      ],
+      "limits": {
+        "maxBufferSize": 4294967292,
+        "maxStorageBufferBindingSize": 4294967292
+      },
+      "runtimeVersion": "1.30.0",
+      "executionProvider": "webgpu",
+      "initializationMs": 1574.5,
+      "modelBytes": 609494148,
+      "packId": "8ea9a1391621f4cb429f",
+      "catalogId": "39831ede5fe0b995b55c",
+      "backend": "native-webgpu-jspi",
+      "deviceFeatures": [
+        "core-features-and-limits",
+        "shader-f16"
+      ]
+    },
+    "timings": {
+      "preprocessingMs": 16,
+      "inferenceMs": 165.80000007152557,
+      "rankingMs": 13.199999928474426,
+      "totalMs": 195
+    },
+    "candidates": [
+      {
+        "taxonId": "pfaf:Urtica%20dioica",
+        "similarity": 0.7110201399992605
+      },
+      {
+        "taxonId": "pfaf:Urtica%20angustifolia",
+        "similarity": 0.689162282382958
+      },
+      {
+        "taxonId": "pfaf:Urtica%20procera",
+        "similarity": 0.6891371046957184
+      },
+      {
+        "taxonId": "pfaf:Urtica%20platyphylla",
+        "similarity": 0.6875861357059815
+      },
+      {
+        "taxonId": "pfaf:Urtica%20holosericea",
+        "similarity": 0.6834588145909604
+      }
+    ],
+    "detailId": "pfaf:Urtica%20dioica",
+    "automaticIdentification": true,
+    "productInterface": "Passed: fresh offline product page, upload, automatic identification, five candidates and PFAF hazards"
+  },
+  "privacy": {
+    "requestCount": 237,
+    "allGetRequestsWithoutBody": true,
+    "allRequestsLocal": true
+  },
+  "limitations": [
+    "Small labeled fixture sample may overlap pretraining.",
+    "JavaScript heap and per-process RSS snapshots do not measure peaks or exclusive GPU allocations."
+  ]
+}

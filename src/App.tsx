@@ -15,7 +15,7 @@ interface InstalledRelatedApp { platform: string; url?: string; id?: string }
 function formatBytes(bytes: number): string { return `${(bytes / 1024 / 1024).toFixed(1)} MiB`; }
 
 export default function App() {
-  const { packs, entries, phase, setupError, retrying } = useOfflinePacks();
+  const { packs, entries, phase, setupError, retrying, modelCurrent } = useOfflinePacks();
   const [photo, setPhoto] = useState<Photo | null>(null);
   const [photoError, setPhotoError] = useState<string | null>(null);
   const [readingPhoto, setReadingPhoto] = useState(false);
@@ -201,7 +201,7 @@ export default function App() {
   const compatible = Boolean(catalog?.manifest.kind === 'pfaf' && modelManifest && entries.length &&
     modelManifest.catalog.id === catalog.manifest.id && modelManifest.catalog.sourceSha256 === catalog.manifest.sourceSha256 &&
     modelManifest.catalog.fullTaxonCount === entries.length);
-  const referencePhotos = usePlantPhotos(catalog, compatible && Boolean(model));
+  const referencePhotos = usePlantPhotos(catalog, compatible && modelCurrent);
   const downloadEstimate = useDownloadEstimate({ packs, phase, photos: referencePhotos });
   const webgpu = Boolean(window.isSecureContext && navigator.gpu);
   const indexById = useMemo(() => new Map(entries.map(entry => [entry.id, entry])), [entries]);

@@ -85,7 +85,10 @@ export function useOfflinePacks() {
       for (const kind of ['pfaf', 'bioclip2'] as const) {
         if (!current()) return;
         const pack = snapshot.current[kind];
-        if (pack.installed) continue;
+        // Keep an installed catalog usable, but automatically activate a newer
+        // compatible model. installPack retains the old receipt until commit.
+        if (pack.installed && (kind === 'pfaf' || !pack.available ||
+            pack.installed.manifest.id === pack.available.manifest.id && pack.installed.manifestUrl === pack.available.manifestUrl)) continue;
         if (!pack.available) { failed(failures.get(kind) ?? new Error('Download metadata is unavailable. Reopen this page to retry.')); return; }
         if (!navigator.onLine) { failed(new DOMException('Waiting for connection.', 'NetworkError')); return; }
         if (kind === 'bioclip2') {
@@ -148,5 +151,8 @@ export function useOfflinePacks() {
     };
   }, []);
 
-  return { packs, entries, phase, setupError, retrying };
+  const model = packs.bioclip2;
+  const modelCurrent = Boolean(model.installed && model.available && !model.checking && !model.downloading &&
+    model.installed.manifest.id === model.available.manifest.id && model.installed.manifestUrl === model.available.manifestUrl);
+  return { packs, entries, phase, setupError, retrying, modelCurrent };
 }
