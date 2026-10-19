@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "receipts": {
-    "assetsSha256": "8f627efc9f892d61b23963ea29183a77b04d8a9832d34ae48c74b16a302112ca",
+    "assetsSha256": "544f505136d6341e5c7115a9a108df5459d817f78305a9f77c7ce1147c23b236",
     "photosSha256": "60a54e5f787c03f7c7aa18fd0ecb4d4d1e77cd258da285b1e108cbf9b68b634f"
   },
   "catalog": {
@@ -9,8 +9,8 @@
     "bytes": 42820214
   },
   "model": {
-    "id": "e2b03528fe84908219e7",
-    "bytes": 663136322
+    "id": "8ea9a1391621f4cb429f",
+    "bytes": 653634173
   },
   "photos": {
     "id": "e2e188337de47653c182",
